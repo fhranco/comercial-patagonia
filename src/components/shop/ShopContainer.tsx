@@ -77,7 +77,7 @@ export default function ShopContainer({ initialProducts, initialCategory, isLive
   });
 
   const [viewMode, setViewMode] = useState<"grid" | "list">("grid");
-  const [visibleItems, setVisibleItems] = useState(24);
+  const [visibleItems, setVisibleItems] = useState(60);
 
   useEffect(() => {
     if (initialCategory) {
@@ -170,7 +170,7 @@ export default function ShopContainer({ initialProducts, initialCategory, isLive
                       </div>
                   </div>
                   <div style={{ marginTop: '5px' }}>
-                    <BentoFilters categories={categories} activeCategory={activeCategory} onSelect={(cat) => { setActiveCategory(cat); setVisibleItems(24); setUserIntent(prev => ({ ...prev, category: cat })); }} />
+                    <BentoFilters categories={categories} activeCategory={activeCategory} onSelect={(cat) => { setActiveCategory(cat); setVisibleItems(60); setUserIntent(prev => ({ ...prev, category: cat })); }} />
                   </div>
               </div>
           </section>
@@ -206,6 +206,20 @@ export default function ShopContainer({ initialProducts, initialCategory, isLive
                   <ProductCard key={p.id} product={p} onQuickView={(prod) => setSelectedQuickProduct(prod)} />
                 ))}
               </div>
+
+              {/* 🔄 CARGAR MÁS */}
+              {filteredProducts.length > visibleItems && (
+                <div style={{ textAlign: 'center', marginTop: '60px' }}>
+                    <button 
+                        onClick={() => setVisibleItems(prev => prev + 60)}
+                        style={{ backgroundColor: 'transparent', border: '2px solid var(--brand-navy)', color: 'var(--brand-navy)', padding: '15px 40px', borderRadius: '100px', fontSize: '12px', fontWeight: 900, textTransform: 'uppercase', letterSpacing: '0.2em', cursor: 'pointer' }}
+                        className="hover:bg-[var(--brand-navy)] hover:text-white transition-all duration-300"
+                    >
+                        Cargar más productos
+                    </button>
+                    <p style={{ fontSize: '10px', opacity: 0.4, marginTop: '15px', textTransform: 'uppercase', letterSpacing: '0.1em' }}>Mostrando {visibleItems} de {filteredProducts.length} materiales</p>
+                </div>
+              )}
           </div>
       </main>
 
