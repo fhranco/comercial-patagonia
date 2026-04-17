@@ -91,16 +91,22 @@ export default function ShopContainer({ initialProducts, initialCategory, isLive
   const filteredProducts = initialProducts.filter(p => {
     const term = searchTerm.toLowerCase().trim();
     
-    // 🧠 MODO BÚSQUEDA GLOBAL: Si hay texto, buscamos en TODO el catálogo
+    // 🧠 FUNCIÓN DE NORMALIZACIÓN: Quita tildes y caracteres especiales
+    const normalize = (str: string) => 
+        str.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase();
+
+    const normalizedTerm = normalize(term);
+
+    // 🧠 MODO BÚSQUEDA GLOBAL (Sin tildes)
     if (term) {
         return (
-            p.name.toLowerCase().includes(term) ||
-            p.sku.toLowerCase().includes(term) ||
-            p.categories.some(cat => cat.name.toLowerCase().includes(term))
+            normalize(p.name).includes(normalizedTerm) ||
+            normalize(p.sku).includes(normalizedTerm) ||
+            p.categories.some(cat => normalize(cat.name).includes(normalizedTerm))
         );
     }
 
-    // 📁 MODO NAVEGACIÓN: Si no hay búsqueda, filtramos por categoría activa
+    // 📁 MODO NAVEGACIÓN
     return activeCategory === "Todos" || p.categories.some(cat => 
         cat.name.toLowerCase() === activeCategory.toLowerCase()
     );

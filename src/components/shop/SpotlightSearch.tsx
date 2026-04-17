@@ -45,11 +45,17 @@ export default function SpotlightSearch({ products, isOpen, onClose }: Spotlight
   const inputRef = useRef<HTMLInputElement>(null);
   const router = useRouter();
 
+  // 🧠 Función de Normalización (Quita tildes)
+  const normalize = (str: string) => 
+    str.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase();
+
+  const normalizedQuery = normalize(query);
+
   // Filtrar productos
   const results = products.filter(p => 
-    p.name.toLowerCase().includes(query.toLowerCase()) ||
-    p.sku.toLowerCase().includes(query.toLowerCase()) ||
-    p.categories.some(c => c.name.toLowerCase().includes(query.toLowerCase()))
+    normalize(p.name).includes(normalizedQuery) ||
+    normalize(p.sku).includes(normalizedQuery) ||
+    p.categories.some(c => normalize(c.name).includes(normalizedQuery))
   ).slice(0, 6);
 
   // Focus input on open
