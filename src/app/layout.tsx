@@ -5,7 +5,7 @@ import { ThemeProvider } from "../context/ThemeContext";
 import { CartProvider } from "../context/CartContext";
 import CartDrawer from "../components/shop/CartDrawer";
 import B2BConcierge from "../components/shop/B2BConcierge";
-import Footer from "../components/layout/IndustrialFooter";
+import Footer from "../components/layout/FinalOfficialFooter";
 
 const inter = Inter({ 
   subsets: ["latin"],
@@ -20,8 +20,8 @@ const outfit = Outfit({
 });
 
 export const metadata: Metadata = {
-  title: "COMERCIAL DE LA PATAGONIA | Sistema Híbrido",
-  description: "Tradición y Calidad en Construcción y Hogar",
+  title: "COMERCIAL PATAGONIA | Suministro Profesional",
+  description: "Tradicción y Calidad en Magallanes",
 };
 
 export default function RootLayout({
