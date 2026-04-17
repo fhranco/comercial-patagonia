@@ -5,7 +5,7 @@ import { ThemeProvider } from "../context/ThemeContext";
 import { CartProvider } from "../context/CartContext";
 import CartDrawer from "../components/shop/CartDrawer";
 import B2BConcierge from "../components/shop/B2BConcierge";
-import Footer from "../components/layout/Footer";
+import Footer from "../components/layout/IndustrialFooter";
 
 const inter = Inter({ 
   subsets: ["latin"],
