@@ -1,17 +1,13 @@
-"use client";
-
 import React, { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Sun, Moon, ArrowRight, Menu, X, ShoppingBag, Clock } from "lucide-react";
+import { ArrowRight, Menu, X, ShoppingBag, Clock } from "lucide-react";
 import Link from 'next/link';
-import { useTheme } from "../../context/ThemeContext";
 
 interface NavigationProps {
   transparent?: boolean;
 }
 
 export default function Navigation({ transparent = true }: NavigationProps) {
-  const { theme, toggleTheme } = useTheme();
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
@@ -26,7 +22,7 @@ export default function Navigation({ transparent = true }: NavigationProps) {
       position: 'fixed', top: 0, width: '100%', zIndex: 9000, 
       padding: isScrolled ? '10px 5%' : '15px 5%',
       background: (isMobileMenuOpen || isScrolled) 
-        ? (theme === 'dark' ? 'var(--brand-navy)' : '#FFF') 
+        ? '#FFF' 
         : 'transparent',
       backdropFilter: (isMobileMenuOpen || isScrolled) ? 'none' : 'blur(10px)',
       transition: 'all 0.4s ease',
@@ -36,7 +32,7 @@ export default function Navigation({ transparent = true }: NavigationProps) {
       <style jsx>{`
         @media (max-width: 768px) {
           .nav-container {
-            background: ${theme === 'dark' ? 'var(--brand-navy)' : '#FFF'} !important;
+            background: #FFF !important;
             padding: 15px 5% !important;
             box-shadow: 0 4px 20px rgba(0,0,0,0.1);
           }
@@ -96,7 +92,7 @@ export default function Navigation({ transparent = true }: NavigationProps) {
             exit={{ opacity: 0, y: -10 }}
             style={{ 
               position: 'absolute', top: '100%', left: 0, width: '100%', 
-              backgroundColor: theme === 'dark' ? 'var(--brand-navy)' : '#FFF',
+              backgroundColor: '#FFF',
               padding: '40px 5%', borderBottom: '1px solid var(--border-color)',
               display: 'flex', flexDirection: 'column', gap: '15px'
             }}
