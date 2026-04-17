@@ -90,12 +90,20 @@ export default function ShopContainer({ initialProducts, initialCategory, isLive
 
   const filteredProducts = initialProducts.filter(p => {
     const term = searchTerm.toLowerCase().trim();
-    // Filtro resiliente: Coincidencia por nombre exacto
-    const isInCat = activeCategory === "Todos" || p.categories.some(cat => 
+    
+    // 🧠 MODO BÚSQUEDA GLOBAL: Si hay texto, buscamos en TODO el catálogo
+    if (term) {
+        return (
+            p.name.toLowerCase().includes(term) ||
+            p.sku.toLowerCase().includes(term) ||
+            p.categories.some(cat => cat.name.toLowerCase().includes(term))
+        );
+    }
+
+    // 📁 MODO NAVEGACIÓN: Si no hay búsqueda, filtramos por categoría activa
+    return activeCategory === "Todos" || p.categories.some(cat => 
         cat.name.toLowerCase() === activeCategory.toLowerCase()
     );
-    if (!term) return isInCat;
-    return (p.name.toLowerCase().includes(term)) && isInCat;
   });
 
   const displayProducts = filteredProducts.slice(0, visibleItems);

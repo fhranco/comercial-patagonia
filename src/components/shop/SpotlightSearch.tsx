@@ -69,7 +69,7 @@ export default function SpotlightSearch({ products, isOpen, onClose }: Spotlight
       if (e.key === "ArrowDown") setSelectedIndex(prev => (prev < results.length - 1 ? prev + 1 : prev));
       if (e.key === "ArrowUp") setSelectedIndex(prev => (prev > 0 ? prev - 1 : prev));
       if (e.key === "Enter" && results[selectedIndex]) {
-        // En un entorno real, navegaríamos al producto. Aquí cerramos y podríamos emitir un evento.
+        router.push(`/shop/${results[selectedIndex].id}`);
         onClose();
       }
     };
@@ -159,6 +159,10 @@ export default function SpotlightSearch({ products, isOpen, onClose }: Spotlight
                     <motion.div 
                       key={product.id}
                       onMouseEnter={() => setSelectedIndex(idx)}
+                      onClick={() => {
+                        router.push(`/shop/${product.id}`);
+                        onClose();
+                      }}
                       style={{ 
                         padding: '12px 15px', borderRadius: '12px',
                         display: 'flex', alignItems: 'center', gap: '20px',
