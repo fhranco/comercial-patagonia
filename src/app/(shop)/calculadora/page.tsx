@@ -105,8 +105,6 @@ export default function CalculatorPage() {
                 />
             </div>
         </div>
-
-        <Footer />
     </main>
   );
 }

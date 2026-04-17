@@ -13,7 +13,6 @@ import ProductCard from "@/components/shop/ProductCard";
 import ProductQuickView from "@/components/shop/ProductQuickView";
 import BentoFilters from "@/components/shop/BentoFilters";
 import SpotlightSearch from "@/components/shop/SpotlightSearch";
-import Footer from "@/components/layout/FinalOfficialFooter";
 import { Product } from "@/types/woocommerce";
 
 interface ShopContainerProps {
@@ -192,7 +191,6 @@ export default function ShopContainer({ initialProducts, initialCategory, isLive
 
       <ProductQuickView product={selectedQuickProduct} isOpen={!!selectedQuickProduct} onClose={() => setSelectedQuickProduct(null)} />
       <SpotlightSearch products={initialProducts} isOpen={isSpotlightOpen} onClose={() => setIsSpotlightOpen(false)} />
-      <Footer />
     </div>
   );
 }

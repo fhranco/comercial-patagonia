@@ -76,8 +76,6 @@ export default function HistorialPage() {
             </div>
         )}
       </main>
-
-      <Footer />
     </div>
   );
 }

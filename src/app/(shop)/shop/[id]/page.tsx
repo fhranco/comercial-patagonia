@@ -71,7 +71,6 @@ export default async function Page({ params }: { params: { id: string } }) {
   return (
     <>
       <ProductDetailClient initialProduct={product} />
-      <Footer />
     </>
   );
 }
