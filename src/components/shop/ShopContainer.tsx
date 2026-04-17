@@ -13,7 +13,7 @@ import ProductCard from "@/components/shop/ProductCard";
 import ProductQuickView from "@/components/shop/ProductQuickView";
 import BentoFilters from "@/components/shop/BentoFilters";
 import SpotlightSearch from "@/components/shop/SpotlightSearch";
-import Footer from "@/components/layout/Footer";
+import Footer from "@/components/layout/FinalOfficialFooter";
 import { Product } from "@/types/woocommerce";
 
 interface ShopContainerProps {

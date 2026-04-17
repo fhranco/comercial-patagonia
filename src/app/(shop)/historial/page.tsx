@@ -6,7 +6,7 @@ import { motion } from "framer-motion";
 import { ChevronLeft, Inbox, Clock, Download, ExternalLink, Trash2 } from "lucide-react";
 import Link from "next/link";
 import Navigation from "@/components/layout/Navigation";
-import Footer from "@/components/layout/Footer";
+import Footer from "@/components/layout/FinalOfficialFooter";
 
 export default function HistorialPage() {
   const { quoteHistory, addToCart } = useCart();

@@ -2,7 +2,7 @@
 
 import React, { useState, useEffect } from 'react';
 import Navigation from '@/components/layout/Navigation';
-import Footer from '@/components/layout/Footer';
+import Footer from '@/components/layout/FinalOfficialFooter';
 import '@/engineering/engineering.css';
 import Header from '@/engineering/components/Header';
 import MaterialSelector from '@/engineering/components/MaterialSelector';

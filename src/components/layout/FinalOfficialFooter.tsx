@@ -1,7 +1,7 @@
 "use client";
 
 import React from "react";
-import { Instagram, Facebook, Mail, MapPin, Phone } from "lucide-react";
+import { Mail, MapPin, Phone, Globe } from "lucide-react";
 
 export default function Footer() {
   const currentYear = new Date().getFullYear();
@@ -56,8 +56,8 @@ export default function Footer() {
                     Punta Arenas, Chile
                 </p>
                 <div style={{ display: 'flex', gap: '20px', marginTop: '30px' }}>
-                    <a href="https://www.instagram.com/comercialdelapatagonia/" target="_blank" rel="noopener noreferrer" style={{ color: 'inherit' }} className="hover:text-[var(--primary-gold)] transition-colors"><Instagram size={20} /></a>
-                    <a href="https://www.facebook.com/comercialdelapatagonia?locale=es_LA" target="_blank" rel="noopener noreferrer" style={{ color: 'inherit' }} className="hover:text-[var(--primary-gold)] transition-colors"><Facebook size={20} /></a>
+                    <a href="https://www.instagram.com/comercialdelapatagonia/" target="_blank" rel="noopener noreferrer" style={{ color: 'inherit' }} className="hover:text-[var(--primary-gold)] transition-colors"><Globe size={20} /></a>
+                    <a href="https://www.facebook.com/comercialdelapatagonia?locale=es_LA" target="_blank" rel="noopener noreferrer" style={{ color: 'inherit' }} className="hover:text-[var(--primary-gold)] transition-colors"><Globe size={20} /></a>
                 </div>
             </div>
 

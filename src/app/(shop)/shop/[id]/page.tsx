@@ -2,7 +2,7 @@ import React from "react";
 import { Product } from "@/types/woocommerce";
 import { MOCK_PRODUCTS } from "@/lib/mock-products";
 import Navigation from "@/components/layout/Navigation";
-import Footer from "@/components/layout/Footer";
+import Footer from "@/components/layout/FinalOfficialFooter";
 import ProductDetailClient from "./ProductDetailClient";
 
 // 🏎️ NITRO PRODUCT FETCH
