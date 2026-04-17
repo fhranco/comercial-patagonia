@@ -61,13 +61,6 @@ export default function Navigation({ transparent = true }: NavigationProps) {
           {/* 📱 APP CONTROLS */}
           <div style={{ display: 'flex', alignItems: 'center', gap: '5px' }}>
               <button 
-                onClick={toggleTheme} 
-                style={{ background: 'none', border: 'none', color: 'inherit', width: '40px', height: '40px', display: 'flex', alignItems: 'center', justifyContent: 'center', cursor: 'pointer' }}
-              >
-                  {theme === 'dark' ? <Sun size={18} /> : <Moon size={18} />}
-              </button>
-
-              <button 
                 className="lg:hidden"
                 onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
                 style={{ background: 'none', border: 'none', color: 'inherit', width: '40px', height: '40px', display: 'flex', alignItems: 'center', justifyContent: 'center', cursor: 'pointer' }}
