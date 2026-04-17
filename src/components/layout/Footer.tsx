@@ -8,10 +8,14 @@ export default function Footer() {
   
   return (
     <footer style={{ 
-      padding: '80px 5%', 
+      display: 'block',
+      width: '100%',
+      padding: '100px 5%', 
       backgroundColor: '#F8FAFC', 
       borderTop: `1px solid var(--border-color)`,
-      color: 'var(--brand-navy)'
+      color: 'var(--brand-navy)',
+      position: 'relative',
+      zIndex: 10
     }}>
         <div style={{ maxWidth: '1400px', margin: '0 auto', display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: '60px', textAlign: 'left' }}>
             
