@@ -3,13 +3,13 @@
 import React from "react";
 import styles from "../../app/page.module.css";
 import { motion, useScroll, useSpring } from "framer-motion";
-import Navigation from "../../components/layout/Navigation";
-import HeroSpectacular from "../../components/layout/HeroComodoro";
-import CategoryBento from "../../components/shop/CategoryBento";
-import TrustBar from "../../components/layout/TrustBar";
-import FeaturedCarousel from "../../components/shop/FeaturedCarousel";
-import FurnitureShowcase from "../../components/layout/FurnitureShowcase";
-import GrandCement from "../../components/layout/GrandCement";
+import Navigation from "./Navigation";
+import HeroSpectacular from "./HeroComodoro";
+import CategoryBento from "../shop/CategoryBento";
+import TrustBar from "./TrustBar";
+import FeaturedCarousel from "../shop/FeaturedCarousel";
+import FurnitureShowcase from "./FurnitureShowcase";
+import GrandCement from "./GrandCement";
 import { Product } from "@/types/woocommerce";
 import Link from "next/link";
 
