@@ -5,8 +5,7 @@ import { ThemeProvider } from "../context/ThemeContext";
 import { CartProvider } from "../context/CartContext";
 import CartDrawer from "../components/shop/CartDrawer";
 import B2BConcierge from "../components/shop/B2BConcierge";
-import MagallanesLogistics from "../components/shop/MagallanesLogistics";
-import AIAssistant from "../components/shop/AIAssistant";
+import Footer from "../components/layout/Footer";
 
 const inter = Inter({ 
   subsets: ["latin"],
@@ -58,8 +57,8 @@ export default function RootLayout({
       "closes": "18:00"
     },
     "sameAs": [
-      "https://facebook.com/comercialpatagonia",
-      "https://instagram.com/comercialpatagonia"
+      "https://facebook.com/comercialdelapatagonia",
+      "https://instagram.com/comercialdelapatagonia"
     ],
     "priceRange": "$$$",
     "description": "Distribuidor líder de materiales de construcción y equipamiento industrial en la Patagonia Chilena. Especialistas en cementos, herramientas de alto desempeño y logística regional."
@@ -81,6 +80,7 @@ export default function RootLayout({
             <B2BConcierge />
             {/* MagallanesLogistics and AIAssistant now live inside the Concierge or are hidden on mobile to avoid clutter */}
             {children}
+            <Footer />
           </CartProvider>
         </ThemeProvider>
       </body>
