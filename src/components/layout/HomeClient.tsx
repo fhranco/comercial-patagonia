@@ -4,7 +4,6 @@ import React from "react";
 import styles from "../../app/page.module.css";
 import { motion, useScroll, useSpring } from "framer-motion";
 import Navigation from "../../components/layout/Navigation";
-import Footer from "../../components/layout/Footer";
 import HeroSpectacular from "../../components/layout/HeroComodoro";
 import CategoryBento from "../../components/shop/CategoryBento";
 import TrustBar from "../../components/layout/TrustBar";
@@ -72,8 +71,6 @@ export default function HomeClient({ products }: HomeClientProps) {
             <Link href={SHOP_URL} style={{ color: 'var(--brand-navy)', textDecoration: 'none', fontWeight: 900, fontSize: '12px', textTransform: 'uppercase', letterSpacing: '0.3em', border: '2px solid var(--brand-navy)', padding: '20px 60px', borderRadius: '100px' }} className="hover:bg-[var(--brand-navy)] hover:text-white transition-all duration-500">Tienda Online Oficial</Link>
         </section>
       </main>
-
-      <Footer />
     </div>
   );
 }
