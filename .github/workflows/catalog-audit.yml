@@ -1,0 +1,35 @@
+name: 🏔️ Auditoría de Catálogo Patagonia
+
+on:
+  push:
+    branches: [ main ]
+  schedule:
+    - cron: '0 0 * * *' # Corre todos los días a media noche
+  workflow_dispatch: # Permite correrlo manualmente desde GitHub
+
+jobs:
+  audit:
+    runs-on: ubuntu-latest
+    steps:
+      - name: 📥 Clonar Repositorio
+        uses: actions/checkout@v4
+
+      - name: 🐍 Configurar Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.x'
+
+      - name: 🔍 Ejecutar Auditoría de WooCommerce
+        env:
+          WOOCOMMERCE_CK: ${{ secrets.WOOCOMMERCE_CK }}
+          WOOCOMMERCE_CS: ${{ secrets.WOOCOMMERCE_CS }}
+          NEXT_PUBLIC_WOOCOMMERCE_URL: ${{ secrets.NEXT_PUBLIC_WOOCOMMERCE_URL }}
+        run: python scripts/catalog_audit.py
+
+      - name: 📝 Auto-Commit del Reporte
+        run: |
+          git config --local user.email "action@github.com"
+          git config --local user.name "Patagonia Audit Bot"
+          git add CATALOGO_STATUS.md
+          git diff --quiet && git diff --staged --quiet || git commit -m "docs: Actualizar Reporte de Salud del Catálogo [skip ci]"
+          git push
