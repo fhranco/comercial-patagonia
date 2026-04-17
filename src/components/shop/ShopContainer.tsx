@@ -91,14 +91,20 @@ export default function ShopContainer({ initialProducts, initialCategory, isLive
   const filteredProducts = initialProducts.filter(p => {
     const term = searchTerm.toLowerCase().trim();
     
-    // 🧠 FUNCIÓN DE NORMALIZACIÓN: Quita tildes y caracteres especiales
-    const normalize = (str: string) => 
-        str.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase();
+    // 🧠 FUNCIÓN DE NORMALIZACIÓN PRO: Quita HTML entities, tildes y caracteres especiales
+    const normalize = (str: string) => {
+        if (!str) return "";
+        // 1. Decodificar entidades HTML (si existen)
+        const doc = new DOMParser().parseFromString(str, "text/html");
+        const decoded = doc.documentElement.textContent || str;
+        // 2. Quitar tildes
+        return decoded.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase();
+    };
 
-    const normalizedTerm = normalize(term);
+    const normalizedTerm = normalize(searchTerm);
 
-    // 🧠 MODO BÚSQUEDA GLOBAL (Sin tildes)
-    if (term) {
+    // 🧠 MODO BÚSQUEDA GLOBAL
+    if (searchTerm.trim()) {
         return (
             normalize(p.name).includes(normalizedTerm) ||
             normalize(p.sku).includes(normalizedTerm) ||
