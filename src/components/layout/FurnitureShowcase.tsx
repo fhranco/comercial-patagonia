@@ -21,7 +21,7 @@ export default function FurnitureShowcase() {
 
   return (
     <section ref={containerRef} style={{ backgroundColor: '#FFF', color: 'var(--brand-navy)', overflow: 'hidden' }}>
-      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(600px, 1fr))' }}>
+      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(450px, 1fr))' }}>
         
         {/* 🛌 DORMITORIO / ORGANIZACIÓN */}
         <div style={{ position: 'relative', height: '100vh', overflow: 'hidden' }} className="group">
@@ -46,7 +46,7 @@ export default function FurnitureShowcase() {
                 <h3 style={{ fontSize: '11px', fontWeight: 900, textTransform: 'uppercase', letterSpacing: '0.4em', color: 'var(--brand-navy)' }}>Calidez Interior</h3>
             </div>
             <h4 style={{ 
-                fontSize: 'clamp(3rem, 6vw, 5.5rem)', 
+                fontSize: 'clamp(1.8rem, 4.5vw, 5.5rem)', 
                 fontWeight: 900, 
                 textTransform: 'uppercase', 
                 lineHeight: 0.85, 
@@ -92,7 +92,7 @@ export default function FurnitureShowcase() {
                 <h3 style={{ fontSize: '11px', fontWeight: 900, textTransform: 'uppercase', letterSpacing: '0.4em', color: 'var(--primary-gold)' }}>Experiencias Compartidas</h3>
             </div>
             <h4 style={{ 
-                fontSize: 'clamp(3rem, 6vw, 5.5rem)', 
+                fontSize: 'clamp(1.8rem, 4.5vw, 5.5rem)', 
                 fontWeight: 900, 
                 textTransform: 'uppercase', 
                 lineHeight: 0.85, 

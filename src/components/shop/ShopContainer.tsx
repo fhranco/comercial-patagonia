@@ -94,10 +94,13 @@ export default function ShopContainer({ initialProducts, initialCategory, isLive
     // 🧠 FUNCIÓN DE NORMALIZACIÓN PRO: Quita HTML entities, tildes y caracteres especiales
     const normalize = (str: string) => {
         if (!str) return "";
-        // 1. Decodificar entidades HTML (si existen)
-        const doc = new DOMParser().parseFromString(str, "text/html");
-        const decoded = doc.documentElement.textContent || str;
-        // 2. Quitar tildes
+        let decoded = str;
+        // 1. Decodificar entidades HTML (solo en el cliente)
+        if (typeof window !== "undefined") {
+            const doc = new DOMParser().parseFromString(str, "text/html");
+            decoded = doc.documentElement.textContent || str;
+        }
+        // 2. Quitar tildes y convertir a minúsculas
         return decoded.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase();
     };
 

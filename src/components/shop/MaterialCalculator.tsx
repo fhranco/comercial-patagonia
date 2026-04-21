@@ -37,7 +37,14 @@ export default function MaterialCalculator() {
             <p style={{ opacity: 0.5, maxWidth: '600px', margin: '20px auto', fontSize: '14px' }}>Optimiza tu logística en el Estrecho de Magallanes cubicando con precisión absoluta tus proyectos de obra civil.</p>
         </div>
 
-        <div style={{ display: 'grid', gridTemplateColumns: '1fr 350px', gap: '40px' }}>
+        <div style={{ display: 'grid', gridTemplateColumns: '1fr 350px', gap: '40px' }} className="calculator-grid">
+            <style jsx>{`
+                @media (max-width: 1024px) {
+                    .calculator-grid {
+                        grid-template-columns: 1fr !important;
+                    }
+                }
+            `}</style>
             {/* 🛠️ CALCULATOR INTERFACE */}
             <div className="titanium-glass" style={{ padding: '40px', borderRadius: '24px', border: '1px solid rgba(14, 31, 51, 0.1)' }}>
                 

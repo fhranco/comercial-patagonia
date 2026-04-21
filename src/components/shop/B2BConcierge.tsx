@@ -38,7 +38,7 @@ export default function B2BConcierge() {
   ];
 
   return (
-    <div className="concierge-wrapper" style={{ position: 'fixed', zIndex: 8000 }}>
+    <div className="concierge-wrapper" style={{ position: 'fixed', bottom: '20px', right: '20px', zIndex: 8000, fontFamily: 'var(--font-body)' }}>
       <AnimatePresence>
         {isOpen && (
           <motion.div
@@ -55,8 +55,8 @@ export default function B2BConcierge() {
             }}
           >
             <div style={{ marginBottom: '20px', borderBottom: '1px solid rgba(0,0,0,0.05)', paddingBottom: '15px' }}>
-                <h3 style={{ fontSize: '10px', fontWeight: 900, textTransform: 'uppercase', letterSpacing: '0.2em', color: '#0E1F33', opacity: 0.6, marginBottom: '5px' }}>Concierge Patagonia</h3>
-                <p style={{ fontSize: '14px', fontWeight: 700, color: '#0E1F33' }}>¿Cómo podemos ayudar con su proyecto hoy?</p>
+                <h3 style={{ fontSize: '10px', fontWeight: 900, textTransform: 'uppercase', letterSpacing: '0.2em', color: '#0E1F33', opacity: 0.6, marginBottom: '5px', fontFamily: 'var(--font-heading)' }}>Concierge Patagonia</h3>
+                <p style={{ fontSize: '14px', fontWeight: 700, color: '#0E1F33', fontFamily: 'var(--font-heading)' }}>¿Cómo podemos ayudar con su proyecto hoy?</p>
             </div>
 
             <div style={{ display: 'flex', flexDirection: 'column', gap: '10px' }}>
@@ -78,7 +78,7 @@ export default function B2BConcierge() {
                     {opt.icon}
                   </div>
                   <div>
-                    <h4 style={{ fontSize: '11px', fontWeight: 900, textTransform: 'uppercase', color: '#0E1F33' }}>{opt.title}</h4>
+                    <h4 style={{ fontSize: '11px', fontWeight: 900, textTransform: 'uppercase', color: '#0E1F33', fontFamily: 'var(--font-heading)' }}>{opt.title}</h4>
                     <p style={{ fontSize: '10px', opacity: 0.5 }}>{opt.desc}</p>
                   </div>
                 </button>
@@ -86,7 +86,7 @@ export default function B2BConcierge() {
             </div>
 
             <div style={{ marginTop: '20px', textAlign: 'center' }}>
-                <p style={{ fontSize: '9px', fontWeight: 900, opacity: 0.3, textTransform: 'uppercase' }}>Tradición y Calidad en Magallanes</p>
+                <p style={{ fontSize: '9px', fontWeight: 900, opacity: 0.3, textTransform: 'uppercase', letterSpacing: '0.1em' }}>Tradición y Calidad en Magallanes</p>
             </div>
           </motion.div>
         )}
@@ -108,7 +108,7 @@ export default function B2BConcierge() {
         }}
       >
         <MessageSquare className="w-6 h-6 text-[#0E1F33]" />
-        <span style={{ fontSize: '11px', fontWeight: 900, textTransform: 'uppercase', letterSpacing: '0.15em', color: '#0E1F33' }}>
+        <span style={{ fontSize: '11px', fontWeight: 900, textTransform: 'uppercase', letterSpacing: '0.15em', color: '#0E1F33', fontFamily: 'var(--font-heading)' }}>
             Concierge B2B
         </span>
         

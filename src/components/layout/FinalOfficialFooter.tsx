@@ -69,7 +69,7 @@ export default function Footer() {
 
         <div style={{ maxWidth: '1400px', margin: '80px auto 0', paddingTop: '40px', borderTop: '1px solid rgba(0,0,0,0.05)', textAlign: 'center' }}>
             <p style={{ fontSize: '11px', fontWeight: 700, opacity: 0.3, textTransform: 'uppercase', letterSpacing: '0.2em' }}>
-                © {currentYear} COMERICAL DE LA PATAGONIA • EXCELENCIA INDUSTRIAL
+                © {currentYear} COMERCIAL DE LA PATAGONIA • EXCELENCIA INDUSTRIAL
             </p>
         </div>
     </footer>

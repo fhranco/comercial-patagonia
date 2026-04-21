@@ -64,11 +64,23 @@ export default function HeroSpectacular() {
           padding: '0 5%',
           width: '100%',
           display: 'grid',
-          gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))',
-          gap: '80px',
+          gridTemplateColumns: '1.2fr 0.8fr',
+          gap: '60px',
           alignItems: 'center'
         }}
+        className="hero-grid-container"
       >
+        <style jsx>{`
+          @media (max-width: 1200px) {
+            .hero-grid-container {
+              grid-template-columns: 1fr !important;
+              gap: 40px !important;
+              padding-top: 100px !important;
+              padding-bottom: 50px !important;
+            }
+            :global(section) { height: auto !important; min-height: 100vh; }
+          }
+        `}</style>
         {/* 🏗️ LADO IZQUIERDO: BRANDING & CTA */}
         <div>
           <motion.div variants={itemVariants} style={{ 
@@ -79,7 +91,7 @@ export default function HeroSpectacular() {
             border: '1px solid var(--brand-yellow)',
             padding: '10px 20px',
             borderRadius: '100px',
-            marginBottom: '30px',
+            marginBottom: '50px',
             color: 'var(--brand-navy)',
             backdropFilter: 'blur(10px)'
           }}>
@@ -88,10 +100,10 @@ export default function HeroSpectacular() {
               Distribuidor Oficial Patagonia
             </span>
           </motion.div>
-
+ 
           <motion.h1 variants={itemVariants} style={{ 
             color: 'var(--brand-navy)', 
-            fontSize: 'clamp(3rem, 7vw, 5.5rem)', 
+            fontSize: 'clamp(2.5rem, 6vw, 5rem)', 
             fontWeight: 900, 
             lineHeight: 0.95,
             textTransform: 'uppercase',
@@ -101,10 +113,10 @@ export default function HeroSpectacular() {
           }}>
             CEMENTO <br/>COMODORO <span style={{ color: 'var(--brand-blue)' }}>PCR</span>
           </motion.h1>
-
+ 
           <motion.p variants={itemVariants} style={{ 
             color: 'var(--brand-navy)', 
-            fontSize: '1.2rem', 
+            fontSize: 'clamp(1rem, 1.5vw, 1.2rem)', 
             maxWidth: '550px',
             marginBottom: '50px',
             lineHeight: 1.7,
@@ -112,24 +124,24 @@ export default function HeroSpectacular() {
           }}>
             Abastecimiento estratégico de Cemento Portland para obras de alta exigencia climática. Fraguado optimizado para la Patagonia y certificación de calidad IRAM.
           </motion.p>
-
+ 
           <motion.div variants={itemVariants} style={{ display: 'flex', gap: '20px', alignItems: 'center', flexWrap: 'wrap' }}>
             <Link href="/shop" className="gold-shimmer" style={{ 
-              textDecoration: 'none', color: 'var(--brand-navy)', padding: '24px 50px', borderRadius: '4px',
-              fontWeight: 900, fontSize: '13px', textTransform: 'uppercase', letterSpacing: '0.15em',
+              textDecoration: 'none', color: 'var(--brand-navy)', padding: '20px 40px', borderRadius: '4px',
+              fontWeight: 900, fontSize: '12px', textTransform: 'uppercase', letterSpacing: '0.15em',
               display: 'flex', alignItems: 'center', gap: '15px',
               boxShadow: '0 20px 40px rgba(212, 175, 55, 0.2)'
             }}>
               Ir a la Tienda <ShoppingBag className="w-4 h-4" />
             </Link>
-
+ 
             <Link href="/calculadora" style={{ 
-              backgroundColor: '#0E1F33', color: 'white', padding: '24px 50px', borderRadius: '4px',
-              fontSize: '13px', fontWeight: 900, textTransform: 'uppercase', letterSpacing: '0.15em', display: 'flex', alignItems: 'center', gap: '20px',
+              backgroundColor: '#0E1F33', color: 'white', padding: '20px 40px', borderRadius: '4px',
+              fontSize: '12px', fontWeight: 900, textTransform: 'uppercase', letterSpacing: '0.15em', display: 'flex', alignItems: 'center', gap: '20px',
               boxShadow: '0 20px 40px rgba(14, 31, 51, 0.4)', textDecoration: 'none'
             }} className="hover:scale-105 transition-all group">
-              <span style={{ borderBottom: '2px solid white', paddingBottom: '2px' }}>CALCULADORA DE MATERIALES</span>
-              <Calculator className="w-6 h-6 text-white" />
+              <span style={{ borderBottom: '2px solid white', paddingBottom: '2px' }}>CALCULADORA DE OBRA</span>
+              <Calculator className="w-5 h-5 text-white" />
             </Link>
           </motion.div>
         </div>
@@ -158,7 +170,7 @@ export default function HeroSpectacular() {
 
           {/* Card 2: Logística Pro */}
           <motion.div variants={itemVariants} className="titanium-glass" style={{ 
-            padding: '35px', borderRadius: '24px', border: '1px solid rgba(212,175,55,0.15)',
+            padding: '45px 35px', borderRadius: '24px', border: '1px solid rgba(212,175,55,0.15)',
             background: 'linear-gradient(135deg, rgba(212,175,55,0.05) 0%, rgba(212,175,55,0) 100%)'
           }}>
             <Truck className="w-8 h-8" style={{ marginBottom: '25px', color: '#D4AF37' }} />

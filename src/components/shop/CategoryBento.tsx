@@ -172,7 +172,7 @@ export default function CategoryGrid() {
                   <div>
                     <h4 style={{ 
                         color: '#FFF', 
-                        fontSize: 'clamp(2rem, 4.5vw, 3.2rem)', 
+                        fontSize: 'clamp(1.3rem, 4.5vw, 3.2rem)', 
                         fontWeight: 900, 
                         textTransform: 'uppercase', 
                         lineHeight: 0.9, 

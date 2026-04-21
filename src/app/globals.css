@@ -64,6 +64,19 @@ h1, h2, h3, h4, h5, h6 {
   font-weight: 700;
 }
 
+/* 🛠️ UTILITIES (Fixing Tailwind-like behavior in Vanilla CSS) */
+.hidden { display: none !important; }
+
+@media (min-width: 640px) {
+  .sm\:block { display: block !important; }
+  .sm\:hidden { display: none !important; }
+}
+
+@media (min-width: 1024px) {
+  .lg\:hidden { display: none !important; }
+  .lg\:flex { display: flex !important; }
+}
+
 .titanium-glass {
   background: var(--nav-bg);
   backdrop-filter: blur(20px);
@@ -150,22 +163,30 @@ h1, h2, h3, h4, h5, h6 {
   }
 }
 
-/* 🏁 GRID DE PRODUCTOS (HASTA 4 COLUMNAS) */
+/* 🏁 GRID DE PRODUCTOS (FLUÍDO & RESPONSIVE) */
 .product-grid-container {
   display: grid;
-  grid-template-columns: repeat(2, 1fr); /* User Preferred: 2 Columnas */
-  gap: 15px; /* Espaciado balanceado */
+  grid-template-columns: repeat(2, 1fr); /* Mobile: 2 Columnas */
+  gap: 15px;
 }
 
 @media (min-width: 768px) {
   .product-grid-container {
-    grid-template-columns: repeat(2, 1fr); /* Tablets: 2 Columnas */
+    grid-template-columns: repeat(2, 1fr); /* Tablet Portrait: 2 Columnas */
+    gap: 20px;
   }
 }
 
 @media (min-width: 1024px) {
   .product-grid-container {
-    grid-template-columns: repeat(4, 1fr); /* Desktop: 4 Columnas Exactas. Si hay un solo producto, usará el 25% del ancho sin estirarse. */
+    grid-template-columns: repeat(3, 1fr); /* Tablet Landscape / 13" Laptops: 3 Columnas */
+    gap: 25px;
+  }
+}
+
+@media (min-width: 1440px) {
+  .product-grid-container {
+    grid-template-columns: repeat(4, 1fr); /* Large Screens: 4 Columnas */
     gap: 40px;
   }
 }

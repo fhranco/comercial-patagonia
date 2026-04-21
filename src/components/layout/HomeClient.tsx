@@ -42,8 +42,17 @@ export default function HomeClient({ products }: HomeClientProps) {
         <TrustBar />
 
         {/* 🏢 HISTORIA Y TRADICIÓN */}
-        <section style={{ padding: '120px 5%', maxWidth: '1400px', margin: '0 auto', backgroundColor: '#FFF' }}>
-            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))', gap: '100px', alignItems: 'center' }}>
+        <section style={{ padding: '120px 5%', maxWidth: '1400px', margin: '0 auto', backgroundColor: '#FFF' }} className="heritage-section">
+            <style jsx>{`
+                @media (max-width: 1024px) {
+                    .heritage-section { padding: 80px 5% !important; }
+                    .heritage-grid { gap: 50px !important; }
+                }
+                @media (max-width: 768px) {
+                    .heritage-section { padding: 60px 5% !important; }
+                }
+            `}</style>
+            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))', gap: '100px', alignItems: 'center' }} className="heritage-grid">
                 <motion.div initial={{ opacity: 0, x: -30 }} whileInView={{ opacity: 1, x: 0 }} transition={{ duration: 1 }} viewport={{ once: true }}>
                     <span style={{ color: 'var(--primary-gold)', fontSize: '11px', fontWeight: 900, letterSpacing: '0.4em', textTransform: 'uppercase' }}>Patrimonio Regional</span>
                     <h2 style={{ fontSize: 'clamp(2.5rem, 5vw, 4.5rem)', fontWeight: 900, textTransform: 'uppercase', margin: '20px 0', lineHeight: 0.9, color: 'var(--brand-navy)' }}>TRADICIÓN <br/>DESDE 1980.</h2>

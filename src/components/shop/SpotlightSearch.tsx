@@ -48,8 +48,13 @@ export default function SpotlightSearch({ products, isOpen, onClose }: Spotlight
   // 🧠 Función de Normalización PRO (Quita HTML entities y tildes)
   const normalize = (str: string) => {
     if (!str) return "";
-    const doc = new DOMParser().parseFromString(str, "text/html");
-    const decoded = doc.documentElement.textContent || str;
+    let decoded = str;
+    // 1. Decodificar entidades HTML (solo en el cliente)
+    if (typeof window !== "undefined") {
+      const doc = new DOMParser().parseFromString(str, "text/html");
+      decoded = doc.documentElement.textContent || str;
+    }
+    // 2. Quitar tildes y convertir a minúsculas
     return decoded.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase();
   };
 

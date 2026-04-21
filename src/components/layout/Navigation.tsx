@@ -22,21 +22,22 @@ export default function Navigation({ transparent = true }: NavigationProps) {
   return (
     <nav style={{ 
       position: 'fixed', top: 0, width: '100%', zIndex: 9000, 
-      padding: isScrolled ? '10px 5%' : '15px 5%',
+      padding: isScrolled ? '15px 5%' : '30px 5%',
       background: (isMobileMenuOpen || isScrolled) 
-        ? '#FFF' 
+        ? 'rgba(255, 255, 255, 0.95)' 
         : 'transparent',
-      backdropFilter: (isMobileMenuOpen || isScrolled) ? 'none' : 'blur(10px)',
-      transition: 'all 0.4s ease',
-      borderBottom: (isScrolled || isMobileMenuOpen) ? '1px solid var(--border-color)' : 'none',
-      color: (transparent && !isScrolled && !isMobileMenuOpen) ? '#FFF' : 'inherit'
+      backdropFilter: (isMobileMenuOpen || isScrolled) ? 'blur(20px)' : 'none',
+      transition: 'all 0.6s cubic-bezier(0.16, 1, 0.3, 1)',
+      borderBottom: (isScrolled || isMobileMenuOpen) ? '1px solid rgba(14, 31, 51, 0.1)' : 'none',
+      color: (transparent && !isScrolled && !isMobileMenuOpen) ? '#FFFFFF' : 'var(--brand-navy)'
     }} className="nav-container">
       <style jsx>{`
-        @media (max-width: 768px) {
+        .nav-container {
+          font-family: var(--font-heading);
+        }
+        @media (max-width: 1024px) {
           .nav-container {
-            background: #FFF !important;
             padding: 15px 5% !important;
-            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
           }
         }
       `}</style>
@@ -45,11 +46,11 @@ export default function Navigation({ transparent = true }: NavigationProps) {
           {/* 🏔️ LOGO HUD */}
           <motion.div initial={{ opacity: 0, x: -10 }} animate={{ opacity: 1, x: 0 }}>
               <Link href="/" style={{ textDecoration: 'none', color: 'inherit' }} onClick={() => setIsMobileMenuOpen(false)}>
-                <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
-                  <div style={{ width: '32px', height: '32px', backgroundColor: 'var(--brand-yellow)', borderRadius: '8px', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
-                    <span style={{ color: 'var(--brand-navy)', fontWeight: 900, fontSize: '0.9rem' }}>C</span>
+                <div style={{ display: 'flex', alignItems: 'center', gap: '15px' }}>
+                  <div style={{ width: '40px', height: '40px', backgroundColor: 'var(--brand-yellow)', borderRadius: '8px', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0, boxShadow: '0 10px 20px rgba(249, 195, 0, 0.2)' }}>
+                    <span style={{ color: 'var(--brand-navy)', fontWeight: 900, fontSize: '1.2rem' }}>C</span>
                   </div>
-                  <span style={{ fontSize: '0.65rem', fontWeight: 900, textTransform: 'uppercase', letterSpacing: '0.15em', fontFamily: 'var(--font-heading)' }} className="sm:block hidden">
+                  <span style={{ fontSize: '0.75rem', fontWeight: 900, textTransform: 'uppercase', letterSpacing: '0.2em', fontFamily: 'var(--font-heading)' }} className="lg:block hidden">
                     Patagonia <span style={{ opacity: 0.5 }}>Commercial</span>
                   </span>
                 </div>
@@ -57,27 +58,31 @@ export default function Navigation({ transparent = true }: NavigationProps) {
           </motion.div>
           
           {/* 📱 APP CONTROLS */}
-          <div style={{ display: 'flex', alignItems: 'center', gap: '5px' }}>
+          <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
               <button 
                 className="lg:hidden"
                 onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-                style={{ background: 'none', border: 'none', color: 'inherit', width: '40px', height: '40px', display: 'flex', alignItems: 'center', justifyContent: 'center', cursor: 'pointer' }}
+                style={{ 
+                  background: 'rgba(14, 31, 51, 0.05)', border: 'none', color: 'inherit', 
+                  width: '45px', height: '45px', display: 'flex', alignItems: 'center', justifyContent: 'center', 
+                  cursor: 'pointer', borderRadius: '12px' 
+                }}
               >
-                  {isMobileMenuOpen ? <X size={22} /> : <Menu size={22} />}
+                  {isMobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
               </button>
 
               {/* 🖥️ DESKTOP NAV */}
-              <div className="hidden lg:flex" style={{ alignItems: 'center', gap: '30px', marginLeft: '20px' }}>
-                  <Link href="/historial" style={{ fontSize: '10px', fontWeight: 900, textTransform: 'uppercase', letterSpacing: '0.15em', textDecoration: 'none', color: 'inherit', opacity: 0.6 }} className="hover:opacity-100 transition">
+              <div className="hidden lg:flex" style={{ alignItems: 'center', gap: '40px', marginLeft: '40px' }}>
+                  <Link href="/historial" style={{ fontSize: '11px', fontWeight: 900, textTransform: 'uppercase', letterSpacing: '0.2em', textDecoration: 'none', color: 'inherit', opacity: 0.9 }} className="hover:opacity-100 transition">
                       HISTORIAL
                   </Link>
 
                   <Link href="/shop" style={{ 
                       background: 'var(--brand-navy)', color: '#FFF',
-                      padding: '12px 28px', borderRadius: '4px', 
-                      fontSize: '10px', fontWeight: 900, textTransform: 'uppercase', letterSpacing: '0.15em', textDecoration: 'none',
-                      display: 'flex', alignItems: 'center', gap: '12px'
-                  }} className="hover:bg-[var(--brand-blue)] transition-all">
+                      padding: '14px 32px', borderRadius: '4px', 
+                      fontSize: '11px', fontWeight: 900, textTransform: 'uppercase', letterSpacing: '0.2em', textDecoration: 'none',
+                      display: 'flex', alignItems: 'center', gap: '15px'
+                  }} className="hover:bg-[var(--brand-blue)] transition-all shadow-xl">
                       <span>VISITAR TIENDA</span>
                       <ArrowRight size={14} />
                   </Link>

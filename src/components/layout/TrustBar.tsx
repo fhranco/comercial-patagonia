@@ -30,7 +30,7 @@ export default function TrustBar() {
       color: 'var(--brand-navy)',
       borderTop: '1px solid var(--border-color)'
     }}>
-      <div style={{ maxWidth: '1400px', margin: '0 auto', display: 'grid', gap: '40px' }} className="md:grid-cols-3">
+      <div style={{ maxWidth: '1400px', margin: '0 auto', display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '40px' }}>
         {trustItems.map((item, idx) => (
           <motion.div
             key={idx}
