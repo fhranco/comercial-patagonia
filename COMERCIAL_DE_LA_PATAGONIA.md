@@ -7,7 +7,7 @@
 ## 📅 31 DE MARZO, 2026: FUNDACIÓN Y REFACTORIZACIÓN ESTRUCTURAL
 
 ### 1. 🏗️ Decisión de Arquitectura: "Headless Hybrid" (V2)
-*   **Decisión:** **Home Cinematográfica** en el dominio principal (`boostpatagonia.online`) con Next.js y **Tienda Full** en el subdominio (`tienda.boostpatagonia.online`) con WooCommerce.
+*   **Decisión:** **Home Cinematográfica** en el dominio principal (`comercialpatagonia.cl`) con Next.js y **Tienda Full** en el subdominio (`tienda.comercialpatagonia.cl`) con WooCommerce.
 *   **Razón:** Velocidad bruta para la marca y robustez total para el carrito y pagos sin fricción.
 
 ### 2. 🌓 Sistema de Diseño: "Duality Era"

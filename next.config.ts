@@ -5,7 +5,7 @@ const nextConfig: NextConfig = {
     remotePatterns: [
       {
         protocol: 'https',
-        hostname: 'tienda.boostpatagonia.online',
+        hostname: 'tienda.comercialpatagonia.cl',
       },
     ],
   },
