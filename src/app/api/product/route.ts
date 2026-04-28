@@ -10,7 +10,7 @@ export async function GET(request: Request) {
 
   const CK = process.env.WOOCOMMERCE_CK;
   const CS = process.env.WOOCOMMERCE_CS;
-  const WOO_URL = process.env.NEXT_PUBLIC_WOOCOMMERCE_URL || "https://darkorange-bat-658298.hostingersite.com/wp-json/wc/v3";
+  const WOO_URL = process.env.NEXT_PUBLIC_WOOCOMMERCE_URL || "https://tienda.comercialpatagonia.cl/wp-json/wc/v3";
   
   const authHeader = Buffer.from(`${CK}:${CS}`).toString('base64');
   const authUrl = `${WOO_URL}/products/${id}`;
