@@ -3,7 +3,7 @@ import ShopContainer from "@/components/shop/ShopContainer";
 import { fetchWooCommerceProducts } from "@/lib/woocommerce";
 import { MOCK_PRODUCTS } from "@/lib/mock-products";
 
-export const revalidate = 1; // 🚀 NUCLEAR RESET: Forzando actualización instantánea de cache
+export const revalidate = 3600; // Cache de 1 hora para evitar colapso de API
 
 export default async function ShopPage({ searchParams }: { searchParams: Promise<{ [key: string]: string | string[] | undefined }> }) {
   let products = [];

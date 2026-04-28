@@ -27,21 +27,20 @@ export async function fetchWooCommerceProducts() {
           "Content-Type": "application/json",
           "User-Agent": "ComercialPatagonia-B2B-Agent/1.0"
         },
-        next: { revalidate: 0 } // Desactivar cache temporalmente para debug
+        next: { revalidate: 3600 } 
       });
       
       if (!response.ok) return [];
       return await response.json();
     };
 
-    // Fetch 5 pages concurrently to maximize speed and bypass 100 limit
-    const pages = await Promise.all([
-      fetchPage(1),
-      fetchPage(2),
-      fetchPage(3),
-      fetchPage(4),
-      fetchPage(5)
-    ]);
+    // Fetch pages sequentially to avoid Netlify timeouts / Hostinger blocking
+    const pages = [];
+    for (let i = 1; i <= 6; i++) {
+      const pageData = await fetchPage(i);
+      if (!pageData || pageData.length === 0) break;
+      pages.push(pageData);
+    }
 
     // Flatten all pages into a single array
     const allProducts = pages.flat();
