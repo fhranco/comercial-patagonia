@@ -119,25 +119,6 @@ export default function ProductQuickView({ product, isOpen, onClose }: ProductQu
                 </p>
               </div>
 
-              {/* 🛠️ B2B MATERIAL CALCULATOR (ALWAYS ON FOR CONSTRUCTION/CEMENT) */}
-              {(
-                product.name.toLowerCase().includes('cemento') || 
-                product.name.toLowerCase().includes('comodoro') ||
-                product.name.toLowerCase().includes('binelli') ||
-                product.name.toLowerCase().includes('saco') ||
-                product.categories.some(c => 
-                  c.name.toLowerCase().includes('cemento') || 
-                  c.name.toLowerCase().includes('construcción') ||
-                  c.name.toLowerCase().includes('construccion')
-                )
-              ) && (
-                <MaterialCalculator 
-                  onCalculate={(qty) => {
-                    setQuantity(qty);
-                  }} 
-                />
-              )}
-
               <div style={{ padding: '25px 0', borderTop: '1px solid #EEE', borderBottom: '1px solid #EEE', marginBottom: '35px' }}>
                  <div style={{ display: 'flex', alignItems: 'baseline', gap: '15px', marginBottom: '10px' }}>
                     <span style={{ fontSize: '2.4rem', fontWeight: 900, color: '#0E1F33', fontFamily: 'var(--font-heading)' }}>
@@ -149,7 +130,7 @@ export default function ProductQuickView({ product, isOpen, onClose }: ProductQu
                       </span>
                     )}
                  </div>
-                 <p style={{ fontSize: '11px', fontWeight: 700, opacity: 0.5, textTransform: 'uppercase' }}>IVA Incluido* • Disponibilidad Inmediata</p>
+                 <p style={{ fontSize: '11px', fontWeight: 700, opacity: 0.5, textTransform: 'uppercase' }}>Disponibilidad Inmediata en Magallanes</p>
               </div>
 
               <div style={{ flex: 1, marginBottom: '40px' }}>
@@ -205,62 +186,4 @@ export default function ProductQuickView({ product, isOpen, onClose }: ProductQu
       )}
     </AnimatePresence>
   );
-}
-
-function MaterialCalculator({ onCalculate }: { onCalculate: (qty: number) => void }) {
-    const [sqm, setSqm] = React.useState<number>(0);
-    const [thickness, setThickness] = React.useState<number>(5); // cm
-    
-    // Calcular sacos: (m2 * (espesor/100)) * sacos_por_m3 (14) * 1.1 (margen)
-    const bags = Math.ceil((sqm * (thickness / 100)) * 14 * 1.1);
-
-    React.useEffect(() => {
-        if (bags > 0) onCalculate(bags);
-        else onCalculate(1);
-    }, [bags, onCalculate]);
-
-    return (
-        <div style={{ 
-            backgroundColor: 'rgba(212, 175, 55, 0.1)', 
-            border: '2px solid rgba(212, 175, 55, 0.5)', 
-            borderRadius: '4px', padding: '25px', marginBottom: '35px',
-            boxShadow: '0 4px 20px rgba(0,0,0,0.02)'
-        }}>
-            <div style={{ display: 'flex', alignItems: 'center', gap: '10px', marginBottom: '15px' }}>
-                <Construction className="w-4 h-4 text-[#D4AF37]" />
-                <h3 style={{ fontSize: '10px', fontWeight: 900, textTransform: 'uppercase', letterSpacing: '0.1em' }}>Cubicador B2B Magallanes</h3>
-            </div>
-
-            <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '15px', marginBottom: '15px' }}>
-                <div>
-                    <label style={{ fontSize: '8px', fontWeight: 900, opacity: 0.5, display: 'block', marginBottom: '5px', textTransform: 'uppercase' }}>Metros Cuadrados (m²)</label>
-                    <input 
-                        type="number" 
-                        value={sqm} 
-                        onChange={(e) => setSqm(Number(e.target.value))}
-                        style={{ width: '100%', padding: '10px', border: '1px solid #EEE', borderRadius: '4px', fontSize: '14px', fontWeight: 700 }}
-                    />
-                </div>
-                <div>
-                    <label style={{ fontSize: '8px', fontWeight: 900, opacity: 0.5, display: 'block', marginBottom: '5px', textTransform: 'uppercase' }}>Espesor (cm)</label>
-                    <input 
-                        type="number" 
-                        value={thickness} 
-                        onChange={(e) => setThickness(Number(e.target.value))}
-                        style={{ width: '100%', padding: '10px', border: '1px solid #EEE', borderRadius: '4px', fontSize: '14px', fontWeight: 700 }}
-                    />
-                </div>
-            </div>
-
-            <div style={{ borderTop: '1px dashed rgba(212, 175, 55, 0.2)', paddingTop: '15px', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-                <div>
-                    <p style={{ fontSize: '9px', fontWeight: 700, opacity: 0.5, textTransform: 'uppercase' }}>Necesitas aprox.</p>
-                    <p style={{ fontSize: '1.2rem', fontWeight: 900, color: '#0E1F33' }}>{bags > 0 ? bags : 0} Sacos</p>
-                </div>
-                <div style={{ textAlign: 'right' }}>
-                    <p style={{ fontSize: '8px', fontWeight: 700, color: '#D4AF37', textTransform: 'uppercase' }}>+10% Merma Incl.</p>
-                </div>
-            </div>
-        </div>
-    );
 }

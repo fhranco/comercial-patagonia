@@ -25,9 +25,10 @@ async function getProduct(id: string): Promise<Product> {
         "Authorization": `Basic ${authHeader}`,
         "Content-Type": "application/json",
         "Accept": "application/json",
-        "User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
+        "Cache-Control": "public, s-maxage=3600, stale-while-revalidate=86400",
+        "User-Agent": "ComercialPatagonia-B2B-Turbo/1.1"
       },
-      next: { revalidate: 3600 } 
+      next: { revalidate: 3600, tags: [`product-${id}`] } 
     });
 
     const bodyText = await response.text();

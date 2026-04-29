@@ -24,42 +24,16 @@ export default function ProductDetailClient({ initialProduct }: ProductDetailCli
   const [loading, setLoading] = React.useState(false);
 
   React.useEffect(() => {
-    // ⚡️ NITRO LOAD: Intentamos sacar el producto de la memoria inmediata para 0ms de delay
-    const cachedProduct = sessionStorage.getItem('current_product');
-    const pathId = window.location.pathname.split('/').pop();
-
-    if (cachedProduct) {
-      try {
-        const parsed = JSON.parse(cachedProduct);
-        if (String(parsed.id) === pathId) {
-          setProduct(parsed);
-          // Ya no necesitamos skeleton si tenemos el caché
-        }
-      } catch (e) {
-        console.error("Cache error");
+    // ⚡️ NITRO LOAD: Sincronizamos el estado con el producto inicial del servidor inmediatamente
+    if (initialProduct && initialProduct.id) {
+      setProduct(initialProduct);
+      setLoading(false);
+      
+      // Guardamos en caché para la próxima navegación instantánea
+      if (typeof window !== 'undefined') {
+        sessionStorage.setItem('current_product', JSON.stringify(initialProduct));
       }
     }
-
-    const fetchRealProduct = async () => {
-      // Solo mostramos loading si no tenemos nada en el estado todavía
-      if (!product.id || String(product.id) !== pathId) {
-        setLoading(true);
-      }
-      
-      try {
-        const res = await fetch(`/api/product?id=${pathId}`);
-        const data = await res.json();
-        if (data && data.id) {
-          setProduct(data);
-        }
-      } catch (err) {
-        console.warn("No se pudo cargar el producto real, manteniendo respaldo.");
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    fetchRealProduct();
   }, [initialProduct.id]);
 
   return (
@@ -147,7 +121,6 @@ export default function ProductDetailClient({ initialProduct }: ProductDetailCli
                       <span style={{ fontSize: '3.5rem', fontWeight: 900, fontFamily: 'var(--font-heading)' }}>
                           ${Math.round(Number(product.price)).toLocaleString('es-CL')}
                       </span>
-                      <span style={{ fontSize: '12px', opacity: 0.4, fontWeight: 900, textTransform: 'uppercase' }}>+ IVA</span>
                   </div>
 
                   <div style={{ marginBottom: '60px' }}>
