@@ -19,6 +19,9 @@ async function getProduct(id: string): Promise<Product> {
   const authHeader = Buffer.from(`${CK}:${CS}`).toString('base64');
   const authUrl = `${WOO_URL}/products/${id}`;
 
+  const controller = new AbortController();
+  const timeoutId = setTimeout(() => controller.abort(), 4000); // 4 Segundos Máximo
+
   try {
     const response = await fetch(authUrl, {
       headers: {
@@ -28,20 +31,21 @@ async function getProduct(id: string): Promise<Product> {
         "Cache-Control": "public, s-maxage=3600, stale-while-revalidate=86400",
         "User-Agent": "ComercialPatagonia-B2B-Turbo/1.1"
       },
-      next: { revalidate: 3600, tags: [`product-${id}`] } 
+      next: { revalidate: 3600, tags: [`product-${id}`] },
+      signal: controller.signal
     });
 
+    clearTimeout(timeoutId);
+
     const bodyText = await response.text();
-    console.log(`[WooCommerce API] Product ID: ${id} - Status: ${response.status}`);
-    
     if (response.status !== 200 || bodyText.startsWith('<')) {
-        console.error(`[WooCommerce API] Error en respuesta ID ${id}: Probable bloqueo de Hostinger.`);
         return MOCK_PRODUCTS.find(p => p.id === Number(id)) || MOCK_PRODUCTS[0];
     }
 
     return JSON.parse(bodyText);
   } catch (error) {
-    console.warn("API Error, usando Mock para el producto:", id);
+    clearTimeout(timeoutId);
+    console.warn("API Timeout/Error, usando Mock para el producto:", id);
     return MOCK_PRODUCTS.find(p => p.id === Number(id)) || MOCK_PRODUCTS[0];
   }
 }

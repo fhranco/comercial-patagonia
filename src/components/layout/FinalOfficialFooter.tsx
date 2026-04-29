@@ -69,7 +69,7 @@ export default function Footer() {
 
         <div style={{ maxWidth: '1400px', margin: '80px auto 0', paddingTop: '40px', borderTop: '1px solid rgba(0,0,0,0.05)', textAlign: 'center', display: 'flex', flexDirection: 'column', gap: '15px' }}>
             <p style={{ fontSize: '11px', fontWeight: 700, opacity: 0.3, textTransform: 'uppercase', letterSpacing: '0.2em' }}>
-                © {currentYear} COMERCIAL DE LA PATAGONIA • EXCELENCIA INDUSTRIAL
+                © {currentYear} COMERCIAL DE LA PATAGONIA • EXCELENCIA INDUSTRIAL • V1.2
             </p>
             <p style={{ fontSize: '10px', fontWeight: 700, opacity: 0.5, textTransform: 'uppercase', letterSpacing: '0.1em' }}>
                 Desarrollado por <a href="https://agenciapatagoniacoach.cl" target="_blank" rel="noopener noreferrer" style={{ color: 'inherit', textDecoration: 'none', borderBottom: '1px solid var(--primary-gold)' }}>Agencia Patagoniacoach</a>
