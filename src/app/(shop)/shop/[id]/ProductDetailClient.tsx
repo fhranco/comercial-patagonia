@@ -151,11 +151,38 @@ export default function ProductDetailClient({ initialProduct }: ProductDetailCli
                   </div>
 
                   <div style={{ marginBottom: '60px' }}>
-                      <h3 style={{ fontSize: '11px', fontWeight: 900, textTransform: 'uppercase', letterSpacing: '0.2em', marginBottom: '20px' }}>Descripción Técnica</h3>
-                      <div 
-                        style={{ opacity: 0.6, fontSize: '1.2rem', lineHeight: 1.8, fontWeight: 300 }}
-                        dangerouslySetInnerHTML={{ __html: product.description || product.short_description || "Información técnica en proceso de actualización..." }}
-                      />
+                      <h3 style={{ fontSize: '11px', fontWeight: 900, textTransform: 'uppercase', letterSpacing: '0.2em', marginBottom: '25px', color: 'rgba(0,0,0,0.5)' }}>Especificaciones del Suministro</h3>
+                      
+                      {product.description || product.short_description ? (
+                        <div 
+                          style={{ opacity: 0.6, fontSize: '1.2rem', lineHeight: 1.8, fontWeight: 300 }}
+                          dangerouslySetInnerHTML={{ __html: product.description || product.short_description }}
+                        />
+                      ) : (
+                        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: '30px', background: '#FDFDFD', padding: '30px', border: '1px solid #F0F0F0', borderRadius: '4px' }}>
+                          <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
+                            <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
+                              <Truck className="w-4 h-4" style={{ color: 'var(--primary-gold)' }} />
+                              <span style={{ fontSize: '10px', fontWeight: 900, textTransform: 'uppercase', letterSpacing: '0.1em' }}>Logística</span>
+                            </div>
+                            <p style={{ fontSize: '12px', opacity: 0.5 }}>Distribución inmediata desde Zona Franca, Punta Arenas.</p>
+                          </div>
+                          <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
+                            <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
+                              <ShieldCheck className="w-4 h-4" style={{ color: 'var(--primary-gold)' }} />
+                              <span style={{ fontSize: '10px', fontWeight: 900, textTransform: 'uppercase', letterSpacing: '0.1em' }}>Garantía</span>
+                            </div>
+                            <p style={{ fontSize: '12px', opacity: 0.5 }}>Certificación técnica para clima extremo (Magallanes).</p>
+                          </div>
+                          <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
+                            <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
+                              <Info className="w-4 h-4" style={{ color: 'var(--primary-gold)' }} />
+                              <span style={{ fontSize: '10px', fontWeight: 900, textTransform: 'uppercase', letterSpacing: '0.1em' }}>Asesoría</span>
+                            </div>
+                            <p style={{ fontSize: '12px', opacity: 0.5 }}>Soporte en obra disponible para este material.</p>
+                          </div>
+                        </div>
+                      )}
                   </div>
 
                   {/* 🔘 ACCIONES MAESTRAS */}

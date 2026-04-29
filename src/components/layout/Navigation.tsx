@@ -4,6 +4,7 @@ import React, { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { ArrowRight, Menu, X, ShoppingBag, Clock } from "lucide-react";
 import Link from 'next/link';
+import { BRAND_CONFIG } from "@/lib/constants";
 
 interface NavigationProps {
   transparent?: boolean;
@@ -77,6 +78,10 @@ export default function Navigation({ transparent = true }: NavigationProps) {
                       HISTORIAL
                   </Link>
 
+                  <Link href={BRAND_CONFIG.calculatorUrl} style={{ fontSize: '11px', fontWeight: 900, textTransform: 'uppercase', letterSpacing: '0.2em', textDecoration: 'none', color: 'inherit', opacity: 0.9 }} className="hover:opacity-100 transition">
+                      CALCULADORA
+                  </Link>
+
                   <Link href="/shop" style={{ 
                       background: 'var(--brand-navy)', color: '#FFF',
                       padding: '14px 32px', borderRadius: '4px', 
@@ -125,7 +130,7 @@ export default function Navigation({ transparent = true }: NavigationProps) {
               <span style={{ fontWeight: 700, fontSize: '13px', textTransform: 'uppercase', letterSpacing: '0.05em' }}>Historial de Cotizaciones</span>
             </Link>
 
-            <Link href="/calculadora" onClick={() => setIsMobileMenuOpen(false)} style={{ 
+            <Link href={BRAND_CONFIG.calculatorUrl} onClick={() => setIsMobileMenuOpen(false)} style={{ 
               display: 'flex', alignItems: 'center', gap: '15px', 
               padding: '20px', borderRadius: '12px', textDecoration: 'none', color: 'inherit',
               border: '1px solid var(--border-color)'

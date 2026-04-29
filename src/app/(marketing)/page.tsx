@@ -10,7 +10,8 @@ export default async function Page() {
     let products = [];
     
     try {
-        products = await fetchWooCommerceProducts() || MOCK_PRODUCTS;
+        const fetchedProducts = await fetchWooCommerceProducts();
+        products = (fetchedProducts && fetchedProducts.length > 0) ? fetchedProducts : MOCK_PRODUCTS;
     } catch (error) {
         console.error("Error fetching homepage products:", error);
         products = MOCK_PRODUCTS;

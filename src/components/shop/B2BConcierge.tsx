@@ -55,7 +55,7 @@ export default function B2BConcierge() {
             }}
           >
             <div style={{ marginBottom: '20px', borderBottom: '1px solid rgba(0,0,0,0.05)', paddingBottom: '15px' }}>
-                <h3 style={{ fontSize: '10px', fontWeight: 900, textTransform: 'uppercase', letterSpacing: '0.2em', color: '#0E1F33', opacity: 0.6, marginBottom: '5px', fontFamily: 'var(--font-heading)' }}>Concierge Patagonia</h3>
+                <h3 style={{ fontSize: '10px', fontWeight: 900, textTransform: 'uppercase', letterSpacing: '0.2em', color: '#0E1F33', opacity: 0.6, marginBottom: '5px', fontFamily: 'var(--font-heading)' }}>Asistente Patagonia</h3>
                 <p style={{ fontSize: '14px', fontWeight: 700, color: '#0E1F33', fontFamily: 'var(--font-heading)' }}>¿Cómo podemos ayudar con su proyecto hoy?</p>
             </div>
 
@@ -109,7 +109,7 @@ export default function B2BConcierge() {
       >
         <MessageSquare className="w-6 h-6 text-[#0E1F33]" />
         <span style={{ fontSize: '11px', fontWeight: 900, textTransform: 'uppercase', letterSpacing: '0.15em', color: '#0E1F33', fontFamily: 'var(--font-heading)' }}>
-            Concierge B2B
+            Asistente
         </span>
         
         {/* Active Session Indicator */}

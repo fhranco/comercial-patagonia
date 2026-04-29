@@ -38,17 +38,31 @@ export default function ProductCard({ product, onQuickView }: ProductCardProps) 
                overflow: 'hidden', position: 'relative', borderRadius: '4px'
              }}
           >
+              <div style={{ position: 'absolute', inset: 0, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                <div style={{ width: '100%', height: '100%', background: 'linear-gradient(135deg, #F5F5F5 0%, #E0E0E0 100%)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                   <div style={{ textAlign: 'center', opacity: 0.2 }}>
+                      <Image src="/branding/logo-minimal.png" alt="Patagonia" width={40} height={40} style={{ filter: 'grayscale(1)' }} />
+                   </div>
+                </div>
+              </div>
+
               {product.images[0] && (
-                <Image 
-                  src={product.images[0].src} 
-                  alt={product.name}
-                  fill
-                  sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 25vw"
-                  className="product-card-image"
-                  style={{ 
-                    objectFit: 'cover'
-                  }} 
-                />
+                <motion.div
+                  initial={{ opacity: 0 }}
+                  whileInView={{ opacity: 1 }}
+                  style={{ position: 'absolute', inset: 0 }}
+                >
+                  <Image 
+                    src={product.images[0].src} 
+                    alt={product.name}
+                    fill
+                    sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 25vw"
+                    className="product-card-image"
+                    style={{ 
+                      objectFit: 'cover'
+                    }} 
+                  />
+                </motion.div>
               )}
               
                {/* 🔘 ACTION OVERLAY (Desktop) */}

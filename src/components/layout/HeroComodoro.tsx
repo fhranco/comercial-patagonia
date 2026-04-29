@@ -7,6 +7,7 @@ import {
   ArrowRight, ShieldCheck, MapPin, HardHat, 
   ShoppingBag, Truck, CheckCircle2, TrendingUp, Calculator
 } from "lucide-react";
+import { BRAND_CONFIG } from "@/lib/constants";
 
 export default function HeroSpectacular() {
   const containerVariants: Variants = {
@@ -135,7 +136,7 @@ export default function HeroSpectacular() {
               Ir a la Tienda <ShoppingBag className="w-4 h-4" />
             </Link>
  
-            <Link href="/calculadora" style={{ 
+            <Link href={BRAND_CONFIG.calculatorUrl} style={{ 
               backgroundColor: '#0E1F33', color: 'white', padding: '20px 40px', borderRadius: '4px',
               fontSize: '12px', fontWeight: 900, textTransform: 'uppercase', letterSpacing: '0.15em', display: 'flex', alignItems: 'center', gap: '20px',
               boxShadow: '0 20px 40px rgba(14, 31, 51, 0.4)', textDecoration: 'none'

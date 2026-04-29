@@ -14,12 +14,12 @@ export default function GrandCement() {
           <img src="/images/comodoro-2000.png" style={{ width: '100%', height: '100%', objectFit: 'cover', filter: 'grayscale(100%) brightness(1.5)' }} alt="Ambiente Industrial" />
       </div>
 
-      <div style={{ maxWidth: '1400px', margin: '0 auto', display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(360px, 1fr))', gap: '80px', alignItems: 'center' }}>
+      <div style={{ maxWidth: '1400px', margin: '0 auto', display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(45%, 1fr))', gap: '60px', alignItems: 'center' }}>
         
         {/* 📝 INFO & TECH SPECS */}
-        <motion.div initial={{ opacity: 0, x: -50 }} whileInView={{ opacity: 1, x: 0 }} transition={{ duration: 1 }} viewport={{ once: true }}>
+        <motion.div initial={{ opacity: 0, x: -50 }} whileInView={{ opacity: 1, x: 0 }} transition={{ duration: 1 }} viewport={{ once: true }} style={{ zIndex: 10 }}>
           <div style={{ display: 'inline-block', padding: '10px 20px', backgroundColor: 'var(--brand-yellow)', color: 'var(--brand-navy)', fontSize: '11px', fontWeight: 900, textTransform: 'uppercase', letterSpacing: '0.3em', marginBottom: '40px' }}>Representante Oficial Magallanes</div>
-          <h2 style={{ fontSize: 'clamp(3rem, 10vw, 7.5rem)', fontWeight: 900, textTransform: 'uppercase', lineHeight: 0.85, marginBottom: '50px', color: 'var(--brand-blue)' }}>CEMENTO <br/>COMODORO</h2>
+          <h2 style={{ fontSize: 'clamp(2.5rem, 8vw, 5.5rem)', fontWeight: 900, textTransform: 'uppercase', lineHeight: 0.95, marginBottom: '50px', color: 'var(--brand-blue)', letterSpacing: '-0.02em' }}>CEMENTO <br/>COMODORO</h2>
           
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: '40px', marginBottom: '80px' }}>
             <div style={{ borderLeft: '1px solid var(--border-color)', paddingLeft: '20px' }}>
