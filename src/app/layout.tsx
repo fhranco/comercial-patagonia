@@ -6,6 +6,7 @@ import { CartProvider } from "../context/CartContext";
 import CartDrawer from "../components/shop/CartDrawer";
 import B2BConcierge from "../components/shop/B2BConcierge";
 import Footer from "../components/layout/FinalOfficialFooter";
+import GlobalQuickView from "../components/shop/GlobalQuickView";
 
 const inter = Inter({ 
   subsets: ["latin"],
@@ -76,6 +77,7 @@ export default function RootLayout({
         <ThemeProvider>
           <CartProvider>
             <CartDrawer />
+            <GlobalQuickView />
             {/* 🛡️ UNIFIED B2B HUB (Replacing multiple floating buttons) */}
             <B2BConcierge />
             {/* MagallanesLogistics and AIAssistant now live inside the Concierge or are hidden on mobile to avoid clutter */}

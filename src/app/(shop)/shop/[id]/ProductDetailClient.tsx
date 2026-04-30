@@ -2,7 +2,7 @@
 
 import React from "react";
 import { useRouter } from "next/navigation";
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 import { 
   ChevronLeft, ShoppingBag, ShieldCheck, 
   Download, MessageCircle, Info, Truck 
@@ -17,27 +17,12 @@ interface ProductDetailClientProps {
   initialProduct: Product;
 }
 
-export default function ProductDetailClient({ initialProduct }: ProductDetailClientProps) {
+export default function ProductDetailClient({ initialProduct: product }: ProductDetailClientProps) {
   const router = useRouter();
   const { addToCart, setIsCartOpen } = useCart();
-  const [product, setProduct] = React.useState<Product>(initialProduct);
-  const [loading, setLoading] = React.useState(false);
-
-  React.useEffect(() => {
-    // ⚡️ NITRO LOAD: Sincronizamos el estado con el producto inicial del servidor inmediatamente
-    if (initialProduct && initialProduct.id) {
-      setProduct(initialProduct);
-      setLoading(false);
-      
-      // Guardamos en caché para la próxima navegación instantánea
-      if (typeof window !== 'undefined') {
-        sessionStorage.setItem('current_product', JSON.stringify(initialProduct));
-      }
-    }
-  }, [initialProduct.id]);
 
   return (
-    <div style={{ backgroundColor: '#FFF', color: '#000', minHeight: '100vh' }}>
+    <div style={{ backgroundColor: '#FFFFFF', color: '#000', minHeight: '100vh', position: 'relative' }}>
       
       {/* 🚀 HUD MINIMALISTA */}
       <nav className="titanium-glass" style={{ padding: '20px 5%', display: 'flex', justifyContent: 'space-between', alignItems: 'center', position: 'sticky', top: 0, zIndex: 2500 }}>
@@ -59,15 +44,17 @@ export default function ProductDetailClient({ initialProduct }: ProductDetailCli
           </button>
       </nav>
 
+      {/* 🏎️ STICKY ACTION BAR (Visible on scroll) */}
+      <AnimatePresence>
+        <StickyActionHUD product={product} onAddToCart={() => addToCart(product)} />
+      </AnimatePresence>
+
       <main style={{ maxWidth: '1600px', margin: '0 auto' }}>
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(500px, 1fr))', minHeight: 'calc(100vh - 100px)' }}>
           
           {/* 🖼️ SECCIÓN VISUAL */}
-          <div style={{ position: 'relative', backgroundColor: '#F8F8F8' }}>
+          <div style={{ position: 'relative', backgroundColor: '#FFFFFF' }}>
              <div style={{ position: 'sticky', top: '100px', width: '100%', height: 'calc(100vh - 100px)', padding: '60px', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-                {loading ? (
-                   <div style={{ width: '80%', height: '80%', backgroundColor: '#EEE', borderRadius: '8px' }} className="animate-pulse gold-shimmer" />
-                ) : (
                   <motion.div 
                     initial={{ opacity: 0, scale: 0.95 }}
                     animate={{ opacity: 1, scale: 1 }}
@@ -81,8 +68,7 @@ export default function ProductDetailClient({ initialProduct }: ProductDetailCli
                         priority
                       />
                   </motion.div>
-                )}
-                {product.on_sale && !loading && (
+                {product.on_sale && (
                     <div style={{ position: 'absolute', top: '80px', left: '80px', background: 'var(--primary-gold)', color: '#000', padding: '10px 25px', borderRadius: '100px', fontWeight: 900, fontSize: '11px', textTransform: 'uppercase', zIndex: 10 }}>
                         Oportunidad de Suministro
                     </div>
@@ -92,14 +78,6 @@ export default function ProductDetailClient({ initialProduct }: ProductDetailCli
 
           {/* 📝 SECCIÓN INFO */}
           <div style={{ padding: '100px 10%', display: 'flex', flexDirection: 'column' }}>
-             {loading ? (
-                <div style={{ display: 'flex', flexDirection: 'column', gap: '30px' }}>
-                   <div style={{ width: '150px', height: '10px', backgroundColor: '#EEE' }} className="animate-pulse" />
-                   <div style={{ width: '100%', height: '60px', backgroundColor: '#EEE' }} className="animate-pulse" />
-                   <div style={{ width: '200px', height: '80px', backgroundColor: '#EEE' }} className="animate-pulse" />
-                   <div style={{ width: '100%', height: '200px', backgroundColor: '#EEE' }} className="animate-pulse" />
-                </div>
-             ) : (
                <motion.div
                  initial={{ opacity: 0, y: 20 }}
                  animate={{ opacity: 1, y: 0 }}
@@ -132,7 +110,7 @@ export default function ProductDetailClient({ initialProduct }: ProductDetailCli
                           dangerouslySetInnerHTML={{ __html: product.description || product.short_description }}
                         />
                       ) : (
-                        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: '30px', background: '#FDFDFD', padding: '30px', border: '1px solid #F0F0F0', borderRadius: '4px' }}>
+                        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: '30px', background: '#FFFFFF', padding: '30px', border: '1px solid var(--border-color)', borderRadius: '4px' }}>
                           <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
                             <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
                               <Truck className="w-4 h-4" style={{ color: 'var(--primary-gold)' }} />
@@ -159,7 +137,7 @@ export default function ProductDetailClient({ initialProduct }: ProductDetailCli
                   </div>
 
                   {/* 🔘 ACCIONES MAESTRAS */}
-                  <div style={{ display: 'grid', gap: '20px' }}>
+                  <div id="main-cta" style={{ display: 'grid', gap: '20px' }}>
                       <button 
                         onClick={(e) => {
                           e.preventDefault();
@@ -188,10 +166,61 @@ export default function ProductDetailClient({ initialProduct }: ProductDetailCli
                       </div>
                   </div>
                </motion.div>
-             )}
           </div>
         </div>
       </main>
     </div>
   );
+}
+
+// 🏎️ COMPONENTE INTERNO: STICKY HUD
+function StickyActionHUD({ product, onAddToCart }: { product: Product; onAddToCart: () => void }) {
+    const [isVisible, setIsVisible] = React.useState(false);
+
+    React.useEffect(() => {
+        const handleScroll = () => {
+            const cta = document.getElementById('main-cta');
+            if (cta) {
+                const rect = cta.getBoundingClientRect();
+                setIsVisible(rect.top < 0);
+            }
+        };
+        window.addEventListener('scroll', handleScroll);
+        return () => window.removeEventListener('scroll', handleScroll);
+    }, []);
+
+    if (!isVisible) return null;
+
+    return (
+        <motion.div 
+            initial={{ y: 100 }}
+            animate={{ y: 0 }}
+            exit={{ y: 100 }}
+            style={{ 
+                position: 'fixed', bottom: 0, left: 0, right: 0, 
+                backgroundColor: 'rgba(14, 31, 51, 0.98)', color: '#FFF',
+                padding: '15px 5%', zIndex: 3000,
+                display: 'flex', justifyContent: 'space-between', alignItems: 'center',
+                backdropFilter: 'blur(20px)', borderTop: '1px solid rgba(212, 175, 55, 0.3)'
+            }}
+        >
+            <div style={{ display: 'flex', alignItems: 'center', gap: '20px' }}>
+                <div style={{ position: 'relative', width: '45px', height: '45px', borderRadius: '4px', overflow: 'hidden', backgroundColor: '#FFF' }}>
+                    <Image src={product.images[0]?.src || ""} alt={product.name} fill style={{ objectFit: 'cover' }} />
+                </div>
+                <div>
+                    <h4 style={{ fontSize: '10px', fontWeight: 900, textTransform: 'uppercase', letterSpacing: '0.1em' }}>{product.name}</h4>
+                    <p style={{ fontSize: '14px', fontWeight: 900, color: 'var(--primary-gold)' }}>${Math.round(Number(product.price)).toLocaleString('es-CL')}</p>
+                </div>
+            </div>
+
+            <button 
+                onClick={onAddToCart}
+                className="gold-shimmer"
+                style={{ border: 'none', padding: '12px 30px', borderRadius: '4px', fontWeight: 900, fontSize: '10px', textTransform: 'uppercase', letterSpacing: '0.1em', cursor: 'pointer' }}
+            >
+                Agregar a Cotización
+            </button>
+        </motion.div>
+    );
 }

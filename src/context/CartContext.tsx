@@ -24,6 +24,9 @@ interface CartContextType {
   quoteHistory: SavedQuote[];
   saveQuoteToHistory: () => void;
   clearCart: () => void;
+  quickViewProduct: Product | null;
+  setQuickViewProduct: (product: Product | null) => void;
+  openQuickView: (product: Product) => void;
 }
 
 const CartContext = createContext<CartContextType | undefined>(undefined);
@@ -34,6 +37,11 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
   const [quoteHistory, setQuoteHistory] = useState<SavedQuote[]>([]);
   const [isCartOpen, setIsCartOpen] = useState(false);
   const [isHydrated, setIsHydrated] = useState(false);
+  const [quickViewProduct, setQuickViewProduct] = useState<Product | null>(null);
+
+  const openQuickView = useCallback((product: Product) => {
+    setQuickViewProduct(product);
+  }, []);
 
   // Recovery - Hydration safe for React 19
   useEffect(() => {
@@ -114,7 +122,8 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
   return (
     <CartContext.Provider value={{ 
       cart, addToCart, removeFromCart, updateQty, cartTotal, isCartOpen, setIsCartOpen,
-      projectName, setProjectName, quoteHistory, saveQuoteToHistory, clearCart
+      projectName, setProjectName, quoteHistory, saveQuoteToHistory, clearCart,
+      quickViewProduct, setQuickViewProduct, openQuickView
     }}>
       {children}
     </CartContext.Provider>

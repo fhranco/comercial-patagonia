@@ -3,6 +3,7 @@
 import React from "react";
 import styles from "../../app/page.module.css";
 import { motion, useScroll, useSpring } from "framer-motion";
+import { useRouter } from "next/navigation";
 import Navigation from "./Navigation";
 import HeroSpectacular from "./HeroComodoro";
 import CategoryBento from "../shop/CategoryBento";
@@ -12,26 +13,37 @@ import FurnitureShowcase from "./FurnitureShowcase";
 import GrandCement from "./GrandCement";
 import { Product } from "@/types/woocommerce";
 import Link from "next/link";
+import PromotionHUD from "../shop/PromotionHUD";
+import RetailStories from "../shop/RetailStories";
 
 interface HomeClientProps {
   products: Product[];
 }
 
 export default function HomeClient({ products }: HomeClientProps) {
+  const router = useRouter();
   const { scrollYProgress } = useScroll();
   const scaleProgress = useSpring(scrollYProgress, { stiffness: 100, damping: 30, restDelta: 0.001 });
   const SHOP_URL = "/shop";
 
   return (
-    <div className={styles.page} style={{ backgroundColor: 'var(--brand-sky)', color: 'var(--brand-navy)', minHeight: '100vh', width: '100%' }}>
+    <div className={styles.page} style={{ backgroundColor: '#FFFFFF', color: 'var(--brand-navy)', minHeight: '100vh', width: '100%' }}>
       
       {/* 🚀 BARRA DE PROGRESO */}
       <motion.div style={{ scaleX: scaleProgress, position: 'fixed', top: 0, left: 0, right: 0, height: '3px', background: 'var(--primary-gold)', zIndex: 9999, transformOrigin: '0%' }} />
 
       <Navigation transparent={true} />
-
+      <PromotionHUD products={products} />
+      
       <main style={{ width: '100%' }}>
         <HeroSpectacular />
+
+        <div style={{ marginTop: '40px', marginBottom: '40px', display: 'flex', justifyContent: 'center' }}>
+          <RetailStories 
+              activeCategory="Todos" 
+              onCategoryChange={(cat) => router.push(`/shop?category=${cat}`)} 
+          />
+        </div>
 
         {/* 🌟 CARRUSEL DINÁMICO: Mostramos productos destacados de la tienda */}
         <FeaturedCarousel products={products.length > 0 ? products : []} />
@@ -55,9 +67,9 @@ export default function HomeClient({ products }: HomeClientProps) {
             <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))', gap: '100px', alignItems: 'center' }} className="heritage-grid">
                 <motion.div initial={{ opacity: 0, x: -30 }} whileInView={{ opacity: 1, x: 0 }} transition={{ duration: 1 }} viewport={{ once: true }}>
                     <span style={{ color: 'var(--primary-gold)', fontSize: '11px', fontWeight: 900, letterSpacing: '0.4em', textTransform: 'uppercase' }}>Patrimonio Regional</span>
-                    <h2 style={{ fontSize: 'clamp(2.5rem, 5vw, 4.5rem)', fontWeight: 900, textTransform: 'uppercase', margin: '20px 0', lineHeight: 0.9, color: 'var(--brand-navy)' }}>TRADICIÓN <br/>DESDE 1980.</h2>
+                    <h2 style={{ fontSize: 'clamp(2.5rem, 5vw, 4.5rem)', fontWeight: 900, textTransform: 'uppercase', margin: '20px 0', lineHeight: 0.9, color: 'var(--brand-navy)' }}>TRADICIÓN <br/>DESDE 1978.</h2>
                     <p style={{ fontSize: '1rem', lineHeight: 1.6, opacity: 0.8, marginBottom: '40px', maxWidth: '350px' }}>
-                        Cuatro décadas forjando el comercio austral con equipamiento que resiste el fin del mundo.
+                        Casi cinco décadas forjando el comercio austral con equipamiento que resiste el fin del mundo.
                     </p>
                     <div>
                         <Link href={SHOP_URL} className="gold-shimmer" style={{ textDecoration: 'none', color: 'var(--brand-navy)', padding: '20px 45px', borderRadius: '4px', fontSize: '12px', fontWeight: 900, textTransform: 'uppercase', letterSpacing: '0.15em', boxShadow: '0 10px 20px rgba(0,0,0,0.05)' }}>Ver Catálogo Técnico</Link>

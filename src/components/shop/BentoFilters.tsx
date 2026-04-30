@@ -63,8 +63,8 @@ export default function BentoFilters({ categories, activeCategory, onSelect }: B
                 display: 'flex',
                 flexDirection: 'column',
                 justifyContent: 'space-between',
-                backgroundColor: isActive ? '#0E1F33' : '#F8FAFC',
-                border: isActive ? '2px solid #D4AF37' : '1px solid rgba(0,0,0,0.05)',
+                backgroundColor: isActive ? '#0E1F33' : '#FFFFFF',
+                border: isActive ? '2px solid #D4AF37' : '1px solid var(--border-color)',
                 boxShadow: isActive ? '0 20px 40px rgba(14, 31, 51, 0.3)' : '0 4px 15px rgba(0,0,0,0.02)',
                 transition: 'all 0.4s cubic-bezier(0.16, 1, 0.3, 1)',
                 position: 'relative',
@@ -78,7 +78,7 @@ export default function BentoFilters({ categories, activeCategory, onSelect }: B
 
               <div style={{ 
                 width: '32px', height: '32px', borderRadius: '8px', 
-                backgroundColor: isActive ? 'rgba(212, 175, 55, 0.2)' : 'rgba(14, 31, 51, 0.05)',
+                backgroundColor: isActive ? 'rgba(212, 175, 55, 0.2)' : 'rgba(14, 31, 51, 0.03)',
                 display: 'flex', alignItems: 'center', justifyContent: 'center'
               }}>
                 <LayoutGrid size={14} style={{ color: isActive ? '#D4AF37' : '#0E1F33' }} />
@@ -109,7 +109,7 @@ export default function BentoFilters({ categories, activeCategory, onSelect }: B
       <div style={{ 
         display: 'flex', alignItems: 'center', justifyContent: 'center', 
         gap: '20px', marginTop: '20px', padding: '15px',
-        backgroundColor: 'rgba(128,128,128,0.03)', borderRadius: '100px',
+        backgroundColor: '#FFFFFF', borderRadius: '100px',
         border: '1px solid var(--border-color)'
       }}>
          <motion.button 

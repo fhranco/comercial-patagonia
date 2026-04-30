@@ -13,6 +13,8 @@ import ProductCard from "@/components/shop/ProductCard";
 import ProductQuickView from "@/components/shop/ProductQuickView";
 import BentoFilters from "@/components/shop/BentoFilters";
 import SpotlightSearch from "@/components/shop/SpotlightSearch";
+import PromotionHUD from "@/components/shop/PromotionHUD";
+import RetailStories from "@/components/shop/RetailStories";
 import { Product } from "@/types/woocommerce";
 
 interface ShopContainerProps {
@@ -126,7 +128,13 @@ export default function ShopContainer({ initialProducts, initialCategory, isLive
 
   return (
     <div className={`${styles.page} page-transition`} style={{ backgroundColor: 'var(--bg-color)', color: 'var(--text-color)', minHeight: '100vh', width: '100%' }}>
+      <PromotionHUD products={initialProducts} />
       
+      <RetailStories 
+        activeCategory={activeCategory} 
+        onCategoryChange={setActiveCategory} 
+      />
+
       <nav className="titanium-glass" style={{ padding: '30px 5%', display: 'flex', justifyContent: 'space-between', alignItems: 'center', position: 'sticky', top: 0, zIndex: 2000 }}>
           <div style={{ display: 'flex', alignItems: 'center', gap: '30px' }}>
               <Link href="/" style={{ color: 'inherit', opacity: 0.5, textDecoration: 'none', display: 'flex', alignItems: 'center', gap: '12px', fontSize: '11px', fontWeight: 900, textTransform: 'uppercase', letterSpacing: '0.1em' }} className="hover:opacity-100 hover:text-[#D4AF37] transition-all">
@@ -167,7 +175,7 @@ export default function ShopContainer({ initialProducts, initialCategory, isLive
                   <span style={{ fontSize: '9px', fontWeight: 900, textTransform: 'uppercase', color: 'var(--primary-gold)', letterSpacing: '0.2em', display: 'block' }}>Catálogo de Materiales</span>
                   <div style={{ display: 'flex', flexDirection: 'column', gap: '15px' }} className="shop-header-flex">
                       <h2 style={{ fontSize: 'clamp(1.8rem, 10vw, 3.5rem)', fontWeight: 900, textTransform: 'uppercase', lineHeight: 1, margin: 0 }}>TIENDA PATAGONIA.</h2>
-                      <div onClick={() => setIsSpotlightOpen(true)} style={{ width: '100%', backgroundColor: 'rgba(128,128,128,0.05)', borderRadius: '12px', padding: '12px 15px', display: 'flex', alignItems: 'center', gap: '12px', border: '1px solid var(--border-color)', cursor: 'text' }}>
+                      <div onClick={() => setIsSpotlightOpen(true)} style={{ width: '100%', backgroundColor: '#FFFFFF', borderRadius: '12px', padding: '12px 15px', display: 'flex', alignItems: 'center', gap: '12px', border: '1px solid var(--border-color)', cursor: 'text' }}>
                         <Search size={16} style={{ opacity: 0.5 }} />
                         <span style={{ fontSize: '13px', opacity: 0.5 }}>Buscar...</span>
                       </div>

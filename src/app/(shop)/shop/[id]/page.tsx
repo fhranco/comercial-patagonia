@@ -13,7 +13,7 @@ async function getProduct(id: string): Promise<Product> {
 
   // Fallback a Mock si no hay llaves
   if (!CK || !CS) {
-    return MOCK_PRODUCTS.find(p => p.id === Number(id)) || MOCK_PRODUCTS[0];
+    return generateDynamicMock(id);
   }
 
   const authHeader = Buffer.from(`${CK}:${CS}`).toString('base64');
@@ -39,15 +39,45 @@ async function getProduct(id: string): Promise<Product> {
 
     const bodyText = await response.text();
     if (response.status !== 200 || bodyText.startsWith('<')) {
-        return MOCK_PRODUCTS.find(p => p.id === Number(id)) || MOCK_PRODUCTS[0];
+        console.warn(`[WooCommerce API] Error ${response.status}, usando fallback dinámico.`);
+        const existingMock = MOCK_PRODUCTS.find(p => p.id === Number(id));
+        if (existingMock) return { ...existingMock, id: Number(id) };
+        return generateDynamicMock(id);
     }
 
     return JSON.parse(bodyText);
   } catch (error) {
     clearTimeout(timeoutId);
-    console.warn("API Timeout/Error, usando Mock para el producto:", id);
-    return MOCK_PRODUCTS.find(p => p.id === Number(id)) || MOCK_PRODUCTS[0];
+    console.warn("API Timeout/Error, usando Mock Dinámico:", id);
+    return generateDynamicMock(id);
   }
+}
+
+// 🎭 FUNCIÓN GENERADORA: Centralizamos la creación de productos de prueba
+function generateDynamicMock(id: string): Product {
+    let numId = Number(id);
+    if (isNaN(numId)) numId = 999; // Fallback estable si el ID es un texto/slug
+    
+    const existingMock = MOCK_PRODUCTS.find(p => p.id === numId);
+    if (existingMock) return { ...existingMock, id: numId } as Product;
+
+    return {
+      id: numId,
+      name: `Suministro Estratégico #${id}`,
+      slug: `producto-${id}`,
+      permalink: "#",
+      price: (12000 + (numId % 40) * 1500).toString(),
+      regular_price: (20000 + (numId % 40) * 1500).toString(),
+      sale_price: (12000 + (numId % 40) * 1500).toString(),
+      on_sale: numId % 3 === 0,
+      stock_status: "instock" as "instock",
+      images: [{ id: numId, src: "/images/comodoro-2000.png", name: "Producto", alt: "Vista de Producto" }],
+      categories: [{ id: 1, name: "Catálogo Magallanes", slug: "catalogo" }],
+      sku: `SKU-${id}-TEST`,
+      description: "Este producto se muestra porque el sistema está en modo local o la API de Hostinger no está disponible. Sin embargo, toda la estructura de la página es real.",
+      short_description: "Equipo de alta resistencia para clima austral.",
+      attributes: []
+    };
 }
 
 // 🚀 NITRO: Pre-renderizado de páginas para velocidad instantánea
@@ -70,8 +100,9 @@ export async function generateStaticParams() {
   }
 }
 
-export default async function Page({ params }: { params: { id: string } }) {
-  const product = await getProduct(params.id);
+export default async function Page({ params }: { params: Promise<{ id: string }> }) {
+  const resolvedParams = await params;
+  const product = await getProduct(resolvedParams.id);
 
   return (
     <>

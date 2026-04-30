@@ -49,19 +49,17 @@ const CalculatorPopup: React.FC<CalculatorPopupProps> = ({
     }
   }, [isOpen]);
 
-  if (!isOpen || !material) return null;
-
   const area = calculateArea(largo, ancho);
-  const volume = material.unitType === 'volume' ? calculateVolume(largo, ancho, alto) : undefined;
+  const volume = (material && material.unitType === 'volume') ? calculateVolume(largo, ancho, alto) : undefined;
 
-  const materialNeeds = calculateMaterialNeeds(
+  const materialNeeds = material ? calculateMaterialNeeds(
     material,
     area,
     volume,
     rendimiento,
     pricePerUnit,
     extraPercentage
-  );
+  ) : { unitsNeeded: 0, unitsWithExtra: 0, totalCost: 0, totalCostWithExtra: 0 };
 
   const convertValue = (value: number, fromMeters: boolean): number => {
     if (unit === 'metros') return value;
@@ -75,8 +73,8 @@ const CalculatorPopup: React.FC<CalculatorPopupProps> = ({
     setVal(metricValue);
   };
 
-  const handleSave = () => {
-    if (area === 0) return;
+  const handleSave = React.useCallback(() => {
+    if (!material || area === 0) return;
     const calculation: Calculation = {
       id: Date.now().toString(36) + Math.random().toString(36).substring(2),
       materialId: material.id,
@@ -97,7 +95,9 @@ const CalculatorPopup: React.FC<CalculatorPopupProps> = ({
     };
     onSaveCalculation(calculation);
     onClose();
-  };
+  }, [area, material, volume, largo, ancho, alto, rendimiento, pricePerUnit, materialNeeds, extraPercentage, onSaveCalculation, onClose]);
+
+  if (!isOpen || !material) return null;
 
   return (
     <div style={{ position: 'fixed', inset: 0, zIndex: 5000, display: 'flex', alignItems: 'center', justifyContent: 'center', backgroundColor: 'rgba(14, 31, 51, 0.4)', backdropFilter: 'blur(20px)' }}>

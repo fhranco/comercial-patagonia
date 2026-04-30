@@ -48,7 +48,7 @@ export default function ProductQuickView({ product, isOpen, onClose }: ProductQu
             transition={{ type: 'spring', damping: 25, stiffness: 200 }}
             style={{ 
               position: 'relative', width: '100%', maxWidth: '1100px', 
-              backgroundColor: '#FFF', borderRadius: '4px', overflow: 'hidden',
+              backgroundColor: '#FFFFFF', borderRadius: '4px', overflow: 'hidden',
               boxShadow: '0 50px 100px rgba(0,0,0,0.5)',
               maxHeight: '90vh',
               display: 'flex'
@@ -56,7 +56,7 @@ export default function ProductQuickView({ product, isOpen, onClose }: ProductQu
             className="flex-col md:flex-row shadow-2xl"
           >
             {/* 🖼️ MEDIA SIDE */}
-            <div style={{ position: 'relative', flex: 1.2, backgroundColor: '#F9F9F9', minHeight: '400px', display: 'flex', flexDirection: 'column' }}>
+            <div style={{ position: 'relative', flex: 1.2, backgroundColor: '#FFFFFF', minHeight: '400px', display: 'flex', flexDirection: 'column' }}>
               <div style={{ position: 'relative', flex: 1, width: '100%' }}>
                 <AnimatePresence mode="wait">
                   <motion.div
@@ -70,6 +70,8 @@ export default function ProductQuickView({ product, isOpen, onClose }: ProductQu
                       src={product.images[activeImgIndex]?.src || product.images[0]?.src || ""} 
                       alt={product.name} 
                       fill 
+                      quality={100}
+                      priority
                       style={{ objectFit: 'contain' }} 
                     />
                   </motion.div>
@@ -145,42 +147,55 @@ export default function ProductQuickView({ product, isOpen, onClose }: ProductQu
 
               {/* 🛠️ B2B GUARANTEES */}
               <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '15px', marginBottom: '40px' }}>
-                 <div style={{ display: 'flex', alignItems: 'center', gap: '10px', padding: '15px', backgroundColor: '#F9F9F9', borderRadius: '4px' }}>
+                 <div style={{ display: 'flex', alignItems: 'center', gap: '10px', padding: '15px', backgroundColor: '#FFFFFF', border: '1px solid #EEE', borderRadius: '4px' }}>
                     <ShieldCheck className="w-4 h-4 text-green-600" />
                     <span style={{ fontSize: '9px', fontWeight: 900, textTransform: 'uppercase' }}>Garantía Oficial</span>
                  </div>
-                 <div style={{ display: 'flex', alignItems: 'center', gap: '10px', padding: '15px', backgroundColor: '#F9F9F9', borderRadius: '4px' }}>
+                 <div style={{ display: 'flex', alignItems: 'center', gap: '10px', padding: '15px', backgroundColor: '#FFFFFF', border: '1px solid #EEE', borderRadius: '4px' }}>
                     <Truck className="w-4 h-4 text-blue-600" />
                     <span style={{ fontSize: '9px', fontWeight: 900, textTransform: 'uppercase' }}>Envío Magallanes</span>
                  </div>
               </div>
 
-               <div style={{ display: 'flex', gap: '15px', alignItems: 'center' }}>
-                 {!product.categories.some(c => c.name.toLowerCase().includes('cemento')) && (
-                   <input 
-                     type="number" 
-                     min="1" 
-                     value={quantity} 
-                     onChange={(e) => setQuantity(Number(e.target.value))}
-                     style={{ width: '70px', padding: '20px', border: '1px solid #EEE', borderRadius: '4px', textAlign: 'center', fontSize: '14px', fontWeight: 900 }}
-                   />
-                 )}
-                 
-                 <button 
-                  onClick={handleAddToCart}
-                  style={{ 
-                    flex: 1, border: 'none', backgroundColor: '#D4AF37', color: '#0E1F33', padding: '22px', borderRadius: '4px',
-                    display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '15px',
-                    fontSize: '11px', fontWeight: 900, textTransform: 'uppercase', letterSpacing: '0.2em', cursor: 'pointer',
-                    boxShadow: '0 15px 35px rgba(212, 175, 55, 0.3)'
-                  }}
-                  className="hover:scale-[1.03] transition-all"
-                 >
-                   {added ? <Check className="w-4 h-4" /> : <ShoppingBag size={16} />}
-                   {added ? "Agregado a Cotización" : `Sumar ${quantity > 1 ? `(${quantity})` : ""} a mi Cotización`}
-                 </button>
-               </div>
-            </div>
+                <div style={{ display: 'flex', gap: '15px', alignItems: 'center', flexDirection: 'column' }}>
+                  {!product.categories.some(c => c.name.toLowerCase().includes('cemento')) && (
+                    <input 
+                      type="number" 
+                      min="1" 
+                      value={quantity} 
+                      onChange={(e) => setQuantity(Number(e.target.value))}
+                      style={{ width: '70px', padding: '20px', border: '1px solid #EEE', borderRadius: '4px', textAlign: 'center', fontSize: '14px', fontWeight: 900, marginBottom: '10px' }}
+                    />
+                  )}
+                  
+                  <button 
+                   onClick={handleAddToCart}
+                   style={{ 
+                     width: '100%', border: 'none', backgroundColor: '#D4AF37', color: '#0E1F33', padding: '22px', borderRadius: '4px',
+                     display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '15px',
+                     fontSize: '11px', fontWeight: 900, textTransform: 'uppercase', letterSpacing: '0.2em', cursor: 'pointer',
+                     boxShadow: '0 15px 35px rgba(212, 175, 55, 0.3)'
+                   }}
+                   className="hover:scale-[1.03] transition-all"
+                  >
+                    {added ? <Check className="w-4 h-4" /> : <ShoppingBag size={16} />}
+                    {added ? "Agregado a Cotización" : `Sumar ${quantity > 1 ? `(${quantity})` : ""} a mi Cotización`}
+                  </button>
+
+                  <a 
+                    href={`/shop/${product.id}`}
+                    style={{ 
+                      width: '100%', border: '1px solid rgba(14, 31, 51, 0.1)', backgroundColor: 'transparent', color: '#0E1F33', padding: '18px', borderRadius: '4px',
+                      display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '15px',
+                      fontSize: '10px', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.1em', cursor: 'pointer',
+                      textDecoration: 'none'
+                    }}
+                    className="hover:bg-gray-50 transition-all text-center"
+                  >
+                    Ver Ficha Completa <Info size={14} />
+                  </a>
+                </div>
+             </div>
           </motion.div>
         </div>
       )}

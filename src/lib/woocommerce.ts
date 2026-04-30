@@ -75,7 +75,7 @@ export async function fetchWooCommerceCategories() {
 
     if (!response.ok) return null;
     const data = await response.json();
-    return data.filter((cat: any) => cat.slug !== 'uncategorized');
+    return data.filter((cat: { slug: string }) => cat.slug !== 'uncategorized');
   } catch (error) {
     console.error("WooCommerce Categories Fetch Error:", error);
     return null;

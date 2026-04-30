@@ -50,7 +50,7 @@ export default function HeroSpectacular() {
           style={{ width: '100%', height: '100%', objectFit: 'cover' }}
           alt="Construcción en Patagonia"
         />
-        <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(to right, rgba(237, 243, 248, 0.95) 0%, rgba(237, 243, 248, 0.4) 100%)' }} />
+        <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(to right, rgba(255, 255, 255, 0.95) 0%, rgba(255, 255, 255, 0.4) 100%)' }} />
       </div>
 
       <motion.div 
@@ -127,13 +127,13 @@ export default function HeroSpectacular() {
           </motion.p>
  
           <motion.div variants={itemVariants} style={{ display: 'flex', gap: '20px', alignItems: 'center', flexWrap: 'wrap' }}>
-            <Link href="/shop" className="gold-shimmer" style={{ 
+            <Link href="/shop/17" className="gold-shimmer" style={{ 
               textDecoration: 'none', color: 'var(--brand-navy)', padding: '20px 40px', borderRadius: '4px',
               fontWeight: 900, fontSize: '12px', textTransform: 'uppercase', letterSpacing: '0.15em',
               display: 'flex', alignItems: 'center', gap: '15px',
               boxShadow: '0 20px 40px rgba(212, 175, 55, 0.2)'
             }}>
-              Ir a la Tienda <ShoppingBag className="w-4 h-4" />
+              Comprar Cemento <ShoppingBag className="w-4 h-4" />
             </Link>
  
             <Link href={BRAND_CONFIG.calculatorUrl} style={{ 
@@ -181,7 +181,7 @@ export default function HeroSpectacular() {
 
           <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '24px' }}>
             <motion.div variants={itemVariants} className="titanium-glass" style={{ padding: '25px', borderRadius: '24px', textAlign: 'center', background: 'rgba(255,255,255,0.03)' }}>
-              <span style={{ display: 'block', fontSize: '1.8rem', fontWeight: 900, color: '#FFF' }}>1980</span>
+              <span style={{ display: 'block', fontSize: '1.8rem', fontWeight: 900, color: '#FFF' }}>1978</span>
               <span style={{ fontSize: '9px', fontWeight: 900, opacity: 0.4, textTransform: 'uppercase', letterSpacing: '0.2em' }}>Tradición Regional</span>
             </motion.div>
             <motion.div variants={itemVariants} className="titanium-glass" style={{ padding: '25px', borderRadius: '24px', textAlign: 'center', background: 'rgba(255,255,255,0.03)' }}>

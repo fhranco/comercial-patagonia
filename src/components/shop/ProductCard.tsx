@@ -1,6 +1,6 @@
 "use client";
 
-import React from "react";
+import React, { useState, useEffect } from "react";
 import Image from "next/image";
 import { motion } from "framer-motion";
 import { Plus, Maximize2, ExternalLink } from "lucide-react";
@@ -17,6 +17,13 @@ interface ProductCardProps {
 export default function ProductCard({ product, onQuickView }: ProductCardProps) {
   const { addToCart } = useCart();
   const { theme } = useTheme();
+  const [mounted, setMounted] = useState(false);
+  const [viewers, setViewers] = useState<number>(15);
+
+  useEffect(() => {
+    setMounted(true);
+    setViewers(Math.floor(Math.random() * 25) + 12);
+  }, []);
 
   return (
     <div 
@@ -26,20 +33,21 @@ export default function ProductCard({ product, onQuickView }: ProductCardProps) 
        <Link 
          href={`/shop/${product.id}`} 
          style={{ textDecoration: 'none', color: 'inherit' }}
-         onClick={() => {
-           if (typeof window !== 'undefined') {
-             sessionStorage.setItem('current_product', JSON.stringify(product));
+         onClick={(e) => {
+           if (onQuickView) {
+             e.preventDefault();
+             onQuickView(product);
            }
          }}
        >
           {/* 🖼️ MEDIA CONTAINER */}
           <div style={{ 
-               aspectRatio: '1/1', backgroundColor: 'var(--titanium-gray)', 
+               aspectRatio: '1/1', backgroundColor: '#FFFFFF', 
                overflow: 'hidden', position: 'relative', borderRadius: '4px'
              }}
           >
               <div style={{ position: 'absolute', inset: 0, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-                <div style={{ width: '100%', height: '100%', background: 'linear-gradient(135deg, #F5F5F5 0%, #E0E0E0 100%)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                <div style={{ width: '100%', height: '100%', background: '#FFFFFF', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
                    <div style={{ textAlign: 'center', opacity: 0.2 }}>
                       <Image src="/branding/logo-minimal.png" alt="Patagonia" width={40} height={40} style={{ filter: 'grayscale(1)' }} />
                    </div>
@@ -58,6 +66,7 @@ export default function ProductCard({ product, onQuickView }: ProductCardProps) 
                     fill
                     sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 25vw"
                     className="product-card-image"
+                    quality={95}
                     style={{ 
                       objectFit: 'cover'
                     }} 
@@ -116,7 +125,10 @@ export default function ProductCard({ product, onQuickView }: ProductCardProps) 
        </Link>
 
        {/* 📝 INFO SECTION */}
-       <div style={{ paddingTop: '20px' }}>
+       <div 
+         style={{ paddingTop: '20px', cursor: 'pointer' }}
+         onClick={() => onQuickView?.(product)}
+       >
            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: '8px' }}>
               <span style={{ fontSize: 'clamp(9px, 2vw, 10px)', color: 'var(--primary-gold)', fontWeight: 900, textTransform: 'uppercase', letterSpacing: '0.2em' }}>
                 {product.categories[0]?.name || "Equipamiento"}
@@ -137,7 +149,23 @@ export default function ProductCard({ product, onQuickView }: ProductCardProps) 
                   ${Math.round(Number(product.regular_price)).toLocaleString('es-CL')}
                 </span>
               )}
-           </div>
+            </div>
+            
+            {/* 👁️ SOCIAL PROOF (Organic & Regional) */}
+            {mounted && (
+              <div style={{ display: 'flex', alignItems: 'center', gap: '10px', marginTop: '18px', padding: '10px 14px', backgroundColor: 'rgba(212, 175, 55, 0.03)', borderRadius: '100px', border: '1px solid rgba(212, 175, 55, 0.1)' }}>
+                 <div style={{ position: 'relative', display: 'flex' }}>
+                    <div style={{ width: '8px', height: '8px', borderRadius: '50%', backgroundColor: 'var(--primary-gold)' }} className="animate-ping absolute" />
+                    <div style={{ width: '8px', height: '8px', borderRadius: '50%', backgroundColor: 'var(--primary-gold)', position: 'relative' }} />
+                 </div>
+                 <span 
+                   suppressHydrationWarning
+                   style={{ fontSize: '9px', fontWeight: 900, color: 'var(--brand-navy)', textTransform: 'uppercase', opacity: 0.7, letterSpacing: '0.05em' }}
+                 >
+                   {viewers > 20 ? `🔥 Tendencia: ${viewers} clientes en Magallanes revisando` : `✨ Solicitado recientemente en Punta Arenas`}
+                 </span>
+              </div>
+            )}
        </div>
     </div>
   );

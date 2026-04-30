@@ -15,14 +15,30 @@ export default function FeaturedCarousel({ products }: FeaturedCarouselProps) {
 
   const scroll = (direction: 'left' | 'right') => {
     if (scrollRef.current) {
-      const { scrollLeft, clientWidth } = scrollRef.current;
-      const scrollTo = direction === 'left' ? scrollLeft - clientWidth : scrollLeft + clientWidth;
+      const { scrollLeft, clientWidth, scrollWidth } = scrollRef.current;
+      let scrollTo = direction === 'left' ? scrollLeft - clientWidth : scrollLeft + clientWidth;
+      
+      // Infinite-like loop behavior
+      if (direction === 'right' && scrollLeft + clientWidth >= scrollWidth - 10) {
+        scrollTo = 0;
+      } else if (direction === 'left' && scrollLeft <= 10) {
+        scrollTo = scrollWidth;
+      }
+
       scrollRef.current.scrollTo({ left: scrollTo, behavior: 'smooth' });
     }
   };
 
+  // 🔄 AUTO-PLAY ENGINE
+  React.useEffect(() => {
+    const interval = setInterval(() => {
+      scroll('right');
+    }, 4500);
+    return () => clearInterval(interval);
+  }, [products]);
+
   return (
-    <section style={{ padding: '100px 0', backgroundColor: '#FAFAFA', overflow: 'hidden' }}>
+    <section style={{ padding: '100px 0', backgroundColor: '#FFFFFF', overflow: 'hidden' }}>
       <div style={{ padding: '0 5%', maxWidth: '1400px', margin: '0 auto', marginBottom: '60px', display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end' }}>
         <motion.div
           initial={{ opacity: 0, x: -20 }}
@@ -72,26 +88,40 @@ export default function FeaturedCarousel({ products }: FeaturedCarouselProps) {
         </div>
       </div>
 
-      <div 
-        ref={scrollRef}
-        style={{ 
-          display: 'flex', 
-          gap: '30px', 
-          overflowX: 'auto', 
-          padding: '20px 5%',
-          scrollSnapType: 'x mandatory',
-          scrollbarWidth: 'none',
-        }}
-        className="no-scrollbar"
-      >
-        {products.map((product) => (
-          <motion.div
-            key={product.id}
-            style={{ minWidth: '320px', maxWidth: '320px', scrollSnapAlign: 'start' }}
-          >
-            <ProductCard product={product} />
-          </motion.div>
-        ))}
+      <div style={{ position: 'relative', width: '100%' }}>
+        {/* 🎭 GRADIENT OVERLAYS */}
+        <div style={{ 
+          position: 'absolute', left: 0, top: 0, bottom: 0, width: '100px', 
+          background: 'linear-gradient(to right, #FFFFFF, transparent)', 
+          zIndex: 10, pointerEvents: 'none' 
+        }} />
+        <div style={{ 
+          position: 'absolute', right: 0, top: 0, bottom: 0, width: '100px', 
+          background: 'linear-gradient(to left, #FFFFFF, transparent)', 
+          zIndex: 10, pointerEvents: 'none' 
+        }} />
+
+        <div 
+          ref={scrollRef}
+          style={{ 
+            display: 'flex', 
+            gap: '30px', 
+            overflowX: 'auto', 
+            padding: '20px 5%',
+            scrollSnapType: 'x mandatory',
+            scrollbarWidth: 'none',
+          }}
+          className="no-scrollbar"
+        >
+          {products.map((product) => (
+            <motion.div
+              key={product.id}
+              style={{ minWidth: '320px', maxWidth: '320px', scrollSnapAlign: 'start' }}
+            >
+              <ProductCard product={product} />
+            </motion.div>
+          ))}
+        </div>
       </div>
     </section>
   );

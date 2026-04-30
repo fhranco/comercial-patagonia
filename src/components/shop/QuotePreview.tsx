@@ -42,7 +42,7 @@ export default function QuotePreview({ isOpen, onClose, projectRef }: QuotePrevi
             }}
         >
             {/* 🛠️ TOP BAR (TOOLS) */}
-            <div className="no-print" style={{ backgroundColor: '#F8FAFC', padding: '15px 30px', display: 'flex', justifyContent: 'space-between', alignItems: 'center', borderBottom: '1px solid #EEE' }}>
+            <div className="no-print" style={{ backgroundColor: '#FFFFFF', padding: '15px 30px', display: 'flex', justifyContent: 'space-between', alignItems: 'center', borderBottom: '1px solid var(--border-color)' }}>
                 <span style={{ fontSize: '10px', fontWeight: 900, textTransform: 'uppercase', letterSpacing: '0.2em', color: 'rgba(0,0,0,0.4)' }}>
                     Visualizador de Cotización B2B v1.1
                 </span>
@@ -77,7 +77,7 @@ export default function QuotePreview({ isOpen, onClose, projectRef }: QuotePrevi
                 </div>
 
                 {/* PROJECT INFO */}
-                <div style={{ display: 'grid', gridTemplateColumns: '2fr 1fr', gap: '40px', padding: '30px', backgroundColor: '#F9F9F9', borderRadius: '4px', marginBottom: '50px' }}>
+                <div style={{ display: 'grid', gridTemplateColumns: '2fr 1fr', gap: '40px', padding: '30px', backgroundColor: '#FFFFFF', border: '1px solid var(--border-color)', borderRadius: '4px', marginBottom: '50px' }}>
                     <div>
                         <h4 style={{ fontSize: '9px', fontWeight: 900, opacity: 0.3, textTransform: 'uppercase', marginBottom: '5px' }}>Identificador de Proyecto</h4>
                         <p style={{ fontSize: '1.2rem', fontWeight: 700, color: '#0E1F33' }}>{projectRef || "S/N (General)"}</p>

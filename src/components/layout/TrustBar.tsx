@@ -13,12 +13,12 @@ const trustItems = [
   {
     icon: <Truck className="w-8 h-8" />,
     title: "Logística Extrema",
-    text: "Flota propia certificada. Entregas en obra en menos de 24hs reales.",
+    text: "Flota propia certificada. Entregas en obra en 24 horas o menos según disponibilidad.",
   },
   {
     icon: <ShieldCheck className="w-8 h-8" />,
     title: "Garantía Profesional",
-    text: "Todos nuestros productos cumplen con Normas IRAM y Estándares ISO.",
+    text: "Todos nuestros productos poseen fichas técnicas y manuales de uso.",
   },
 ];
 
@@ -26,7 +26,7 @@ export default function TrustBar() {
   return (
     <section style={{ 
       padding: '80px 5%', 
-      backgroundColor: 'var(--brand-sky)', 
+      backgroundColor: '#FFFFFF', 
       color: 'var(--brand-navy)',
       borderTop: '1px solid var(--border-color)'
     }}>

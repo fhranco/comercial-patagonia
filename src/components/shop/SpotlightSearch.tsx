@@ -215,7 +215,7 @@ export default function SpotlightSearch({ products, isOpen, onClose }: Spotlight
 
             {/* ⌨️ FOOTER HELP */}
             <div style={{ 
-              padding: '15px 25px', backgroundColor: '#F9F9F9', borderTop: '1px solid #EEE',
+              padding: '15px 25px', backgroundColor: '#FFFFFF', borderTop: '1px solid var(--border-color)',
               display: 'flex', gap: '20px', fontSize: '10px', fontWeight: 800, color: 'rgba(0,0,0,0.4)', textTransform: 'uppercase'
             }}>
                 <div style={{ display: 'flex', alignItems: 'center', gap: '5px' }}><span style={{ padding: '2px 5px', backgroundColor: '#FFF', borderRadius: '3px', border: '1px solid #DDD' }}>↑↓</span> Navegar</div>

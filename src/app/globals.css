@@ -6,7 +6,7 @@
   --brand-blue: #3A69A8; /* Azul Plano del Logo */
   --brand-yellow: #F9C300; /* Amarillo Casa del Logo */
   --brand-navy: #0E1F33; /* Reemplazo absoluto del Negro (Azul Marino Súper Oscuro) */
-  --brand-sky: #EDF3F8; /* Reemplazo del gris de fondo (Blanco Técnico Azulado) */
+  --brand-sky: #FFFFFF; /* Eliminamos el gris por blanco puro */
 
   /* Aplicación Global (Eliminamos negros) */
   --bg-color: #FFFFFF;

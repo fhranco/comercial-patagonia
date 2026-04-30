@@ -3,11 +3,16 @@
 import React from "react";
 import { motion, useScroll, useTransform } from "framer-motion";
 import { ShieldCheck, Snowflake, Weight, ArrowUpRight } from "lucide-react";
-import Link from 'next/link';
+import Link from "next/link";
+import { useCart } from "@/context/CartContext";
+import { MOCK_PRODUCTS } from "@/lib/mock-products";
 
 export default function GrandCement() {
+  const { openQuickView } = useCart();
+  const cementProduct = MOCK_PRODUCTS.find(p => p.id === 17) || MOCK_PRODUCTS[0];
+
   return (
-    <section style={{ padding: '150px 5%', backgroundColor: '#FFF', color: 'var(--brand-navy)', position: 'relative', overflow: 'hidden' }}>
+    <section style={{ padding: '150px 5%', backgroundColor: '#FFFFFF', color: 'var(--brand-navy)', position: 'relative', overflow: 'hidden' }}>
       
       {/* 🏔️ FONDO AMBIENTE (REPRESENTACIÓN OFICIAL) */}
       <div style={{ position: 'absolute', top: 0, right: 0, width: '60%', height: '100%', opacity: 0.05 }}>
@@ -34,11 +39,16 @@ export default function GrandCement() {
             </div>
           </div>
 
-          <Link href="/shop/cemento-comodoro" style={{ 
-            color: 'var(--brand-navy)', textDecoration: 'none', border: '2px solid var(--brand-navy)', padding: '24px 60px', borderRadius: '100px',
-            fontSize: '12px', fontWeight: 900, textTransform: 'uppercase', letterSpacing: '0.4em', display: 'inline-flex', alignItems: 'center', gap: '20px'
-          }} className="hover:bg-[var(--brand-navy)] hover:text-white transition-all">
-            Ficha Técnica <ArrowUpRight className="w-5 h-5" />
+          <Link 
+            href="/shop/17"
+            style={{ 
+              background: 'transparent', color: 'var(--brand-navy)', border: '2px solid var(--brand-navy)', padding: '24px 60px', borderRadius: '100px',
+              fontSize: '12px', fontWeight: 900, textTransform: 'uppercase', letterSpacing: '0.4em', display: 'inline-flex', alignItems: 'center', gap: '20px',
+              cursor: 'pointer', textDecoration: 'none'
+            }} 
+            className="hover:bg-[var(--brand-navy)] hover:text-white transition-all"
+          >
+            COMPRAR CEMENTO <ArrowUpRight className="w-5 h-5" />
           </Link>
         </motion.div>
 
