@@ -6,6 +6,7 @@ import { ShieldCheck, Snowflake, Weight, ArrowUpRight } from "lucide-react";
 import Link from "next/link";
 import { useCart } from "@/context/CartContext";
 import { MOCK_PRODUCTS } from "@/lib/mock-products";
+import { Product } from "@/types/woocommerce";
 
 interface GrandCementProps {
   onQuickView?: (product: Product) => void;
