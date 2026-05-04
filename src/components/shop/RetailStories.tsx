@@ -14,10 +14,10 @@ interface StoryItem {
 const STORIES: StoryItem[] = [
   { id: "Ofertas", label: "Ofertas", image: "/images/comodoro-nuevo.png", hasOffer: true },
   { id: "Construcción", label: "Obra", image: "/images/comodoro-2000.png" },
-  { id: "Muebles", label: "Muebles", image: "/images/luxury-home.webp" },
-  { id: "Hogar", label: "Hogar", image: "/images/home-ceramicas.png" },
-  { id: "Industrial", label: "Fierros", image: "/images/industrial-pro.webp" },
-  { id: "Herramientas", label: "Equipos", image: "/images/cat-tools.png" },
+  { id: "Cerámicas", label: "Cerámicas", image: "/images/home-ceramicas.png" },
+  { id: "Cocina", label: "Cocina", image: "/images/home-cocina.png" },
+  { id: "Aislación", label: "Aislación", image: "/images/home-aislante.png" },
+  { id: "Binelli", label: "Binelli", image: "/images/home-quincho.png" },
 ];
 
 interface RetailStoriesProps {

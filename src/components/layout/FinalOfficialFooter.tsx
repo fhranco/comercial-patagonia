@@ -1,7 +1,8 @@
 "use client";
 
-import React from "react";
 import { Mail, MapPin, Phone, Globe } from "lucide-react";
+import Image from "next/image";
+import { APP_VERSION } from "@/lib/version";
 
 export default function Footer() {
   const currentYear = new Date().getFullYear();
@@ -21,7 +22,14 @@ export default function Footer() {
             
             {/* 🏔️ BRAND & DESCRIPTION */}
             <div>
-                <h3 style={{ fontSize: '11px', fontWeight: 900, textTransform: 'uppercase', letterSpacing: '0.2em', marginBottom: '25px', color: 'var(--primary-gold)' }}>Comercial de la Patagonia</h3>
+                <div style={{ position: 'relative', width: '300px', height: '90px', marginBottom: '25px' }}>
+                    <Image 
+                      src="/branding/logo-comercial.webp" 
+                      alt="Comercial de la Patagonia" 
+                      fill 
+                      style={{ objectFit: 'contain' }} 
+                    />
+                </div>
                 <p style={{ fontSize: '14px', lineHeight: 1.8, opacity: 0.7, maxWidth: '300px' }}>
                     Tradición y Calidad en Suministro Estratégico para Construcción e Industria en la Región de Magallanes.
                 </p>
@@ -69,7 +77,7 @@ export default function Footer() {
 
         <div style={{ maxWidth: '1400px', margin: '80px auto 0', paddingTop: '40px', borderTop: '1px solid rgba(0,0,0,0.05)', textAlign: 'center', display: 'flex', flexDirection: 'column', gap: '15px' }}>
             <p style={{ fontSize: '11px', fontWeight: 700, opacity: 0.3, textTransform: 'uppercase', letterSpacing: '0.2em' }}>
-                © {currentYear} COMERCIAL DE LA PATAGONIA • EXCELENCIA INDUSTRIAL • V1.2
+                © {currentYear} COMERCIAL DE LA PATAGONIA • EXCELENCIA INDUSTRIAL • {APP_VERSION.toUpperCase()}
             </p>
             <p style={{ fontSize: '10px', fontWeight: 700, opacity: 0.5, textTransform: 'uppercase', letterSpacing: '0.1em' }}>
                 Desarrollado por <a href="https://agenciapatagoniacoach.cl" target="_blank" rel="noopener noreferrer" style={{ color: 'inherit', textDecoration: 'none', borderBottom: '1px solid var(--primary-gold)' }}>Agencia Patagoniacoach</a>

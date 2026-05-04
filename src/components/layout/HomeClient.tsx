@@ -15,6 +15,7 @@ import { Product } from "@/types/woocommerce";
 import Link from "next/link";
 import PromotionHUD from "../shop/PromotionHUD";
 import RetailStories from "../shop/RetailStories";
+import ProductQuickView from "../shop/ProductQuickView";
 
 interface HomeClientProps {
   products: Product[];
@@ -22,6 +23,7 @@ interface HomeClientProps {
 
 export default function HomeClient({ products }: HomeClientProps) {
   const router = useRouter();
+  const [selectedQuickProduct, setSelectedQuickProduct] = React.useState<Product | null>(null);
   const { scrollYProgress } = useScroll();
   const scaleProgress = useSpring(scrollYProgress, { stiffness: 100, damping: 30, restDelta: 0.001 });
   const SHOP_URL = "/shop";
@@ -33,7 +35,7 @@ export default function HomeClient({ products }: HomeClientProps) {
       <motion.div style={{ scaleX: scaleProgress, position: 'fixed', top: 0, left: 0, right: 0, height: '3px', background: 'var(--primary-gold)', zIndex: 9999, transformOrigin: '0%' }} />
 
       <Navigation transparent={true} />
-      <PromotionHUD products={products} />
+      <PromotionHUD products={products} onQuickView={(prod) => setSelectedQuickProduct(prod)} />
       
       <main style={{ width: '100%' }}>
         <HeroSpectacular />
@@ -45,10 +47,11 @@ export default function HomeClient({ products }: HomeClientProps) {
           />
         </div>
 
-        {/* 🌟 CARRUSEL DINÁMICO: Mostramos productos destacados de la tienda */}
-        <FeaturedCarousel products={products.length > 0 ? products : []} />
-
-        <GrandCement />
+        <FeaturedCarousel 
+          products={products.length > 0 ? products : []} 
+          onQuickView={(prod) => setSelectedQuickProduct(prod)}
+        />
+        <GrandCement onQuickView={(prod) => setSelectedQuickProduct(prod)} />
         <FurnitureShowcase />
         <CategoryBento />
         <TrustBar />
@@ -92,6 +95,12 @@ export default function HomeClient({ products }: HomeClientProps) {
             <Link href={SHOP_URL} style={{ color: 'var(--brand-navy)', textDecoration: 'none', fontWeight: 900, fontSize: '12px', textTransform: 'uppercase', letterSpacing: '0.3em', border: '2px solid var(--brand-navy)', padding: '20px 60px', borderRadius: '100px' }} className="hover:bg-[var(--brand-navy)] hover:text-white transition-all duration-500">Tienda Online Oficial</Link>
         </section>
       </main>
+
+      <ProductQuickView 
+        product={selectedQuickProduct} 
+        isOpen={!!selectedQuickProduct} 
+        onClose={() => setSelectedQuickProduct(null)} 
+      />
     </div>
   );
 }

@@ -5,14 +5,16 @@ import { motion, AnimatePresence } from "framer-motion";
 import { Sparkles, X, ChevronRight, ShoppingBag } from "lucide-react";
 import Image from "next/image";
 import { MOCK_PRODUCTS } from "@/lib/mock-products";
+import { Product } from "@/types/woocommerce";
 import { useCart } from "@/context/CartContext";
 import { useRouter } from "next/navigation";
 
 interface PromotionHUDProps {
   products?: any[];
+  onQuickView?: (product: Product) => void;
 }
 
-export default function PromotionHUD({ products }: PromotionHUDProps) {
+export default function PromotionHUD({ products, onQuickView }: PromotionHUDProps) {
   const [isVisible, setIsVisible] = useState(false);
   const { addToCart } = useCart();
   const router = useRouter();
@@ -39,7 +41,11 @@ export default function PromotionHUD({ products }: PromotionHUDProps) {
   if (!isVisible || !promoProduct) return null;
 
   const handleNavigate = () => {
-    router.push(`/shop/${promoProduct.id}`);
+    if (onQuickView) {
+      onQuickView(promoProduct);
+    } else {
+      router.push(`/shop/${promoProduct.id}`);
+    }
   };
 
   // Cálculo de descuento real dinámico

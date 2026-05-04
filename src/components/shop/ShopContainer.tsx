@@ -5,7 +5,7 @@ import styles from "../../app/page.module.css";
 import { motion, AnimatePresence } from "framer-motion";
 import { 
   ShoppingBag, Search, ChevronLeft,
-  LayoutGrid, List
+  LayoutGrid, List, AlertTriangle, X
 } from "lucide-react";
 import Link from 'next/link';
 import { useCart } from "@/context/CartContext";
@@ -60,6 +60,7 @@ export default function ShopContainer({ initialProducts, initialCategory, isLive
   // 🧠 SMART CATEGORY MATCHING (NAME OR SLUG)
   const getCategoryNameFromParam = (param: string) => {
     if (!param || param === "Todos") return "Todos";
+    if (param === "Ofertas") return "Ofertas";
     
     const normalizedParam = param.toLowerCase().trim();
     
@@ -118,16 +119,59 @@ export default function ShopContainer({ initialProducts, initialCategory, isLive
     }
 
     // 📁 MODO NAVEGACIÓN
-    return activeCategory === "Todos" || p.categories.some(cat => 
+    if (activeCategory === "Todos") return true;
+    if (activeCategory === "Ofertas") return p.on_sale;
+    
+    return p.categories.some(cat => 
         cat.name.toLowerCase() === activeCategory.toLowerCase()
     );
   });
+
+  const [stockAlerts, setStockAlerts] = useState<{id: string, name: string}[]>([]);
+
+  useEffect(() => {
+    // Simulación de alertas de stock crítico para B2B
+    const criticalItems = initialProducts.filter(p => Math.random() > 0.8).slice(0, 2);
+    setStockAlerts(criticalItems.map(p => ({ id: p.id, name: p.name })));
+  }, [initialProducts]);
 
   const displayProducts = filteredProducts.slice(0, visibleItems);
   const categories = ["Todos", ...new Set(initialProducts.flatMap(p => p.categories.map(cat => cat.name)).filter(Boolean))];
 
   return (
     <div className={`${styles.page} page-transition`} style={{ backgroundColor: 'var(--bg-color)', color: 'var(--text-color)', minHeight: '100vh', width: '100%' }}>
+      
+      {/* ⚠️ B2B CRITICAL STOCK ALERTS */}
+      <AnimatePresence>
+        {stockAlerts.length > 0 && (
+          <motion.div 
+            initial={{ height: 0, opacity: 0 }}
+            animate={{ height: 'auto', opacity: 1 }}
+            exit={{ height: 0, opacity: 0 }}
+            style={{ backgroundColor: '#0E1F33', color: 'white', overflow: 'hidden' }}
+          >
+            <div style={{ maxWidth: '1400px', margin: '0 auto', padding: '12px 20px', display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
+              <div style={{ display: 'flex', alignItems: 'center', gap: '15px' }}>
+                <div style={{ width: '8px', height: '8px', borderRadius: '50%', backgroundColor: '#F9C300' }} className="animate-pulse" />
+                <span style={{ fontSize: '10px', fontWeight: 900, textTransform: 'uppercase', letterSpacing: '0.2em' }}>
+                  ALERTA B2B: Stock Crítico Detectado en Bodega Central
+                </span>
+              </div>
+              <div style={{ display: 'flex', gap: '20px' }}>
+                {stockAlerts.map(alert => (
+                  <span key={alert.id} style={{ fontSize: '10px', fontWeight: 600, opacity: 0.8, borderBottom: '1px solid #F9C300' }}>
+                    {alert.name}
+                  </span>
+                ))}
+              </div>
+              <button onClick={() => setStockAlerts([])} style={{ background: 'none', border: 'none', color: 'white', cursor: 'pointer', opacity: 0.5 }}>
+                <X size={14} />
+              </button>
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+
       <PromotionHUD products={initialProducts} />
       
       <RetailStories 

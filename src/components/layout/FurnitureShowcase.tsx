@@ -59,11 +59,11 @@ export default function FurnitureShowcase() {
               Detalles que marcan la diferencia. Cajoneras, clósets y mobiliario de alta terminación para vestir tus espacios íntimos.
             </p>
             <div>
-                <Link href="/shop?category=Cómodas" style={{ 
+                <Link href="/shop?category=Cerámicas" style={{ 
                 color: 'var(--brand-navy)', textDecoration: 'none', border: '1px solid rgba(14,31,51,0.3)', padding: '24px 60px', borderRadius: '2px',
                 fontSize: '11px', fontWeight: 900, textTransform: 'uppercase', letterSpacing: '0.3em'
                 }} className="hover:bg-[var(--brand-navy)] hover:text-white transition-all duration-700">
-                Ver Cómodas
+                Ver Cerámicas
                 </Link>
             </div>
           </motion.div>

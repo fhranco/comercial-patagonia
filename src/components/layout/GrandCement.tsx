@@ -7,8 +7,11 @@ import Link from "next/link";
 import { useCart } from "@/context/CartContext";
 import { MOCK_PRODUCTS } from "@/lib/mock-products";
 
-export default function GrandCement() {
-  const { openQuickView } = useCart();
+interface GrandCementProps {
+  onQuickView?: (product: Product) => void;
+}
+
+export default function GrandCement({ onQuickView }: GrandCementProps) {
   const cementProduct = MOCK_PRODUCTS.find(p => p.id === 17) || MOCK_PRODUCTS[0];
 
   return (
@@ -39,8 +42,8 @@ export default function GrandCement() {
             </div>
           </div>
 
-          <Link 
-            href="/shop/17"
+          <button 
+            onClick={() => onQuickView && onQuickView(cementProduct)}
             style={{ 
               background: 'transparent', color: 'var(--brand-navy)', border: '2px solid var(--brand-navy)', padding: '24px 60px', borderRadius: '100px',
               fontSize: '12px', fontWeight: 900, textTransform: 'uppercase', letterSpacing: '0.4em', display: 'inline-flex', alignItems: 'center', gap: '20px',
@@ -49,7 +52,7 @@ export default function GrandCement() {
             className="hover:bg-[var(--brand-navy)] hover:text-white transition-all"
           >
             COMPRAR CEMENTO <ArrowUpRight className="w-5 h-5" />
-          </Link>
+          </button>
         </motion.div>
 
         {/* 🏔️ PRODUCT VISUAL (FOTOGRAFÍA ESCÉNICA) */}

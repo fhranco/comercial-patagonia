@@ -118,6 +118,30 @@ export const materials: Material[] = [
     description: 'Plancha de techo 1.09x2.5m, cobertura 2.725 m² por plancha',
     tips: ['Resistente a vientos patagónicos certificados']
   },
+  {
+    id: 'plancha_zincalum_3_6m',
+    name: 'Plancha Zinc-Alum 0.4mm x 3.66m',
+    category: 'roofing',
+    icon: 'Home',
+    unit: 'plancha',
+    defaultRendimiento: 3.2,
+    defaultPrice: 24500,
+    unitType: 'area',
+    description: 'Plancha de zinc-alum ondulada de 3.66m, alta resistencia a la corrosión.',
+    tips: ['Ideal para naves industriales y galpones en zonas costeras.']
+  },
+  {
+    id: 'fieltro_asfaltico_40_10',
+    name: 'Fieltro Asfáltico 40/10',
+    category: 'roofing',
+    icon: 'Scroll',
+    unit: 'rollo',
+    defaultRendimiento: 40,
+    defaultPrice: 28900,
+    unitType: 'area',
+    description: 'Fieltro asfáltico para impermeabilización de techumbres, rollo de 40m².',
+    tips: ['Barrera esencial contra la humedad antes de instalar la plancha.']
+  },
 
   // TABIQUERÍA (YESO)
   {

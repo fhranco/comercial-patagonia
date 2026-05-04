@@ -77,6 +77,12 @@ h1, h2, h3, h4, h5, h6 {
   .lg\:flex { display: flex !important; }
 }
 
+.flex-col { display: flex; flex-direction: column; }
+
+@media (min-width: 768px) {
+  .md\:flex-row { display: flex; flex-direction: row; }
+}
+
 .titanium-glass {
   background: var(--nav-bg);
   backdrop-filter: blur(20px);

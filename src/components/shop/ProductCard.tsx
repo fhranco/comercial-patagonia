@@ -102,21 +102,37 @@ export default function ProductCard({ product, onQuickView }: ProductCardProps) 
                     </div>
                </div>
 
-               {/* 🛒 MOBILE QUICK ADD (Always Visible on Small Screens) */}
-               <button 
-                  onClick={(e) => { e.preventDefault(); e.stopPropagation(); addToCart(product); }}
-                  style={{ 
-                    position: 'absolute', bottom: '10px', right: '10px',
-                    width: '40px', height: '40px', borderRadius: '12px',
-                    backgroundColor: 'var(--brand-yellow)', border: 'none',
-                    display: 'flex', alignItems: 'center', justifyContent: 'center',
-                    boxShadow: '0 4px 15px rgba(0,0,0,0.2)',
-                    zIndex: 20
-                  }}
-                  className="lg:hidden active:scale-90 transition-transform"
-               >
-                  <Plus size={20} color="var(--brand-navy)" />
-               </button>
+               {/* 🛒 MOBILE ACTIONS (Visible on Small Screens) */}
+               <div style={{ 
+                  position: 'absolute', bottom: '10px', right: '10px',
+                  display: 'flex', gap: '8px', zIndex: 20
+               }} className="lg:hidden">
+                   <button 
+                      onClick={(e) => { e.preventDefault(); e.stopPropagation(); onQuickView?.(product); }}
+                      style={{ 
+                        width: '40px', height: '40px', borderRadius: '12px',
+                        backgroundColor: 'rgba(14, 31, 51, 0.8)', border: 'none',
+                        display: 'flex', alignItems: 'center', justifyContent: 'center',
+                        boxShadow: '0 4px 15px rgba(0,0,0,0.2)',
+                        backdropFilter: 'blur(10px)', color: 'white'
+                      }}
+                      className="active:scale-90 transition-transform"
+                   >
+                      <Maximize2 size={18} />
+                   </button>
+                   <button 
+                      onClick={(e) => { e.preventDefault(); e.stopPropagation(); addToCart(product); }}
+                      style={{ 
+                        width: '40px', height: '40px', borderRadius: '12px',
+                        backgroundColor: 'var(--brand-yellow)', border: 'none',
+                        display: 'flex', alignItems: 'center', justifyContent: 'center',
+                        boxShadow: '0 4px 15px rgba(0,0,0,0.2)'
+                      }}
+                      className="active:scale-90 transition-transform"
+                   >
+                      <Plus size={20} color="var(--brand-navy)" />
+                   </button>
+               </div>
 
               {product.on_sale && (
                 <span style={{ position: 'absolute', top: '15px', left: '15px', background: '#D4AF37', color: '#000', fontSize: '9px', fontWeight: 900, padding: '4px 10px', borderRadius: '100px', textTransform: 'uppercase' }}>Oferta</span>

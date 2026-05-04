@@ -8,9 +8,10 @@ import { Product } from "@/types/woocommerce";
 
 interface FeaturedCarouselProps {
   products: Product[];
+  onQuickView?: (product: Product) => void;
 }
 
-export default function FeaturedCarousel({ products }: FeaturedCarouselProps) {
+export default function FeaturedCarousel({ products, onQuickView }: FeaturedCarouselProps) {
   const scrollRef = useRef<HTMLDivElement>(null);
 
   const scroll = (direction: 'left' | 'right') => {
@@ -118,7 +119,7 @@ export default function FeaturedCarousel({ products }: FeaturedCarouselProps) {
               key={product.id}
               style={{ minWidth: '320px', maxWidth: '320px', scrollSnapAlign: 'start' }}
             >
-              <ProductCard product={product} />
+              <ProductCard product={product} onQuickView={onQuickView} />
             </motion.div>
           ))}
         </div>

@@ -4,6 +4,12 @@ export const calculateArea = (largo: number, ancho: number): number => {
   return largo * ancho;
 };
 
+export const calculateRoofArea = (largo: number, ancho: number, alto: number): number => {
+  // Fórmula para techo a dos aguas (gabled roof)
+  // L * sqrt(W^2 + (2*H)^2)
+  return largo * Math.sqrt(Math.pow(ancho, 2) + Math.pow(2 * alto, 2));
+};
+
 export const calculateVolume = (largo: number, ancho: number, alto: number): number => {
   return largo * ancho * alto;
 };

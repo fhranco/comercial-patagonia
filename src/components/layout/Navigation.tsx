@@ -3,6 +3,7 @@
 import React, { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { ArrowRight, Menu, X, ShoppingBag, Clock } from "lucide-react";
+import Image from "next/image";
 import Link from 'next/link';
 import { BRAND_CONFIG } from "@/lib/constants";
 
@@ -48,12 +49,14 @@ export default function Navigation({ transparent = true }: NavigationProps) {
           <motion.div initial={{ opacity: 0, x: -10 }} animate={{ opacity: 1, x: 0 }}>
               <Link href="/" style={{ textDecoration: 'none', color: 'inherit' }} onClick={() => setIsMobileMenuOpen(false)}>
                 <div style={{ display: 'flex', alignItems: 'center', gap: '15px' }}>
-                  <div style={{ width: '40px', height: '40px', backgroundColor: 'var(--brand-yellow)', borderRadius: '8px', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0, boxShadow: '0 10px 20px rgba(249, 195, 0, 0.2)' }}>
-                    <span style={{ color: 'var(--brand-navy)', fontWeight: 900, fontSize: '1.2rem' }}>C</span>
+                  <div style={{ position: 'relative', width: '280px', height: '80px' }}>
+                    <Image 
+                      src="/branding/logo-comercial.webp" 
+                      alt={BRAND_CONFIG.name} 
+                      fill 
+                      style={{ objectFit: 'contain', filter: (transparent && !isScrolled && !isMobileMenuOpen) ? 'brightness(0) invert(1)' : 'none' }} 
+                    />
                   </div>
-                  <span style={{ fontSize: '0.75rem', fontWeight: 900, textTransform: 'uppercase', letterSpacing: '0.2em', fontFamily: 'var(--font-heading)' }} className="lg:block hidden">
-                    Patagonia <span style={{ opacity: 0.5 }}>Commercial</span>
-                  </span>
                 </div>
               </Link>
           </motion.div>

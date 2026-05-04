@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { X, Calculator, Ruler, Settings, DollarSign, Save, Share2, AlertTriangle, ChevronRight } from 'lucide-react';
 import { Material, Calculation } from '@/engineering/types/materials';
-import { calculateArea, calculateVolume, calculateMaterialNeeds, formatCurrency } from '@/engineering/utils/calculations';
+import { calculateArea, calculateRoofArea, calculateVolume, calculateMaterialNeeds, formatCurrency } from '@/engineering/utils/calculations';
 
 interface CalculatorPopupProps {
   material: Material | null;
@@ -49,7 +49,10 @@ const CalculatorPopup: React.FC<CalculatorPopupProps> = ({
     }
   }, [isOpen]);
 
-  const area = calculateArea(largo, ancho);
+  const area = (material && material.category === 'roofing') 
+    ? calculateRoofArea(largo, ancho, alto)
+    : calculateArea(largo, ancho);
+    
   const volume = (material && material.unitType === 'volume') ? calculateVolume(largo, ancho, alto) : undefined;
 
   const materialNeeds = material ? calculateMaterialNeeds(
@@ -161,9 +164,11 @@ const CalculatorPopup: React.FC<CalculatorPopupProps> = ({
                               style={{ width: '100%', padding: '20px', backgroundColor: '#F4F7FA', border: '1px solid rgba(0,0,0,0.05)', borderRadius: '12px', fontSize: '1.2rem', fontWeight: 700, color: 'var(--brand-navy)', outline: 'none' }} 
                              />
                         </div>
-                        {material.unitType === 'volume' && (
+                        {(material.unitType === 'volume' || material.category === 'roofing') && (
                              <div style={{ display: 'block' }}>
-                                 <label style={{ display: 'block', fontSize: '9px', fontWeight: 900, opacity: 0.4, textTransform: 'uppercase', marginBottom: '10px' }}>Alto ({material.id.includes('cemento') ? 'cm' : unit})</label>
+                                 <label style={{ display: 'block', fontSize: '9px', fontWeight: 900, opacity: 0.4, textTransform: 'uppercase', marginBottom: '10px' }}>
+                                    {material.category === 'roofing' ? 'Altura Cumbrera (m)' : (material.id.includes('cemento') ? 'Espesor (cm)' : `Alto (${unit})`)}
+                                 </label>
                                  <input 
                                   type="number" 
                                   step="0.1"
