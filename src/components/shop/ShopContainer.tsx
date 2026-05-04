@@ -127,7 +127,7 @@ export default function ShopContainer({ initialProducts, initialCategory, isLive
     );
   });
 
-  const [stockAlerts, setStockAlerts] = useState<{id: string, name: string}[]>([]);
+  const [stockAlerts, setStockAlerts] = useState<{id: string | number, name: string}[]>([]);
 
   useEffect(() => {
     // Simulación de alertas de stock crítico para B2B
