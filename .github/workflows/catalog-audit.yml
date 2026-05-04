@@ -10,6 +10,8 @@ on:
 jobs:
   audit:
     runs-on: ubuntu-latest
+    permissions:
+      contents: write
     steps:
       - name: 📥 Clonar Repositorio
         uses: actions/checkout@v4
