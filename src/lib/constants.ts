@@ -5,5 +5,5 @@ export const BRAND_CONFIG = {
   address: "Punta Arenas, Chile",
   currency: "CLP",
   currencySymbol: "$",
-  calculatorUrl: "/calculadora",
+  calculatorUrl: "https://calculadora.comercialpatagonia.cl",
 };

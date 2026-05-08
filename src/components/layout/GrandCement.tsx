@@ -43,8 +43,8 @@ export default function GrandCement({ onQuickView }: GrandCementProps) {
             </div>
           </div>
 
-          <button 
-            onClick={() => onQuickView && onQuickView(cementProduct)}
+          <Link 
+            href="/shop/17"
             style={{ 
               background: 'transparent', color: 'var(--brand-navy)', border: '2px solid var(--brand-navy)', padding: '24px 60px', borderRadius: '100px',
               fontSize: '12px', fontWeight: 900, textTransform: 'uppercase', letterSpacing: '0.4em', display: 'inline-flex', alignItems: 'center', gap: '20px',
@@ -53,7 +53,7 @@ export default function GrandCement({ onQuickView }: GrandCementProps) {
             className="hover:bg-[var(--brand-navy)] hover:text-white transition-all"
           >
             COMPRAR CEMENTO <ArrowUpRight className="w-5 h-5" />
-          </button>
+          </Link>
         </motion.div>
 
         {/* 🏔️ PRODUCT VISUAL (FOTOGRAFÍA ESCÉNICA) */}

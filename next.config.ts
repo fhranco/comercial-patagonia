@@ -5,6 +5,10 @@ const nextConfig: NextConfig = {
     remotePatterns: [
       {
         protocol: 'https',
+        hostname: 'productos.comercialpatagonia.cl',
+      },
+      {
+        protocol: 'https',
         hostname: 'tienda.comercialpatagonia.cl',
       },
     ],

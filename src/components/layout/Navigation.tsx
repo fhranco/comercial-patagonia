@@ -81,7 +81,13 @@ export default function Navigation({ transparent = true }: NavigationProps) {
                       HISTORIAL
                   </Link>
 
-                  <Link href={BRAND_CONFIG.calculatorUrl} style={{ fontSize: '11px', fontWeight: 900, textTransform: 'uppercase', letterSpacing: '0.2em', textDecoration: 'none', color: 'inherit', opacity: 0.9 }} className="hover:opacity-100 transition">
+                  <Link 
+                    href={BRAND_CONFIG.calculatorUrl} 
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    style={{ fontSize: '11px', fontWeight: 900, textTransform: 'uppercase', letterSpacing: '0.2em', textDecoration: 'none', color: 'inherit', opacity: 0.9 }} 
+                    className="hover:opacity-100 transition"
+                  >
                       CALCULADORA
                   </Link>
 
@@ -133,11 +139,17 @@ export default function Navigation({ transparent = true }: NavigationProps) {
               <span style={{ fontWeight: 700, fontSize: '13px', textTransform: 'uppercase', letterSpacing: '0.05em' }}>Historial de Cotizaciones</span>
             </Link>
 
-            <Link href={BRAND_CONFIG.calculatorUrl} onClick={() => setIsMobileMenuOpen(false)} style={{ 
-              display: 'flex', alignItems: 'center', gap: '15px', 
-              padding: '20px', borderRadius: '12px', textDecoration: 'none', color: 'inherit',
-              border: '1px solid var(--border-color)'
-            }}>
+            <Link 
+              href={BRAND_CONFIG.calculatorUrl} 
+              target="_blank"
+              rel="noopener noreferrer"
+              onClick={() => setIsMobileMenuOpen(false)} 
+              style={{ 
+                display: 'flex', alignItems: 'center', gap: '15px', 
+                padding: '20px', borderRadius: '12px', textDecoration: 'none', color: 'inherit',
+                border: '1px solid var(--border-color)'
+              }}
+            >
               <ShoppingBag size={20} opacity={0.5} />
               <span style={{ fontWeight: 700, fontSize: '13px', textTransform: 'uppercase', letterSpacing: '0.05em' }}>Calculadora de Obra</span>
             </Link>

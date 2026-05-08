@@ -9,7 +9,7 @@ import ProductDetailClient from "./ProductDetailClient";
 async function getProduct(id: string): Promise<Product> {
   const CK = process.env.WOOCOMMERCE_CK;
   const CS = process.env.WOOCOMMERCE_CS;
-  const WOO_URL = process.env.NEXT_PUBLIC_WOOCOMMERCE_URL || "https://tienda.comercialpatagonia.cl/wp-json/wc/v3";
+  const WOO_URL = process.env.NEXT_PUBLIC_WOOCOMMERCE_URL || "https://productos.comercialpatagonia.cl/wp-json/wc/v3";
 
   // Fallback a Mock si no hay llaves
   if (!CK || !CS) {
@@ -84,7 +84,7 @@ function generateDynamicMock(id: string): Product {
 export async function generateStaticParams() {
   const CK = process.env.WOOCOMMERCE_CK;
   const CS = process.env.WOOCOMMERCE_CS;
-  const WOO_URL = process.env.NEXT_PUBLIC_WOOCOMMERCE_URL || "https://tienda.comercialpatagonia.cl/wp-json/wc/v3";
+  const WOO_URL = process.env.NEXT_PUBLIC_WOOCOMMERCE_URL || "https://productos.comercialpatagonia.cl/wp-json/wc/v3";
 
   if (!CK || !CS) return [];
 

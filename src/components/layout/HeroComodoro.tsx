@@ -8,8 +8,14 @@ import {
   ShoppingBag, Truck, CheckCircle2, TrendingUp, Calculator
 } from "lucide-react";
 import { BRAND_CONFIG } from "@/lib/constants";
+import { Product } from "@/types/woocommerce";
 
-export default function HeroSpectacular() {
+interface HeroSpectacularProps {
+  products?: Product[];
+  onQuickView?: (product: Product) => void;
+}
+
+export default function HeroSpectacular({ products = [], onQuickView }: HeroSpectacularProps) {
   const containerVariants: Variants = {
     hidden: { opacity: 0 },
     visible: { 
@@ -127,20 +133,30 @@ export default function HeroSpectacular() {
           </motion.p>
  
           <motion.div variants={itemVariants} style={{ display: 'flex', gap: '20px', alignItems: 'center', flexWrap: 'wrap' }}>
-            <Link href="/shop/17" className="gold-shimmer" style={{ 
-              textDecoration: 'none', color: 'var(--brand-navy)', padding: '20px 40px', borderRadius: '4px',
-              fontWeight: 900, fontSize: '12px', textTransform: 'uppercase', letterSpacing: '0.15em',
-              display: 'flex', alignItems: 'center', gap: '15px',
-              boxShadow: '0 20px 40px rgba(212, 175, 55, 0.2)'
-            }}>
+            <Link 
+              href="/shop/17" 
+              className="gold-shimmer" 
+              style={{ 
+                textDecoration: 'none', color: 'var(--brand-navy)', padding: '20px 40px', borderRadius: '4px',
+                fontWeight: 900, fontSize: '12px', textTransform: 'uppercase', letterSpacing: '0.15em',
+                display: 'flex', alignItems: 'center', gap: '15px',
+                boxShadow: '0 20px 40px rgba(212, 175, 55, 0.2)'
+              }}
+            >
               Comprar Cemento <ShoppingBag className="w-4 h-4" />
             </Link>
  
-            <Link href={BRAND_CONFIG.calculatorUrl} style={{ 
-              backgroundColor: '#0E1F33', color: 'white', padding: '20px 40px', borderRadius: '4px',
-              fontSize: '12px', fontWeight: 900, textTransform: 'uppercase', letterSpacing: '0.15em', display: 'flex', alignItems: 'center', gap: '20px',
-              boxShadow: '0 20px 40px rgba(14, 31, 51, 0.4)', textDecoration: 'none'
-            }} className="hover:scale-105 transition-all group">
+            <Link 
+              href={BRAND_CONFIG.calculatorUrl} 
+              target="_blank"
+              rel="noopener noreferrer"
+              style={{ 
+                backgroundColor: '#0E1F33', color: 'white', padding: '20px 40px', borderRadius: '4px',
+                fontSize: '12px', fontWeight: 900, textTransform: 'uppercase', letterSpacing: '0.15em', display: 'flex', alignItems: 'center', gap: '20px',
+                boxShadow: '0 20px 40px rgba(14, 31, 51, 0.4)', textDecoration: 'none'
+              }} 
+              className="hover:scale-105 transition-all group"
+            >
               <span style={{ borderBottom: '2px solid white', paddingBottom: '2px' }}>CALCULADORA DE OBRA</span>
               <Calculator className="w-5 h-5 text-white" />
             </Link>

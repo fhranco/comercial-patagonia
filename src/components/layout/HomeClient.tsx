@@ -38,7 +38,10 @@ export default function HomeClient({ products }: HomeClientProps) {
       <PromotionHUD products={products} onQuickView={(prod) => setSelectedQuickProduct(prod)} />
       
       <main style={{ width: '100%' }}>
-        <HeroSpectacular />
+        <HeroSpectacular 
+          products={products} 
+          onQuickView={(prod) => setSelectedQuickProduct(prod)} 
+        />
 
         <div style={{ marginTop: '40px', marginBottom: '40px', display: 'flex', justifyContent: 'center' }}>
           <RetailStories 
