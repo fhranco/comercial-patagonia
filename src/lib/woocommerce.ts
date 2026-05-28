@@ -260,45 +260,41 @@ async function _fetchCategoriesFromAPI(): Promise<any[] | null> {
     const authHeader = `Basic ${Buffer.from(`${CK}:${CS}`).toString('base64')}`;
     const authUrl = `${WOOCOMMERCE_URL}/products/categories?per_page=100&hide_empty=true`;
     
-      const isVercel = process.env.VERCEL === "1" || process.env.NODE_ENV === "production";
-      const timeoutMs = isVercel ? 2000 : 8000;
-      const maxRetries = isVercel ? 1 : 3;
+    const isVercel = process.env.VERCEL === "1" || process.env.NODE_ENV === "production";
+    const timeoutMs = isVercel ? 2000 : 8000;
+    const maxRetries = isVercel ? 1 : 3;
 
-      writeLog(`[FETCH] Categories requesting: ${authUrl}`);
-      const response = await fetchWithRetry(authUrl, {
-        method: "GET",
-        headers: {
-          "Authorization": authHeader,
-          "Accept": "application/json",
-          "Content-Type": "application/json",
-          "User-Agent": "ComercialPatagonia-B2B-Agent/1.0"
-        },
-        next: { revalidate: 3600 }
-      }, timeoutMs, maxRetries);
+    writeLog(`[FETCH] Categories requesting: ${authUrl}`);
+    const response = await fetchWithRetry(authUrl, {
+      method: "GET",
+      headers: {
+        "Authorization": authHeader,
+        "Accept": "application/json",
+        "Content-Type": "application/json",
+        "User-Agent": "ComercialPatagonia-B2B-Agent/1.0"
+      },
+      next: { revalidate: 3600 }
+    }, timeoutMs, maxRetries);
 
-      writeLog(`[RESPONSE] Categories received. Status: ${response.status} ok: ${response.ok}`);
-      
-      if (!response.ok) {
-        writeLog(`[ERROR] Categories request failed with HTTP status ${response.status}`);
-        return loadBackupData('backup-categories.json');
-      }
-      
-      const data = await response.json();
-      if (!Array.isArray(data)) {
-        writeLog(`[ERROR] Categories did not return an array. Response detail: ${JSON.stringify(data)}`);
-        return loadBackupData('backup-categories.json');
-      }
-      
-      const filtered = data.filter((cat: { slug: string }) => cat.slug !== 'uncategorized');
-      writeLog(`[SUCCESS] Categories fetched successfully: ${filtered.length} categories.`);
-      
-      // Save offline backup asynchronously
-      saveBackupData('backup-categories.json', filtered);
-      return filtered;
-    } catch (err: any) {
-      writeLog(`[EXCEPTION] Categories failed after retries: ${err.message || err}. Falling back to disk backup...`, err);
+    writeLog(`[RESPONSE] Categories received. Status: ${response.status} ok: ${response.ok}`);
+    
+    if (!response.ok) {
+      writeLog(`[ERROR] Categories request failed with HTTP status ${response.status}`);
       return loadBackupData('backup-categories.json');
     }
+    
+    const data = await response.json();
+    if (!Array.isArray(data)) {
+      writeLog(`[ERROR] Categories did not return an array. Response detail: ${JSON.stringify(data)}`);
+      return loadBackupData('backup-categories.json');
+    }
+    
+    const filtered = data.filter((cat: { slug: string }) => cat.slug !== 'uncategorized');
+    writeLog(`[SUCCESS] Categories fetched successfully: ${filtered.length} categories.`);
+    
+    // Save offline backup asynchronously
+    saveBackupData('backup-categories.json', filtered);
+    return filtered;
   } catch (error: any) {
     writeLog(`[FATAL EXCEPTION] fetchWooCommerceCategories caught error: ${error.message || error}. Falling back to disk backup...`, error);
     console.error("WooCommerce Categories Fetch Error:", error);
