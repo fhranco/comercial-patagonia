@@ -54,6 +54,8 @@ export default function Navigation({ transparent = true }: NavigationProps) {
                       src="/branding/logo-comercial.webp" 
                       alt={BRAND_CONFIG.name} 
                       fill 
+                      priority
+                      sizes="(max-width: 768px) 280px, 280px"
                       style={{ objectFit: 'contain', filter: (transparent && !isScrolled && !isMobileMenuOpen) ? 'brightness(0) invert(1)' : 'none' }} 
                     />
                   </div>

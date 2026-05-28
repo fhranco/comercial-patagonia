@@ -72,6 +72,7 @@ export default function ProductQuickView({ product, isOpen, onClose }: ProductQu
                       fill 
                       quality={100}
                       priority
+                      unoptimized={Boolean((product.images[activeImgIndex]?.src || product.images[0]?.src)?.startsWith('http'))}
                       style={{ objectFit: 'contain' }} 
                     />
                   </motion.div>
@@ -100,7 +101,7 @@ export default function ProductQuickView({ product, isOpen, onClose }: ProductQu
                         transition: '0.2s', cursor: 'pointer'
                       }}
                     >
-                      <Image src={img.src} alt="" fill style={{ objectFit: 'cover' }} />
+                      <Image src={img.src} alt="" fill unoptimized={img.src.startsWith('http')} style={{ objectFit: 'cover' }} />
                     </button>
                   ))}
                 </div>

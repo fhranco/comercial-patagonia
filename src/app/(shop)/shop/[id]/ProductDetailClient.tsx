@@ -64,6 +64,8 @@ export default function ProductDetailClient({ initialProduct: product }: Product
                         src={product.images[0]?.src || ""} 
                         alt={product.name}
                         fill
+                        sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                        unoptimized={product.images[0]?.src?.startsWith('http')}
                         style={{ objectFit: 'contain' }}
                         priority
                       />
@@ -206,7 +208,7 @@ function StickyActionHUD({ product, onAddToCart }: { product: Product; onAddToCa
         >
             <div style={{ display: 'flex', alignItems: 'center', gap: '20px' }}>
                 <div style={{ position: 'relative', width: '45px', height: '45px', borderRadius: '4px', overflow: 'hidden', backgroundColor: '#FFF' }}>
-                    <Image src={product.images[0]?.src || ""} alt={product.name} fill style={{ objectFit: 'cover' }} />
+                    <Image src={product.images[0]?.src || ""} alt={product.name} fill sizes="45px" unoptimized={product.images[0]?.src?.startsWith('http')} style={{ objectFit: 'cover' }} />
                 </div>
                 <div>
                     <h4 style={{ fontSize: '10px', fontWeight: 900, textTransform: 'uppercase', letterSpacing: '0.1em' }}>{product.name}</h4>
