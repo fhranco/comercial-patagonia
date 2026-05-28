@@ -56,6 +56,7 @@ export default function Navigation({ transparent = true }: NavigationProps) {
                       fill 
                       priority
                       sizes="(max-width: 768px) 280px, 280px"
+                      unoptimized={true}
                       style={{ objectFit: 'contain', filter: (transparent && !isScrolled && !isMobileMenuOpen) ? 'brightness(0) invert(1)' : 'none' }} 
                     />
                   </div>

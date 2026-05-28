@@ -27,6 +27,7 @@ export default function Footer() {
                       src="/branding/logo-comercial.webp" 
                       alt="Comercial de la Patagonia" 
                       fill 
+                      unoptimized={true}
                       style={{ objectFit: 'contain' }} 
                     />
                 </div>

@@ -148,6 +148,10 @@ async function _fetchProductsFromAPI(): Promise<any[] | null> {
   try {
     const authHeader = `Basic ${Buffer.from(`${CK}:${CS}`).toString('base64')}`;
     
+    const isVercel = process.env.VERCEL === "1" || process.env.NODE_ENV === "production";
+    const timeoutMs = isVercel ? 2000 : 8000;
+    const maxRetries = isVercel ? 1 : 3;
+
     const fetchPage = async (page: number) => {
       const url = `${WOOCOMMERCE_URL}/products?per_page=80&page=${page}&status=publish`;
       
@@ -162,7 +166,7 @@ async function _fetchProductsFromAPI(): Promise<any[] | null> {
             "User-Agent": "ComercialPatagonia-B2B-Agent/1.0"
           },
           next: { revalidate: 3600 }
-        }, 8000, 3);
+        }, timeoutMs, maxRetries);
         
         writeLog(`[RESPONSE] Page ${page} received. Status: ${response.status} ok: ${response.ok}`);
         
@@ -256,7 +260,10 @@ async function _fetchCategoriesFromAPI(): Promise<any[] | null> {
     const authHeader = `Basic ${Buffer.from(`${CK}:${CS}`).toString('base64')}`;
     const authUrl = `${WOOCOMMERCE_URL}/products/categories?per_page=100&hide_empty=true`;
     
-    try {
+      const isVercel = process.env.VERCEL === "1" || process.env.NODE_ENV === "production";
+      const timeoutMs = isVercel ? 2000 : 8000;
+      const maxRetries = isVercel ? 1 : 3;
+
       writeLog(`[FETCH] Categories requesting: ${authUrl}`);
       const response = await fetchWithRetry(authUrl, {
         method: "GET",
@@ -267,7 +274,7 @@ async function _fetchCategoriesFromAPI(): Promise<any[] | null> {
           "User-Agent": "ComercialPatagonia-B2B-Agent/1.0"
         },
         next: { revalidate: 3600 }
-      }, 8000, 3);
+      }, timeoutMs, maxRetries);
 
       writeLog(`[RESPONSE] Categories received. Status: ${response.status} ok: ${response.ok}`);
       
