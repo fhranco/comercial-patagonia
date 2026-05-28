@@ -19,19 +19,29 @@ export async function fetchWooCommerceProducts() {
     
     const fetchPage = async (page: number) => {
       const url = `${WOOCOMMERCE_URL}/products?per_page=80&page=${page}&status=publish`;
-      const response = await fetch(url, {
-        method: "GET",
-        headers: {
-          "Authorization": authHeader,
-          "Accept": "application/json",
-          "Content-Type": "application/json",
-          "User-Agent": "ComercialPatagonia-B2B-Agent/1.0"
-        },
-        next: { revalidate: 3600 } 
-      });
+      const controller = new AbortController();
+      const timeoutId = setTimeout(() => controller.abort(), 3000); // 3 segundos máximo
       
-      if (!response.ok) return [];
-      return await response.json();
+      try {
+        const response = await fetch(url, {
+          method: "GET",
+          headers: {
+            "Authorization": authHeader,
+            "Accept": "application/json",
+            "Content-Type": "application/json",
+            "User-Agent": "ComercialPatagonia-B2B-Agent/1.0"
+          },
+          next: { revalidate: 3600 },
+          signal: controller.signal
+        });
+        
+        clearTimeout(timeoutId);
+        if (!response.ok) return [];
+        return await response.json();
+      } catch (err) {
+        clearTimeout(timeoutId);
+        return [];
+      }
     };
 
     // Fetch pages sequentially to avoid Netlify timeouts / Hostinger blocking
@@ -62,20 +72,30 @@ export async function fetchWooCommerceCategories() {
     const authHeader = `Basic ${Buffer.from(`${CK}:${CS}`).toString('base64')}`;
     const authUrl = `${WOOCOMMERCE_URL}/products/categories?per_page=100&hide_empty=true`;
     
-    const response = await fetch(authUrl, {
-      method: "GET",
-      headers: {
-        "Authorization": authHeader,
-        "Accept": "application/json",
-        "Content-Type": "application/json",
-        "User-Agent": "ComercialPatagonia-B2B-Agent/1.0"
-      },
-      next: { revalidate: 3600 } 
-    });
+    const controller = new AbortController();
+    const timeoutId = setTimeout(() => controller.abort(), 3000); // 3 segundos máximo
+    
+    try {
+      const response = await fetch(authUrl, {
+        method: "GET",
+        headers: {
+          "Authorization": authHeader,
+          "Accept": "application/json",
+          "Content-Type": "application/json",
+          "User-Agent": "ComercialPatagonia-B2B-Agent/1.0"
+        },
+        next: { revalidate: 3600 },
+        signal: controller.signal
+      });
 
-    if (!response.ok) return null;
-    const data = await response.json();
-    return data.filter((cat: { slug: string }) => cat.slug !== 'uncategorized');
+      clearTimeout(timeoutId);
+      if (!response.ok) return null;
+      const data = await response.json();
+      return data.filter((cat: { slug: string }) => cat.slug !== 'uncategorized');
+    } catch (err) {
+      clearTimeout(timeoutId);
+      return null;
+    }
   } catch (error) {
     console.error("WooCommerce Categories Fetch Error:", error);
     return null;

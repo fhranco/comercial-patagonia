@@ -36,7 +36,7 @@ export default function PromotionHUD({ products, onQuickView }: PromotionHUDProp
 
     const timer = setTimeout(() => setIsVisible(true), 1000); 
     return () => clearTimeout(timer);
-  }, [products]);
+  }, [products?.length]);
 
   if (!isVisible || !promoProduct) return null;
 

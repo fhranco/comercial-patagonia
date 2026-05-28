@@ -30,13 +30,12 @@ export default function FeaturedCarousel({ products, onQuickView }: FeaturedCaro
     }
   };
 
-  // 🔄 AUTO-PLAY ENGINE
   React.useEffect(() => {
     const interval = setInterval(() => {
       scroll('right');
     }, 4500);
     return () => clearInterval(interval);
-  }, [products]);
+  }, [products?.length]);
 
   return (
     <section style={{ padding: '100px 0', backgroundColor: '#FFFFFF', overflow: 'hidden' }}>
