@@ -9,6 +9,8 @@ export interface Material {
   unitType: 'area' | 'volume' | 'length';
   description: string;
   tips: string[];
+  sheetWidth?: number;  // ancho físico en metros (ej: 1.09)
+  sheetLength?: number; // largo físico en metros (ej: 2.5)
 }
 
 export interface Calculation {
@@ -28,6 +30,10 @@ export interface Calculation {
   totalCostWithExtra: number;
   extraPercentage: number;
   date: string;
+  roofType?: 'gabled' | 'shed' | 'hip' | 'flat';
+  lateralOverlap?: number;
+  longitudinalOverlap?: number;
+  usefulAreaPerSheet?: number;
 }
 
 export interface SavedQuotation {

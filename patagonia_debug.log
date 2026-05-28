@@ -1,0 +1,143 @@
+[2026-05-28T16:45:08.000Z] [LOGGER_RESET] Log limpiado. Servidor reiniciado limpiamente.
+[2026-05-28T16:49:16.741Z] [RENDER] Homepage Server Side render initiated.
+--------------------------------------------------
+[2026-05-28T16:49:16.742Z] [INIT] fetchWooCommerceProducts: WOOCOMMERCE_URL="https://tienda.comercialpatagonia.cl/wp-json/wc/v3", CK=SET, CS=SET
+--------------------------------------------------
+[2026-05-28T16:49:16.742Z] [FETCH] Page 1 requesting: https://tienda.comercialpatagonia.cl/wp-json/wc/v3/products?per_page=80&page=1&status=publish
+--------------------------------------------------
+[2026-05-28T16:49:20.928Z] [RESPONSE] Page 1 received. Status: 200 ok: true
+--------------------------------------------------
+[2026-05-28T16:49:22.038Z] [SUCCESS] Page 1 successfully fetched 80 products.
+--------------------------------------------------
+[2026-05-28T16:49:22.039Z] [FETCH] Page 2 requesting: https://tienda.comercialpatagonia.cl/wp-json/wc/v3/products?per_page=80&page=2&status=publish
+--------------------------------------------------
+[2026-05-28T16:49:24.914Z] [RESPONSE] Page 2 received. Status: 200 ok: true
+--------------------------------------------------
+[2026-05-28T16:49:25.118Z] [SUCCESS] Page 2 successfully fetched 80 products.
+--------------------------------------------------
+[2026-05-28T16:49:25.118Z] [FETCH] Page 3 requesting: https://tienda.comercialpatagonia.cl/wp-json/wc/v3/products?per_page=80&page=3&status=publish
+--------------------------------------------------
+[2026-05-28T16:49:28.601Z] [RESPONSE] Page 3 received. Status: 200 ok: true
+--------------------------------------------------
+[2026-05-28T16:49:28.825Z] [SUCCESS] Page 3 successfully fetched 80 products.
+--------------------------------------------------
+[2026-05-28T16:49:28.826Z] [FETCH] Page 4 requesting: https://tienda.comercialpatagonia.cl/wp-json/wc/v3/products?per_page=80&page=4&status=publish
+--------------------------------------------------
+[2026-05-28T16:49:31.747Z] [RESPONSE] Page 4 received. Status: 200 ok: true
+--------------------------------------------------
+[2026-05-28T16:49:31.844Z] [SUCCESS] Page 4 successfully fetched 12 products.
+--------------------------------------------------
+[2026-05-28T16:49:31.845Z] [FETCH] Page 5 requesting: https://tienda.comercialpatagonia.cl/wp-json/wc/v3/products?per_page=80&page=5&status=publish
+--------------------------------------------------
+[2026-05-28T16:49:35.042Z] [RESPONSE] Page 5 received. Status: 200 ok: true
+--------------------------------------------------
+[2026-05-28T16:49:35.044Z] [SUCCESS] Page 5 successfully fetched 0 products.
+--------------------------------------------------
+[2026-05-28T16:49:35.044Z] [LOOP_BREAK] Stopped product loop at page 5 (no more products or connection failed).
+--------------------------------------------------
+[2026-05-28T16:49:35.045Z] [COMPLETE] fetchWooCommerceProducts completed. Total real products flattened: 252
+--------------------------------------------------
+[2026-05-28T16:49:35.045Z] [RENDER] Homepage successfully loaded 252 live products.
+--------------------------------------------------
+[2026-05-28T16:49:45.387Z] [RENDER] ShopPage Server Side render initiated. Category parameter: undefined
+--------------------------------------------------
+[2026-05-28T16:49:45.388Z] [CACHE HIT] Products returned from memory cache (252 products, age: 10s)
+--------------------------------------------------
+[2026-05-28T16:49:45.388Z] [RENDER] ShopPage successfully loaded 252 live products.
+--------------------------------------------------
+[2026-05-28T16:51:01.727Z] [RENDER] ShopPage Server Side render initiated. Category parameter: undefined
+--------------------------------------------------
+[2026-05-28T16:51:01.728Z] [INIT] fetchWooCommerceProducts: WOOCOMMERCE_URL="https://tienda.comercialpatagonia.cl/wp-json/wc/v3", CK=SET, CS=SET
+--------------------------------------------------
+[2026-05-28T16:51:01.728Z] [FETCH] Page 1 requesting: https://tienda.comercialpatagonia.cl/wp-json/wc/v3/products?per_page=80&page=1&status=publish
+--------------------------------------------------
+[2026-05-28T16:51:01.785Z] [RENDER] ShopPage Server Side render initiated. Category parameter: undefined
+--------------------------------------------------
+[2026-05-28T16:51:01.785Z] [INIT] fetchWooCommerceProducts: WOOCOMMERCE_URL="https://tienda.comercialpatagonia.cl/wp-json/wc/v3", CK=SET, CS=SET
+--------------------------------------------------
+[2026-05-28T16:51:01.785Z] [FETCH] Page 1 requesting: https://tienda.comercialpatagonia.cl/wp-json/wc/v3/products?per_page=80&page=1&status=publish
+--------------------------------------------------
+[2026-05-28T16:51:01.788Z] [RESPONSE] Page 1 received. Status: 200 ok: true
+--------------------------------------------------
+[2026-05-28T16:51:01.790Z] [SUCCESS] Page 1 successfully fetched 80 products.
+--------------------------------------------------
+[2026-05-28T16:51:01.790Z] [FETCH] Page 2 requesting: https://tienda.comercialpatagonia.cl/wp-json/wc/v3/products?per_page=80&page=2&status=publish
+--------------------------------------------------
+[2026-05-28T16:51:01.791Z] [RESPONSE] Page 2 received. Status: 200 ok: true
+--------------------------------------------------
+[2026-05-28T16:51:01.793Z] [SUCCESS] Page 2 successfully fetched 80 products.
+--------------------------------------------------
+[2026-05-28T16:51:01.793Z] [FETCH] Page 3 requesting: https://tienda.comercialpatagonia.cl/wp-json/wc/v3/products?per_page=80&page=3&status=publish
+--------------------------------------------------
+[2026-05-28T16:51:01.793Z] [RESPONSE] Page 3 received. Status: 200 ok: true
+--------------------------------------------------
+[2026-05-28T16:51:01.795Z] [SUCCESS] Page 3 successfully fetched 80 products.
+--------------------------------------------------
+[2026-05-28T16:51:01.795Z] [FETCH] Page 4 requesting: https://tienda.comercialpatagonia.cl/wp-json/wc/v3/products?per_page=80&page=4&status=publish
+--------------------------------------------------
+[2026-05-28T16:51:01.795Z] [RESPONSE] Page 4 received. Status: 200 ok: true
+--------------------------------------------------
+[2026-05-28T16:51:01.796Z] [SUCCESS] Page 4 successfully fetched 12 products.
+--------------------------------------------------
+[2026-05-28T16:51:01.796Z] [FETCH] Page 5 requesting: https://tienda.comercialpatagonia.cl/wp-json/wc/v3/products?per_page=80&page=5&status=publish
+--------------------------------------------------
+[2026-05-28T16:51:01.796Z] [RESPONSE] Page 5 received. Status: 200 ok: true
+--------------------------------------------------
+[2026-05-28T16:51:01.797Z] [SUCCESS] Page 5 successfully fetched 0 products.
+--------------------------------------------------
+[2026-05-28T16:51:01.797Z] [LOOP_BREAK] Stopped product loop at page 5 (no more products or connection failed).
+--------------------------------------------------
+[2026-05-28T16:51:01.797Z] [COMPLETE] fetchWooCommerceProducts completed. Total real products flattened: 252
+--------------------------------------------------
+[2026-05-28T16:51:01.797Z] [RENDER] ShopPage successfully loaded 252 live products.
+--------------------------------------------------
+[2026-05-28T16:51:01.806Z] [BACKUP WRITE] Successfully saved offline backup to backup-products.json (252 items)
+--------------------------------------------------
+[2026-05-28T16:51:01.855Z] [RENDER] ShopPage Server Side render initiated. Category parameter: undefined
+--------------------------------------------------
+[2026-05-28T16:51:01.855Z] [CACHE HIT] Products returned from memory cache (252 products, age: 0s)
+--------------------------------------------------
+[2026-05-28T16:51:01.856Z] [RENDER] ShopPage successfully loaded 252 live products.
+--------------------------------------------------
+[2026-05-28T16:51:01.980Z] [RENDER] ShopPage Server Side render initiated. Category parameter: undefined
+--------------------------------------------------
+[2026-05-28T16:51:01.980Z] [CACHE HIT] Products returned from memory cache (252 products, age: 0s)
+--------------------------------------------------
+[2026-05-28T16:51:01.980Z] [RENDER] ShopPage successfully loaded 252 live products.
+--------------------------------------------------
+[2026-05-28T16:51:05.687Z] [RESPONSE] Page 1 received. Status: 200 ok: true
+--------------------------------------------------
+[2026-05-28T16:51:06.780Z] [SUCCESS] Page 1 successfully fetched 80 products.
+--------------------------------------------------
+[2026-05-28T16:51:06.781Z] [FETCH] Page 2 requesting: https://tienda.comercialpatagonia.cl/wp-json/wc/v3/products?per_page=80&page=2&status=publish
+--------------------------------------------------
+[2026-05-28T16:51:06.786Z] [RESPONSE] Page 2 received. Status: 200 ok: true
+--------------------------------------------------
+[2026-05-28T16:51:06.791Z] [SUCCESS] Page 2 successfully fetched 80 products.
+--------------------------------------------------
+[2026-05-28T16:51:06.791Z] [FETCH] Page 3 requesting: https://tienda.comercialpatagonia.cl/wp-json/wc/v3/products?per_page=80&page=3&status=publish
+--------------------------------------------------
+[2026-05-28T16:51:06.795Z] [RESPONSE] Page 3 received. Status: 200 ok: true
+--------------------------------------------------
+[2026-05-28T16:51:06.801Z] [SUCCESS] Page 3 successfully fetched 80 products.
+--------------------------------------------------
+[2026-05-28T16:51:06.801Z] [FETCH] Page 4 requesting: https://tienda.comercialpatagonia.cl/wp-json/wc/v3/products?per_page=80&page=4&status=publish
+--------------------------------------------------
+[2026-05-28T16:51:06.803Z] [RESPONSE] Page 4 received. Status: 200 ok: true
+--------------------------------------------------
+[2026-05-28T16:51:06.805Z] [SUCCESS] Page 4 successfully fetched 12 products.
+--------------------------------------------------
+[2026-05-28T16:51:06.805Z] [FETCH] Page 5 requesting: https://tienda.comercialpatagonia.cl/wp-json/wc/v3/products?per_page=80&page=5&status=publish
+--------------------------------------------------
+[2026-05-28T16:51:06.807Z] [RESPONSE] Page 5 received. Status: 200 ok: true
+--------------------------------------------------
+[2026-05-28T16:51:06.808Z] [SUCCESS] Page 5 successfully fetched 0 products.
+--------------------------------------------------
+[2026-05-28T16:51:06.808Z] [LOOP_BREAK] Stopped product loop at page 5 (no more products or connection failed).
+--------------------------------------------------
+[2026-05-28T16:51:06.808Z] [COMPLETE] fetchWooCommerceProducts completed. Total real products flattened: 252
+--------------------------------------------------
+[2026-05-28T16:51:06.809Z] [RENDER] ShopPage successfully loaded 252 live products.
+--------------------------------------------------
+[2026-05-28T16:51:06.824Z] [BACKUP WRITE] Successfully saved offline backup to backup-products.json (252 items)
+--------------------------------------------------

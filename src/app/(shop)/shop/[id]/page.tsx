@@ -4,6 +4,7 @@ import { MOCK_PRODUCTS } from "@/lib/mock-products";
 import Navigation from "@/components/layout/Navigation";
 import Footer from "@/components/layout/FinalOfficialFooter";
 import ProductDetailClient from "./ProductDetailClient";
+import { writeLog } from "@/lib/logger";
 
 // 🏎️ NITRO PRODUCT FETCH
 async function getProduct(id: string): Promise<Product> {
@@ -13,6 +14,7 @@ async function getProduct(id: string): Promise<Product> {
 
   // Fallback a Mock si no hay llaves
   if (!CK || !CS) {
+    writeLog(`[INFO DETAIL] Product id ${id} using mock because WooCommerce keys are missing.`);
     return generateDynamicMock(id);
   }
 
@@ -20,9 +22,10 @@ async function getProduct(id: string): Promise<Product> {
   const authUrl = `${WOO_URL}/products/${id}`;
 
   const controller = new AbortController();
-  const timeoutId = setTimeout(() => controller.abort(), 4000); // 4 Segundos Máximo
+  const timeoutId = setTimeout(() => controller.abort(), 4000); // 4 Seconds Maximum
 
   try {
+    writeLog(`[FETCH DETAIL] Fetching product id ${id} from: ${authUrl}`);
     const response = await fetch(authUrl, {
       headers: {
         "Authorization": `Basic ${authHeader}`,
@@ -36,18 +39,28 @@ async function getProduct(id: string): Promise<Product> {
     });
 
     clearTimeout(timeoutId);
+    writeLog(`[RESPONSE DETAIL] Product id ${id} status: ${response.status} ok: ${response.ok}`);
 
     const bodyText = await response.text();
     if (response.status !== 200 || bodyText.startsWith('<')) {
+        writeLog(`[ERROR DETAIL] Product id ${id} failed status: ${response.status}. Using mock fallback.`);
         console.warn(`[WooCommerce API] Error ${response.status}, usando fallback dinámico.`);
         const existingMock = MOCK_PRODUCTS.find(p => p.id === Number(id));
         if (existingMock) return { ...existingMock, id: Number(id) };
         return generateDynamicMock(id);
     }
 
-    return JSON.parse(bodyText);
-  } catch (error) {
+    const product = JSON.parse(bodyText);
+    if (!product || typeof product !== 'object' || !product.name || !Array.isArray(product.images)) {
+        writeLog(`[ERROR DETAIL] Product id ${id} returned an invalid JSON schema. Using mock fallback.`);
+        return generateDynamicMock(id);
+    }
+
+    writeLog(`[SUCCESS DETAIL] Product id ${id} loaded successfully: "${product.name}"`);
+    return product;
+  } catch (error: any) {
     clearTimeout(timeoutId);
+    writeLog(`[EXCEPTION DETAIL] Product id ${id} crashed: ${error.message || error}`, error);
     console.warn("API Timeout/Error, usando Mock Dinámico:", id);
     return generateDynamicMock(id);
   }

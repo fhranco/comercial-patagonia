@@ -116,7 +116,9 @@ export const materials: Material[] = [
     defaultPrice: 18600,
     unitType: 'area',
     description: 'Plancha de techo 1.09x2.5m, cobertura 2.725 m² por plancha',
-    tips: ['Resistente a vientos patagónicos certificados']
+    tips: ['Resistente a vientos patagónicos certificados'],
+    sheetWidth: 1.09,
+    sheetLength: 2.5
   },
   {
     id: 'plancha_zincalum_3_6m',
@@ -128,7 +130,9 @@ export const materials: Material[] = [
     defaultPrice: 24500,
     unitType: 'area',
     description: 'Plancha de zinc-alum ondulada de 3.66m, alta resistencia a la corrosión.',
-    tips: ['Ideal para naves industriales y galpones en zonas costeras.']
+    tips: ['Ideal para naves industriales y galpones en zonas costeras.'],
+    sheetWidth: 0.9,
+    sheetLength: 3.66
   },
   {
     id: 'fieltro_asfaltico_40_10',

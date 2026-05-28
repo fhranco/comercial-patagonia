@@ -10,6 +10,7 @@ import CalculatorPopup from '@/engineering/components/CalculatorPopup';
 import SavedCalculations from '@/engineering/components/SavedCalculations';
 import QuotationManager from '@/engineering/components/QuotationManager';
 import TipsSection from '@/engineering/components/TipsSection';
+import B2BNotificationCenter from '@/engineering/components/B2BNotificationCenter';
 import { materials } from '@/engineering/data/materials';
 import { Material, Calculation } from '@/engineering/types/materials';
 
@@ -103,6 +104,8 @@ export default function CalculatorPage() {
                     onClose={handleCloseCalculator}
                     onSaveCalculation={handleSaveCalculation}
                 />
+
+                <B2BNotificationCenter />
             </div>
         </div>
     </main>

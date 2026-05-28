@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { X, Calculator, Ruler, Settings, DollarSign, Save, Share2, AlertTriangle, ChevronRight } from 'lucide-react';
 import { Material, Calculation } from '@/engineering/types/materials';
-import { calculateArea, calculateRoofArea, calculateVolume, calculateMaterialNeeds, formatCurrency } from '@/engineering/utils/calculations';
+import { calculateArea, calculateRoofArea, calculateVolume, calculateMaterialNeeds, formatCurrency, calculateSheetsNeeded } from '@/engineering/utils/calculations';
 
 interface CalculatorPopupProps {
   material: Material | null;
@@ -30,6 +30,11 @@ const CalculatorPopup: React.FC<CalculatorPopupProps> = ({
   const [extraPercentage, setExtraPercentage] = useState<number>(10);
   const [unit, setUnit] = useState<'metros' | 'pies'>('metros');
 
+  // Advanced Roofing States
+  const [roofType, setRoofType] = useState<'gabled' | 'shed' | 'hip' | 'flat'>('gabled');
+  const [lateralOverlap, setLateralOverlap] = useState<number>(9); // default 9cm lateral overlap
+  const [longitudinalOverlap, setLongitudinalOverlap] = useState<number>(20); // default 20cm longitudinal overlap
+
   useEffect(() => {
     if (material) {
       setRendimiento(material.defaultRendimiento);
@@ -46,20 +51,41 @@ const CalculatorPopup: React.FC<CalculatorPopupProps> = ({
       setAnchoStr('0');
       setAltoStr('0');
       setUnit('metros');
+      setRoofType('gabled');
+      setLateralOverlap(9);
+      setLongitudinalOverlap(20);
     }
   }, [isOpen]);
 
+  // Dynamically recommend waste margin depending on the roof style
+  useEffect(() => {
+    if (material && material.category === 'roofing') {
+      if (roofType === 'gabled') setExtraPercentage(10);
+      else if (roofType === 'shed') setExtraPercentage(8);
+      else if (roofType === 'hip') setExtraPercentage(18); // complex hip cuts require more waste
+      else if (roofType === 'flat') setExtraPercentage(5);
+    }
+  }, [roofType, material]);
+
+  const isSheetBased = !!(material && material.category === 'roofing' && material.sheetWidth && material.sheetLength);
+
   const area = (material && material.category === 'roofing') 
-    ? calculateRoofArea(largo, ancho, alto)
+    ? calculateRoofArea(largo, ancho, alto, roofType)
     : calculateArea(largo, ancho);
     
   const volume = (material && material.unitType === 'volume') ? calculateVolume(largo, ancho, alto) : undefined;
+
+  const sheetInfo = (material && material.sheetWidth && material.sheetLength)
+    ? calculateSheetsNeeded(area, material.sheetWidth, material.sheetLength, lateralOverlap, longitudinalOverlap)
+    : { usefulAreaPerSheet: 0, exactSheets: 0, sheetsNeeded: 0 };
+
+  const finalRendimiento = isSheetBased ? sheetInfo.usefulAreaPerSheet : rendimiento;
 
   const materialNeeds = material ? calculateMaterialNeeds(
     material,
     area,
     volume,
-    rendimiento,
+    finalRendimiento,
     pricePerUnit,
     extraPercentage
   ) : { unitsNeeded: 0, unitsWithExtra: 0, totalCost: 0, totalCostWithExtra: 0 };
@@ -86,19 +112,41 @@ const CalculatorPopup: React.FC<CalculatorPopupProps> = ({
       volume,
       largo,
       ancho,
-      alto,
-      rendimiento,
+      alto: material.category === 'roofing' && roofType === 'flat' ? undefined : alto,
+      rendimiento: finalRendimiento,
       pricePerUnit,
       unitsNeeded: materialNeeds.unitsNeeded,
       unitsWithExtra: materialNeeds.unitsWithExtra,
       totalCost: materialNeeds.totalCost,
       totalCostWithExtra: materialNeeds.totalCostWithExtra,
       extraPercentage,
-      date: new Date().toISOString()
+      date: new Date().toISOString(),
+      roofType: material.category === 'roofing' ? roofType : undefined,
+      lateralOverlap: isSheetBased ? lateralOverlap : undefined,
+      longitudinalOverlap: isSheetBased ? longitudinalOverlap : undefined,
+      usefulAreaPerSheet: isSheetBased ? sheetInfo.usefulAreaPerSheet : undefined
     };
     onSaveCalculation(calculation);
     onClose();
-  }, [area, material, volume, largo, ancho, alto, rendimiento, pricePerUnit, materialNeeds, extraPercentage, onSaveCalculation, onClose]);
+  }, [
+    area,
+    material,
+    volume,
+    largo,
+    ancho,
+    alto,
+    finalRendimiento,
+    pricePerUnit,
+    materialNeeds,
+    extraPercentage,
+    onSaveCalculation,
+    onClose,
+    roofType,
+    isSheetBased,
+    lateralOverlap,
+    longitudinalOverlap,
+    sheetInfo.usefulAreaPerSheet
+  ]);
 
   if (!isOpen || !material) return null;
 
@@ -141,7 +189,43 @@ const CalculatorPopup: React.FC<CalculatorPopupProps> = ({
                         </div>
                     </div>
 
-                    <div style={{ display: 'grid', gap: '20px' }}>
+                    {material.category === 'roofing' && (
+                        <div style={{ marginBottom: '25px' }}>
+                            <label style={{ display: 'block', fontSize: '9px', fontWeight: 900, opacity: 0.4, textTransform: 'uppercase', marginBottom: '10px' }}>
+                                Diseño del Techo (Cálculo Geométrico)
+                            </label>
+                            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gap: '10px' }}>
+                                {[
+                                    { id: 'gabled', name: 'Dos Aguas (Gabled)' },
+                                    { id: 'shed', name: 'Un Agua (Shed)' },
+                                    { id: 'hip', name: 'Cuatro Aguas (Hip)' },
+                                    { id: 'flat', name: 'Plano (Flat / Low Slope)' }
+                                ].map((type) => (
+                                    <button
+                                        key={type.id}
+                                        type="button"
+                                        onClick={() => setRoofType(type.id as any)}
+                                        style={{
+                                            padding: '12px',
+                                            borderRadius: '8px',
+                                            fontSize: '11px',
+                                            fontWeight: 700,
+                                            border: roofType === type.id ? '2px solid var(--brand-blue)' : '1px solid rgba(14, 31, 51, 0.1)',
+                                            backgroundColor: roofType === type.id ? 'rgba(37, 99, 235, 0.05)' : 'white',
+                                            color: 'var(--brand-navy)',
+                                            cursor: 'pointer',
+                                            textAlign: 'center',
+                                            transition: 'all 0.2s'
+                                        }}
+                                    >
+                                        {type.name}
+                                    </button>
+                                ))}
+                            </div>
+                        </div>
+                    )}
+
+                    <div style={{ display: 'grid', gap: '20px', marginBottom: '25px' }}>
                         <div style={{ display: 'block' }}>
                             <label style={{ display: 'block', fontSize: '9px', fontWeight: 900, opacity: 0.4, textTransform: 'uppercase', marginBottom: '10px' }}>Largo ({unit})</label>
                             <input 
@@ -164,7 +248,7 @@ const CalculatorPopup: React.FC<CalculatorPopupProps> = ({
                               style={{ width: '100%', padding: '20px', backgroundColor: '#F4F7FA', border: '1px solid rgba(0,0,0,0.05)', borderRadius: '12px', fontSize: '1.2rem', fontWeight: 700, color: 'var(--brand-navy)', outline: 'none' }} 
                              />
                         </div>
-                        {(material.unitType === 'volume' || material.category === 'roofing') && (
+                        {(material.unitType === 'volume' || (material.category === 'roofing' && roofType !== 'flat')) && (
                              <div style={{ display: 'block' }}>
                                  <label style={{ display: 'block', fontSize: '9px', fontWeight: 900, opacity: 0.4, textTransform: 'uppercase', marginBottom: '10px' }}>
                                     {material.category === 'roofing' ? 'Altura Cumbrera (m)' : (material.id.includes('cemento') ? 'Espesor (cm)' : `Alto (${unit})`)}
@@ -186,6 +270,41 @@ const CalculatorPopup: React.FC<CalculatorPopupProps> = ({
                              </div>
                         )}
                     </div>
+
+                    {isSheetBased && (
+                        <div style={{ backgroundColor: '#F8FAFC', padding: '20px', borderRadius: '16px', border: '1px solid rgba(14, 31, 51, 0.05)' }}>
+                            <h4 style={{ fontSize: '10px', fontWeight: 900, textTransform: 'uppercase', color: 'var(--brand-navy)', marginBottom: '15px', display: 'flex', alignItems: 'center', gap: '8px' }}>
+                                <Settings size={12} className="text-[var(--brand-blue)]" /> TRASLAPES DE PLANCHAS
+                            </h4>
+                            <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '15px' }}>
+                                <div>
+                                    <label style={{ display: 'block', fontSize: '9px', fontWeight: 900, opacity: 0.4, textTransform: 'uppercase', marginBottom: '8px' }}>Traslape Lateral (cm)</label>
+                                    <input
+                                        type="number"
+                                        value={lateralOverlap}
+                                        onChange={(e) => setLateralOverlap(Number(e.target.value) || 0)}
+                                        style={{ width: '100%', padding: '12px', backgroundColor: 'white', border: '1px solid rgba(0,0,0,0.1)', borderRadius: '8px', fontSize: '12px', fontWeight: 700 }}
+                                    />
+                                </div>
+                                <div>
+                                    <label style={{ display: 'block', fontSize: '9px', fontWeight: 900, opacity: 0.4, textTransform: 'uppercase', marginBottom: '8px' }}>Traslape Long. (cm)</label>
+                                    <input
+                                        type="number"
+                                        value={longitudinalOverlap}
+                                        onChange={(e) => setLongitudinalOverlap(Number(e.target.value) || 0)}
+                                        style={{ width: '100%', padding: '12px', backgroundColor: 'white', border: '1px solid rgba(0,0,0,0.1)', borderRadius: '8px', fontSize: '12px', fontWeight: 700 }}
+                                    />
+                                </div>
+                            </div>
+                            <div style={{ marginTop: '15px', padding: '10px', backgroundColor: 'white', borderRadius: '8px', border: '1px solid rgba(0,0,0,0.05)', fontSize: '10px', color: 'rgba(0,0,0,0.6)' }}>
+                                <p style={{ margin: 0, lineHeight: 1.4 }}>
+                                    📏 <strong>Ficha Técnica de Cobertura:</strong><br />
+                                    • Dimensiones Brutas: <strong>{material.sheetWidth}m × {material.sheetLength}m</strong> ({material.defaultRendimiento.toFixed(3)} m²)<br />
+                                    • Área Útil de Cobertura Real: <strong style={{ color: 'var(--brand-blue)' }}>{sheetInfo.usefulAreaPerSheet.toFixed(3)} m²</strong> por plancha (restado traslapes).
+                                </p>
+                            </div>
+                        </div>
+                    )}
                 </div>
 
                 <div>
@@ -199,7 +318,13 @@ const CalculatorPopup: React.FC<CalculatorPopupProps> = ({
                         </div>
                         <div>
                             <label style={{ display: 'block', fontSize: '9px', fontWeight: 900, opacity: 0.4, textTransform: 'uppercase', marginBottom: '10px' }}>Rendimiento</label>
-                            <input type="number" value={rendimiento} onChange={(e) => setRendimiento(Number(e.target.value))} style={{ width: '100%', padding: '15px', backgroundColor: '#F4F7FA', border: 'none', borderRadius: '12px', fontSize: '1rem', fontWeight: 700 }} />
+                            <input 
+                              type="number" 
+                              value={finalRendimiento} 
+                              disabled={isSheetBased} 
+                              onChange={(e) => setRendimiento(Number(e.target.value))} 
+                              style={{ width: '100%', padding: '15px', backgroundColor: '#F4F7FA', border: 'none', borderRadius: '12px', fontSize: '1rem', fontWeight: 700, opacity: isSheetBased ? 0.6 : 1 }} 
+                            />
                         </div>
                     </div>
                 </div>
@@ -216,6 +341,12 @@ const CalculatorPopup: React.FC<CalculatorPopupProps> = ({
                             <span style={{ fontSize: '12px', fontWeight: 500, color: 'rgba(0,0,0,0.5)' }}>Área Proyectada</span>
                             <span style={{ fontSize: '14px', fontWeight: 900, color: 'var(--brand-navy)' }}>{area.toFixed(2)} m²</span>
                         </div>
+                        {volume !== undefined && (
+                            <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '15px', borderBottom: '1px solid #F0F0F0', paddingBottom: '15px' }}>
+                                <span style={{ fontSize: '12px', fontWeight: 500, color: 'rgba(0,0,0,0.5)' }}>Volumen Proyectado</span>
+                                <span style={{ fontSize: '14px', fontWeight: 900, color: 'var(--brand-navy)' }}>{volume.toFixed(3)} m³</span>
+                            </div>
+                        )}
                         <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '25px', borderBottom: '1px solid #F0F0F0', paddingBottom: '15px' }} className="sm:mb-[30px]">
                             <span style={{ fontSize: '12px', fontWeight: 500, color: 'rgba(0,0,0,0.5)' }}>Precio unitario</span>
                             <span style={{ fontSize: '14px', fontWeight: 900, color: 'var(--brand-blue)' }}>{formatCurrency(pricePerUnit)}</span>
