@@ -72,6 +72,7 @@ export default function RetailStories({ activeCategory, onCategoryChange }: Reta
                         alt={story.label} 
                         fill 
                         sizes="64px"
+                        unoptimized={true}
                         style={{ objectFit: 'cover' }} 
                     />
                 </div>

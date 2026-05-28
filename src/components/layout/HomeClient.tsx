@@ -16,6 +16,7 @@ import Link from "next/link";
 import PromotionHUD from "../shop/PromotionHUD";
 import RetailStories from "../shop/RetailStories";
 import ProductQuickView from "../shop/ProductQuickView";
+import CyberdayCountdown from "./CyberdayCountdown";
 
 interface HomeClientProps {
   products: Product[];
@@ -42,6 +43,8 @@ export default function HomeClient({ products }: HomeClientProps) {
           products={products} 
           onQuickView={(prod) => setSelectedQuickProduct(prod)} 
         />
+
+        <CyberdayCountdown />
 
         <div style={{ marginTop: '40px', marginBottom: '40px', display: 'flex', justifyContent: 'center' }}>
           <RetailStories 

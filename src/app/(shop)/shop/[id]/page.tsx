@@ -5,65 +5,30 @@ import Navigation from "@/components/layout/Navigation";
 import Footer from "@/components/layout/FinalOfficialFooter";
 import ProductDetailClient from "./ProductDetailClient";
 import { writeLog } from "@/lib/logger";
+import { fetchWooCommerceProducts } from "@/lib/woocommerce";
 
-// 🏎️ NITRO PRODUCT FETCH
+// 🏎️ NITRO PRODUCT FETCH (Deduplicated cache and offline backup)
 async function getProduct(id: string): Promise<Product> {
-  const CK = process.env.WOOCOMMERCE_CK;
-  const CS = process.env.WOOCOMMERCE_CS;
-  const WOO_URL = process.env.NEXT_PUBLIC_WOOCOMMERCE_URL || "https://productos.comercialpatagonia.cl/wp-json/wc/v3";
-
-  // Fallback a Mock si no hay llaves
-  if (!CK || !CS) {
-    writeLog(`[INFO DETAIL] Product id ${id} using mock because WooCommerce keys are missing.`);
-    return generateDynamicMock(id);
-  }
-
-  const authHeader = Buffer.from(`${CK}:${CS}`).toString('base64');
-  const authUrl = `${WOO_URL}/products/${id}`;
-
-  const controller = new AbortController();
-  const timeoutId = setTimeout(() => controller.abort(), 4000); // 4 Seconds Maximum
-
+  writeLog(`[GET DETAIL] Resolving product id ${id}`);
+  
   try {
-    writeLog(`[FETCH DETAIL] Fetching product id ${id} from: ${authUrl}`);
-    const response = await fetch(authUrl, {
-      headers: {
-        "Authorization": `Basic ${authHeader}`,
-        "Content-Type": "application/json",
-        "Accept": "application/json",
-        "Cache-Control": "public, s-maxage=3600, stale-while-revalidate=86400",
-        "User-Agent": "ComercialPatagonia-B2B-Turbo/1.1"
-      },
-      next: { revalidate: 3600, tags: [`product-${id}`] },
-      signal: controller.signal
-    });
-
-    clearTimeout(timeoutId);
-    writeLog(`[RESPONSE DETAIL] Product id ${id} status: ${response.status} ok: ${response.ok}`);
-
-    const bodyText = await response.text();
-    if (response.status !== 200 || bodyText.startsWith('<')) {
-        writeLog(`[ERROR DETAIL] Product id ${id} failed status: ${response.status}. Using mock fallback.`);
-        console.warn(`[WooCommerce API] Error ${response.status}, usando fallback dinámico.`);
-        const existingMock = MOCK_PRODUCTS.find(p => p.id === Number(id));
-        if (existingMock) return { ...existingMock, id: Number(id) };
-        return generateDynamicMock(id);
+    const products = await fetchWooCommerceProducts();
+    if (products && products.length > 0) {
+      const found = products.find((p: any) => p.id.toString() === id);
+      if (found) {
+        writeLog(`[SUCCESS DETAIL] Product id ${id} resolved from cache/backup: "${found.name}"`);
+        return found;
+      }
     }
-
-    const product = JSON.parse(bodyText);
-    if (!product || typeof product !== 'object' || !product.name || !Array.isArray(product.images)) {
-        writeLog(`[ERROR DETAIL] Product id ${id} returned an invalid JSON schema. Using mock fallback.`);
-        return generateDynamicMock(id);
-    }
-
-    writeLog(`[SUCCESS DETAIL] Product id ${id} loaded successfully: "${product.name}"`);
-    return product;
-  } catch (error: any) {
-    clearTimeout(timeoutId);
-    writeLog(`[EXCEPTION DETAIL] Product id ${id} crashed: ${error.message || error}`, error);
-    console.warn("API Timeout/Error, usando Mock Dinámico:", id);
-    return generateDynamicMock(id);
+  } catch (err: any) {
+    writeLog(`[EXCEPTION DETAIL] Error searching product id ${id}: ${err.message || err}`);
   }
+
+  // Fallback if not found in live products or complete network crash
+  writeLog(`[FALLBACK DETAIL] Product id ${id} not found in live products. Using mock.`);
+  const existingMock = MOCK_PRODUCTS.find(p => p.id === Number(id));
+  if (existingMock) return { ...existingMock, id: Number(id) } as Product;
+  return generateDynamicMock(id);
 }
 
 // 🎭 FUNCIÓN GENERADORA: Centralizamos la creación de productos de prueba
@@ -95,22 +60,15 @@ function generateDynamicMock(id: string): Product {
 
 // 🚀 NITRO: Pre-renderizado de páginas para velocidad instantánea
 export async function generateStaticParams() {
-  const CK = process.env.WOOCOMMERCE_CK;
-  const CS = process.env.WOOCOMMERCE_CS;
-  const WOO_URL = process.env.NEXT_PUBLIC_WOOCOMMERCE_URL || "https://productos.comercialpatagonia.cl/wp-json/wc/v3";
-
-  if (!CK || !CS) return [];
-
-  const authHeader = Buffer.from(`${CK}:${CS}`).toString('base64');
   try {
-    const res = await fetch(`${WOO_URL}/products?per_page=100&_fields=id`, {
-      headers: { "Authorization": `Basic ${authHeader}` }
-    });
-    const products = await res.json();
-    return products.map((p: any) => ({ id: p.id.toString() }));
+    const products = await fetchWooCommerceProducts();
+    if (products && products.length > 0) {
+      return products.map((p: any) => ({ id: p.id.toString() }));
+    }
   } catch (e) {
-    return [];
+    writeLog(`[STATIC PARAMS ERROR] Could not generate static params: ${e}`);
   }
+  return [];
 }
 
 export default async function Page({ params }: { params: Promise<{ id: string }> }) {

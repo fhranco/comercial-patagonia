@@ -118,7 +118,7 @@ export default function ProductQuickView({ product, isOpen, onClose }: ProductQu
                   {product.name}
                 </h2>
                 <p style={{ fontSize: '12px', fontWeight: 700, opacity: 0.4, textTransform: 'uppercase', letterSpacing: '0.1em' }}>
-                  SKU: {product.sku || 'N/A'} • Magallanes B2B Approved
+                  SKU: {product.sku || 'N/A'} • Aprobado para Negocios en Magallanes
                 </p>
               </div>
 
