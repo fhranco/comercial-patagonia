@@ -195,7 +195,7 @@ export default function SpotlightSearch({ products, isOpen, onClose }: Spotlight
                           src={product.images[0]?.src} 
                           alt={product.name} 
                           fill 
-                          unoptimized={Boolean(product.images[0]?.src?.startsWith('http'))} 
+                          sizes="50px"
                           style={{ objectFit: 'contain' }} 
                         />
                       </div>

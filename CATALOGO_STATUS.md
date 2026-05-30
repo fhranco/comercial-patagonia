@@ -1,1 +1,0 @@
-⚠️ Error: Faltan credenciales de WooCommerce en GitHub Secrets.

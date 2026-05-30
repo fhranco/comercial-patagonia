@@ -36,70 +36,34 @@ export default function CartDrawer() {
     const message = `🏔️ *SOLICITUD DE COTIZACIÓN*%0AComercial de la Patagonia%0A%0A${projectHeader}--------------------------%0A${itemsList}%0A--------------------------%0A*TOTAL ESTIMADO:* $${Math.round(cartTotal).toLocaleString('es-CL')}%0A%0A*DATOS DEL CLIENTE:*%0ANombre: ${clientName}%0AEmail: ${clientEmail}%0ATeléfono: ${clientPhone}%0A%0A_Favor confirmar disponibilidad para despacho en Magallanes._`;
     window.open(`https://wa.me/${phone}?text=${message}`, '_blank');
 
-    // 🔄 Registrar en WooCommerce en segundo plano desde el cliente (evita bloqueos DNS del servidor local)
-    fetch("/api/config")
-      .then(res => res.json())
-      .then(config => {
-        if (!config || config.error) throw new Error(config.error || "Faltan credenciales");
-        
-        const authHeader = btoa(`${config.ck}:${config.cs}`);
-        const orderData = {
-          payment_method: "b2b_quote",
-          payment_method_title: "Cotización B2B (Web)",
-          set_paid: false,
-          status: "on-hold",
-          billing: {
-            first_name: clientName,
-            last_name: "",
-            address_1: "Región de Magallanes",
-            city: "Punta Arenas",
-            state: "Magallanes",
-            postcode: "6200000",
-            country: "CL",
-            email: clientEmail,
-            phone: clientPhone
-          },
-          shipping: {
-            first_name: clientName,
-            last_name: "",
-            address_1: "Región de Magallanes",
-            city: "Punta Arenas",
-            state: "Magallanes",
-            postcode: "6200000",
-            country: "CL"
-          },
-          line_items: cart.map((item: any) => ({
-            product_id: item.id,
-            quantity: item.quantity
-          })),
-          customer_note: projectName ? `Obra/Proyecto: ${projectName}` : "Cotización B2B",
-          meta_data: [
-            {
-              key: "b2b_project_name",
-              value: projectName || ""
-            },
-            {
-              key: "_b2b_quote_source",
-              value: "B2B Web Portal"
-            }
-          ]
-        };
-
-        return fetch(`${config.url.replace(/\/$/, "")}/orders`, {
-          method: "POST",
-          headers: {
-            "Authorization": `Basic ${authHeader}`,
-            "Content-Type": "application/json"
-          },
-          body: JSON.stringify(orderData)
-        });
+    // 🔄 Registrar en WooCommerce de forma segura en segundo plano llamando al endpoint interno de Next.js
+    fetch("/api/orders", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({
+        name: clientName,
+        email: clientEmail,
+        phone: clientPhone,
+        projectName: projectName || "",
+        cart: cart.map(item => ({
+          id: item.id,
+          name: item.name,
+          quantity: item.quantity
+        }))
       })
+    })
       .then(res => res.json())
       .then(data => {
-        console.log("Cotización registrada en WooCommerce desde el navegador con éxito:", data);
+        if (data.success) {
+          console.log("Cotización registrada en WooCommerce de forma segura. ID:", data.orderId);
+        } else {
+          console.error("Error al registrar cotización:", data.error || data);
+        }
       })
       .catch(err => {
-        console.error("Error al registrar cotización en WooCommerce desde navegador:", err);
+        console.error("Error de red al registrar cotización:", err);
       });
 
     // Limpiar carrito y cerrar drawer
@@ -274,7 +238,7 @@ export default function CartDrawer() {
                           src={item.images[0]?.src || ""} 
                           alt={item.name} 
                           fill 
-                          unoptimized={Boolean(item.images[0]?.src?.startsWith('http'))} 
+                          sizes="70px"
                           style={{ objectFit: 'cover' }} 
                         />
                       </div>

@@ -1,0 +1,23 @@
+{
+  "search.exclude": {
+    "**/node_modules": true,
+    "**/dist": true,
+    "**/.next": true,
+    "**/.cache": true,
+    "**/.pnpm-store": true,
+    "**/.git": true,
+    "**/*.log": true,
+    "**/out": true
+  },
+  "files.watcherExclude": {
+    "**/node_modules/**": true,
+    "**/dist/**": true,
+    "**/.next/**": true,
+    "**/.cache/**": true,
+    "**/.pnpm-store/**": true,
+    "**/.git/**": true,
+    "**/*.log/**": true,
+    "**/out/**": true
+  },
+  "eslint.run": "onSave"
+}

@@ -65,9 +65,7 @@ export default function ProductCard({ product, onQuickView }: ProductCardProps) 
                     alt={product.name}
                     fill
                     sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 25vw"
-                    unoptimized={product.images[0].src.startsWith('http')}
                     className="product-card-image"
-                    quality={95}
                     style={{ 
                       objectFit: 'cover'
                     }} 

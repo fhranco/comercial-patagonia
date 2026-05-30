@@ -70,9 +70,8 @@ export default function ProductQuickView({ product, isOpen, onClose }: ProductQu
                       src={product.images[activeImgIndex]?.src || product.images[0]?.src || ""} 
                       alt={product.name} 
                       fill 
-                      quality={100}
+                      sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                       priority
-                      unoptimized={Boolean((product.images[activeImgIndex]?.src || product.images[0]?.src)?.startsWith('http'))}
                       style={{ objectFit: 'contain' }} 
                     />
                   </motion.div>
@@ -101,7 +100,7 @@ export default function ProductQuickView({ product, isOpen, onClose }: ProductQu
                         transition: '0.2s', cursor: 'pointer'
                       }}
                     >
-                      <Image src={img.src} alt="" fill unoptimized={img.src.startsWith('http')} style={{ objectFit: 'cover' }} />
+                      <Image src={img.src} alt="" fill sizes="60px" style={{ objectFit: 'cover' }} />
                     </button>
                   ))}
                 </div>

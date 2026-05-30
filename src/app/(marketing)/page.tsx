@@ -1,7 +1,6 @@
 import React from "react";
 import HomeClient from "@/components/layout/HomeClient";
 import { fetchWooCommerceProducts } from "@/lib/woocommerce";
-import { MOCK_PRODUCTS } from "@/lib/mock-products";
 import { writeLog } from "@/lib/logger";
 
 // 🚀 ISR: Revalidar cada hora (en dev mode se ignora, pero el cache en memoria lo maneja)
@@ -17,13 +16,13 @@ export default async function Page() {
             products = fetchedProducts;
             writeLog(`[RENDER] Homepage successfully loaded ${products.length} live products.`);
         } else {
-            products = MOCK_PRODUCTS;
-            writeLog("[RENDER] Homepage using MOCK_PRODUCTS fallback due to empty or failed WooCommerce request.");
+            products = [];
+            writeLog("[RENDER] Homepage loaded empty product list due to empty WooCommerce request.");
         }
     } catch (error: any) {
         writeLog(`[RENDER ERROR] Homepage products fetch crashed: ${error.message || error}`, error);
         console.error("Error fetching homepage products:", error);
-        products = MOCK_PRODUCTS;
+        products = [];
     }
 
     return (

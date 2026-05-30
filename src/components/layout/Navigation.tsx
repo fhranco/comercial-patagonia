@@ -2,7 +2,7 @@
 
 import React, { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { ArrowRight, Menu, X, ShoppingBag, Clock } from "lucide-react";
+import { ArrowRight, Menu, X, ShoppingBag, Clock, Image as ImageIcon } from "lucide-react";
 import Image from "next/image";
 import Link from 'next/link';
 import { BRAND_CONFIG } from "@/lib/constants";
@@ -92,6 +92,8 @@ export default function Navigation({ transparent = true }: NavigationProps) {
                       CALCULADORA
                   </Link>
 
+
+
                   <Link href="/shop" style={{ 
                       background: 'var(--brand-navy)', color: '#FFF',
                       padding: '14px 32px', borderRadius: '4px', 
@@ -152,6 +154,8 @@ export default function Navigation({ transparent = true }: NavigationProps) {
               <ShoppingBag size={20} opacity={0.5} />
               <span style={{ fontWeight: 700, fontSize: '13px', textTransform: 'uppercase', letterSpacing: '0.05em' }}>Calculadora de Obra</span>
             </Link>
+
+
           </motion.div>
         )}
       </AnimatePresence>

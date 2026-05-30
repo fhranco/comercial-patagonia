@@ -60,15 +60,14 @@ export default function ProductDetailClient({ initialProduct: product }: Product
                     animate={{ opacity: 1, scale: 1 }}
                     style={{ position: 'relative', width: '100%', height: '100%' }}
                   >
-                      <Image 
-                        src={product.images[0]?.src || ""} 
-                        alt={product.name}
-                        fill
-                        sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-                        unoptimized={product.images[0]?.src?.startsWith('http')}
-                        style={{ objectFit: 'contain' }}
-                        priority
-                      />
+                       <Image 
+                         src={product.images[0]?.src || ""} 
+                         alt={product.name}
+                         fill
+                         sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                         style={{ objectFit: 'contain' }}
+                         priority
+                       />
                   </motion.div>
                 {product.on_sale && (
                     <div style={{ position: 'absolute', top: '80px', left: '80px', background: 'var(--primary-gold)', color: '#000', padding: '10px 25px', borderRadius: '100px', fontWeight: 900, fontSize: '11px', textTransform: 'uppercase', zIndex: 10 }}>
@@ -225,7 +224,7 @@ function StickyActionHUD({ product, onAddToCart }: { product: Product; onAddToCa
         >
             <div style={{ display: 'flex', alignItems: 'center', gap: '20px' }}>
                 <div style={{ position: 'relative', width: '45px', height: '45px', borderRadius: '4px', overflow: 'hidden', backgroundColor: '#FFF' }}>
-                    <Image src={product.images[0]?.src || ""} alt={product.name} fill sizes="45px" unoptimized={product.images[0]?.src?.startsWith('http')} style={{ objectFit: 'cover' }} />
+                    <Image src={product.images[0]?.src || ""} alt={product.name} fill sizes="45px" style={{ objectFit: 'cover' }} />
                 </div>
                 <div>
                     <h4 style={{ fontSize: '10px', fontWeight: 900, textTransform: 'uppercase', letterSpacing: '0.1em', margin: 0 }}>{product.name}</h4>

@@ -2,29 +2,12 @@
 // Status: CONNECTED 🏔️🔌 WITH IN-MEMORY CACHE + RETRIES + STATIC JSON BACKUP
 // Fix: Deduplication cache to prevent re-fetch storms, backoff retries, and offline backup filesystem cache
 
-import { writeLog } from './logger';
-import cyberProductsData from '../data/cyber-products.json';
-
-interface CyberExcelProduct {
-  sku: string;
-  name: string;
-  regular_price: number;
-  sale_price: number;
-  discount_pct: number;
+if (process.env.NODE_ENV === 'development') {
+  process.env.NODE_TLS_REJECT_UNAUTHORIZED = '0';
 }
 
-const cyberProductsArray = cyberProductsData as CyberExcelProduct[];
-const cyberProductsMap = new Map<string, { name: string; regular_price: number; sale_price: number; discount_pct: number; cyber_order_index: number }>();
-
-cyberProductsArray.forEach((item, index) => {
-  cyberProductsMap.set(item.sku, {
-    name: item.name,
-    regular_price: item.regular_price,
-    sale_price: item.sale_price,
-    discount_pct: item.discount_pct,
-    cyber_order_index: index
-  });
-});
+import { writeLog } from './logger';
+// Removed Excel products mapping. Everything is retrieved directly from WooCommerce.
 
 export const WOOCOMMERCE_URL = (process.env.NEXT_PUBLIC_WOOCOMMERCE_URL || "").replace(/\/$/, "");
 const CK = process.env.WOOCOMMERCE_CK || "";
@@ -127,137 +110,71 @@ async function fetchWithRetry(
   throw lastError || new Error(`Request failed after ${maxRetries} attempts`);
 }
 
-/**
- * 🏷️ AUTOMATIC CYBER DISCOUNTS ENGINE
- * Computes and simulates a 25% discount for products in the 'cybermonday' category
- * if they do not have an active sale price configured in WooCommerce.
- */
-function applyCyberDiscounts(products: any[] | null): any[] | null {
-  if (!products || !Array.isArray(products)) return products;
-  
-  const matchedSkus = new Set<string>();
-  
-  const updatedProducts = products.map(product => {
-    const sku = product.sku ? product.sku.toString().trim().replace('.0', '') : '';
-    
-    // Check if product is in our Excel JSON list
-    const excelPromo = sku ? cyberProductsMap.get(sku) : undefined;
-    
-    if (excelPromo) {
-      matchedSkus.add(sku);
-      // 1. Ensure the product is marked as being in the 'cybermonday' and 'cyberday' categories
-      const cleanCategories = (product.categories || []).filter(
-        (cat: any) => cat.slug && cat.slug.toLowerCase() !== "cybermonday" && cat.slug.toLowerCase() !== "cyberday"
-      );
-      
-      const injectedCategories = [
-        { id: 9999, name: "Cyberday", slug: "cybermonday" },
-        { id: 9998, name: "Cyberday", slug: "cyberday" },
-        ...cleanCategories
-      ];
-      
-      // 2. Override name, prices, metadata, and images if there is a backend SKU conflict
-      const nameDiffers = product.name.toLowerCase().trim() !== excelPromo.name.toLowerCase().trim();
-      let images = product.images;
-      
-      if (nameDiffers) {
-        let imageUrl = "https://images.unsplash.com/photo-1618221195710-dd6b41faaea6?q=80&w=600&auto=format&fit=crop"; // Living/Hogar genérico elegante
-        const nameLower = excelPromo.name.toLowerCase();
-        if (nameLower.includes("piso") || nameLower.includes("flotante") || nameLower.includes("madera")) {
-          imageUrl = "https://images.unsplash.com/photo-1581858726788-75bc0f6a952d?q=80&w=600&auto=format&fit=crop";
-        } else if (nameLower.includes("llave") || nameLower.includes("monomando") || nameLower.includes("griferia") || nameLower.includes("ducha")) {
-          imageUrl = "https://images.unsplash.com/photo-1584622650111-993a426fbf0a?q=80&w=600&auto=format&fit=crop";
-        } else if (nameLower.includes("ropero") || nameLower.includes("estante") || nameLower.includes("mueble") || nameLower.includes("organizador")) {
-          imageUrl = "https://images.unsplash.com/photo-1595428774223-ef52624120d2?q=80&w=600&auto=format&fit=crop";
-        } else if (nameLower.includes("adhesivo") || nameLower.includes("frague") || nameLower.includes("pegamento")) {
-          imageUrl = "https://images.unsplash.com/photo-1572883454114-1cf0031ede2a?q=80&w=600&auto=format&fit=crop";
-        } else if (nameLower.includes("prot.") || nameLower.includes("lasur") || nameLower.includes("pintura") || nameLower.includes("barniz")) {
-          imageUrl = "https://images.unsplash.com/photo-1589939705384-5185137a7f0f?q=80&w=600&auto=format&fit=crop";
-        }
-        
-        images = [
-          {
-            id: 0,
-            src: imageUrl,
-            name: excelPromo.name,
-            alt: excelPromo.name
-          }
-        ];
-      }
+// Removed applyCyberDiscounts function.
 
-      return {
-        ...product,
-        name: excelPromo.name, // Force name to match Excel!
-        images: images,        // Force correct image if conflict
-        categories: injectedCategories,
-        regular_price: excelPromo.regular_price.toString(),
-        price: excelPromo.sale_price.toString(),
-        sale_price: excelPromo.sale_price.toString(),
-        on_sale: true,
-        cyber_order_index: excelPromo.cyber_order_index
-      };
-    } else {
-      // If it's NOT in the Excel list, remove any cyber categories it might have in WooCommerce
-      const cleanCategories = (product.categories || []).filter(
-        (cat: any) => cat.slug && cat.slug.toLowerCase() !== "cybermonday" && cat.slug.toLowerCase() !== "cyberday"
-      );
-      
-      return {
-        ...product,
-        categories: cleanCategories
-      };
+// 🔗 AUTOMATIC DOMAIN REWRITE FOR IMAGES
+// Non-intrusive approach: Preserves legitimate media endpoints (both legacy tienda.comercialpatagonia.cl and tiendacp.boostpatagonia.online for newly uploaded assets).
+// It only rewrites expired Hostinger preview domains to the active WooCommerce host configured in .env.local.
+export function rewriteImageUrl(url: string): string {
+  if (!url || typeof url !== 'string') return url;
+  
+  // Extraer el host activo de la configuración
+  let activeHost = "tiendacp.boostpatagonia.online";
+  try {
+    const activeUrl = process.env.NEXT_PUBLIC_WOOCOMMERCE_URL || "";
+    if (activeUrl) {
+      const urlObj = new URL(activeUrl);
+      activeHost = urlObj.hostname;
     }
-  });
+  } catch (e) {}
 
-  // 🪄 INYECTAR PRODUCTOS VIRTUALES PARA AQUELLOS ELEMENTOS DEL EXCEL QUE NO ESTÉN CREADOS EN WOOCOMMERCE
-  cyberProductsArray.forEach((excelPromo, index) => {
-    if (!matchedSkus.has(excelPromo.sku)) {
-      // Determinar una imagen premium y contextual según el nombre del producto
-      let imageUrl = "https://images.unsplash.com/photo-1618221195710-dd6b41faaea6?q=80&w=600&auto=format&fit=crop"; // Living/Hogar genérico elegante
-      
-      const nameLower = excelPromo.name.toLowerCase();
-      if (nameLower.includes("piso") || nameLower.includes("flotante") || nameLower.includes("madera")) {
-        imageUrl = "https://images.unsplash.com/photo-1581858726788-75bc0f6a952d?q=80&w=600&auto=format&fit=crop"; // Piso de madera premium
-      } else if (nameLower.includes("llave") || nameLower.includes("monomando") || nameLower.includes("griferia") || nameLower.includes("ducha")) {
-        imageUrl = "https://images.unsplash.com/photo-1584622650111-993a426fbf0a?q=80&w=600&auto=format&fit=crop"; // Grifería de baño de alta gama
-      } else if (nameLower.includes("ropero") || nameLower.includes("estante") || nameLower.includes("mueble") || nameLower.includes("organizador")) {
-        imageUrl = "https://images.unsplash.com/photo-1595428774223-ef52624120d2?q=80&w=600&auto=format&fit=crop"; // Mueble/Organizador
-      } else if (nameLower.includes("adhesivo") || nameLower.includes("frague") || nameLower.includes("pegamento")) {
-        imageUrl = "https://images.unsplash.com/photo-1572883454114-1cf0031ede2a?q=80&w=600&auto=format&fit=crop"; // Construcción/Materiales
-      }
+  return url
+    .replace(/https?:\/\/darkorange-bat-658298\.hostingersite\.com/g, `https://${activeHost}`)
+    .replace(/https?:\/\/[\w-]+\.hostingersite\.com/g, `https://${activeHost}`);
+}
 
-      updatedProducts.push({
-        id: 9999000 + index,
-        name: excelPromo.name,
-        slug: `cyber-virtual-${excelPromo.sku}`,
-        permalink: `#`,
-        description: `Producto de la campaña Cyberday (SKU: ${excelPromo.sku}).`,
-        short_description: `Campaña Especial Cyberday - Descuento del ${excelPromo.discount_pct}%`,
-        sku: excelPromo.sku,
-        price: excelPromo.sale_price.toString(),
-        regular_price: excelPromo.regular_price.toString(),
-        sale_price: excelPromo.sale_price.toString(),
-        on_sale: true,
-        stock_status: 'instock',
-        images: [
-          {
-            id: 0,
-            src: imageUrl,
-            name: excelPromo.name,
-            alt: excelPromo.name
+export function rewriteProductImageUrls(products: any[] | null): any[] | null {
+  if (!products || !Array.isArray(products)) return products;
+  return products.map(product => {
+    let images = product.images;
+    if (images && Array.isArray(images)) {
+      images = images.map((img: any) => {
+        if (img && typeof img === 'object') {
+          const newImg = { ...img };
+          for (const key in newImg) {
+            if (typeof newImg[key] === 'string') {
+              newImg[key] = rewriteImageUrl(newImg[key]);
+            }
           }
-        ],
-        categories: [
-          { id: 9999, name: "Cyberday", slug: "cybermonday" },
-          { id: 9998, name: "Cyberday", slug: "cyberday" }
-        ],
-        attributes: [],
-        cyber_order_index: index
+          return newImg;
+        }
+        return img;
       });
     }
+    return {
+      ...product,
+      images
+    };
   });
+}
 
-  return updatedProducts;
+function rewriteCategoryImageUrls(categories: any[] | null): any[] | null {
+  if (!categories || !Array.isArray(categories)) return categories;
+  return categories.map(cat => {
+    if (cat.image && typeof cat.image === 'object') {
+      const newImg = { ...cat.image };
+      for (const key in newImg) {
+        if (typeof newImg[key] === 'string') {
+          newImg[key] = rewriteImageUrl(newImg[key]);
+        }
+      }
+      return {
+        ...cat,
+        image: newImg
+      };
+    }
+    return cat;
+  });
 }
 
 /**
@@ -281,9 +198,9 @@ export async function fetchWooCommerceProducts() {
 
   try {
     const result = await productsCachePromise;
-    const processedResult = applyCyberDiscounts(result);
-    productsCache = { data: processedResult, timestamp: Date.now() };
-    return processedResult;
+    const finalResult = rewriteProductImageUrls(result);
+    productsCache = { data: finalResult, timestamp: Date.now() };
+    return finalResult;
   } finally {
     productsCachePromise = null;
   }
@@ -395,8 +312,9 @@ export async function fetchWooCommerceCategories() {
 
   try {
     const result = await categoriesCachePromise;
-    categoriesCache = { data: result, timestamp: Date.now() };
-    return result;
+    const finalResult = rewriteCategoryImageUrls(result);
+    categoriesCache = { data: finalResult, timestamp: Date.now() };
+    return finalResult;
   } finally {
     categoriesCachePromise = null;
   }

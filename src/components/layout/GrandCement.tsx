@@ -5,7 +5,6 @@ import { motion, useScroll, useTransform } from "framer-motion";
 import { ShieldCheck, Snowflake, Weight, ArrowUpRight } from "lucide-react";
 import Link from "next/link";
 import { useCart } from "@/context/CartContext";
-import { MOCK_PRODUCTS } from "@/lib/mock-products";
 import { Product } from "@/types/woocommerce";
 
 interface GrandCementProps {
@@ -13,7 +12,6 @@ interface GrandCementProps {
 }
 
 export default function GrandCement({ onQuickView }: GrandCementProps) {
-  const cementProduct = MOCK_PRODUCTS.find(p => p.id === 17) || MOCK_PRODUCTS[0];
 
   return (
     <section style={{ padding: '150px 5%', backgroundColor: '#FFFFFF', color: 'var(--brand-navy)', position: 'relative', overflow: 'hidden' }}>

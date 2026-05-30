@@ -4,7 +4,6 @@ import React, { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Sparkles, X, ChevronRight, ShoppingBag } from "lucide-react";
 import Image from "next/image";
-import { MOCK_PRODUCTS } from "@/lib/mock-products";
 import { Product } from "@/types/woocommerce";
 import { useCart } from "@/context/CartContext";
 import { useRouter } from "next/navigation";
@@ -20,7 +19,7 @@ export default function PromotionHUD({ products, onQuickView }: PromotionHUDProp
   const router = useRouter();
   
   // 🔍 BUSCAMOS PRODUCTOS QUE REALMENTE ESTÉN EN OFERTA
-  const dataSource = (products && products.length > 0) ? products : MOCK_PRODUCTS;
+  const dataSource = products || [];
   const saleProducts = dataSource.filter(p => p.on_sale);
   
   // Selección aleatoria para evitar sensación de "plantilla"
@@ -103,7 +102,7 @@ export default function PromotionHUD({ products, onQuickView }: PromotionHUDProp
                     src={promoProduct.images[0]?.src || ""} 
                     alt={promoProduct.name} 
                     fill 
-                    unoptimized={Boolean(promoProduct.images[0]?.src?.startsWith('http'))} 
+                    sizes="60px"
                     style={{ objectFit: 'cover' }} 
                   />
               </div>

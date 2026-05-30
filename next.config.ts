@@ -21,6 +21,23 @@ const nextConfig: NextConfig = {
         protocol: 'http',
         hostname: 'tienda.comercialpatagonia.cl',
       },
+      // 🏔️ SERVIDORES DE CONTINGENCIA BOOSTPATAGONIA (HTTPS & HTTP)
+      {
+        protocol: 'https',
+        hostname: 'tiendacp.boostpatagonia.online',
+      },
+      {
+        protocol: 'http',
+        hostname: 'tiendacp.boostpatagonia.online',
+      },
+      {
+        protocol: 'https',
+        hostname: '**.boostpatagonia.online',
+      },
+      {
+        protocol: 'http',
+        hostname: '**.boostpatagonia.online',
+      },
       // 🏔️ SERVIDORES DE HOSTINGER (HTTPS & HTTP - para desarrollo/contingencia y assets sin redirección de base de datos)
       {
         protocol: 'https',
