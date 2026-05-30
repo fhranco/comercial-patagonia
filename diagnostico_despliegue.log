@@ -1,0 +1,12 @@
+[2026-05-30T22:53:39.453Z] 🏔️ INICIANDO AUDITORÍA PRE-DESPLIEGUE - COMERCIAL DE LA PATAGONIA
+[2026-05-30T22:53:39.458Z] =================================================================
+[2026-05-30T22:53:39.458Z] [✓] next.config.ts existe.
+[2026-05-30T22:53:39.458Z] [✓] CONFIGURACIÓN IMAGEN: 'unoptimized: true' detectado en next.config.ts de forma correcta.
+[2026-05-30T22:53:39.459Z] [✓] src/lib/woocommerce.ts existe.
+[2026-05-30T22:53:39.459Z] [✓] NORMALIZACIÓN HTTPS: Función 'rewriteImageUrl' normaliza correctamente a HTTPS en woocommerce.ts.
+[2026-05-30T22:53:39.459Z] [✓] .env.local existe.
+[2026-05-30T22:53:39.459Z] [✓] SEGURIDAD SSL LOCAL: Bypass removido de forma exitosa. Paridad estricta con Vercel garantizada.
+[2026-05-30T22:53:39.459Z] [RUNNING] Ejecutando auditoría de compilación TypeScript local...
+[2026-05-30T22:53:40.845Z] [✓] COMPILACIÓN TYPESCRIPT: Auditoría de tipado finalizada con 0 errores de compilación.
+[2026-05-30T22:53:40.845Z] =================================================================
+[2026-05-30T22:53:40.845Z] 🏔️ AUDITORÍA FINALIZADA CON ÉXITO - LISTO PARA PRODUCCIÓN EN VERCEL
