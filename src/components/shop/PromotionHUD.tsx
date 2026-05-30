@@ -27,7 +27,16 @@ export default function PromotionHUD({ products, onQuickView }: PromotionHUDProp
   const [promoProduct, setPromoProduct] = useState<any>(null);
 
   useEffect(() => {
-    if (saleProducts.length > 0) {
+    // 🏆 PRIORIDAD CYBER: Buscamos productos de la categoría CyberMonday o Cyberday para destacarlos en el HUD flotante
+    const cyberSaleProducts = saleProducts.filter(p =>
+      p.categories && Array.isArray(p.categories) && 
+      p.categories.some((cat: any) => cat.slug && (cat.slug.toLowerCase() === "cybermonday" || cat.slug.toLowerCase() === "cyberday"))
+    );
+
+    if (cyberSaleProducts.length > 0) {
+      const randomProduct = cyberSaleProducts[Math.floor(Math.random() * cyberSaleProducts.length)];
+      setPromoProduct(randomProduct);
+    } else if (saleProducts.length > 0) {
       const randomProduct = saleProducts[Math.floor(Math.random() * saleProducts.length)];
       setPromoProduct(randomProduct);
     } else {
@@ -50,6 +59,7 @@ export default function PromotionHUD({ products, onQuickView }: PromotionHUDProp
 
   // Cálculo de descuento real dinámico
   const discount = promoProduct.regular_price ? Math.round((1 - (Number(promoProduct.price) / Number(promoProduct.regular_price))) * 100) : 0;
+  const isCyberProduct = promoProduct.categories && promoProduct.categories.some((cat: any) => cat.slug && (cat.slug.toLowerCase() === "cybermonday" || cat.slug.toLowerCase() === "cyberday"));
 
   return (
     <div style={{ position: 'fixed', bottom: '100px', left: '30px', zIndex: 9999 }}>
@@ -65,10 +75,14 @@ export default function PromotionHUD({ products, onQuickView }: PromotionHUDProp
                 borderRadius: '16px', 
                 padding: '12px',
                 display: 'flex', 
-                alignItems: 'center', 
-                gap: '15px',
-                boxShadow: '0 20px 50px rgba(0,0,0,0.15)',
-                border: '1px solid var(--border-color)',
+                flexDirection: 'column', // Change to column layout to hold details and footer button
+                gap: '12px',
+                boxShadow: isCyberProduct 
+                  ? '0 20px 50px rgba(212, 175, 55, 0.3)' 
+                  : '0 20px 50px rgba(0,0,0,0.15)',
+                border: isCyberProduct 
+                  ? '2px solid var(--primary-gold)' 
+                  : '1px solid var(--border-color)',
                 maxWidth: '320px',
                 position: 'relative',
                 cursor: 'pointer'
@@ -82,32 +96,103 @@ export default function PromotionHUD({ products, onQuickView }: PromotionHUDProp
                 <X size={12} />
             </button>
 
-            <div style={{ position: 'relative', width: '60px', height: '60px', borderRadius: '8px', overflow: 'hidden', flexShrink: 0, backgroundColor: '#F4F7FA' }}>
-                <Image src={promoProduct.images[0]?.src || ""} alt={promoProduct.name} fill style={{ objectFit: 'cover' }} />
-            </div>
+            {/* UPPER ROW: PRODUCT DETAILS */}
+            <div style={{ display: 'flex', alignItems: 'center', gap: '15px', width: '100%' }}>
+              <div style={{ position: 'relative', width: '60px', height: '60px', borderRadius: '8px', overflow: 'hidden', flexShrink: 0, backgroundColor: '#F4F7FA' }}>
+                  <Image 
+                    src={promoProduct.images[0]?.src || ""} 
+                    alt={promoProduct.name} 
+                    fill 
+                    unoptimized={Boolean(promoProduct.images[0]?.src?.startsWith('http'))} 
+                    style={{ objectFit: 'cover' }} 
+                  />
+              </div>
 
-            <div style={{ flex: 1 }}>
+              <div style={{ flex: 1 }}>
                 <div style={{ display: 'flex', alignItems: 'center', gap: '5px', marginBottom: '2px' }}>
-                    <Sparkles size={10} className="text-[var(--primary-gold)]" />
-                    <span style={{ fontSize: '9px', fontWeight: 900, textTransform: 'uppercase', color: 'var(--primary-gold)', letterSpacing: '0.1em' }}>Oferta de la Semana</span>
+                    <Sparkles size={10} style={{ color: isCyberProduct ? '#FF4B4B' : 'var(--primary-gold)' }} />
+                    <span style={{ 
+                      fontSize: '9px', 
+                      fontWeight: 900, 
+                      textTransform: 'uppercase', 
+                      color: isCyberProduct ? '#FF4B4B' : 'var(--primary-gold)', 
+                      letterSpacing: '0.1em' 
+                    }}>
+                        {isCyberProduct 
+                            ? "OFERTA CYBERDAY" 
+                            : "Oferta de la Semana"}
+                    </span>
                     {discount > 0 && (
                         <span style={{ backgroundColor: '#ff4b4b', color: '#FFF', fontSize: '8px', fontWeight: 900, padding: '2px 6px', borderRadius: '4px', marginLeft: '5px' }}>
                             -{discount}%
                         </span>
                     )}
                 </div>
-                <h4 style={{ fontSize: '11px', fontWeight: 900, color: '#000', margin: 0, lineHeight: 1.2 }}>{promoProduct.name}</h4>
-                <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginTop: '4px' }}>
-                    <span style={{ fontSize: '13px', fontWeight: 900 }}>${Math.round(Number(promoProduct.price)).toLocaleString('es-CL')}</span>
-                    <button 
-                        onClick={(e) => { e.stopPropagation(); handleNavigate(); }}
-                        style={{ border: 'none', background: 'none', color: 'var(--brand-blue)', fontSize: '10px', fontWeight: 900, textTransform: 'uppercase', padding: 0, cursor: 'pointer', display: 'flex', alignItems: 'center', gap: '4px' }}
-                        className="hover:translate-x-1 transition-transform"
-                    >
-                        Lo quiero <ChevronRight size={10} />
-                    </button>
-                </div>
+                  <h4 style={{ fontSize: '11px', fontWeight: 900, color: '#000', margin: 0, lineHeight: 1.2 }}>{promoProduct.name}</h4>
+                  <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginTop: '4px', flexWrap: 'wrap' }}>
+                      <div style={{ display: 'flex', alignItems: 'baseline', gap: '6px', flexWrap: 'wrap' }}>
+                          <span style={{ fontSize: '13px', fontWeight: 950, color: '#000' }}>
+                              ${Math.round(Number(promoProduct.price)).toLocaleString('es-CL')}
+                          </span>
+                          {promoProduct.regular_price && Number(promoProduct.regular_price) !== Number(promoProduct.price) && (
+                              <>
+                                  <span style={{ fontSize: '10px', opacity: 0.4, textDecoration: 'line-through', color: '#000', fontWeight: 600 }}>
+                                      ${Math.round(Number(promoProduct.regular_price)).toLocaleString('es-CL')}
+                                  </span>
+                                  {discount > 0 && (
+                                      <span style={{ 
+                                          fontSize: '9px', 
+                                          fontWeight: 900, 
+                                          color: '#FF4B4B', 
+                                          backgroundColor: 'rgba(255, 75, 75, 0.1)', 
+                                          padding: '1px 4px', 
+                                          borderRadius: '3px' 
+                                      }}>
+                                          -{discount}%
+                                      </span>
+                                  )}
+                              </>
+                          )}
+                      </div>
+                      <button 
+                          onClick={(e) => { e.stopPropagation(); handleNavigate(); }}
+                          style={{ border: 'none', background: 'none', color: 'var(--brand-blue)', fontSize: '10px', fontWeight: 900, textTransform: 'uppercase', padding: 0, cursor: 'pointer', display: 'flex', alignItems: 'center', gap: '4px', marginLeft: 'auto' }}
+                          className="hover:translate-x-1 transition-transform"
+                      >
+                          Lo quiero <ChevronRight size={10} />
+                      </button>
+                  </div>
+              </div>
             </div>
+
+            {/* LOWER ROW: GO TO ALL OFFERS BUTTON */}
+            <div 
+              onClick={(e) => { 
+                e.stopPropagation(); 
+                router.push(isCyberProduct ? '/shop?category=cyberday' : '/shop?category=Ofertas'); 
+              }}
+              style={{
+                width: '100%',
+                borderTop: '1px solid rgba(0, 0, 0, 0.05)',
+                paddingTop: '10px',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                gap: '6px',
+                cursor: 'pointer',
+                fontSize: '9px',
+                fontWeight: 900,
+                textTransform: 'uppercase',
+                color: isCyberProduct ? '#FF4B4B' : 'var(--brand-blue)',
+                letterSpacing: '0.08em',
+                transition: 'opacity 0.2s ease'
+              }}
+              className="hover:opacity-85"
+            >
+              <span>{isCyberProduct ? "Ver todas las ofertas Cyber" : "Ver todas las ofertas"}</span>
+              <ChevronRight size={10} style={{ color: isCyberProduct ? '#FF4B4B' : 'var(--brand-blue)' }} />
+            </div>
+
           </motion.div>
         )}
       </AnimatePresence>

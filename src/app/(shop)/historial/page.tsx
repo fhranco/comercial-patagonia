@@ -20,7 +20,7 @@ export default function HistorialPage() {
             <Link href="/shop" style={{ display: 'flex', alignItems: 'center', gap: '10px', color: 'inherit', textDecoration: 'none', opacity: 0.5, fontSize: '11px', fontWeight: 900, textTransform: 'uppercase', marginBottom: '20px' }} className="hover:opacity-100 transition">
                 <ChevronLeft size={16} /> Volver a Tienda
             </Link>
-            <h1 style={{ fontSize: 'clamp(2.5rem, 5vw, 4rem)', fontWeight: 900, textTransform: 'uppercase', letterSpacing: '-0.02em', lineHeight: 1 }}>Historial de <br/><span style={{ color: 'var(--brand-blue)' }}>Cotizaciones B2B</span></h1>
+            <h1 style={{ fontSize: 'clamp(2.5rem, 5vw, 4rem)', fontWeight: 900, textTransform: 'uppercase', letterSpacing: '-0.02em', lineHeight: 1 }}>Historial de <br/><span style={{ color: 'var(--brand-blue)' }}>Cotizaciones Guardadas</span></h1>
             <p style={{ marginTop: '20px', opacity: 0.5, maxWidth: '600px' }}>
                 Registro local de tus cotizaciones generadas. Estos datos se almacenan solo en este navegador para tu privacidad y gestión rápida.
             </p>

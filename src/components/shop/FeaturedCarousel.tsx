@@ -9,9 +9,11 @@ import { Product } from "@/types/woocommerce";
 interface FeaturedCarouselProps {
   products: Product[];
   onQuickView?: (product: Product) => void;
+  title?: string;
+  subtitle?: string;
 }
 
-export default function FeaturedCarousel({ products, onQuickView }: FeaturedCarouselProps) {
+export default function FeaturedCarousel({ products, onQuickView, title, subtitle }: FeaturedCarouselProps) {
   const scrollRef = useRef<HTMLDivElement>(null);
 
   const scroll = (direction: 'left' | 'right') => {
@@ -48,7 +50,7 @@ export default function FeaturedCarousel({ products, onQuickView }: FeaturedCaro
           <div style={{ display: 'flex', alignItems: 'center', gap: '15px', color: 'var(--primary-gold)', marginBottom: '20px' }}>
             <Sparkles className="w-5 h-5" />
             <span style={{ fontSize: '11px', fontWeight: 900, textTransform: 'uppercase', letterSpacing: '0.4em' }}>
-              Radar de Equipamiento
+              {subtitle || "Radar de Equipamiento"}
             </span>
           </div>
           <h2 style={{ 
@@ -60,7 +62,11 @@ export default function FeaturedCarousel({ products, onQuickView }: FeaturedCaro
             fontFamily: 'var(--font-heading)',
             letterSpacing: '-0.02em'
           }}>
-            ARTÍCULOS <span style={{ opacity: 0.3 }}>DESTACADOS</span>
+            {title ? (
+              title
+            ) : (
+              <>ARTÍCULOS <span style={{ opacity: 0.3 }}>DESTACADOS</span></>
+            )}
           </h2>
         </motion.div>
 

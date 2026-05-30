@@ -524,7 +524,7 @@ export default function CyberdayCountdown() {
             </div>
 
             {/* 🔘 ACTIVE SHIMMER ACTION BUTTON */}
-            <Link href="/shop" style={{
+            <Link href="/shop?category=cyberday" style={{
               display: 'flex',
               alignItems: 'center',
               gap: '12px',

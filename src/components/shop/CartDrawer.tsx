@@ -12,17 +12,99 @@ import QuotePreview from "./QuotePreview";
 export default function CartDrawer() {
   const { 
     cart, isCartOpen, setIsCartOpen, removeFromCart, updateQty, cartTotal, 
-    projectName, setProjectName, saveQuoteToHistory 
+    projectName, setProjectName,
+    clientName, setClientName,
+    clientEmail, setClientEmail,
+    clientPhone, setClientPhone,
+    saveQuoteToHistory, clearCart 
   } = useCart();
   const [isQuotePreviewOpen, setIsQuotePreviewOpen] = React.useState(false);
 
   const handleWhatsAppQuote = () => {
-    saveQuoteToHistory(); // 💾 Archivar en historial antes de enviar
+    if (!clientName || !clientEmail || !clientPhone) {
+      alert("Por favor completa tus datos de contacto (Nombre, Correo y Teléfono) en el formulario para registrar tu cotización.");
+      return;
+    }
+
+    saveQuoteToHistory(); // 💾 Archivar en historial local
+
     const phone = "56985806127"; 
     const itemsList = cart.map(item => `- ${item.name} (x${item.quantity}) - Ref: ${item.sku || 'N/A'}`).join('%0A');
     const projectHeader = projectName ? `PROYECTO: *${projectName}*%0A` : '';
-    const message = `🏔️ *SOLICITUD DE COTIZACIÓN B2B*%0AComercial de la Patagonia%0A%0A${projectHeader}--------------------------%0A${itemsList}%0A--------------------------%0A*TOTAL ESTIMADO:* $${Math.round(cartTotal).toLocaleString('es-CL')}%0A%0A_Favor confirmar disponibilidad para despacho en Magallanes._`;
+    
+    // 🚀 Abrir WhatsApp inmediatamente para evitar bloqueador de popups
+    const message = `🏔️ *SOLICITUD DE COTIZACIÓN*%0AComercial de la Patagonia%0A%0A${projectHeader}--------------------------%0A${itemsList}%0A--------------------------%0A*TOTAL ESTIMADO:* $${Math.round(cartTotal).toLocaleString('es-CL')}%0A%0A*DATOS DEL CLIENTE:*%0ANombre: ${clientName}%0AEmail: ${clientEmail}%0ATeléfono: ${clientPhone}%0A%0A_Favor confirmar disponibilidad para despacho en Magallanes._`;
     window.open(`https://wa.me/${phone}?text=${message}`, '_blank');
+
+    // 🔄 Registrar en WooCommerce en segundo plano desde el cliente (evita bloqueos DNS del servidor local)
+    fetch("/api/config")
+      .then(res => res.json())
+      .then(config => {
+        if (!config || config.error) throw new Error(config.error || "Faltan credenciales");
+        
+        const authHeader = btoa(`${config.ck}:${config.cs}`);
+        const orderData = {
+          payment_method: "b2b_quote",
+          payment_method_title: "Cotización B2B (Web)",
+          set_paid: false,
+          status: "on-hold",
+          billing: {
+            first_name: clientName,
+            last_name: "",
+            address_1: "Región de Magallanes",
+            city: "Punta Arenas",
+            state: "Magallanes",
+            postcode: "6200000",
+            country: "CL",
+            email: clientEmail,
+            phone: clientPhone
+          },
+          shipping: {
+            first_name: clientName,
+            last_name: "",
+            address_1: "Región de Magallanes",
+            city: "Punta Arenas",
+            state: "Magallanes",
+            postcode: "6200000",
+            country: "CL"
+          },
+          line_items: cart.map((item: any) => ({
+            product_id: item.id,
+            quantity: item.quantity
+          })),
+          customer_note: projectName ? `Obra/Proyecto: ${projectName}` : "Cotización B2B",
+          meta_data: [
+            {
+              key: "b2b_project_name",
+              value: projectName || ""
+            },
+            {
+              key: "_b2b_quote_source",
+              value: "B2B Web Portal"
+            }
+          ]
+        };
+
+        return fetch(`${config.url.replace(/\/$/, "")}/orders`, {
+          method: "POST",
+          headers: {
+            "Authorization": `Basic ${authHeader}`,
+            "Content-Type": "application/json"
+          },
+          body: JSON.stringify(orderData)
+        });
+      })
+      .then(res => res.json())
+      .then(data => {
+        console.log("Cotización registrada en WooCommerce desde el navegador con éxito:", data);
+      })
+      .catch(err => {
+        console.error("Error al registrar cotización en WooCommerce desde navegador:", err);
+      });
+
+    // Limpiar carrito y cerrar drawer
+    clearCart();
+    setIsCartOpen(false);
   };
 
   return (
@@ -101,39 +183,72 @@ export default function CartDrawer() {
               </button>
             </div>
 
-            {/* 🏗️ B2B CONTEXT (Project Identifier) */}
-            <div style={{ padding: '20px 30px', backgroundColor: 'rgba(212, 175, 55, 0.05)', borderBottom: '1px solid rgba(212, 175, 55, 0.2)' }}>
-               <div style={{ display: 'flex', alignItems: 'center', gap: '15px' }}>
-                  <div style={{ flex: 1 }}>
-                    <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '8px' }}>
-                      <label style={{ fontSize: '9px', fontWeight: 900, opacity: 0.6, textTransform: 'uppercase', letterSpacing: '0.1em' }}>Nombre del Proyecto / Obra</label>
-                      {!projectName && (
-                        <motion.div 
-                          animate={{ scale: [1, 1.5, 1], opacity: [0.5, 1, 0.5] }}
-                          transition={{ repeat: Infinity, duration: 2 }}
-                          style={{ width: '6px', height: '6px', borderRadius: '50%', backgroundColor: 'var(--primary-gold)' }}
-                        />
-                      )}
-                    </div>
-                    <input 
-                      type="text" 
-                      placeholder="Ej. Casa Mirador Lote 4"
-                      value={projectName || ''}
-                      onChange={(e) => setProjectName?.(e.target.value)}
-                      style={{ 
-                        width: '100%', background: 'white', border: !projectName ? '1px solid var(--primary-gold)' : '1px solid rgba(0,0,0,0.1)', 
-                        padding: '12px 15px', borderRadius: '4px',
-                        fontSize: '14px', fontWeight: 700, outline: 'none', color: 'var(--brand-navy)',
-                        boxShadow: !projectName ? '0 0 15px rgba(212, 175, 55, 0.1)' : 'none',
-                        transition: 'all 0.3s'
-                      }}
-                    />
-                    {!projectName && (
-                      <p style={{ fontSize: '8px', fontWeight: 900, color: 'var(--primary-gold)', marginTop: '8px', textTransform: 'uppercase', letterSpacing: '0.05em' }}>
-                         ✨ Identifica tu cotización para una mejor gestión
-                      </p>
-                    )}
-                  </div>
+            {/* 🏗️ CONTEXTO (Client Details & Project) */}
+            <div style={{ padding: '20px 30px', backgroundColor: 'rgba(212, 175, 55, 0.05)', borderBottom: '1px solid rgba(212, 175, 55, 0.2)', display: 'flex', flexDirection: 'column', gap: '12px' }}>
+               <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+                 <span style={{ fontSize: '9px', fontWeight: 900, textTransform: 'uppercase', letterSpacing: '0.1em', color: 'var(--primary-gold)' }}>Identificación y Obra de Cotización</span>
+               </div>
+               
+               <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '10px' }}>
+                 <div>
+                   <label style={{ fontSize: '8px', fontWeight: 900, opacity: 0.5, textTransform: 'uppercase', display: 'block', marginBottom: '4px' }}>Nombre completo *</label>
+                   <input 
+                     type="text" 
+                     placeholder="Tu Nombre"
+                     value={clientName || ''}
+                     onChange={(e) => setClientName(e.target.value)}
+                     style={{ 
+                       width: '100%', background: 'white', border: !clientName ? '1px solid var(--primary-gold)' : '1px solid rgba(0,0,0,0.1)', 
+                       padding: '8px 10px', borderRadius: '4px',
+                       fontSize: '12px', fontWeight: 700, outline: 'none', color: 'var(--brand-navy)'
+                     }}
+                   />
+                 </div>
+                 <div>
+                   <label style={{ fontSize: '8px', fontWeight: 900, opacity: 0.5, textTransform: 'uppercase', display: 'block', marginBottom: '4px' }}>Correo Electrónico *</label>
+                   <input 
+                     type="email" 
+                     placeholder="tu@correo.com"
+                     value={clientEmail || ''}
+                     onChange={(e) => setClientEmail(e.target.value)}
+                     style={{ 
+                       width: '100%', background: 'white', border: !clientEmail ? '1px solid var(--primary-gold)' : '1px solid rgba(0,0,0,0.1)', 
+                       padding: '8px 10px', borderRadius: '4px',
+                       fontSize: '12px', fontWeight: 700, outline: 'none', color: 'var(--brand-navy)'
+                     }}
+                   />
+                 </div>
+               </div>
+
+               <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '10px' }}>
+                 <div>
+                   <label style={{ fontSize: '8px', fontWeight: 900, opacity: 0.5, textTransform: 'uppercase', display: 'block', marginBottom: '4px' }}>Teléfono *</label>
+                   <input 
+                     type="tel" 
+                     placeholder="Ej. +569..."
+                     value={clientPhone || ''}
+                     onChange={(e) => setClientPhone(e.target.value)}
+                     style={{ 
+                       width: '100%', background: 'white', border: !clientPhone ? '1px solid var(--primary-gold)' : '1px solid rgba(0,0,0,0.1)', 
+                       padding: '8px 10px', borderRadius: '4px',
+                       fontSize: '12px', fontWeight: 700, outline: 'none', color: 'var(--brand-navy)'
+                     }}
+                   />
+                 </div>
+                 <div>
+                   <label style={{ fontSize: '8px', fontWeight: 900, opacity: 0.5, textTransform: 'uppercase', display: 'block', marginBottom: '4px' }}>Nombre Proyecto / Obra</label>
+                   <input 
+                     type="text" 
+                     placeholder="Ej. Casa Mirador"
+                     value={projectName || ''}
+                     onChange={(e) => setProjectName?.(e.target.value)}
+                     style={{ 
+                       width: '100%', background: 'white', border: '1px solid rgba(0,0,0,0.1)', 
+                       padding: '8px 10px', borderRadius: '4px',
+                       fontSize: '12px', fontWeight: 700, outline: 'none', color: 'var(--brand-navy)'
+                     }}
+                   />
+                 </div>
                </div>
             </div>
 
@@ -155,7 +270,13 @@ export default function CartDrawer() {
                       style={{ display: 'flex', gap: '18px', alignItems: 'center' }}
                     >
                       <div style={{ position: 'relative', width: '70px', height: '70px', backgroundColor: '#F4F7FA', borderRadius: '6px', overflow: 'hidden', border: '1px solid rgba(0,0,0,0.03)' }}>
-                        <Image src={item.images[0]?.src || ""} alt={item.name} fill style={{ objectFit: 'cover' }} />
+                        <Image 
+                          src={item.images[0]?.src || ""} 
+                          alt={item.name} 
+                          fill 
+                          unoptimized={Boolean(item.images[0]?.src?.startsWith('http'))} 
+                          style={{ objectFit: 'cover' }} 
+                        />
                       </div>
                       
                       <div style={{ flex: 1 }}>
@@ -220,7 +341,7 @@ export default function CartDrawer() {
                     className="hover:scale-[1.02] transition-transform duration-300"
                   >
                     <MessageSquare size={16} className="text-[var(--primary-gold)]" />
-                    Enviar a WhatsApp B2B
+                    Enviar a WhatsApp
                   </button>
                   <Link 
                     href="/cotizacion"

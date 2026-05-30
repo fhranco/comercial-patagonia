@@ -22,6 +22,7 @@ interface Product {
   id: number;
   name: string;
   price: string;
+  regular_price?: string;
   sku: string;
   images: ProductImage[];
   categories: Category[];
@@ -190,16 +191,39 @@ export default function SpotlightSearch({ products, isOpen, onClose }: Spotlight
                         width: '50px', height: '50px', position: 'relative', 
                         borderRadius: '8px', overflow: 'hidden', backgroundColor: '#FFF' 
                       }}>
-                        <Image src={product.images[0]?.src} alt={product.name} fill style={{ objectFit: 'contain' }} />
+                        <Image 
+                          src={product.images[0]?.src} 
+                          alt={product.name} 
+                          fill 
+                          unoptimized={Boolean(product.images[0]?.src?.startsWith('http'))} 
+                          style={{ objectFit: 'contain' }} 
+                        />
                       </div>
                       <div style={{ flex: 1 }}>
                         <span style={{ fontSize: '9px', fontWeight: 900, color: '#D4AF37', textTransform: 'uppercase' }}>{product.categories[0]?.name}</span>
                         <h4 style={{ fontSize: '15px', fontWeight: 700, color: '#0E1F33' }}>{product.name}</h4>
                         <p style={{ fontSize: '12px', opacity: 0.5 }}>SKU: {product.sku}</p>
                       </div>
-                      <div style={{ textAlign: 'right' }}>
-                        <p style={{ fontSize: '16px', fontWeight: 900, color: '#0E1F33' }}>${Math.round(Number(product.price)).toLocaleString('es-CL')}</p>
-                        {selectedIndex === idx && <ArrowRight size={16} className="text-[#D4AF37] mt-1 ml-auto" />}
+                      <div style={{ textAlign: 'right', display: 'flex', flexDirection: 'column', alignItems: 'flex-end', justifyContent: 'center' }}>
+                        <p style={{ fontSize: '16px', fontWeight: 900, color: '#0E1F33', margin: 0 }}>${Math.round(Number(product.price)).toLocaleString('es-CL')}</p>
+                        {product.regular_price && Number(product.regular_price) > 0 && product.regular_price !== product.price && (
+                          <div style={{ display: 'flex', alignItems: 'center', gap: '6px', marginTop: '2px' }}>
+                            <span style={{ fontSize: '11px', opacity: 0.3, textDecoration: 'line-through', color: '#0E1F33' }}>
+                              ${Math.round(Number(product.regular_price)).toLocaleString('es-CL')}
+                            </span>
+                            <span style={{ 
+                              fontSize: '10px', 
+                              fontWeight: 900, 
+                              color: '#FF4B4B', 
+                              backgroundColor: 'rgba(255, 75, 75, 0.1)', 
+                              padding: '1px 4px', 
+                              borderRadius: '3px'
+                            }}>
+                              -{Math.round(((Number(product.regular_price) - Number(product.price)) / Number(product.regular_price)) * 100)}%
+                            </span>
+                          </div>
+                        )}
+                        {selectedIndex === idx && <ArrowRight size={16} className="text-[#D4AF37] mt-1" />}
                       </div>
                     </motion.div>
                   ))}

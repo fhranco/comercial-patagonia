@@ -1,0 +1,1094 @@
+[
+  {
+    "sku": "3502075",
+    "name": "ESTANTE MULTIUSO",
+    "regular_price": 45500,
+    "sale_price": 36400,
+    "discount_pct": 20
+  },
+  {
+    "sku": "3502076",
+    "name": "ESTANTE MULTIUSO",
+    "regular_price": 45500,
+    "sale_price": 36400,
+    "discount_pct": 20
+  },
+  {
+    "sku": "3502087",
+    "name": "ROPERO ROMA BLANCO",
+    "regular_price": 256400,
+    "sale_price": 205120,
+    "discount_pct": 20
+  },
+  {
+    "sku": "3502089",
+    "name": "ROPERO PALMAS BLANCO",
+    "regular_price": 132200,
+    "sale_price": 105760,
+    "discount_pct": 20
+  },
+  {
+    "sku": "3502090",
+    "name": "ROPERO PALMAS CINAMOMO",
+    "regular_price": 132200,
+    "sale_price": 105760,
+    "discount_pct": 20
+  },
+  {
+    "sku": "3502091",
+    "name": "ROPERO PALMAS CINAMOMO OFF WHITE",
+    "regular_price": 132200,
+    "sale_price": 105760,
+    "discount_pct": 20
+  },
+  {
+    "sku": "3502051",
+    "name": "ROPERO RIO GRANDE BLANCO",
+    "regular_price": 101500,
+    "sale_price": 81200,
+    "discount_pct": 20
+  },
+  {
+    "sku": "3502052",
+    "name": "ROPERO RIO GRANDE CINAMOMO OFF",
+    "regular_price": 101500,
+    "sale_price": 81200,
+    "discount_pct": 20
+  },
+  {
+    "sku": "3502034",
+    "name": "ROPERO ADOLETA BLANCO NATURE",
+    "regular_price": 132200,
+    "sale_price": 105760,
+    "discount_pct": 20
+  },
+  {
+    "sku": "3502033",
+    "name": "ROPERO ADOLETA VERDE",
+    "regular_price": 132200,
+    "sale_price": 105760,
+    "discount_pct": 20
+  },
+  {
+    "sku": "3502092",
+    "name": "ARMARIO GENIUS BLANCO",
+    "regular_price": 109500,
+    "sale_price": 87600,
+    "discount_pct": 20
+  },
+  {
+    "sku": "3502093",
+    "name": "ARMARIO GENIUS CINAMOMO",
+    "regular_price": 109500,
+    "sale_price": 87600,
+    "discount_pct": 20
+  },
+  {
+    "sku": "3502094",
+    "name": "ARMARIO GENIUS CINAMOMO OFF",
+    "regular_price": 109500,
+    "sale_price": 87600,
+    "discount_pct": 20
+  },
+  {
+    "sku": "3502026",
+    "name": "MULTIUSO SERIDO CINAMOMO OFF",
+    "regular_price": 80100,
+    "sale_price": 64080,
+    "discount_pct": 20
+  },
+  {
+    "sku": "3502082",
+    "name": "COMODA BELLA BLANCA",
+    "regular_price": 146900,
+    "sale_price": 117520,
+    "discount_pct": 20
+  },
+  {
+    "sku": "3502081",
+    "name": "COMODA BELLA CINAMOMO",
+    "regular_price": 146900,
+    "sale_price": 117520,
+    "discount_pct": 20
+  },
+  {
+    "sku": "3502080",
+    "name": "COMODA BELLA CINAMOMO OFF",
+    "regular_price": 146900,
+    "sale_price": 117520,
+    "discount_pct": 20
+  },
+  {
+    "sku": "3502083",
+    "name": "COMODA BELLA CINAMOMO CHUMBO",
+    "regular_price": 146900,
+    "sale_price": 117520,
+    "discount_pct": 20
+  },
+  {
+    "sku": "3502069",
+    "name": "COMODA LAGUNA BLANCA",
+    "regular_price": 122900,
+    "sale_price": 98320,
+    "discount_pct": 20
+  },
+  {
+    "sku": "3502067",
+    "name": "COMODA LAGUNA CINAMOMO OFF",
+    "regular_price": 122900,
+    "sale_price": 98320,
+    "discount_pct": 20
+  },
+  {
+    "sku": "3502068",
+    "name": "COMODA LAGUNA CINAMOMO CHUMBO",
+    "regular_price": 122900,
+    "sale_price": 98320,
+    "discount_pct": 20
+  },
+  {
+    "sku": "3502020",
+    "name": "COMODA CATAVENTO BLANCO NAT",
+    "regular_price": 88200,
+    "sale_price": 70560,
+    "discount_pct": 20
+  },
+  {
+    "sku": "3502018",
+    "name": "COMODA CATAVENTO ROSA",
+    "regular_price": 88200,
+    "sale_price": 70560,
+    "discount_pct": 20
+  },
+  {
+    "sku": "3502019",
+    "name": "COMODA CATAVENTO VERDE",
+    "regular_price": 88200,
+    "sale_price": 70560,
+    "discount_pct": 20
+  },
+  {
+    "sku": "3502084",
+    "name": "COMODA DUNAS CON ESPEJO BLANCA",
+    "regular_price": 82800,
+    "sale_price": 66240,
+    "discount_pct": 20
+  },
+  {
+    "sku": "3599114",
+    "name": "BUFFET MAX",
+    "regular_price": 99900,
+    "sale_price": 79920,
+    "discount_pct": 20
+  },
+  {
+    "sku": "3599115",
+    "name": "BUFFET MAX",
+    "regular_price": 99900,
+    "sale_price": 79920,
+    "discount_pct": 20
+  },
+  {
+    "sku": "3599116",
+    "name": "BUFFET MAX",
+    "regular_price": 99900,
+    "sale_price": 79920,
+    "discount_pct": 20
+  },
+  {
+    "sku": "3503001",
+    "name": "MESA LATERAL PET",
+    "regular_price": 42100,
+    "sale_price": 27365,
+    "discount_pct": 35
+  },
+  {
+    "sku": "3503002",
+    "name": "MESA LATERAL PET",
+    "regular_price": 42100,
+    "sale_price": 27365,
+    "discount_pct": 35
+  },
+  {
+    "sku": "3503003",
+    "name": "MESA LATERAL PET",
+    "regular_price": 42100,
+    "sale_price": 27365,
+    "discount_pct": 35
+  },
+  {
+    "sku": "3503004",
+    "name": "MESA LATERAL PET",
+    "regular_price": 43600,
+    "sale_price": 28340,
+    "discount_pct": 35
+  },
+  {
+    "sku": "3503006",
+    "name": "MESA LATERAL PET",
+    "regular_price": 43600,
+    "sale_price": 28340,
+    "discount_pct": 35
+  },
+  {
+    "sku": "3503007",
+    "name": "APARADOR PET",
+    "regular_price": 64000,
+    "sale_price": 41600,
+    "discount_pct": 35
+  },
+  {
+    "sku": "3503008",
+    "name": "APARADOR PET",
+    "regular_price": 64000,
+    "sale_price": 41600,
+    "discount_pct": 35
+  },
+  {
+    "sku": "3503009",
+    "name": "APARADOR PET",
+    "regular_price": 85100,
+    "sale_price": 55315,
+    "discount_pct": 35
+  },
+  {
+    "sku": "3503010",
+    "name": "APARADOR PET",
+    "regular_price": 85100,
+    "sale_price": 55315,
+    "discount_pct": 35
+  },
+  {
+    "sku": "3503011",
+    "name": "RACK RETRO PET",
+    "regular_price": 86900,
+    "sale_price": 56485,
+    "discount_pct": 35
+  },
+  {
+    "sku": "3503014",
+    "name": "ESTANTE PET GATO",
+    "regular_price": 76500,
+    "sale_price": 49725,
+    "discount_pct": 35
+  },
+  {
+    "sku": "3503015",
+    "name": "ESTANTE PET GATO",
+    "regular_price": 76500,
+    "sale_price": 49725,
+    "discount_pct": 35
+  },
+  {
+    "sku": "3503016",
+    "name": "ESTANTE PET GATO",
+    "regular_price": 76500,
+    "sale_price": 49725,
+    "discount_pct": 35
+  },
+  {
+    "sku": "3503017",
+    "name": "ESTANTE PET GATO",
+    "regular_price": 76500,
+    "sale_price": 49725,
+    "discount_pct": 35
+  },
+  {
+    "sku": "3503018",
+    "name": "ESTANTE PET GATO",
+    "regular_price": 76500,
+    "sale_price": 49725,
+    "discount_pct": 35
+  },
+  {
+    "sku": "3503028",
+    "name": "ZAPATERA RETRO",
+    "regular_price": 95500,
+    "sale_price": 62075,
+    "discount_pct": 35
+  },
+  {
+    "sku": "3599658",
+    "name": "COMODA GENOVA JACARANDA OFF WHITE",
+    "regular_price": 117200,
+    "sale_price": 93760,
+    "discount_pct": 20
+  },
+  {
+    "sku": "3599659",
+    "name": "COMODA GENOVA CINAMOMO",
+    "regular_price": 117200,
+    "sale_price": 93760,
+    "discount_pct": 20
+  },
+  {
+    "sku": "3599416",
+    "name": "COMODA GENOVA BLANCO",
+    "regular_price": 117200,
+    "sale_price": 93760,
+    "discount_pct": 20
+  },
+  {
+    "sku": "3599415",
+    "name": "COMODA GENOVA JACARANDA",
+    "regular_price": 117200,
+    "sale_price": 93760,
+    "discount_pct": 20
+  },
+  {
+    "sku": "3599097",
+    "name": "KIT COCINA POP CINAMOMO AREIA",
+    "regular_price": 95100,
+    "sale_price": 76080,
+    "discount_pct": 20
+  },
+  {
+    "sku": "3599098",
+    "name": "KIT COCINA POP CINAMOMO NEGRO",
+    "regular_price": 95100,
+    "sale_price": 76080,
+    "discount_pct": 20
+  },
+  {
+    "sku": "3599099",
+    "name": "KIT COCINA POP BLANCO",
+    "regular_price": 95100,
+    "sale_price": 76080,
+    "discount_pct": 20
+  },
+  {
+    "sku": "3599234",
+    "name": "COMODA PRIMORDIAL JACARANDA",
+    "regular_price": 100800,
+    "sale_price": 80640,
+    "discount_pct": 20
+  },
+  {
+    "sku": "3599237",
+    "name": "COMODA PRIMORDIAL CINAMOMO",
+    "regular_price": 100800,
+    "sale_price": 80640,
+    "discount_pct": 20
+  },
+  {
+    "sku": "3599662",
+    "name": "COMODA PRIMORDIAL BLANCA",
+    "regular_price": 100800,
+    "sale_price": 80640,
+    "discount_pct": 20
+  },
+  {
+    "sku": "3599712",
+    "name": "COMODA VERSATIL CINAMONO AREIA",
+    "regular_price": 188150,
+    "sale_price": 150520,
+    "discount_pct": 20
+  },
+  {
+    "sku": "3599269",
+    "name": "COMODA VERSATIL JACARANDA OFF WHITE",
+    "regular_price": 188150,
+    "sale_price": 150520,
+    "discount_pct": 20
+  },
+  {
+    "sku": "3599494",
+    "name": "COMODA VERSATIL  BLANCA",
+    "regular_price": 188150,
+    "sale_price": 150520,
+    "discount_pct": 20
+  },
+  {
+    "sku": "3599727",
+    "name": "COMODA IMPERIAL JACARANDA",
+    "regular_price": 192900,
+    "sale_price": 154320,
+    "discount_pct": 20
+  },
+  {
+    "sku": "3599728",
+    "name": "COMODA IMPERIAL BLANCA",
+    "regular_price": 192900,
+    "sale_price": 154320,
+    "discount_pct": 20
+  },
+  {
+    "sku": "3599729",
+    "name": "COMODA IMPERIAL CINAMOMO AREIA",
+    "regular_price": 192900,
+    "sale_price": 154320,
+    "discount_pct": 20
+  },
+  {
+    "sku": "3599530",
+    "name": "ROPERO FRANCA BLANCO",
+    "regular_price": 126100,
+    "sale_price": 100880,
+    "discount_pct": 20
+  },
+  {
+    "sku": "3599213",
+    "name": "ROPERO PRIMORDIAL BLANCO",
+    "regular_price": 179900,
+    "sale_price": 143920,
+    "discount_pct": 20
+  },
+  {
+    "sku": "3599320",
+    "name": "ROPERO PRIMORDIAL CINAMOMO AREIA",
+    "regular_price": 179900,
+    "sale_price": 143920,
+    "discount_pct": 20
+  },
+  {
+    "sku": "3599319",
+    "name": "ROPERO PRIMORDIAL JACARANDA",
+    "regular_price": 179900,
+    "sale_price": 143920,
+    "discount_pct": 20
+  },
+  {
+    "sku": "3599003",
+    "name": "ROPERO CAPELINHA JACARANDA",
+    "regular_price": 241350,
+    "sale_price": 193080,
+    "discount_pct": 20
+  },
+  {
+    "sku": "3599002",
+    "name": "ROPERO CAPELINHA BLANCO",
+    "regular_price": 241350,
+    "sale_price": 193080,
+    "discount_pct": 20
+  },
+  {
+    "sku": "3599711",
+    "name": "ROPERO CAPELINHA CINAMOMO AREIA",
+    "regular_price": 241350,
+    "sale_price": 193080,
+    "discount_pct": 20
+  },
+  {
+    "sku": "3599718",
+    "name": "M. COCINA AEREO 1 PUERTA",
+    "regular_price": 39900,
+    "sale_price": 31920,
+    "discount_pct": 20
+  },
+  {
+    "sku": "3599608",
+    "name": "M. COCINA AEREO 2 PUERTAS",
+    "regular_price": 84550,
+    "sale_price": 67640,
+    "discount_pct": 20
+  },
+  {
+    "sku": "3599403",
+    "name": "M. COCINA AEREO VIDRIADO",
+    "regular_price": 143100,
+    "sale_price": 114480,
+    "discount_pct": 20
+  },
+  {
+    "sku": "3599720",
+    "name": "M. COCINA MESADA 1.20",
+    "regular_price": 131900,
+    "sale_price": 105520,
+    "discount_pct": 20
+  },
+  {
+    "sku": "3599544",
+    "name": "M. COCINA MESADA 1 PUERTA",
+    "regular_price": 62100,
+    "sale_price": 49680,
+    "discount_pct": 20
+  },
+  {
+    "sku": "3599717",
+    "name": "M. COCINA DESPENSA SIMPLE",
+    "regular_price": 120300,
+    "sale_price": 96240,
+    "discount_pct": 20
+  },
+  {
+    "sku": "3599716",
+    "name": "M. COCINA DESPENSA MICROONDAS",
+    "regular_price": 120300,
+    "sale_price": 96240,
+    "discount_pct": 20
+  },
+  {
+    "sku": "3599118",
+    "name": "MESA CON BANQUETAS",
+    "regular_price": 119500,
+    "sale_price": 95600,
+    "discount_pct": 20
+  },
+  {
+    "sku": "3599156",
+    "name": "ARMARIO PRACTICO",
+    "regular_price": 67900,
+    "sale_price": 54320,
+    "discount_pct": 20
+  },
+  {
+    "sku": "2902001",
+    "name": "FOGÓN UNO 1.08 MTS",
+    "regular_price": 950000,
+    "sale_price": 855000,
+    "discount_pct": 10
+  },
+  {
+    "sku": "2902002",
+    "name": "FOGÓN DOS 1.26 MTS",
+    "regular_price": 1150000,
+    "sale_price": 1035000,
+    "discount_pct": 10
+  },
+  {
+    "sku": "2902005",
+    "name": "JUEGO PARRILLERO",
+    "regular_price": 27900,
+    "sale_price": 23715,
+    "discount_pct": 15
+  },
+  {
+    "sku": "2902008",
+    "name": "JUEGO PARRILLERO",
+    "regular_price": 26900,
+    "sale_price": 22865,
+    "discount_pct": 15
+  },
+  {
+    "sku": "2902011",
+    "name": "DISCO",
+    "regular_price": 106600,
+    "sale_price": 90610,
+    "discount_pct": 15
+  },
+  {
+    "sku": "2902028",
+    "name": "ASADOR MEDIANO",
+    "regular_price": 87400,
+    "sale_price": 74290,
+    "discount_pct": 15
+  },
+  {
+    "sku": "2902029",
+    "name": "ASADOR GRANDE",
+    "regular_price": 95100,
+    "sale_price": 80835,
+    "discount_pct": 15
+  },
+  {
+    "sku": "2902013",
+    "name": "PLANCHETA",
+    "regular_price": 43000,
+    "sale_price": 36550,
+    "discount_pct": 15
+  },
+  {
+    "sku": "2902043",
+    "name": "FOGON CON HERRAJE ENLOZADO",
+    "regular_price": 350000,
+    "sale_price": 297500,
+    "discount_pct": 15
+  },
+  {
+    "sku": "2902044",
+    "name": "LEÑERO",
+    "regular_price": 46000,
+    "sale_price": 39100,
+    "discount_pct": 15
+  },
+  {
+    "sku": "3199135",
+    "name": "PLANCHA TECHO 2.5",
+    "regular_price": 18600,
+    "sale_price": 16740,
+    "discount_pct": 10
+  },
+  {
+    "sku": "3199138",
+    "name": "PLANCHA TECHO 3.0",
+    "regular_price": 22300,
+    "sale_price": 20070,
+    "discount_pct": 10
+  },
+  {
+    "sku": "3099474",
+    "name": "LANA DE VIDRIO 50MM LIBRE",
+    "regular_price": 50900,
+    "sale_price": 45810,
+    "discount_pct": 10
+  },
+  {
+    "sku": "3099475",
+    "name": "LANA DE VIDRIO 50MM C/P",
+    "regular_price": 77900,
+    "sale_price": 70110,
+    "discount_pct": 10
+  },
+  {
+    "sku": "3099477",
+    "name": "LANA DE VIDRIO 80MM C/P",
+    "regular_price": 48900,
+    "sale_price": 44010,
+    "discount_pct": 10
+  },
+  {
+    "sku": "3099112",
+    "name": "MEMBRANA HIDROFUGA",
+    "regular_price": 38900,
+    "sale_price": 35010,
+    "discount_pct": 10
+  },
+  {
+    "sku": "3099110",
+    "name": "NIVELADOR PISO FLOTANTE FILM",
+    "regular_price": 17600,
+    "sale_price": 15840,
+    "discount_pct": 10
+  },
+  {
+    "sku": "2699729",
+    "name": "CER. BLANCO PLUS",
+    "regular_price": 16100,
+    "sale_price": 14490,
+    "discount_pct": 10
+  },
+  {
+    "sku": "2699740",
+    "name": "CER. NEGRO PLUS",
+    "regular_price": 16100,
+    "sale_price": 14490,
+    "discount_pct": 10
+  },
+  {
+    "sku": "2699692",
+    "name": "CER. MARINO RUBI",
+    "regular_price": 16500,
+    "sale_price": 14850,
+    "discount_pct": 10
+  },
+  {
+    "sku": "2699820",
+    "name": "CER. MURETTO",
+    "regular_price": 18330,
+    "sale_price": 16497,
+    "discount_pct": 10
+  },
+  {
+    "sku": "2699016",
+    "name": "CER. DIAMOND GREEN",
+    "regular_price": 20700,
+    "sale_price": 18630,
+    "discount_pct": 10
+  },
+  {
+    "sku": "2699034",
+    "name": "CER. CLASSIC BIANCO",
+    "regular_price": 18330,
+    "sale_price": 16497,
+    "discount_pct": 10
+  },
+  {
+    "sku": "2699376",
+    "name": "CER. SAO TOMÉ",
+    "regular_price": 21480,
+    "sale_price": 19332,
+    "discount_pct": 10
+  },
+  {
+    "sku": "2699105",
+    "name": "CER. MARMOL",
+    "regular_price": 20800,
+    "sale_price": 18720,
+    "discount_pct": 10
+  },
+  {
+    "sku": "2699219",
+    "name": "CER. PRESTIGE",
+    "regular_price": 20700,
+    "sale_price": 18630,
+    "discount_pct": 10
+  },
+  {
+    "sku": "2699373",
+    "name": "CER. SUBWAY NEGRO",
+    "regular_price": 18900,
+    "sale_price": 17010,
+    "discount_pct": 10
+  },
+  {
+    "sku": "2699671",
+    "name": "CER. NIEVE BRILLANTE 31X53",
+    "regular_price": 18900,
+    "sale_price": 17010,
+    "discount_pct": 10
+  },
+  {
+    "sku": "2699123",
+    "name": "CER. HD3273 32X56",
+    "regular_price": 18500,
+    "sale_price": 16650,
+    "discount_pct": 10
+  },
+  {
+    "sku": "2699391",
+    "name": "CER. EUCALIPTO GRIS 56X56",
+    "regular_price": 18300,
+    "sale_price": 16470,
+    "discount_pct": 10
+  },
+  {
+    "sku": "2699937",
+    "name": "CER. PINO CLARO 56X56",
+    "regular_price": 18300,
+    "sale_price": 16470,
+    "discount_pct": 10
+  },
+  {
+    "sku": "2699940",
+    "name": "CER. LEÑO ALBINO 56X56",
+    "regular_price": 18300,
+    "sale_price": 16470,
+    "discount_pct": 10
+  },
+  {
+    "sku": "2699946",
+    "name": "CER. MADERA BRILLANTE 56X56",
+    "regular_price": 18300,
+    "sale_price": 16470,
+    "discount_pct": 10
+  },
+  {
+    "sku": "2699936",
+    "name": "CER. EUCALIPTO BEIGE 56X56",
+    "regular_price": 18300,
+    "sale_price": 16470,
+    "discount_pct": 10
+  },
+  {
+    "sku": "2699236",
+    "name": "CER. 327000 CRISTOFOLETTI",
+    "regular_price": 15700,
+    "sale_price": 14130,
+    "discount_pct": 10
+  },
+  {
+    "sku": "2699731",
+    "name": "CER. ACUARIO BLANCO 25X35",
+    "regular_price": 20500,
+    "sale_price": 18450,
+    "discount_pct": 10
+  },
+  {
+    "sku": "2699395",
+    "name": "CER. GLACIAR BEIGE 25X35",
+    "regular_price": 17200,
+    "sale_price": 15480,
+    "discount_pct": 10
+  },
+  {
+    "sku": "2699371",
+    "name": "CER. MARINO NEGRO 25X35",
+    "regular_price": 17200,
+    "sale_price": 15480,
+    "discount_pct": 10
+  },
+  {
+    "sku": "2699948",
+    "name": "PORC. KAIRO GRIS",
+    "regular_price": 28900,
+    "sale_price": 26010,
+    "discount_pct": 10
+  },
+  {
+    "sku": "2699949",
+    "name": "PORC. VERONA GRIS",
+    "regular_price": 28900,
+    "sale_price": 26010,
+    "discount_pct": 10
+  },
+  {
+    "sku": "2699947",
+    "name": "PORC. FOLKS GRIS",
+    "regular_price": 28900,
+    "sale_price": 26010,
+    "discount_pct": 10
+  },
+  {
+    "sku": "2699150",
+    "name": "CER. ARBE 405 31.5X31.5",
+    "regular_price": 21480,
+    "sale_price": 19332,
+    "discount_pct": 10
+  },
+  {
+    "sku": "2699377",
+    "name": "CER. ARBE 315 31.5X31.5",
+    "regular_price": 21480,
+    "sale_price": 19332,
+    "discount_pct": 10
+  },
+  {
+    "sku": "2699088",
+    "name": "CER. 45330 45X45",
+    "regular_price": 25200,
+    "sale_price": 22680,
+    "discount_pct": 10
+  },
+  {
+    "sku": "2699938",
+    "name": "CER. CALCAREO COLOR 56X56",
+    "regular_price": 18300,
+    "sale_price": 16470,
+    "discount_pct": 10
+  },
+  {
+    "sku": "2699943",
+    "name": "CER. CASTAÑO BEIGE 18X56",
+    "regular_price": 19400,
+    "sale_price": 17460,
+    "discount_pct": 10
+  },
+  {
+    "sku": "2499012",
+    "name": "BARNIZ TITANLUX MATE 750 ML",
+    "regular_price": 14900,
+    "sale_price": 13410,
+    "discount_pct": 10
+  },
+  {
+    "sku": "2499024",
+    "name": "PROT. LASUR TECA MATE 750 ML",
+    "regular_price": 17100,
+    "sale_price": 15390,
+    "discount_pct": 10
+  },
+  {
+    "sku": "2499029",
+    "name": "PROT. LASUR ROBLE MATE 750 ML",
+    "regular_price": 17100,
+    "sale_price": 15390,
+    "discount_pct": 10
+  },
+  {
+    "sku": "2499080",
+    "name": "OXIRON MARRON 750 ML",
+    "regular_price": 16500,
+    "sale_price": 14850,
+    "discount_pct": 10
+  },
+  {
+    "sku": "2499107",
+    "name": "OXIRON FORJA ROJO 750 ML",
+    "regular_price": 16500,
+    "sale_price": 14850,
+    "discount_pct": 10
+  },
+  {
+    "sku": "2499111",
+    "name": "BARNIZ TITANLUX MATE 4 LTS",
+    "regular_price": 69200,
+    "sale_price": 62280,
+    "discount_pct": 10
+  },
+  {
+    "sku": "2499132",
+    "name": "BARNIZ SUELO BRILLANTE",
+    "regular_price": 63900,
+    "sale_price": 57510,
+    "discount_pct": 10
+  },
+  {
+    "sku": "2499160",
+    "name": "LASUR TARIMA 750 ML",
+    "regular_price": 23930,
+    "sale_price": 21537,
+    "discount_pct": 10
+  },
+  {
+    "sku": "2499162",
+    "name": "PROT. LASUR NOGAL  MATE 750 ML",
+    "regular_price": 17100,
+    "sale_price": 15390,
+    "discount_pct": 10
+  },
+  {
+    "sku": "2499166",
+    "name": "FONDO INCOLORO AL AFUA 750 ML",
+    "regular_price": 14100,
+    "sale_price": 12690,
+    "discount_pct": 10
+  },
+  {
+    "sku": "2499168",
+    "name": "BZ EFECTO MADERA ROBLE 750 ML",
+    "regular_price": 11800,
+    "sale_price": 10620,
+    "discount_pct": 10
+  },
+  {
+    "sku": "2499169",
+    "name": "BZ EFECTO MADERA NOGAL 750 ML",
+    "regular_price": 11800,
+    "sale_price": 10620,
+    "discount_pct": 10
+  },
+  {
+    "sku": "2499172",
+    "name": "BZ EFECTO MADERA SAPELI 750 ML",
+    "regular_price": 11800,
+    "sale_price": 10620,
+    "discount_pct": 10
+  },
+  {
+    "sku": "2499188",
+    "name": "PROT. LASUR ROBLE SAT 750 ML",
+    "regular_price": 17100,
+    "sale_price": 15390,
+    "discount_pct": 10
+  },
+  {
+    "sku": "2499189",
+    "name": "PROT. LASUR PINO NAT. SAT. 750 ML",
+    "regular_price": 17100,
+    "sale_price": 15390,
+    "discount_pct": 10
+  },
+  {
+    "sku": "2499222",
+    "name": "BARNIZ ECO INTEMPERIE SAT 750 ML",
+    "regular_price": 18500,
+    "sale_price": 16650,
+    "discount_pct": 10
+  },
+  {
+    "sku": "2499226",
+    "name": "PROT. LASUR TECA SAT 750 ML",
+    "regular_price": 17100,
+    "sale_price": 15390,
+    "discount_pct": 10
+  },
+  {
+    "sku": "2499231",
+    "name": "PROT. LASUR NOGAL SAT 750 ML",
+    "regular_price": 17100,
+    "sale_price": 15390,
+    "discount_pct": 10
+  },
+  {
+    "sku": "2899043",
+    "name": "LLAVE MOD. FTK-832",
+    "regular_price": 35100,
+    "sale_price": 28080,
+    "discount_pct": 20
+  },
+  {
+    "sku": "2899042",
+    "name": "LLAVE. MOD FT-9401",
+    "regular_price": 24580,
+    "sale_price": 19664,
+    "discount_pct": 20
+  },
+  {
+    "sku": "2899057",
+    "name": "LLAVE LAVAMANO MOD. 11982-A",
+    "regular_price": 61400,
+    "sale_price": 49120,
+    "discount_pct": 20
+  },
+  {
+    "sku": "2899076",
+    "name": "LLAVE LAVAMANO MOD3105-A",
+    "regular_price": 50300,
+    "sale_price": 40240,
+    "discount_pct": 20
+  },
+  {
+    "sku": "2899044",
+    "name": "LLAVE MONOMANDO 11970",
+    "regular_price": 55800,
+    "sale_price": 44640,
+    "discount_pct": 20
+  },
+  {
+    "sku": "2899070",
+    "name": "LLAVE LAVAPLATOS MOD 11889",
+    "regular_price": 89400,
+    "sale_price": 71520,
+    "discount_pct": 20
+  },
+  {
+    "sku": "2899062",
+    "name": "LLAVE LAVAPLATO MOD 12027",
+    "regular_price": 120100,
+    "sale_price": 96080,
+    "discount_pct": 20
+  },
+  {
+    "sku": "2899037",
+    "name": "LLAVE LAVAPLATO MOD A417",
+    "regular_price": 100500,
+    "sale_price": 80400,
+    "discount_pct": 20
+  },
+  {
+    "sku": "2899036",
+    "name": "LLAVE LAVAPLATO MOD 12033",
+    "regular_price": 125600,
+    "sale_price": 100480,
+    "discount_pct": 20
+  },
+  {
+    "sku": "2899063",
+    "name": "PROT. LASUR NOGAL SAT 750 ML",
+    "regular_price": 17100,
+    "sale_price": 13680,
+    "discount_pct": 20
+  },
+  {
+    "sku": "3099213",
+    "name": "PISO FLOTANTE TM612",
+    "regular_price": 39900,
+    "sale_price": 35910,
+    "discount_pct": 10
+  },
+  {
+    "sku": "3099223",
+    "name": "PISO FLOTANTE XSM89",
+    "regular_price": 39900,
+    "sale_price": 35910,
+    "discount_pct": 10
+  },
+  {
+    "sku": "3099425",
+    "name": "PISO FLOTANTE ACACIA",
+    "regular_price": 39900,
+    "sale_price": 35910,
+    "discount_pct": 10
+  },
+  {
+    "sku": "3099142",
+    "name": "PISO FLOTANTE LEGACY OAK",
+    "regular_price": 39900,
+    "sale_price": 35910,
+    "discount_pct": 10
+  },
+  {
+    "sku": "3099100",
+    "name": "PISO FLOTANTE OAK COUNTRY",
+    "regular_price": 39900,
+    "sale_price": 35910,
+    "discount_pct": 10
+  },
+  {
+    "sku": "3099225",
+    "name": "PISO FLOTANTE BIRMANIA",
+    "regular_price": 45500,
+    "sale_price": 40950,
+    "discount_pct": 10
+  }
+]

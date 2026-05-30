@@ -21,6 +21,12 @@ interface CartContextType {
   setIsCartOpen: (open: boolean) => void;
   projectName: string;
   setProjectName: (name: string) => void;
+  clientName: string;
+  setClientName: (name: string) => void;
+  clientEmail: string;
+  setClientEmail: (email: string) => void;
+  clientPhone: string;
+  setClientPhone: (phone: string) => void;
   quoteHistory: SavedQuote[];
   saveQuoteToHistory: () => void;
   clearCart: () => void;
@@ -34,6 +40,9 @@ const CartContext = createContext<CartContextType | undefined>(undefined);
 export function CartProvider({ children }: { children: React.ReactNode }) {
   const [cart, setCart] = useState<CartItem[]>([]);
   const [projectName, setProjectName] = useState("");
+  const [clientName, setClientName] = useState("");
+  const [clientEmail, setClientEmail] = useState("");
+  const [clientPhone, setClientPhone] = useState("");
   const [quoteHistory, setQuoteHistory] = useState<SavedQuote[]>([]);
   const [isCartOpen, setIsCartOpen] = useState(false);
   const [isHydrated, setIsHydrated] = useState(false);
@@ -56,6 +65,13 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
     }
     
     if (savedProject) setProjectName(savedProject);
+    
+    const savedClientName = localStorage.getItem("patagonia_client_name");
+    const savedClientEmail = localStorage.getItem("patagonia_client_email");
+    const savedClientPhone = localStorage.getItem("patagonia_client_phone");
+    if (savedClientName) setClientName(savedClientName);
+    if (savedClientEmail) setClientEmail(savedClientEmail);
+    if (savedClientPhone) setClientPhone(savedClientPhone);
 
     if (savedHistory) {
       try {
@@ -71,9 +87,12 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
     if (isHydrated) {
       localStorage.setItem("patagonia_cart", JSON.stringify(cart));
       localStorage.setItem("patagonia_project_name", projectName);
+      localStorage.setItem("patagonia_client_name", clientName);
+      localStorage.setItem("patagonia_client_email", clientEmail);
+      localStorage.setItem("patagonia_client_phone", clientPhone);
       localStorage.setItem("patagonia_history", JSON.stringify(quoteHistory));
     }
-  }, [cart, projectName, quoteHistory, isHydrated]);
+  }, [cart, projectName, clientName, clientEmail, clientPhone, quoteHistory, isHydrated]);
 
   const addToCart = useCallback((product: Product, quantity: number = 1) => {
     setCart(prev => {
@@ -122,7 +141,11 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
   return (
     <CartContext.Provider value={{ 
       cart, addToCart, removeFromCart, updateQty, cartTotal, isCartOpen, setIsCartOpen,
-      projectName, setProjectName, quoteHistory, saveQuoteToHistory, clearCart,
+      projectName, setProjectName,
+      clientName, setClientName,
+      clientEmail, setClientEmail,
+      clientPhone, setClientPhone,
+      quoteHistory, saveQuoteToHistory, clearCart,
       quickViewProduct, setQuickViewProduct, openQuickView
     }}>
       {children}

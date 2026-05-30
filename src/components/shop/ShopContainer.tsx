@@ -62,15 +62,31 @@ export default function ShopContainer({ initialProducts, initialCategory, isLive
     if (!param || param === "Todos") return "Todos";
     if (param === "Ofertas") return "Ofertas";
     
-    const normalizedParam = param.toLowerCase().trim();
+    let normalizedParam = param.toLowerCase().trim();
     
     // Buscamos en todas las categorías disponibles en los productos
     const allUniqueCategories = Array.from(new Set(initialProducts.flatMap(p => p.categories)));
     
-    const matchedCat = allUniqueCategories.find(c => 
+    // 1. Buscamos primero con el parámetro exacto (ej. cyberday o cybermonday)
+    let matchedCat = allUniqueCategories.find(c => 
         c.name.toLowerCase() === normalizedParam || 
         c.slug.toLowerCase() === normalizedParam
     );
+
+    // 2. Si no se encuentra, y es cyberday/cyber, probamos con cybermonday (y viceversa)
+    if (!matchedCat) {
+      if (normalizedParam === "cyberday" || normalizedParam === "cyber") {
+        matchedCat = allUniqueCategories.find(c => 
+            c.name.toLowerCase() === "cybermonday" || 
+            c.slug.toLowerCase() === "cybermonday"
+        );
+      } else if (normalizedParam === "cybermonday") {
+        matchedCat = allUniqueCategories.find(c => 
+            c.name.toLowerCase() === "cyberday" || 
+            c.slug.toLowerCase() === "cyberday"
+        );
+      }
+    }
 
     return matchedCat ? matchedCat.name : "Todos";
   };
@@ -127,10 +143,20 @@ export default function ShopContainer({ initialProducts, initialCategory, isLive
     );
   });
 
+  // 🛍️ ORDENAR PRODUCTOS DE CYBERDAY SEGÚN EXCEL
+  const isCyberActive = activeCategory.toLowerCase() === "cyberday" || activeCategory.toLowerCase() === "cybermonday";
+  if (isCyberActive) {
+    filteredProducts.sort((a, b) => {
+      const idxA = a.cyber_order_index !== undefined ? a.cyber_order_index : 999999;
+      const idxB = b.cyber_order_index !== undefined ? b.cyber_order_index : 999999;
+      return idxA - idxB;
+    });
+  }
+
   const [stockAlerts, setStockAlerts] = useState<{id: string | number, name: string}[]>([]);
 
   useEffect(() => {
-    // Simulación de alertas de stock crítico para B2B
+    // Simulación de alertas de stock crítico
     const criticalItems = initialProducts.filter(p => Math.random() > 0.8).slice(0, 2);
     setStockAlerts(criticalItems.map(p => ({ id: p.id, name: p.name })));
   }, [initialProducts]);
@@ -141,7 +167,7 @@ export default function ShopContainer({ initialProducts, initialCategory, isLive
   return (
     <div className={`${styles.page} page-transition`} style={{ backgroundColor: 'var(--bg-color)', color: 'var(--text-color)', minHeight: '100vh', width: '100%' }}>
       
-      {/* ⚠️ B2B CRITICAL STOCK ALERTS */}
+      {/* ⚠️ CRITICAL STOCK ALERTS */}
       <AnimatePresence>
         {stockAlerts.length > 0 && (
           <motion.div 
@@ -154,7 +180,7 @@ export default function ShopContainer({ initialProducts, initialCategory, isLive
               <div style={{ display: 'flex', alignItems: 'center', gap: '15px' }}>
                 <div style={{ width: '8px', height: '8px', borderRadius: '50%', backgroundColor: '#F9C300' }} className="animate-pulse" />
                 <span style={{ fontSize: '10px', fontWeight: 900, textTransform: 'uppercase', letterSpacing: '0.2em' }}>
-                  ALERTA B2B: Stock Crítico Detectado en Bodega Central
+                  ALERTA MAYORISTA: Stock Crítico Detectado en Bodega Central
                 </span>
               </div>
               <div style={{ display: 'flex', gap: '20px' }}>

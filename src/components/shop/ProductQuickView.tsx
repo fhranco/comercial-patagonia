@@ -123,14 +123,26 @@ export default function ProductQuickView({ product, isOpen, onClose }: ProductQu
               </div>
 
               <div style={{ padding: '25px 0', borderTop: '1px solid #EEE', borderBottom: '1px solid #EEE', marginBottom: '35px' }}>
-                 <div style={{ display: 'flex', alignItems: 'baseline', gap: '15px', marginBottom: '10px' }}>
+                 <div style={{ display: 'flex', alignItems: 'baseline', gap: '15px', marginBottom: '10px', flexWrap: 'wrap' }}>
                     <span style={{ fontSize: '2.4rem', fontWeight: 900, color: '#0E1F33', fontFamily: 'var(--font-heading)' }}>
                       ${Math.round(Number(product.price)).toLocaleString('es-CL')}
                     </span>
-                    {product.regular_price !== product.price && (
-                      <span style={{ fontSize: '1.2rem', opacity: 0.3, textDecoration: 'line-through' }}>
-                        ${Math.round(Number(product.regular_price)).toLocaleString('es-CL')}
-                      </span>
+                    {product.regular_price && Number(product.regular_price) > 0 && product.regular_price !== product.price && (
+                      <>
+                        <span style={{ fontSize: '1.2rem', opacity: 0.3, textDecoration: 'line-through' }}>
+                          ${Math.round(Number(product.regular_price)).toLocaleString('es-CL')}
+                        </span>
+                        <span style={{ 
+                          fontSize: '1rem', 
+                          fontWeight: 900, 
+                          color: '#FF4B4B', 
+                          backgroundColor: 'rgba(255, 75, 75, 0.1)', 
+                          padding: '4px 10px', 
+                          borderRadius: '4px'
+                        }}>
+                          -{Math.round(((Number(product.regular_price) - Number(product.price)) / Number(product.regular_price)) * 100)}%
+                        </span>
+                      </>
                     )}
                  </div>
                  <p style={{ fontSize: '11px', fontWeight: 700, opacity: 0.5, textTransform: 'uppercase' }}>Disponibilidad Inmediata en Magallanes</p>

@@ -97,10 +97,27 @@ export default function ProductDetailClient({ initialProduct: product }: Product
                       {product.name}
                   </h1>
 
-                  <div style={{ display: 'flex', alignItems: 'baseline', gap: '20px', marginBottom: '60px' }}>
+                  <div style={{ display: 'flex', alignItems: 'baseline', gap: '20px', marginBottom: '60px', flexWrap: 'wrap' }}>
                       <span style={{ fontSize: '3.5rem', fontWeight: 900, fontFamily: 'var(--font-heading)' }}>
                           ${Math.round(Number(product.price)).toLocaleString('es-CL')}
                       </span>
+                      {product.regular_price && Number(product.regular_price) > 0 && product.regular_price !== product.price && (
+                        <>
+                          <span style={{ fontSize: '1.8rem', opacity: 0.3, textDecoration: 'line-through' }}>
+                            ${Math.round(Number(product.regular_price)).toLocaleString('es-CL')}
+                          </span>
+                          <span style={{ 
+                            fontSize: '1.2rem', 
+                            fontWeight: 900, 
+                            color: '#FF4B4B', 
+                            backgroundColor: 'rgba(255, 75, 75, 0.1)', 
+                            padding: '6px 14px', 
+                            borderRadius: '6px'
+                          }}>
+                            -{Math.round(((Number(product.regular_price) - Number(product.price)) / Number(product.regular_price)) * 100)}% DESCUENTO
+                          </span>
+                        </>
+                      )}
                   </div>
 
                   <div style={{ marginBottom: '60px' }}>
@@ -211,8 +228,27 @@ function StickyActionHUD({ product, onAddToCart }: { product: Product; onAddToCa
                     <Image src={product.images[0]?.src || ""} alt={product.name} fill sizes="45px" unoptimized={product.images[0]?.src?.startsWith('http')} style={{ objectFit: 'cover' }} />
                 </div>
                 <div>
-                    <h4 style={{ fontSize: '10px', fontWeight: 900, textTransform: 'uppercase', letterSpacing: '0.1em' }}>{product.name}</h4>
-                    <p style={{ fontSize: '14px', fontWeight: 900, color: 'var(--primary-gold)' }}>${Math.round(Number(product.price)).toLocaleString('es-CL')}</p>
+                    <h4 style={{ fontSize: '10px', fontWeight: 900, textTransform: 'uppercase', letterSpacing: '0.1em', margin: 0 }}>{product.name}</h4>
+                    <div style={{ display: 'flex', alignItems: 'baseline', gap: '8px', marginTop: '2px' }}>
+                        <span style={{ fontSize: '14px', fontWeight: 900, color: 'var(--primary-gold)' }}>${Math.round(Number(product.price)).toLocaleString('es-CL')}</span>
+                        {product.regular_price && Number(product.regular_price) > 0 && product.regular_price !== product.price && (
+                          <>
+                            <span style={{ fontSize: '10px', opacity: 0.5, textDecoration: 'line-through', color: '#FFF' }}>
+                              ${Math.round(Number(product.regular_price)).toLocaleString('es-CL')}
+                            </span>
+                            <span style={{ 
+                              fontSize: '9px', 
+                              fontWeight: 900, 
+                              color: '#FF4B4B', 
+                              backgroundColor: 'rgba(255, 75, 75, 0.2)', 
+                              padding: '1px 4px', 
+                              borderRadius: '3px'
+                            }}>
+                              -{Math.round(((Number(product.regular_price) - Number(product.price)) / Number(product.regular_price)) * 100)}%
+                            </span>
+                          </>
+                        )}
+                    </div>
                 </div>
             </div>
 

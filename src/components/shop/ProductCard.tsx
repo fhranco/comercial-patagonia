@@ -135,9 +135,27 @@ export default function ProductCard({ product, onQuickView }: ProductCardProps) 
                    </button>
                </div>
 
-              {product.on_sale && (
-                <span style={{ position: 'absolute', top: '15px', left: '15px', background: '#D4AF37', color: '#000', fontSize: '9px', fontWeight: 900, padding: '4px 10px', borderRadius: '100px', textTransform: 'uppercase' }}>Oferta</span>
-              )}
+              {product.on_sale && (() => {
+                const isCyber = product.categories && product.categories.some(cat => cat.slug && (cat.slug.toLowerCase() === "cybermonday" || cat.slug.toLowerCase() === "cyberday"));
+                return (
+                  <span style={{ 
+                    position: 'absolute', 
+                    top: '15px', 
+                    left: '15px', 
+                    background: isCyber ? '#FF4B4B' : '#D4AF37', 
+                    color: isCyber ? '#FFF' : '#000', 
+                    fontSize: '9px', 
+                    fontWeight: 900, 
+                    padding: '4px 10px', 
+                    borderRadius: '100px', 
+                    textTransform: 'uppercase',
+                    boxShadow: isCyber ? '0 4px 12px rgba(255, 75, 75, 0.3)' : 'none',
+                    zIndex: 10
+                  }}>
+                    {isCyber ? 'Cyber' : 'Oferta'}
+                  </span>
+                );
+              })()}
           </div>
        </Link>
 
@@ -157,14 +175,27 @@ export default function ProductCard({ product, onQuickView }: ProductCardProps) 
              {product.name}
            </h3>
            
-           <div style={{ display: 'flex', alignItems: 'baseline', gap: '10px' }}>
+           <div style={{ display: 'flex', alignItems: 'baseline', gap: '10px', flexWrap: 'wrap' }}>
               <span style={{ fontSize: 'clamp(1.4rem, 4vw, 1.8rem)', fontWeight: 900, color: 'var(--text-color)', fontFamily: 'var(--font-heading)' }}>
                 ${Math.round(Number(product.price)).toLocaleString('es-CL')}
               </span>
-              {product.regular_price !== product.price && (
-                <span style={{ fontSize: 'clamp(0.8rem, 2vw, 0.9rem)', opacity: 0.3, textDecoration: 'line-through' }}>
-                  ${Math.round(Number(product.regular_price)).toLocaleString('es-CL')}
-                </span>
+              {product.regular_price && Number(product.regular_price) > 0 && product.regular_price !== product.price && (
+                <>
+                  <span style={{ fontSize: 'clamp(0.8rem, 2vw, 0.9rem)', opacity: 0.3, textDecoration: 'line-through' }}>
+                    ${Math.round(Number(product.regular_price)).toLocaleString('es-CL')}
+                  </span>
+                  <span style={{ 
+                    fontSize: 'clamp(0.75rem, 1.8vw, 0.85rem)', 
+                    fontWeight: 900, 
+                    color: '#FF4B4B', 
+                    backgroundColor: 'rgba(255, 75, 75, 0.1)', 
+                    padding: '2px 6px', 
+                    borderRadius: '4px', 
+                    marginLeft: '2px'
+                  }}>
+                    -{Math.round(((Number(product.regular_price) - Number(product.price)) / Number(product.regular_price)) * 100)}%
+                  </span>
+                </>
               )}
             </div>
             

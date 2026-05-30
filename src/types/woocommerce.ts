@@ -27,6 +27,7 @@ export interface Product {
   images: ProductImage[];
   categories: { id: number; name: string; slug: string }[];
   attributes: ProductAttribute[];
+  cyber_order_index?: number;
 }
 
 export interface CartItem extends Product {

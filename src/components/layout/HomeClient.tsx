@@ -9,6 +9,9 @@ import HeroSpectacular from "./HeroComodoro";
 import CategoryBento from "../shop/CategoryBento";
 import TrustBar from "./TrustBar";
 import FeaturedCarousel from "../shop/FeaturedCarousel";
+import CyberFeaturedGrid from "../shop/CyberFeaturedGrid";
+import CyberCarousel from "../shop/CyberCarousel";
+import CyberMarquee from "./CyberMarquee";
 import FurnitureShowcase from "./FurnitureShowcase";
 import GrandCement from "./GrandCement";
 import { Product } from "@/types/woocommerce";
@@ -17,6 +20,7 @@ import PromotionHUD from "../shop/PromotionHUD";
 import RetailStories from "../shop/RetailStories";
 import ProductQuickView from "../shop/ProductQuickView";
 import CyberdayCountdown from "./CyberdayCountdown";
+import { ArrowRight } from "lucide-react";
 
 interface HomeClientProps {
   products: Product[];
@@ -25,8 +29,12 @@ interface HomeClientProps {
 export default function HomeClient({ products }: HomeClientProps) {
   const router = useRouter();
   const [selectedQuickProduct, setSelectedQuickProduct] = React.useState<Product | null>(null);
+  const [isMarqueeOpen, setIsMarqueeOpen] = React.useState(true);
   const { scrollYProgress } = useScroll();
   const scaleProgress = useSpring(scrollYProgress, { stiffness: 100, damping: 30, restDelta: 0.001 });
+  const cyberProductsAll = products.filter(p => 
+    p.categories.some(cat => cat.slug.toLowerCase() === "cybermonday" || cat.slug.toLowerCase() === "cyberday")
+  );
   const SHOP_URL = "/shop";
 
   return (
@@ -35,16 +43,79 @@ export default function HomeClient({ products }: HomeClientProps) {
       {/* 🚀 BARRA DE PROGRESO */}
       <motion.div style={{ scaleX: scaleProgress, position: 'fixed', top: 0, left: 0, right: 0, height: '3px', background: 'var(--primary-gold)', zIndex: 9999, transformOrigin: '0%' }} />
 
+      {isMarqueeOpen && (
+        <div style={{ position: 'fixed', top: 0, left: 0, right: 0, zIndex: 10000 }}>
+          <CyberMarquee onClose={() => setIsMarqueeOpen(false)} />
+        </div>
+      )}
+
+      {/* Override navigation top position if marquee is open & responsive styling */}
+      <style jsx global>{`
+        .nav-container {
+          top: ${isMarqueeOpen ? '40px' : '0px'} !important;
+          transition: top 0.4s cubic-bezier(0.16, 1, 0.3, 1) !important;
+        }
+        @media (max-width: 1024px) {
+          .heritage-section { padding: 80px 5% !important; }
+          .heritage-grid { gap: 50px !important; }
+        }
+        @media (max-width: 768px) {
+          .heritage-section { padding: 60px 5% !important; }
+        }
+      `}</style>
+
       <Navigation transparent={true} />
       <PromotionHUD products={products} onQuickView={(prod) => setSelectedQuickProduct(prod)} />
       
-      <main style={{ width: '100%' }}>
+      <main style={{ width: '100%', paddingTop: isMarqueeOpen ? '40px' : '0px', transition: 'padding-top 0.4s cubic-bezier(0.16, 1, 0.3, 1)' }}>
         <HeroSpectacular 
           products={products} 
           onQuickView={(prod) => setSelectedQuickProduct(prod)} 
         />
 
         <CyberdayCountdown />
+
+        {cyberProductsAll.length > 0 && (
+          <>
+            <CyberFeaturedGrid 
+              products={cyberProductsAll} 
+              onQuickView={(prod) => setSelectedQuickProduct(prod)}
+            />
+            
+            <CyberCarousel 
+              products={cyberProductsAll} 
+              onQuickView={(prod) => setSelectedQuickProduct(prod)}
+            />
+
+            {/* 🏷️ ACCESO A TODAS LAS OFERTAS CYBER */}
+            <div style={{ display: 'flex', justifyContent: 'center', marginTop: '50px', marginBottom: '80px' }}>
+              <Link 
+                href="/shop?category=cyberday" 
+                style={{ 
+                  backgroundColor: '#0E1F33', 
+                  border: '2px solid var(--primary-gold)',
+                  color: '#FFFFFF',
+                  padding: '20px 50px', 
+                  borderRadius: '4px', 
+                  fontSize: '11px', 
+                  fontWeight: 950, 
+                  textTransform: 'uppercase', 
+                  letterSpacing: '0.2em', 
+                  cursor: 'pointer',
+                  display: 'inline-flex',
+                  alignItems: 'center',
+                  gap: '12px',
+                  textDecoration: 'none',
+                  boxShadow: '0 15px 35px rgba(14, 31, 51, 0.15)'
+                }}
+                className="hover:bg-[var(--primary-gold)] hover:text-black hover:border-[var(--primary-gold)] transition-all duration-300 active:scale-95"
+              >
+                <span>Ver todas las ofertas Cyber</span>
+                <ArrowRight size={14} />
+              </Link>
+            </div>
+          </>
+        )}
 
         <div style={{ marginTop: '40px', marginBottom: '40px', display: 'flex', justifyContent: 'center' }}>
           <RetailStories 
@@ -64,15 +135,6 @@ export default function HomeClient({ products }: HomeClientProps) {
 
         {/* 🏢 HISTORIA Y TRADICIÓN */}
         <section style={{ padding: '120px 5%', maxWidth: '1400px', margin: '0 auto', backgroundColor: '#FFF' }} className="heritage-section">
-            <style jsx>{`
-                @media (max-width: 1024px) {
-                    .heritage-section { padding: 80px 5% !important; }
-                    .heritage-grid { gap: 50px !important; }
-                }
-                @media (max-width: 768px) {
-                    .heritage-section { padding: 60px 5% !important; }
-                }
-            `}</style>
             <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))', gap: '100px', alignItems: 'center' }} className="heritage-grid">
                 <motion.div initial={{ opacity: 0, x: -30 }} whileInView={{ opacity: 1, x: 0 }} transition={{ duration: 1 }} viewport={{ once: true }}>
                     <span style={{ color: 'var(--primary-gold)', fontSize: '11px', fontWeight: 900, letterSpacing: '0.4em', textTransform: 'uppercase' }}>Patrimonio Regional</span>

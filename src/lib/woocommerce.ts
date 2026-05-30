@@ -3,6 +3,28 @@
 // Fix: Deduplication cache to prevent re-fetch storms, backoff retries, and offline backup filesystem cache
 
 import { writeLog } from './logger';
+import cyberProductsData from '../data/cyber-products.json';
+
+interface CyberExcelProduct {
+  sku: string;
+  name: string;
+  regular_price: number;
+  sale_price: number;
+  discount_pct: number;
+}
+
+const cyberProductsArray = cyberProductsData as CyberExcelProduct[];
+const cyberProductsMap = new Map<string, { name: string; regular_price: number; sale_price: number; discount_pct: number; cyber_order_index: number }>();
+
+cyberProductsArray.forEach((item, index) => {
+  cyberProductsMap.set(item.sku, {
+    name: item.name,
+    regular_price: item.regular_price,
+    sale_price: item.sale_price,
+    discount_pct: item.discount_pct,
+    cyber_order_index: index
+  });
+});
 
 export const WOOCOMMERCE_URL = (process.env.NEXT_PUBLIC_WOOCOMMERCE_URL || "").replace(/\/$/, "");
 const CK = process.env.WOOCOMMERCE_CK || "";
@@ -106,6 +128,139 @@ async function fetchWithRetry(
 }
 
 /**
+ * 🏷️ AUTOMATIC CYBER DISCOUNTS ENGINE
+ * Computes and simulates a 25% discount for products in the 'cybermonday' category
+ * if they do not have an active sale price configured in WooCommerce.
+ */
+function applyCyberDiscounts(products: any[] | null): any[] | null {
+  if (!products || !Array.isArray(products)) return products;
+  
+  const matchedSkus = new Set<string>();
+  
+  const updatedProducts = products.map(product => {
+    const sku = product.sku ? product.sku.toString().trim().replace('.0', '') : '';
+    
+    // Check if product is in our Excel JSON list
+    const excelPromo = sku ? cyberProductsMap.get(sku) : undefined;
+    
+    if (excelPromo) {
+      matchedSkus.add(sku);
+      // 1. Ensure the product is marked as being in the 'cybermonday' and 'cyberday' categories
+      const cleanCategories = (product.categories || []).filter(
+        (cat: any) => cat.slug && cat.slug.toLowerCase() !== "cybermonday" && cat.slug.toLowerCase() !== "cyberday"
+      );
+      
+      const injectedCategories = [
+        { id: 9999, name: "Cyberday", slug: "cybermonday" },
+        { id: 9998, name: "Cyberday", slug: "cyberday" },
+        ...cleanCategories
+      ];
+      
+      // 2. Override name, prices, metadata, and images if there is a backend SKU conflict
+      const nameDiffers = product.name.toLowerCase().trim() !== excelPromo.name.toLowerCase().trim();
+      let images = product.images;
+      
+      if (nameDiffers) {
+        let imageUrl = "https://images.unsplash.com/photo-1618221195710-dd6b41faaea6?q=80&w=600&auto=format&fit=crop"; // Living/Hogar genérico elegante
+        const nameLower = excelPromo.name.toLowerCase();
+        if (nameLower.includes("piso") || nameLower.includes("flotante") || nameLower.includes("madera")) {
+          imageUrl = "https://images.unsplash.com/photo-1581858726788-75bc0f6a952d?q=80&w=600&auto=format&fit=crop";
+        } else if (nameLower.includes("llave") || nameLower.includes("monomando") || nameLower.includes("griferia") || nameLower.includes("ducha")) {
+          imageUrl = "https://images.unsplash.com/photo-1584622650111-993a426fbf0a?q=80&w=600&auto=format&fit=crop";
+        } else if (nameLower.includes("ropero") || nameLower.includes("estante") || nameLower.includes("mueble") || nameLower.includes("organizador")) {
+          imageUrl = "https://images.unsplash.com/photo-1595428774223-ef52624120d2?q=80&w=600&auto=format&fit=crop";
+        } else if (nameLower.includes("adhesivo") || nameLower.includes("frague") || nameLower.includes("pegamento")) {
+          imageUrl = "https://images.unsplash.com/photo-1572883454114-1cf0031ede2a?q=80&w=600&auto=format&fit=crop";
+        } else if (nameLower.includes("prot.") || nameLower.includes("lasur") || nameLower.includes("pintura") || nameLower.includes("barniz")) {
+          imageUrl = "https://images.unsplash.com/photo-1589939705384-5185137a7f0f?q=80&w=600&auto=format&fit=crop";
+        }
+        
+        images = [
+          {
+            id: 0,
+            src: imageUrl,
+            name: excelPromo.name,
+            alt: excelPromo.name
+          }
+        ];
+      }
+
+      return {
+        ...product,
+        name: excelPromo.name, // Force name to match Excel!
+        images: images,        // Force correct image if conflict
+        categories: injectedCategories,
+        regular_price: excelPromo.regular_price.toString(),
+        price: excelPromo.sale_price.toString(),
+        sale_price: excelPromo.sale_price.toString(),
+        on_sale: true,
+        cyber_order_index: excelPromo.cyber_order_index
+      };
+    } else {
+      // If it's NOT in the Excel list, remove any cyber categories it might have in WooCommerce
+      const cleanCategories = (product.categories || []).filter(
+        (cat: any) => cat.slug && cat.slug.toLowerCase() !== "cybermonday" && cat.slug.toLowerCase() !== "cyberday"
+      );
+      
+      return {
+        ...product,
+        categories: cleanCategories
+      };
+    }
+  });
+
+  // 🪄 INYECTAR PRODUCTOS VIRTUALES PARA AQUELLOS ELEMENTOS DEL EXCEL QUE NO ESTÉN CREADOS EN WOOCOMMERCE
+  cyberProductsArray.forEach((excelPromo, index) => {
+    if (!matchedSkus.has(excelPromo.sku)) {
+      // Determinar una imagen premium y contextual según el nombre del producto
+      let imageUrl = "https://images.unsplash.com/photo-1618221195710-dd6b41faaea6?q=80&w=600&auto=format&fit=crop"; // Living/Hogar genérico elegante
+      
+      const nameLower = excelPromo.name.toLowerCase();
+      if (nameLower.includes("piso") || nameLower.includes("flotante") || nameLower.includes("madera")) {
+        imageUrl = "https://images.unsplash.com/photo-1581858726788-75bc0f6a952d?q=80&w=600&auto=format&fit=crop"; // Piso de madera premium
+      } else if (nameLower.includes("llave") || nameLower.includes("monomando") || nameLower.includes("griferia") || nameLower.includes("ducha")) {
+        imageUrl = "https://images.unsplash.com/photo-1584622650111-993a426fbf0a?q=80&w=600&auto=format&fit=crop"; // Grifería de baño de alta gama
+      } else if (nameLower.includes("ropero") || nameLower.includes("estante") || nameLower.includes("mueble") || nameLower.includes("organizador")) {
+        imageUrl = "https://images.unsplash.com/photo-1595428774223-ef52624120d2?q=80&w=600&auto=format&fit=crop"; // Mueble/Organizador
+      } else if (nameLower.includes("adhesivo") || nameLower.includes("frague") || nameLower.includes("pegamento")) {
+        imageUrl = "https://images.unsplash.com/photo-1572883454114-1cf0031ede2a?q=80&w=600&auto=format&fit=crop"; // Construcción/Materiales
+      }
+
+      updatedProducts.push({
+        id: 9999000 + index,
+        name: excelPromo.name,
+        slug: `cyber-virtual-${excelPromo.sku}`,
+        permalink: `#`,
+        description: `Producto de la campaña Cyberday (SKU: ${excelPromo.sku}).`,
+        short_description: `Campaña Especial Cyberday - Descuento del ${excelPromo.discount_pct}%`,
+        sku: excelPromo.sku,
+        price: excelPromo.sale_price.toString(),
+        regular_price: excelPromo.regular_price.toString(),
+        sale_price: excelPromo.sale_price.toString(),
+        on_sale: true,
+        stock_status: 'instock',
+        images: [
+          {
+            id: 0,
+            src: imageUrl,
+            name: excelPromo.name,
+            alt: excelPromo.name
+          }
+        ],
+        categories: [
+          { id: 9999, name: "Cyberday", slug: "cybermonday" },
+          { id: 9998, name: "Cyberday", slug: "cyberday" }
+        ],
+        attributes: [],
+        cyber_order_index: index
+      });
+    }
+  });
+
+  return updatedProducts;
+}
+
+/**
  * Fetches products from your WooCommerce server (with deduplication cache and backup fallback)
  */
 export async function fetchWooCommerceProducts() {
@@ -126,8 +281,9 @@ export async function fetchWooCommerceProducts() {
 
   try {
     const result = await productsCachePromise;
-    productsCache = { data: result, timestamp: Date.now() };
-    return result;
+    const processedResult = applyCyberDiscounts(result);
+    productsCache = { data: processedResult, timestamp: Date.now() };
+    return processedResult;
   } finally {
     productsCachePromise = null;
   }

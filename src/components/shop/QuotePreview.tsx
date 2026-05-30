@@ -44,7 +44,7 @@ export default function QuotePreview({ isOpen, onClose, projectRef }: QuotePrevi
             {/* 🛠️ TOP BAR (TOOLS) */}
             <div className="no-print" style={{ backgroundColor: '#FFFFFF', padding: '15px 30px', display: 'flex', justifyContent: 'space-between', alignItems: 'center', borderBottom: '1px solid var(--border-color)' }}>
                 <span style={{ fontSize: '10px', fontWeight: 900, textTransform: 'uppercase', letterSpacing: '0.2em', color: 'rgba(0,0,0,0.4)' }}>
-                    Visualizador de Cotización B2B v1.1
+                    Visualizador de Cotización Profesional v1.1
                 </span>
                 <div style={{ display: 'flex', gap: '15px' }}>
                     <button 
@@ -67,7 +67,7 @@ export default function QuotePreview({ isOpen, onClose, projectRef }: QuotePrevi
                     <div>
                         <h1 style={{ fontSize: '1.2rem', fontWeight: 900, color: '#0E1F33', margin: 0, letterSpacing: '0.1em' }}>COMERCIAL DE LA PATAGONIA</h1>
                         <p style={{ fontSize: '10px', opacity: 0.5, fontWeight: 700, textTransform: 'uppercase', marginTop: '5px' }}>
-                            Magallanes, Chile • B2B Procurement Division
+                            Magallanes, Chile • División Mayorista
                         </p>
                     </div>
                     <div style={{ textAlign: 'right' }}>

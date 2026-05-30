@@ -12,15 +12,98 @@ import { BRAND_CONFIG } from "@/lib/constants";
 export default function CartSheet() {
   const { 
     cart, isCartOpen, setIsCartOpen, updateQty, removeFromCart, cartTotal,
-    projectName, setProjectName 
+    projectName, setProjectName,
+    clientName, setClientName,
+    clientEmail, setClientEmail,
+    clientPhone, setClientPhone,
+    saveQuoteToHistory, clearCart
   } = useCart();
   const { theme } = useTheme();
 
   const sendWhatsAppRequest = () => {
+    if (!clientName || !clientEmail || !clientPhone) {
+      alert("Por favor completa tus datos de contacto (Nombre, Correo y Teléfono) en el formulario para registrar tu cotización.");
+      return;
+    }
+
+    saveQuoteToHistory(); // 💾 Archivar en historial local
+
     const itemsList = cart.map(item => `%0A- ${item.quantity}x ${item.name}`).join('');
     const projectHeader = projectName ? `Proyecto: *${projectName}*%0A` : '';
-    const message = `Hola ${BRAND_CONFIG.name}, me interesa cotizar:${itemsList}%0A%0A${projectHeader}*Total Estimado: $${Math.round(cartTotal).toLocaleString('es-CL')}*`;
+    
+    // 🚀 Abrir WhatsApp inmediatamente para evitar bloqueador de popups
+    const message = `🏔️ *SOLICITUD DE COTIZACIÓN*%0AComercial de la Patagonia%0A%0A${projectHeader}--------------------------${itemsList}%0A--------------------------%0A*TOTAL ESTIMADO:* $${Math.round(cartTotal).toLocaleString('es-CL')}%0A%0A*DATOS DEL CLIENTE:*%0ANombre: ${clientName}%0AEmail: ${clientEmail}%0ATeléfono: ${clientPhone}%0A%0A_Favor confirmar disponibilidad para despacho en Magallanes._`;
     window.open(`https://wa.me/${BRAND_CONFIG.whatsapp.replace('+', '').replace(/\s/g, '')}?text=${message}`, '_blank');
+
+    // 🔄 Registrar en WooCommerce en segundo plano desde el cliente (evita bloqueos DNS del servidor local)
+    fetch("/api/config")
+      .then(res => res.json())
+      .then(config => {
+        if (!config || config.error) throw new Error(config.error || "Faltan credenciales");
+        
+        const authHeader = btoa(`${config.ck}:${config.cs}`);
+        const orderData = {
+          payment_method: "b2b_quote",
+          payment_method_title: "Cotización B2B (Web)",
+          set_paid: false,
+          status: "on-hold",
+          billing: {
+            first_name: clientName,
+            last_name: "",
+            address_1: "Región de Magallanes",
+            city: "Punta Arenas",
+            state: "Magallanes",
+            postcode: "6200000",
+            country: "CL",
+            email: clientEmail,
+            phone: clientPhone
+          },
+          shipping: {
+            first_name: clientName,
+            last_name: "",
+            address_1: "Región de Magallanes",
+            city: "Punta Arenas",
+            state: "Magallanes",
+            postcode: "6200000",
+            country: "CL"
+          },
+          line_items: cart.map((item: any) => ({
+            product_id: item.id,
+            quantity: item.quantity
+          })),
+          customer_note: projectName ? `Obra/Proyecto: ${projectName}` : "Cotización B2B",
+          meta_data: [
+            {
+              key: "b2b_project_name",
+              value: projectName || ""
+            },
+            {
+              key: "_b2b_quote_source",
+              value: "B2B Web Portal"
+            }
+          ]
+        };
+
+        return fetch(`${config.url.replace(/\/$/, "")}/orders`, {
+          method: "POST",
+          headers: {
+            "Authorization": `Basic ${authHeader}`,
+            "Content-Type": "application/json"
+          },
+          body: JSON.stringify(orderData)
+        });
+      })
+      .then(res => res.json())
+      .then(data => {
+        console.log("Cotización registrada en WooCommerce desde el navegador con éxito:", data);
+      })
+      .catch(err => {
+        console.error("Error al registrar cotización en WooCommerce desde navegador:", err);
+      });
+
+    // Limpiar carrito y cerrar
+    clearCart();
+    setIsCartOpen(false);
   };
 
   return (
@@ -59,22 +142,58 @@ export default function CartSheet() {
               </button>
             </div>
 
-            {/* Project Mode Input */}
-            <div style={{ marginBottom: '25px', padding: '15px', background: 'rgba(212, 175, 55, 0.05)', border: '1px dashed rgba(212, 175, 55, 0.3)', borderRadius: '4px' }}>
-              <label style={{ fontSize: '8px', fontWeight: 900, textTransform: 'uppercase', letterSpacing: '0.1em', opacity: 0.5, display: 'block', marginBottom: '8px' }}>
-                IDENTIFICADOR DE PROYECTO (B2B)
-              </label>
-              <input 
-                type="text" 
-                placeholder="Ej. Casa Mirador, Revestimiento Oficinas..." 
-                value={projectName}
-                onChange={(e) => setProjectName(e.target.value)}
-                style={{ 
-                  width: '100%', background: 'transparent', border: 'none', 
-                  borderBottom: '1px solid var(--border-color)', padding: '5px 0',
-                  fontSize: '12px', fontWeight: 600, color: 'inherit', outline: 'none'
-                }}
-              />
+            {/* Contact Fields */}
+            <div style={{ marginBottom: '25px', padding: '15px', background: 'rgba(212, 175, 55, 0.05)', border: '1px dashed rgba(212, 175, 55, 0.3)', borderRadius: '4px', display: 'flex', flexDirection: 'column', gap: '10px' }}>
+              <span style={{ fontSize: '8px', fontWeight: 900, textTransform: 'uppercase', letterSpacing: '0.1em', opacity: 0.8, color: 'var(--primary-gold)' }}>
+                Identificación y Obra de Cotización
+              </span>
+
+              <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
+                <input 
+                  type="text" 
+                  placeholder="Nombre completo *" 
+                  value={clientName || ''}
+                  onChange={(e) => setClientName(e.target.value)}
+                  style={{ 
+                    width: '100%', background: 'transparent', border: 'none', 
+                    borderBottom: !clientName ? '1px solid var(--primary-gold)' : '1px solid var(--border-color)', padding: '5px 0',
+                    fontSize: '11px', fontWeight: 600, color: 'inherit', outline: 'none'
+                  }}
+                />
+                <input 
+                  type="email" 
+                  placeholder="Correo electrónico *" 
+                  value={clientEmail || ''}
+                  onChange={(e) => setClientEmail(e.target.value)}
+                  style={{ 
+                    width: '100%', background: 'transparent', border: 'none', 
+                    borderBottom: !clientEmail ? '1px solid var(--primary-gold)' : '1px solid var(--border-color)', padding: '5px 0',
+                    fontSize: '11px', fontWeight: 600, color: 'inherit', outline: 'none'
+                  }}
+                />
+                <input 
+                  type="tel" 
+                  placeholder="Teléfono de contacto *" 
+                  value={clientPhone || ''}
+                  onChange={(e) => setClientPhone(e.target.value)}
+                  style={{ 
+                    width: '100%', background: 'transparent', border: 'none', 
+                    borderBottom: !clientPhone ? '1px solid var(--primary-gold)' : '1px solid var(--border-color)', padding: '5px 0',
+                    fontSize: '11px', fontWeight: 600, color: 'inherit', outline: 'none'
+                  }}
+                />
+                <input 
+                  type="text" 
+                  placeholder="Nombre del Proyecto / Obra" 
+                  value={projectName || ''}
+                  onChange={(e) => setProjectName(e.target.value)}
+                  style={{ 
+                    width: '100%', background: 'transparent', border: 'none', 
+                    borderBottom: '1px solid var(--border-color)', padding: '5px 0',
+                    fontSize: '11px', fontWeight: 600, color: 'inherit', outline: 'none'
+                  }}
+                />
+              </div>
             </div>
             
             <div style={{ flex: 1, overflowY: 'auto' }} className="no-scrollbar">
@@ -91,6 +210,7 @@ export default function CartSheet() {
                           src={item.images[0].src} 
                           alt={item.name} 
                           fill
+                          unoptimized={Boolean(item.images[0]?.src?.startsWith('http'))}
                           style={{ objectFit: 'cover' }} 
                         />
                       )}
@@ -119,7 +239,7 @@ export default function CartSheet() {
                   <span style={{ fontSize: '1.2rem', fontWeight: 900 }}>${Math.round(cartTotal).toLocaleString('es-CL')}</span>
                 </div>
                 <button 
-                  onClick={sendWhatsAppRequest} 
+                  onClick={sendWhatsAppRequest}
                   style={{ 
                     width: '100%', backgroundColor: '#D4AF37', color: '#000', padding: '20px', 
                     fontSize: '11px', fontWeight: 900, textTransform: 'uppercase', border: 'none', 

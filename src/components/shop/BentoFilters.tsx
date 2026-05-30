@@ -46,6 +46,7 @@ export default function BentoFilters({ categories, activeCategory, onSelect }: B
       >
         {displayCategories.map((category) => {
           const isActive = activeCategory === category;
+          const displayName = category.toLowerCase() === "cybermonday" ? "Cyberday" : category;
           
           return (
             <motion.div
@@ -90,7 +91,7 @@ export default function BentoFilters({ categories, activeCategory, onSelect }: B
                     letterSpacing: '0.1em', margin: 0,
                     color: isActive ? '#FFF' : '#0E1F33'
                 }}>
-                  {category}
+                  {displayName}
                 </h3>
                 <p style={{ 
                     fontSize: '8px', fontWeight: 700, opacity: 0.5, 
