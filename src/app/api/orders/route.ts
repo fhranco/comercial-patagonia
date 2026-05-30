@@ -21,8 +21,8 @@ export async function POST(request: Request) {
     
     // Format order for WooCommerce REST API
     const orderData = {
-      payment_method: "b2b_quote",
-      payment_method_title: "Cotización B2B (Web)",
+      payment_method: "cotizacion_web",
+      payment_method_title: "Cotización Online (Web)",
       set_paid: false,
       status: "on-hold", // "on-hold" is perfect for quote requests as it holds stock but awaits manual processing
       billing: {
@@ -49,15 +49,15 @@ export async function POST(request: Request) {
         product_id: item.id,
         quantity: item.quantity
       })),
-      customer_note: projectName ? `Obra/Proyecto: ${projectName}` : "Cotización General B2B",
+      customer_note: projectName ? `Obra/Proyecto: ${projectName}` : "Cotización General",
       meta_data: [
         {
-          key: "b2b_project_name",
+          key: "project_name",
           value: projectName || ""
         },
         {
-          key: "_b2b_quote_source",
-          value: "B2B Web Portal"
+          key: "_quote_source",
+          value: "Portal Web"
         }
       ]
     };

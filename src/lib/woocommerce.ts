@@ -118,19 +118,13 @@ async function fetchWithRetry(
 export function rewriteImageUrl(url: string): string {
   if (!url || typeof url !== 'string') return url;
   
-  // Extraer el host activo de la configuración
-  let activeHost = "tiendacp.boostpatagonia.online";
-  try {
-    const activeUrl = process.env.NEXT_PUBLIC_WOOCOMMERCE_URL || "";
-    if (activeUrl) {
-      const urlObj = new URL(activeUrl);
-      activeHost = urlObj.hostname;
-    }
-  } catch (e) {}
-
+  // Force all media assets to load from the official production server tienda.comercialpatagonia.cl
+  // which has a valid Let's Encrypt/Cloudflare SSL certificate and contains all cloned uploads.
   return url
-    .replace(/https?:\/\/darkorange-bat-658298\.hostingersite\.com/g, `https://${activeHost}`)
-    .replace(/https?:\/\/[\w-]+\.hostingersite\.com/g, `https://${activeHost}`);
+    .replace(/https?:\/\/darkorange-bat-658298\.hostingersite\.com/g, 'https://tienda.comercialpatagonia.cl')
+    .replace(/https?:\/\/[\w-]+\.hostingersite\.com/g, 'https://tienda.comercialpatagonia.cl')
+    .replace(/https?:\/\/tiendacp\.boostpatagonia\.online/g, 'https://tienda.comercialpatagonia.cl')
+    .replace(/https?:\/\/productos\.comercialpatagonia\.cl/g, 'https://tienda.comercialpatagonia.cl');
 }
 
 export function rewriteProductImageUrls(products: any[] | null): any[] | null {
