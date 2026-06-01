@@ -87,9 +87,35 @@ export default function HeroSpectacular({ products = [], onQuickView }: HeroSpec
             }
             :global(section) { height: auto !important; min-height: 100vh; }
           }
+          @media (max-width: 768px) {
+            .hero-bento-cards {
+              display: none !important;
+            }
+            .hero-left-column {
+              display: flex !important;
+              flex-direction: column !important;
+              align-items: center !important;
+              text-align: center !important;
+            }
+            :global(.hero-left-column > *) {
+              margin-left: auto !important;
+              margin-right: auto !important;
+            }
+            :global(.hero-cta-container) {
+              flex-direction: column !important;
+              align-items: stretch !important;
+              width: 100% !important;
+              gap: 16px !important;
+            }
+            :global(.hero-cta-container > a) {
+              width: 100% !important;
+              justify-content: center !important;
+              text-align: center !important;
+            }
+          }
         `}</style>
         {/* 🏗️ LADO IZQUIERDO: BRANDING & CTA */}
-        <div>
+        <div className="hero-left-column">
           <motion.div variants={itemVariants} style={{ 
             display: 'inline-flex', 
             alignItems: 'center', 
@@ -132,7 +158,7 @@ export default function HeroSpectacular({ products = [], onQuickView }: HeroSpec
             Abastecimiento estratégico de Cemento Portland para obras de alta exigencia climática. Fraguado optimizado para la Patagonia y certificación de calidad IRAM.
           </motion.p>
  
-          <motion.div variants={itemVariants} style={{ display: 'flex', gap: '20px', alignItems: 'center', flexWrap: 'wrap' }}>
+          <motion.div className="hero-cta-container" variants={itemVariants} style={{ display: 'flex', gap: '20px', alignItems: 'center', flexWrap: 'wrap' }}>
             <Link 
               href="/shop/17" 
               className="gold-shimmer" 
@@ -164,7 +190,7 @@ export default function HeroSpectacular({ products = [], onQuickView }: HeroSpec
         </div>
 
         {/* 🧩 LADO DERECHO: BENTO ECO-CARDS */}
-        <div style={{ display: 'grid', gap: '24px' }}>
+        <div className="hero-bento-cards" style={{ display: 'grid', gap: '24px' }}>
           {/* Card 1: Live Status */}
           <motion.div variants={itemVariants} className="titanium-glass" style={{ 
             padding: '35px', borderRadius: '24px', border: '1px solid rgba(255,255,255,0.08)',

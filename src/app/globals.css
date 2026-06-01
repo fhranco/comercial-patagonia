@@ -172,8 +172,8 @@ h1, h2, h3, h4, h5, h6 {
 /* 🏁 GRID DE PRODUCTOS (FLUÍDO & RESPONSIVE) */
 .product-grid-container {
   display: grid;
-  grid-template-columns: repeat(2, 1fr); /* Mobile: 2 Columnas */
-  gap: 15px;
+  grid-template-columns: 1fr; /* Mobile: 1 Columna */
+  gap: 20px;
 }
 
 @media (min-width: 768px) {

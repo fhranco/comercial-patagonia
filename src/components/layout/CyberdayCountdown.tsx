@@ -191,7 +191,7 @@ export default function CyberdayCountdown() {
       className="cyber-root-container"
     >
       
-      {/* 🚀 CSS GLOBAL PARA EFECTOS CINEMATOGRÁFICOS */}
+      {/* 🚀 CSS GLOBAL PARA EFECTOS CINEMATOGRÁFICOS Y RESPONSIVIDAD */}
       <style jsx global>{`
         @keyframes cyber-shimmer {
           0% { background-position: -200% 0; }
@@ -257,12 +257,12 @@ export default function CyberdayCountdown() {
           animation: pulse-ring 2s infinite ease-in-out;
         }
         .cyber-gold-shimmer {
-          background: linear-gradient(90deg, #FFD700 0%, #FFE600 25%, #FFFF00 50%, #FFE600 75%, #FFD700 100%) !important;
+          background: linear-gradient(90deg, #F9C300 0%, #FFE600 25%, #F9C300 50%, #FFE600 75%, #F9C300 100%) !important;
           background-size: 200% auto !important;
           color: #000000 !important;
           font-weight: 950 !important;
           animation: cyber-shimmer 3s linear infinite !important;
-          box-shadow: 0 0 20px rgba(255, 230, 0, 0.5) !important;
+          box-shadow: 0 0 20px rgba(249, 195, 0, 0.4) !important;
         }
         .cyber-red-shimmer {
           background: linear-gradient(90deg, #FF2E2E 0%, #FF5C5C 25%, #FF8E8E 50%, #FF5C5C 75%, #FF2E2E 100%) !important;
@@ -288,20 +288,14 @@ export default function CyberdayCountdown() {
         }
         .cyber-fab {
           position: fixed;
-          top: 50%;
-          right: 0px;
-          transform: translateY(-50%);
+          bottom: 95px;
+          right: 20px;
           z-index: 8999;
           background: rgba(7, 18, 32, 0.95);
           backdrop-filter: blur(15px);
-          border-left: 3px solid ${isActive ? '#FF2E2E' : '#FFD700'};
-          border-top: 1px solid rgba(255,255,255,0.08);
-          border-bottom: 1px solid rgba(255,255,255,0.08);
-          border-right: none;
-          border-top-left-radius: 12px;
-          border-bottom-left-radius: 12px;
-          border-top-right-radius: 0px;
-          border-bottom-right-radius: 0px;
+          border: 1px solid rgba(255, 255, 255, 0.08);
+          border-bottom: 3px solid var(--brand-yellow);
+          border-radius: 16px;
           padding: 20px 10px;
           display: flex;
           flex-direction: column;
@@ -309,16 +303,16 @@ export default function CyberdayCountdown() {
           justify-content: center;
           gap: 12px;
           cursor: pointer;
-          box-shadow: -10px 10px 30px rgba(0,0,0,0.5);
-          animation: pulse-fab-${isActive ? 'red' : 'gold'} 2s infinite ease-in-out;
+          box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+          animation: pulse-fab-gold 2s infinite ease-in-out;
           transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
           color: #FFFFFF !important;
           text-decoration: none !important;
           width: 58px;
         }
         .cyber-fab:hover {
-          transform: scale(1.08) translateY(-50%) translateX(-4px);
-          background: ${isActive ? '#FF2E2E' : '#FFD700'} !important;
+          transform: scale(1.05) translateY(-4px);
+          background: var(--brand-yellow) !important;
           color: #000000 !important;
         }
         .cyber-fab:hover .cyber-fab-icon {
@@ -329,6 +323,154 @@ export default function CyberdayCountdown() {
         }
         .cyber-fab:hover .cyber-fab-subtitle {
           color: #000000 !important;
+        }
+
+        /* 📱 RESPONSIVIDAD MAESTRA MÓVIL (ESTILOS COMPARTIDOS) */
+        .cyber-main-flex {
+          display: flex;
+          flex-wrap: wrap;
+          align-items: center;
+          justify-content: space-between;
+          gap: 30px;
+          padding-bottom: 10px;
+          width: 100%;
+        }
+        .cyber-title-column {
+          display: flex;
+          flex-direction: column;
+          gap: 10px;
+        }
+        .cyber-badge-row {
+          display: flex;
+          align-items: center;
+          gap: 12px;
+          flex-wrap: wrap;
+        }
+        .cyber-timing-container {
+          display: flex;
+          align-items: center;
+          gap: 24px;
+          flex-wrap: wrap;
+        }
+        .cyber-countdown-box {
+          display: flex;
+          flex-direction: column;
+          gap: 8px;
+        }
+        .cyber-timer-row {
+          display: flex;
+          gap: 10px;
+          align-items: center;
+        }
+        .cyber-time-card {
+          padding: 12px 16px;
+          border-radius: 4px;
+          min-width: 55px;
+          text-align: center;
+          transition: all 0.3s ease;
+        }
+        .cyber-time-num {
+          font-size: 22px;
+          font-weight: 1000;
+          display: block;
+          color: #FFF;
+          letter-spacing: -0.02em;
+          line-height: 1;
+        }
+        .cyber-time-label {
+          font-size: 7px;
+          font-weight: 950;
+          text-transform: uppercase;
+          letter-spacing: 0.1em;
+          margin-top: 4px;
+          display: block;
+        }
+        .cyber-colon {
+          opacity: 0.8;
+          font-weight: 1000;
+          font-size: 22px;
+          color: ${isActive ? '#FF5C5C' : '#FFD700'};
+        }
+        .cyber-action-btn {
+          display: flex;
+          align-items: center;
+          gap: 12px;
+          padding: 20px 42px;
+          border-radius: 4px;
+          font-size: 11px;
+          font-weight: 950;
+          text-transform: uppercase;
+          letter-spacing: 0.2em;
+          color: #000000;
+          position: relative;
+          overflow: hidden;
+          cursor: pointer;
+          border: 1px solid rgba(255,255,255,0.1);
+          text-decoration: none;
+          transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        @media (max-width: 768px) {
+          .cyber-root-container {
+            padding: 45px 20px 0px !important;
+          }
+          .cyber-main-flex {
+            flex-direction: column !important;
+            align-items: center !important;
+            text-align: center !important;
+            gap: 25px !important;
+          }
+          .cyber-badge-row {
+            justify-content: center !important;
+            gap: 10px !important;
+          }
+          .cyber-title-column {
+            align-items: center !important;
+          }
+          .cyber-title-column h2 {
+            text-align: center !important;
+            font-size: 1.8rem !important;
+            line-height: 1.1 !important;
+          }
+          .cyber-title-column p {
+            text-align: center !important;
+            font-size: 12px !important;
+            line-height: 1.4 !important;
+          }
+          .cyber-timing-container {
+            flex-direction: column !important;
+            align-items: center !important;
+            gap: 20px !important;
+            width: 100% !important;
+          }
+          .cyber-countdown-box {
+            align-items: center !important;
+          }
+          .cyber-timer-row {
+            gap: 6px !important;
+            justify-content: center !important;
+          }
+          .cyber-time-card {
+            padding: 8px 10px !important;
+            min-width: 46px !important;
+          }
+          .cyber-time-num {
+            font-size: 16px !important;
+          }
+          .cyber-time-label {
+            font-size: 6px !important;
+            margin-top: 2px !important;
+          }
+          .cyber-colon {
+            font-size: 16px !important;
+          }
+          .cyber-action-btn {
+            width: 100% !important;
+            justify-content: center !important;
+            padding: 15px 24px !important;
+            font-size: 10px !important;
+            letter-spacing: 0.1em !important;
+          }
         }
       `}</style>
 
@@ -374,33 +516,26 @@ export default function CyberdayCountdown() {
         flexDirection: 'column'
       }}>
         
-        <div style={{
-          display: 'flex',
-          flexWrap: 'wrap',
-          alignItems: 'center',
-          justifyContent: 'space-between',
-          gap: '30px',
-          paddingBottom: '10px'
-        }}>
+        <div className="cyber-main-flex">
           
           {/* 🏷️ CAMPAIGN TITLE HUD */}
-          <div style={{ display: 'flex', flexDirection: 'column', gap: '10px' }}>
-            <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
+          <div className="cyber-title-column">
+            <div className="cyber-badge-row">
               
               {isActive ? (
                 <div style={{
                   display: 'flex',
                   alignItems: 'center',
                   gap: '8px',
-                  backgroundColor: '#FF2E2E',
-                  color: '#FFFFFF',
+                  backgroundColor: 'var(--brand-yellow)',
+                  color: 'var(--brand-navy)',
                   padding: '6px 14px',
                   borderRadius: '100px',
                   fontSize: '9px',
                   fontWeight: 950,
                   textTransform: 'uppercase',
                   letterSpacing: '0.25em',
-                  boxShadow: '0 0 20px rgba(255, 46, 46, 0.6)',
+                  boxShadow: '0 0 20px rgba(249, 195, 0, 0.6)',
                   border: '1px solid rgba(255,255,255,0.3)'
                 }}>
                   <Flame size={12} className="animate-bounce" />
@@ -440,16 +575,21 @@ export default function CyberdayCountdown() {
               letterSpacing: '-0.03em',
               lineHeight: 0.95,
               margin: 0,
-              background: isActive 
-                ? 'linear-gradient(135deg, #FFF 0%, #FFA8A8 50%, #FF4B4B 100%)'
-                : 'linear-gradient(135deg, #FFF 0%, #FFF3B0 50%, #D4AF37 100%)',
-              WebkitBackgroundClip: 'text',
-              WebkitTextFillColor: 'transparent',
-              textShadow: isActive ? '0 0 30px rgba(255,75,75,0.25)' : '0 0 30px rgba(212,175,55,0.2)'
+              color: '#FFFFFF', // Color sólido de alta calidad para evitar fallos de renderizado de WebKit
+              textShadow: isActive 
+                ? '0 0 20px rgba(255, 75, 75, 0.4), 0 0 40px rgba(255, 75, 75, 0.2)' 
+                : '0 0 20px rgba(212, 175, 55, 0.3), 0 0 40px rgba(212, 175, 55, 0.15)'
             }}>
               {isActive ? "CYBER APERTURA MAYORISTA:" : "DESCUENTOS CYBER PATAGONIA"}
               <br/>
-              <span style={{ fontSize: '70%', color: isActive ? '#FF5C5C' : '#FFD700', WebkitTextFillColor: 'initial', textShadow: 'none', fontWeight: 900 }}>
+              <span style={{ 
+                fontSize: '70%', 
+                color: isActive ? '#FF4B4B' : '#FFD700', 
+                fontWeight: 900,
+                display: 'inline-block',
+                marginTop: '10px',
+                textShadow: isActive ? '0 0 10px rgba(255, 75, 75, 0.3)' : '0 0 10px rgba(212, 175, 55, 0.3)'
+              }}>
                 {isActive ? "🔥 ¡COMPRA AHORA HASTA 40% DCTO!" : "⏱️ 01, 02 y 03 de Junio de 2026"}
               </span>
             </h2>
@@ -469,14 +609,9 @@ export default function CyberdayCountdown() {
           </div>
 
           {/* ⏰ STEREOSCOPIC 3D TIMING HUD */}
-          <div style={{
-            display: 'flex',
-            alignItems: 'center',
-            gap: '24px',
-            flexWrap: 'wrap'
-          }}>
+          <div className="cyber-timing-container">
             
-            <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
+            <div className="cyber-countdown-box">
               <div style={{ display: 'flex', alignItems: 'center', gap: '6px', color: '#E2E8F0' }}>
                 <Clock size={12} style={{ color: isActive ? '#FF5C5C' : '#FFD700' }} />
                 <span style={{ fontSize: '9px', fontWeight: 900, textTransform: 'uppercase', letterSpacing: '0.25em' }}>
@@ -485,62 +620,52 @@ export default function CyberdayCountdown() {
               </div>
 
               {/* TIMING CARDS */}
-              <div style={{ display: 'flex', gap: '10px', alignItems: 'center' }}>
+              <div className="cyber-timer-row">
                 {timeLeft.days > 0 && (
                   <>
-                    <div style={{ padding: '12px 16px', borderRadius: '4px', minWidth: '55px', textAlign: 'center' }} className="cyber-neon-card">
-                      <span style={{ fontSize: '22px', fontWeight: 1000, display: 'block', color: '#FFF', letterSpacing: '-0.02em', lineHeight: 1 }}>{timeLeft.days}</span>
-                      <span style={{ fontSize: '7px', fontWeight: 950, color: 'var(--primary-gold)', textTransform: 'uppercase', letterSpacing: '0.1em', marginTop: '4px', display: 'block' }}>Días</span>
+                    <div className="cyber-time-card cyber-neon-card">
+                      <span className="cyber-time-num">{timeLeft.days}</span>
+                      <span className="cyber-time-label" style={{ color: 'var(--primary-gold)' }}>Días</span>
                     </div>
-                    <span style={{ opacity: 0.8, fontWeight: 1000, fontSize: '22px', color: isActive ? '#FF5C5C' : '#FFD700' }}>:</span>
+                    <span className="cyber-colon">:</span>
                   </>
                 )}
 
-                <div style={{ padding: '12px 16px', borderRadius: '4px', minWidth: '55px', textAlign: 'center' }} className="cyber-neon-card">
-                  <span style={{ fontSize: '22px', fontWeight: 1000, display: 'block', color: '#FFF', letterSpacing: '-0.02em', lineHeight: 1 }}>
+                <div className="cyber-time-card cyber-neon-card">
+                  <span className="cyber-time-num">
                     {timeLeft.hours.toString().padStart(2, '0')}
                   </span>
-                  <span style={{ fontSize: '7px', fontWeight: 950, color: '#FFF', textTransform: 'uppercase', letterSpacing: '0.1em', marginTop: '4px', display: 'block' }}>Horas</span>
+                  <span className="cyber-time-label" style={{ color: '#FFF' }}>Horas</span>
                 </div>
 
-                <span style={{ opacity: 0.8, fontWeight: 1000, fontSize: '22px', color: isActive ? '#FF5C5C' : '#FFD700' }}>:</span>
+                <span className="cyber-colon">:</span>
 
-                <div style={{ padding: '12px 16px', borderRadius: '4px', minWidth: '55px', textAlign: 'center' }} className="cyber-neon-card">
-                  <span style={{ fontSize: '22px', fontWeight: 1000, display: 'block', color: '#FFF', letterSpacing: '-0.02em', lineHeight: 1 }}>
+                <div className="cyber-time-card cyber-neon-card">
+                  <span className="cyber-time-num">
                     {timeLeft.minutes.toString().padStart(2, '0')}
                   </span>
-                  <span style={{ fontSize: '7px', fontWeight: 950, color: '#FFF', textTransform: 'uppercase', letterSpacing: '0.1em', marginTop: '4px', display: 'block' }}>Mins</span>
+                  <span className="cyber-time-label" style={{ color: '#FFF' }}>Mins</span>
                 </div>
 
-                <span style={{ opacity: 0.8, fontWeight: 1000, fontSize: '22px', color: isActive ? '#FF5C5C' : '#FFD700' }}>:</span>
+                <span className="cyber-colon">:</span>
 
-                <div style={{ padding: '12px 16px', borderRadius: '4px', minWidth: '55px', textAlign: 'center' }} className="cyber-neon-card">
-                  <span style={{ fontSize: '22px', fontWeight: 1000, display: 'block', color: isActive ? '#FF2E2E' : 'var(--primary-gold)', textShadow: isActive ? '0 0 10px rgba(255,46,46,0.5)' : '0 0 10px rgba(212,175,55,0.5)', letterSpacing: '-0.02em', lineHeight: 1 }}>
+                <div className="cyber-time-card cyber-neon-card">
+                  <span className="cyber-time-num" style={{ color: isActive ? '#FF2E2E' : 'var(--primary-gold)', textShadow: isActive ? '0 0 10px rgba(255,46,46,0.5)' : '0 0 10px rgba(212,175,55,0.5)' }}>
                     {timeLeft.seconds.toString().padStart(2, '0')}
                   </span>
-                  <span style={{ fontSize: '7px', fontWeight: 950, color: isActive ? '#FF5C5C' : 'var(--primary-gold)', textTransform: 'uppercase', letterSpacing: '0.1em', marginTop: '4px', display: 'block' }}>Segs</span>
+                  <span className="cyber-time-label" style={{ color: isActive ? '#FF5C5C' : 'var(--primary-gold)' }}>Segs</span>
                 </div>
               </div>
             </div>
 
             {/* 🔘 ACTIVE SHIMMER ACTION BUTTON */}
-            <Link href="/shop?category=cyberday" style={{
-              display: 'flex',
-              alignItems: 'center',
-              gap: '12px',
-              padding: '20px 42px',
-              borderRadius: '4px',
-              fontSize: '11px',
-              fontWeight: 950,
-              textTransform: 'uppercase',
-              letterSpacing: '0.2em',
-              color: '#000000',
-              boxShadow: isActive ? '0 20px 40px rgba(255, 46, 46, 0.4)' : '0 20px 40px rgba(212, 175, 55, 0.3)',
-              position: 'relative',
-              overflow: 'hidden',
-              cursor: 'pointer',
-              border: '1px solid rgba(255,255,255,0.1)'
-            }} className={isActive ? "cyber-red-shimmer hover:scale-[1.03] active:scale-95 transition-all" : "cyber-gold-shimmer hover:scale-[1.03] active:scale-95 transition-all"}>
+            <Link 
+              href="/shop?category=cyberday" 
+              style={{
+                boxShadow: '0 20px 40px rgba(255, 230, 0, 0.3)'
+              }} 
+              className="cyber-action-btn cyber-gold-shimmer hover:scale-[1.03] active:scale-95 transition-all"
+            >
               <span>{isActive ? "ADQUIRIR DESCUENTOS" : "ACCEDER PRE-VENTA"}</span>
               <ArrowRight size={14} />
             </Link>
@@ -582,10 +707,10 @@ export default function CyberdayCountdown() {
         onClick={handleScrollToBanner}
         className="cyber-fab"
       >
-        <Flame size={20} className="cyber-fab-icon animate-bounce" style={{ color: isActive ? '#FF2E2E' : '#FFD700' }} />
+        <Flame size={20} className="cyber-fab-icon animate-bounce" style={{ color: 'var(--brand-yellow)' }} />
         
         <div style={{ display: 'flex', flexDirection: 'column', gap: '3px', alignItems: 'center', textAlign: 'center' }}>
-          <span style={{ fontSize: '9px', fontWeight: 1000, color: isActive ? '#FF2E2E' : '#FFD700', letterSpacing: '0.05em' }} className="cyber-fab-title">CYBER</span>
+          <span style={{ fontSize: '9px', fontWeight: 1000, color: 'var(--brand-yellow)', letterSpacing: '0.05em' }} className="cyber-fab-title">CYBER</span>
           <span style={{ fontSize: '9px', fontWeight: 1000, color: '#FFFFFF', letterSpacing: '0.05em' }} className="cyber-fab-subtitle">DAY</span>
         </div>
       </a>

@@ -140,14 +140,14 @@ export default function ProductCard({ product, onQuickView }: ProductCardProps) 
                     position: 'absolute', 
                     top: '15px', 
                     left: '15px', 
-                    background: isCyber ? '#FF4B4B' : '#D4AF37', 
-                    color: isCyber ? '#FFF' : '#000', 
+                    background: isCyber ? 'var(--brand-yellow)' : '#D4AF37', 
+                    color: '#000', 
                     fontSize: '9px', 
                     fontWeight: 900, 
                     padding: '4px 10px', 
                     borderRadius: '100px', 
                     textTransform: 'uppercase',
-                    boxShadow: isCyber ? '0 4px 12px rgba(255, 75, 75, 0.3)' : 'none',
+                    boxShadow: isCyber ? '0 4px 12px rgba(249, 195, 0, 0.3)' : 'none',
                     zIndex: 10
                   }}>
                     {isCyber ? 'Cyber' : 'Oferta'}

@@ -30,7 +30,7 @@ export default function CyberFeaturedGrid({ products, onQuickView }: CyberFeatur
         
         {/* HEADER SECTION */}
         <div style={{ marginBottom: '40px', display: 'flex', flexDirection: 'column', gap: '8px' }}>
-          <div style={{ display: 'flex', alignItems: 'center', gap: '8px', color: '#FF4B4B' }}>
+          <div style={{ display: 'flex', alignItems: 'center', gap: '8px', color: 'var(--brand-yellow)' }}>
             <Flame className="w-4 h-4 animate-pulse" />
             <span style={{ fontSize: '11px', fontWeight: 900, textTransform: 'uppercase', letterSpacing: '0.3em' }}>
               EQUIPAMIENTO EN LIQUIDACIÓN
@@ -46,7 +46,7 @@ export default function CyberFeaturedGrid({ products, onQuickView }: CyberFeatur
             letterSpacing: '-0.02em',
             margin: 0
           }}>
-            SELECCIÓN DESTACADA <span style={{ color: '#FF4B4B' }}>CYBER.</span>
+            SELECCIÓN DESTACADA <span style={{ color: 'var(--brand-yellow)' }}>CYBER.</span>
           </h2>
           <p style={{ fontSize: '13px', opacity: 0.5, margin: '5px 0 0', maxWidth: '500px' }}>
             Descuento del 25% y despacho directo coordinado en obra. Stock crítico con tarifas preferenciales.
@@ -54,10 +54,16 @@ export default function CyberFeaturedGrid({ products, onQuickView }: CyberFeatur
         </div>
 
         {/* 4-COLUMN RESPONSIVE GRID */}
-        <div className="cyber-grid-layout" style={{ display: 'grid', gap: '30px' }}>
+        <div className="cyber-grid-layout" style={{ display: 'grid', gap: '20px' }}>
           <style jsx>{`
             .cyber-grid-layout {
-              grid-template-columns: repeat(2, 1fr);
+              grid-template-columns: 1fr;
+            }
+            @media (min-width: 768px) {
+              .cyber-grid-layout {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 30px !important;
+              }
             }
             @media (min-width: 1024px) {
               .cyber-grid-layout {

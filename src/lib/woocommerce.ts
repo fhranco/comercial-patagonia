@@ -230,8 +230,8 @@ async function _fetchProductsFromAPI(): Promise<any[] | null> {
     const authHeader = `Basic ${Buffer.from(`${CK}:${CS}`).toString('base64')}`;
     
     const isVercel = process.env.VERCEL === "1" || process.env.NODE_ENV === "production";
-    const timeoutMs = isVercel ? 2000 : 8000;
-    const maxRetries = isVercel ? 1 : 3;
+    const timeoutMs = isVercel ? 9000 : 9000; // Aumentado a 9s para soporte robusto a Hostinger
+    const maxRetries = isVercel ? 2 : 3;      // 2 intentos en producción para resiliencia sin exceder límites de Vercel
 
     const fetchPage = async (page: number) => {
       const url = `${WOOCOMMERCE_URL}/products?per_page=80&page=${page}&status=publish`;
@@ -343,8 +343,8 @@ async function _fetchCategoriesFromAPI(): Promise<any[] | null> {
     const authUrl = `${WOOCOMMERCE_URL}/products/categories?per_page=100&hide_empty=true`;
     
     const isVercel = process.env.VERCEL === "1" || process.env.NODE_ENV === "production";
-    const timeoutMs = isVercel ? 2000 : 8000;
-    const maxRetries = isVercel ? 1 : 3;
+    const timeoutMs = isVercel ? 9000 : 9000; // Aumentado a 9s para soporte robusto a Hostinger
+    const maxRetries = isVercel ? 2 : 3;      // 2 intentos en producción para resiliencia sin exceder límites de Vercel
 
     writeLog(`[FETCH] Categories requesting: ${authUrl}`);
     const response = await fetchWithRetry(authUrl, {

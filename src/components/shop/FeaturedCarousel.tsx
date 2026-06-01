@@ -117,18 +117,36 @@ export default function FeaturedCarousel({ products, onQuickView, title, subtitl
             scrollSnapType: 'x mandatory',
             scrollbarWidth: 'none',
           }}
-          className="no-scrollbar"
+          className="no-scrollbar featured-carousel-container"
         >
           {products.map((product) => (
-            <motion.div
+            <div
               key={product.id}
-              style={{ minWidth: '320px', maxWidth: '320px', scrollSnapAlign: 'start' }}
+              className="featured-carousel-item"
+              style={{ scrollSnapAlign: 'start' }}
             >
               <ProductCard product={product} onQuickView={onQuickView} />
-            </motion.div>
+            </div>
           ))}
         </div>
       </div>
+
+      <style jsx>{`
+        .featured-carousel-item {
+          min-width: 320px;
+          max-width: 320px;
+        }
+        @media (max-width: 768px) {
+          .featured-carousel-item {
+            min-width: calc(100vw - 10%) !important;
+            max-width: calc(100vw - 10%) !important;
+            scroll-snap-align: center !important;
+          }
+          :global(.featured-carousel-container) {
+            gap: 16px !important;
+          }
+        }
+      `}</style>
     </section>
   );
 }

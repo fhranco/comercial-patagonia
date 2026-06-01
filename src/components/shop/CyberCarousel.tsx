@@ -47,7 +47,7 @@ export default function CyberCarousel({ products, onQuickView }: CyberCarouselPr
           whileInView={{ opacity: 1, x: 0 }}
           viewport={{ once: true }}
         >
-          <div style={{ display: 'flex', alignItems: 'center', gap: '8px', color: '#FF4B4B', marginBottom: '15px' }}>
+          <div style={{ display: 'flex', alignItems: 'center', gap: '8px', color: 'var(--brand-yellow)', marginBottom: '15px' }}>
             <Flame className="w-5 h-5 animate-pulse" />
             <span style={{ fontSize: '11px', fontWeight: 900, textTransform: 'uppercase', letterSpacing: '0.4em' }}>
               Catálogo Completo Cyber
@@ -62,7 +62,7 @@ export default function CyberCarousel({ products, onQuickView }: CyberCarouselPr
             fontFamily: 'var(--font-heading)',
             letterSpacing: '-0.02em'
           }}>
-            TODA LA <span style={{ color: '#FF4B4B' }}>CATEGORÍA CYBER</span>
+            TODA LA <span style={{ color: 'var(--brand-yellow)' }}>CATEGORÍA CYBER</span>
           </h2>
         </motion.div>
 
@@ -71,22 +71,22 @@ export default function CyberCarousel({ products, onQuickView }: CyberCarouselPr
           <button 
             onClick={() => scroll('left')}
             style={{ 
-              width: '50px', height: '50px', borderRadius: '50%', border: '2px solid rgba(255, 75, 75, 0.15)', 
+              width: '50px', height: '50px', borderRadius: '50%', border: '2px solid rgba(249, 195, 0, 0.25)', 
               background: '#FFF', cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center',
-              color: '#FF4B4B', boxShadow: '0 4px 10px rgba(255,75,75,0.05)'
+              color: 'var(--brand-navy)', boxShadow: '0 4px 10px rgba(249,195,0,0.08)'
             }}
-            className="hover:bg-[#FF4B4B] hover:text-white hover:border-[#FF4B4B] transition-all duration-300"
+            className="hover:bg-[var(--brand-yellow)] hover:text-black hover:border-[var(--brand-yellow)] transition-all duration-300"
           >
             <ArrowLeft className="w-5 h-5" />
           </button>
           <button 
             onClick={() => scroll('right')}
             style={{ 
-              width: '50px', height: '50px', borderRadius: '50%', border: '2px solid rgba(255, 75, 75, 0.15)', 
+              width: '50px', height: '50px', borderRadius: '50%', border: '2px solid rgba(249, 195, 0, 0.25)', 
               background: '#FFF', cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center',
-              color: '#FF4B4B', boxShadow: '0 4px 10px rgba(255,75,75,0.05)'
+              color: 'var(--brand-navy)', boxShadow: '0 4px 10px rgba(249,195,0,0.08)'
             }}
-            className="hover:bg-[#FF4B4B] hover:text-white hover:border-[#FF4B4B] transition-all duration-300"
+            className="hover:bg-[var(--brand-yellow)] hover:text-black hover:border-[var(--brand-yellow)] transition-all duration-300"
           >
             <ArrowRight className="w-5 h-5" />
           </button>
@@ -116,32 +116,54 @@ export default function CyberCarousel({ products, onQuickView }: CyberCarouselPr
             scrollSnapType: 'x mandatory',
             scrollbarWidth: 'none',
           }}
-          className="no-scrollbar"
+          className="no-scrollbar cyber-carousel-container"
         >
           {products.map((product) => (
-            <motion.div
+            <div
               key={product.id}
-              style={{ minWidth: '300px', maxWidth: '300px', scrollSnapAlign: 'start' }}
-              whileHover={{ y: -8 }}
-              transition={{ duration: 0.3 }}
+              className="cyber-carousel-item"
+              style={{ scrollSnapAlign: 'start' }}
             >
-              <div style={{
-                border: '1px solid rgba(255, 75, 75, 0.1)',
-                borderRadius: '8px',
-                padding: '12px',
-                background: '#FFFFFF',
-                boxShadow: '0 5px 20px rgba(0,0,0,0.02)',
-                position: 'relative',
-                transition: 'all 0.3s ease',
-              }}
-              className="hover:shadow-[0_15px_45px_rgba(255,75,75,0.08)] hover:border-[rgba(255,75,75,0.3)]"
+              <motion.div
+                whileHover={{ y: -8 }}
+                transition={{ duration: 0.3 }}
+                style={{ width: '100%' }}
               >
-                <ProductCard product={product} onQuickView={onQuickView} />
-              </div>
-            </motion.div>
+                <div style={{
+                  border: '1px solid rgba(249, 195, 0, 0.15)',
+                  borderRadius: '8px',
+                  padding: '12px',
+                  background: '#FFFFFF',
+                  boxShadow: '0 5px 20px rgba(0,0,0,0.02)',
+                  position: 'relative',
+                  transition: 'all 0.3s ease',
+                }}
+                className="hover:shadow-[0_15px_45px_rgba(249,195,0,0.08)] hover:border-[rgba(249,195,0,0.35)]"
+                >
+                  <ProductCard product={product} onQuickView={onQuickView} />
+                </div>
+              </motion.div>
+            </div>
           ))}
         </div>
       </div>
+
+      <style jsx>{`
+        .cyber-carousel-item {
+          min-width: 300px;
+          max-width: 300px;
+        }
+        @media (max-width: 768px) {
+          .cyber-carousel-item {
+            min-width: calc(100vw - 10%) !important;
+            max-width: calc(100vw - 10%) !important;
+            scroll-snap-align: center !important;
+          }
+          :global(.cyber-carousel-container) {
+            gap: 16px !important;
+          }
+        }
+      `}</style>
     </section>
   );
 }
