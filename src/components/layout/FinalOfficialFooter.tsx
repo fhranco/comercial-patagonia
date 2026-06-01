@@ -3,6 +3,7 @@
 import { Mail, MapPin, Phone, Globe } from "lucide-react";
 import Image from "next/image";
 import { APP_VERSION } from "@/lib/version";
+import ViewCounter from "@/components/common/ViewCounter";
 
 export default function Footer() {
   const currentYear = new Date().getFullYear();
@@ -83,6 +84,9 @@ export default function Footer() {
             <p style={{ fontSize: '10px', fontWeight: 700, opacity: 0.5, textTransform: 'uppercase', letterSpacing: '0.1em' }}>
                 Desarrollado por <a href="https://agenciapatagoniacoach.cl" target="_blank" rel="noopener noreferrer" style={{ color: 'inherit', textDecoration: 'none', borderBottom: '1px solid var(--primary-gold)' }}>Agencia Patagoniacoach</a>
             </p>
+            <div style={{ marginTop: '5px' }}>
+                <ViewCounter />
+            </div>
         </div>
     </footer>
   );

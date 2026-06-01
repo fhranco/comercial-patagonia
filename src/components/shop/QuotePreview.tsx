@@ -67,7 +67,7 @@ export default function QuotePreview({ isOpen, onClose, projectRef }: QuotePrevi
                     <div>
                         <h1 style={{ fontSize: '1.2rem', fontWeight: 900, color: '#0E1F33', margin: 0, letterSpacing: '0.1em' }}>COMERCIAL DE LA PATAGONIA</h1>
                         <p style={{ fontSize: '10px', opacity: 0.5, fontWeight: 700, textTransform: 'uppercase', marginTop: '5px' }}>
-                            Magallanes, Chile • División Mayorista
+                            Magallanes, Chile • Suministro Estratégico
                         </p>
                     </div>
                     <div style={{ textAlign: 'right' }}>

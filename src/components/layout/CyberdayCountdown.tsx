@@ -12,11 +12,11 @@ export default function CyberdayCountdown() {
 
   // 1. Ticker items for Negocios hot deals
   const tickerItems = [
-    "🔥 CYBERDAY PATAGONIA: HASTA 40% EN OBRAS COMPLETA",
-    "🚛 ENVÍOS PREFERENCIALES DESDE PUNTA ARENAS A NATALES, PORVENIR Y TODA LA REGIÓN",
-    "💰 PRECIOS NETOS DIRECTOS EN FACTURA DE NEGOCIOS DE AHORRO INMEDIATO",
-    "🧱 CEMENTO COMODORO PCR-50 CON DESCUENTO MAYORISTA EXCLUSIVO",
-    "🍳 LÍNEA DE COCINAS BINELLI Y MUEBLES PREMIUM HASTA 35% OFF",
+    "🔥 CYBERDAY PATAGONIA: HASTA 35% DE DESCUENTO EN PRODUCTOS PARA EL HOGAR",
+    "🚛 ENVÍOS A DOMICILIO DESDE PUNTA ARENAS A NATALES, PORVENIR Y TODA LA REGIÓN",
+    "🏠 PRECIOS DIRECTOS PARA LA FAMILIA QUE CONSTRUYE Y EQUIPA SU CASA",
+    "🛋️ MUEBLES, ROPEROS, CÓMODAS Y ORGANIZADORES PARA TODOS LOS AMBIENTES",
+    "🍳 MUEBLES DE COCINA BINELLI Y MUEBLES PREMIUM HASTA 35% OFF",
     "❄️ MATERIALES DE AISLACIÓN TÉRMICA PRO CERTIFICADOS PARA CLIMA EXTREMO"
   ];
 
@@ -580,7 +580,7 @@ export default function CyberdayCountdown() {
                 ? '0 0 20px rgba(255, 75, 75, 0.4), 0 0 40px rgba(255, 75, 75, 0.2)' 
                 : '0 0 20px rgba(212, 175, 55, 0.3), 0 0 40px rgba(212, 175, 55, 0.15)'
             }}>
-              {isActive ? "CYBER APERTURA MAYORISTA:" : "DESCUENTOS CYBER PATAGONIA"}
+              {isActive ? "CYBER PATAGONIA: TU HOGAR AL MEJOR PRECIO" : "DESCUENTOS CYBER PATAGONIA"}
               <br/>
               <span style={{ 
                 fontSize: '70%', 
@@ -590,7 +590,7 @@ export default function CyberdayCountdown() {
                 marginTop: '10px',
                 textShadow: isActive ? '0 0 10px rgba(255, 75, 75, 0.3)' : '0 0 10px rgba(212, 175, 55, 0.3)'
               }}>
-                {isActive ? "🔥 ¡COMPRA AHORA HASTA 40% DCTO!" : "⏱️ 01, 02 y 03 de Junio de 2026"}
+                {isActive ? "🔥 MUEBLES DE HOGAR Y COCINA, REVESTIMIENTOS Y AISLACIÓN" : "⏱️ 01, 02 y 03 de Junio de 2026"}
               </span>
             </h2>
 
@@ -603,8 +603,8 @@ export default function CyberdayCountdown() {
               lineHeight: 1.5
             }}>
               {isActive 
-                ? "Precios rebajados en Cemento Comodoro, cocinas premium, revestimientos y aislación durante este 01, 02 y 03 de Junio de 2026. Despacho coordinado en obra."
-                : "Tarifas especiales preferenciales para constructoras, contratistas y clientes de Negocios vigentes este 01, 02 y 03 de Junio de 2026. Apertura Lunes a las 00:00:00."}
+                ? "Descuentos reales en muebles para el hogar, muebles de cocina premium, revestimientos y aislación térmica. Para la familia que equipa y construye su casa en Magallanes."
+                : "Ofertas para toda la familia durante el 01, 02 y 03 de Junio de 2026. Muebles, muebles de cocina, materiales de construcción y más. ¡Apertura el Lunes a las 00:00!"}
             </p>
           </div>
 

@@ -29,7 +29,7 @@ export default function B2BConcierge() {
     },
     {
         id: "support",
-        title: "Atención Especial Mayorista",
+        title: "Atención Especial Constructoras & Empresas",
         desc: "Arquitectos y Constructoras",
         icon: <Headset className="w-5 h-5" />,
         action: () => window.open(`https://wa.me/${phone}?text=Hola, represento a una constructora/arquitecto y busco atención profesional.`, '_blank'),

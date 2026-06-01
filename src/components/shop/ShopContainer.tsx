@@ -180,7 +180,7 @@ export default function ShopContainer({ initialProducts, initialCategory, isLive
               <div style={{ display: 'flex', alignItems: 'center', gap: '15px' }}>
                 <div style={{ width: '8px', height: '8px', borderRadius: '50%', backgroundColor: '#F9C300' }} className="animate-pulse" />
                 <span style={{ fontSize: '10px', fontWeight: 900, textTransform: 'uppercase', letterSpacing: '0.2em' }}>
-                  ALERTA MAYORISTA: Stock Crítico Detectado en Bodega Central
+                  ALERTA DE STOCK: Stock Crítico Detectado en Bodega Central
                 </span>
               </div>
               <div style={{ display: 'flex', gap: '20px' }}>
