@@ -20,7 +20,7 @@ export async function POST(req: NextRequest) {
     const rawIp = 
       req.headers.get('x-forwarded-for')?.split(',')[0].trim() || 
       req.headers.get('x-real-ip') || 
-      req.ip || 
+      (req as any).ip || 
       '127.0.0.1';
 
     // 2. Anonimizar la IP (RGPD) — hash de IP + pathname + fecha
