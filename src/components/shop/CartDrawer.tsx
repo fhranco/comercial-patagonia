@@ -8,6 +8,7 @@ import { useCart } from "@/context/CartContext";
 import Image from "next/image";
 import Link from "next/link";
 import QuotePreview from "./QuotePreview";
+import { BRAND_CONFIG } from "@/lib/constants";
 
 export default function CartDrawer() {
   const { 
@@ -28,7 +29,7 @@ export default function CartDrawer() {
 
     saveQuoteToHistory(); // 💾 Archivar en historial local
 
-    const phone = "56985806127"; 
+    const phone = BRAND_CONFIG.whatsapp.replace('+', '').replace(/\s/g, ''); 
     const itemsList = cart.map(item => `- ${item.name} (x${item.quantity}) - Ref: ${item.sku || 'N/A'}`).join('%0A');
     const projectHeader = projectName ? `PROYECTO: *${projectName}*%0A` : '';
     

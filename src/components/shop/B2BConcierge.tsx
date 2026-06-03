@@ -4,11 +4,12 @@ import React, { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { MessageSquare, Truck, ShieldCheck, X, Phone, Headset, Construction } from "lucide-react";
 import { useCart } from "@/context/CartContext";
+import { BRAND_CONFIG } from "@/lib/constants";
 
 export default function B2BConcierge() {
   const [isOpen, setIsOpen] = useState(false);
   const { cart } = useCart();
-  const phone = "56985806127";
+  const phone = BRAND_CONFIG.whatsapp.replace('+', '').replace(/\s/g, '');
 
   const conciergeOptions = [
     {

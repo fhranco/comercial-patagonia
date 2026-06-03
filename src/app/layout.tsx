@@ -7,6 +7,7 @@ import CartDrawer from "../components/shop/CartDrawer";
 import B2BConcierge from "../components/shop/B2BConcierge";
 import Footer from "../components/layout/FinalOfficialFooter";
 import GlobalQuickView from "../components/shop/GlobalQuickView";
+import { BRAND_CONFIG } from "../lib/constants";
 
 const inter = Inter({ 
   subsets: ["latin"],
@@ -38,7 +39,7 @@ export default function RootLayout({
     "image": "https://comercialpatagonia.cl/logo.png",
     "@id": "https://comercialpatagonia.cl",
     "url": "https://comercialpatagonia.cl",
-    "telephone": "+56985806127",
+    "telephone": BRAND_CONFIG.whatsapp,
     "address": {
       "@type": "PostalAddress",
       "streetAddress": "Avenida Carlos Ibañez del Campo",

@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { FileText, Save, Trash2, Send, MessageCircle, User, Phone, Mail, FolderOpen } from 'lucide-react';
 import { Calculation } from '@/engineering/types/materials';
 import { formatCurrency } from '@/engineering/utils/calculations';
+import { BRAND_CONFIG } from '@/lib/constants';
 
 interface QuotationManagerProps {
   calculations: Calculation[];
@@ -46,7 +47,8 @@ ${index + 1}. *${item.materialName}*
 _Nota: Precios referenciales sujetos a stock y logística regional._
     `.trim();
 
-    const whatsappLink = `https://wa.me/56985806127?text=${encodeURIComponent(message)}`;
+    const phone = BRAND_CONFIG.whatsapp.replace('+', '').replace(/\s/g, '');
+    const whatsappLink = `https://wa.me/${phone}?text=${encodeURIComponent(message)}`;
     window.open(whatsappLink, '_blank');
     setShowShareDialog(false);
   };

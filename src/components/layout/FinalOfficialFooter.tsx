@@ -4,6 +4,7 @@ import { Mail, MapPin, Phone, Globe } from "lucide-react";
 import Image from "next/image";
 import { APP_VERSION } from "@/lib/version";
 import ViewCounter from "@/components/common/ViewCounter";
+import { BRAND_CONFIG } from "@/lib/constants";
 
 export default function Footer() {
   const currentYear = new Date().getFullYear();
@@ -47,7 +48,7 @@ export default function Footer() {
                     <a href="tel:+56985806125" style={{ display: 'flex', alignItems: 'center', gap: '10px', textDecoration: 'none', color: 'inherit', fontSize: '14px' }} className="hover:text-[var(--primary-gold)] transition-colors">
                         <Phone size={16} opacity={0.5} /> +56 9 8580 6125
                     </a>
-                    <a href="tel:+56985806127" style={{ display: 'flex', alignItems: 'center', gap: '10px', textDecoration: 'none', color: 'inherit', fontSize: '14px' }} className="hover:text-[var(--primary-gold)] transition-colors">
+                    <a href={`tel:${BRAND_CONFIG.whatsapp}`} style={{ display: 'flex', alignItems: 'center', gap: '10px', textDecoration: 'none', color: 'inherit', fontSize: '14px' }} className="hover:text-[var(--primary-gold)] transition-colors">
                         <Phone size={16} opacity={0.5} /> +56 9 8580 6127
                     </a>
                     <a href="mailto:ventas@comercialpatagonia.cl" style={{ display: 'flex', alignItems: 'center', gap: '10px', textDecoration: 'none', color: 'inherit', fontSize: '14px' }} className="hover:text-[var(--primary-gold)] transition-colors">
