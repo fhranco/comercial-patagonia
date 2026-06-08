@@ -7,6 +7,7 @@ import Image from "next/image";
 import { Product } from "@/types/woocommerce";
 import { useCart } from "@/context/CartContext";
 import { useRouter } from "next/navigation";
+import { CAMPAIGN_CONFIG } from "@/lib/constants";
 
 interface PromotionHUDProps {
   products?: any[];
@@ -26,14 +27,23 @@ export default function PromotionHUD({ products, onQuickView }: PromotionHUDProp
   const [promoProduct, setPromoProduct] = useState<any>(null);
 
   useEffect(() => {
-    // 🏆 PRIORIDAD CYBER: Buscamos productos de la categoría CyberMonday o Cyberday para destacarlos en el HUD flotante
-    const cyberSaleProducts = saleProducts.filter(p =>
-      p.categories && Array.isArray(p.categories) && 
-      p.categories.some((cat: any) => cat.slug && (cat.slug.toLowerCase() === "cybermonday" || cat.slug.toLowerCase() === "cyberday"))
-    );
+    // 🏆 PRIORIDAD CAMPAÑA: Buscamos productos de la categoría Cyber o de Zanzini en junio
+    let campaignProducts = [];
+    
+    if (CAMPAIGN_CONFIG.isCyberActive) {
+      campaignProducts = saleProducts.filter(p =>
+        p.categories && Array.isArray(p.categories) && 
+        p.categories.some((cat: any) => cat.slug && (cat.slug.toLowerCase() === "cybermonday" || cat.slug.toLowerCase() === "cyberday"))
+      );
+    } else if (CAMPAIGN_CONFIG.activeCampaign === "zanzini_june") {
+      campaignProducts = dataSource.filter(p =>
+        p.categories && Array.isArray(p.categories) && 
+        p.categories.some((cat: any) => cat.slug && (cat.slug.toLowerCase() === "zanzini-marca" || cat.slug.toLowerCase() === "zanzini"))
+      );
+    }
 
-    if (cyberSaleProducts.length > 0) {
-      const randomProduct = cyberSaleProducts[Math.floor(Math.random() * cyberSaleProducts.length)];
+    if (campaignProducts.length > 0) {
+      const randomProduct = campaignProducts[Math.floor(Math.random() * campaignProducts.length)];
       setPromoProduct(randomProduct);
     } else if (saleProducts.length > 0) {
       const randomProduct = saleProducts[Math.floor(Math.random() * saleProducts.length)];
@@ -58,7 +68,10 @@ export default function PromotionHUD({ products, onQuickView }: PromotionHUDProp
 
   // Cálculo de descuento real dinámico
   const discount = promoProduct.regular_price ? Math.round((1 - (Number(promoProduct.price) / Number(promoProduct.regular_price))) * 100) : 0;
-  const isCyberProduct = promoProduct.categories && promoProduct.categories.some((cat: any) => cat.slug && (cat.slug.toLowerCase() === "cybermonday" || cat.slug.toLowerCase() === "cyberday"));
+  const isCyberProduct = CAMPAIGN_CONFIG.isCyberActive && promoProduct.categories && promoProduct.categories.some((cat: any) => cat.slug && (cat.slug.toLowerCase() === "cybermonday" || cat.slug.toLowerCase() === "cyberday"));
+  const isZanziniProduct = CAMPAIGN_CONFIG.activeCampaign === "zanzini_june" && promoProduct.categories && promoProduct.categories.some((cat: any) => cat.slug && (cat.slug.toLowerCase() === "zanzini-marca" || cat.slug.toLowerCase() === "zanzini"));
+
+  const isSpecialCampaign = isCyberProduct || isZanziniProduct;
 
   return (
     <div style={{ position: 'fixed', bottom: '100px', left: '30px', zIndex: 9999 }}>
@@ -74,12 +87,12 @@ export default function PromotionHUD({ products, onQuickView }: PromotionHUDProp
                 borderRadius: '16px', 
                 padding: '12px',
                 display: 'flex', 
-                flexDirection: 'column', // Change to column layout to hold details and footer button
+                flexDirection: 'column', 
                 gap: '12px',
-                boxShadow: isCyberProduct 
+                boxShadow: isSpecialCampaign 
                   ? '0 20px 50px rgba(212, 175, 55, 0.3)' 
                   : '0 20px 50px rgba(0,0,0,0.15)',
-                border: isCyberProduct 
+                border: isSpecialCampaign 
                   ? '2px solid var(--primary-gold)' 
                   : '1px solid var(--border-color)',
                 maxWidth: '320px',
@@ -119,7 +132,7 @@ export default function PromotionHUD({ products, onQuickView }: PromotionHUDProp
                     }}>
                         {isCyberProduct 
                             ? "OFERTA CYBERDAY" 
-                            : "Oferta de la Semana"}
+                            : (isZanziniProduct ? "Recién Llegado" : "Oferta de la Semana")}
                     </span>
                     {discount > 0 && (
                         <span style={{ backgroundColor: '#ff4b4b', color: '#FFF', fontSize: '8px', fontWeight: 900, padding: '2px 6px', borderRadius: '4px', marginLeft: '5px' }}>
@@ -168,7 +181,9 @@ export default function PromotionHUD({ products, onQuickView }: PromotionHUDProp
             <div 
               onClick={(e) => { 
                 e.stopPropagation(); 
-                router.push(isCyberProduct ? '/shop?category=cyberday' : '/shop?category=Ofertas'); 
+                router.push(isCyberProduct 
+                  ? '/shop?category=cyberday' 
+                  : (isZanziniProduct ? '/shop?category=Zanzini' : '/shop?category=Ofertas')); 
               }}
               style={{
                 width: '100%',
@@ -188,7 +203,9 @@ export default function PromotionHUD({ products, onQuickView }: PromotionHUDProp
               }}
               className="hover:opacity-85"
             >
-              <span>{isCyberProduct ? "Ver todas las ofertas Cyber" : "Ver todas las ofertas"}</span>
+              <span>{isCyberProduct 
+                ? "Ver todas las ofertas Cyber" 
+                : (isZanziniProduct ? "Ver colección Zanzini" : "Ver todas las ofertas")}</span>
               <ChevronRight size={10} style={{ color: isCyberProduct ? '#FF4B4B' : 'var(--brand-blue)' }} />
             </div>
 

@@ -8,6 +8,7 @@ import Link from "next/link";
 import { useCart } from "@/context/CartContext";
 import { useTheme } from "@/context/ThemeContext";
 import { Product } from "@/types/woocommerce";
+import { CAMPAIGN_CONFIG } from "@/lib/constants";
 
 interface ProductCardProps {
   product: Product;
@@ -133,24 +134,42 @@ export default function ProductCard({ product, onQuickView }: ProductCardProps) 
                    </button>
                </div>
 
-              {product.on_sale && (() => {
-                const isCyber = product.categories && product.categories.some(cat => cat.slug && (cat.slug.toLowerCase() === "cybermonday" || cat.slug.toLowerCase() === "cyberday"));
+              {(() => {
+                const isCyber = CAMPAIGN_CONFIG.isCyberActive && product.categories && product.categories.some(cat => cat.slug && (cat.slug.toLowerCase() === "cybermonday" || cat.slug.toLowerCase() === "cyberday"));
+                const isZanziniCampaign = CAMPAIGN_CONFIG.activeCampaign === "zanzini_june" && product.categories && product.categories.some(cat => cat.slug && (cat.slug.toLowerCase() === "zanzini-marca" || cat.slug.toLowerCase() === "zanzini"));
+                
+                if (!product.on_sale && !isZanziniCampaign) return null;
+
+                let badgeText = "Oferta";
+                let badgeColor = "#D4AF37";
+                let shadow = "none";
+
+                if (isCyber) {
+                  badgeText = "Cyber";
+                  badgeColor = "var(--brand-yellow)";
+                  shadow = "0 4px 12px rgba(249, 195, 0, 0.3)";
+                } else if (isZanziniCampaign) {
+                  badgeText = "Recién Llegado";
+                  badgeColor = "#D4AF37";
+                  shadow = "0 4px 12px rgba(212, 175, 55, 0.3)";
+                }
+
                 return (
                   <span style={{ 
                     position: 'absolute', 
                     top: '15px', 
                     left: '15px', 
-                    background: isCyber ? 'var(--brand-yellow)' : '#D4AF37', 
+                    background: badgeColor, 
                     color: '#000', 
                     fontSize: '9px', 
                     fontWeight: 900, 
                     padding: '4px 10px', 
                     borderRadius: '100px', 
                     textTransform: 'uppercase',
-                    boxShadow: isCyber ? '0 4px 12px rgba(249, 195, 0, 0.3)' : 'none',
+                    boxShadow: shadow,
                     zIndex: 10
                   }}>
-                    {isCyber ? 'Cyber' : 'Oferta'}
+                    {badgeText}
                   </span>
                 );
               })()}

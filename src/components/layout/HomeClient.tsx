@@ -12,6 +12,8 @@ import FeaturedCarousel from "../shop/FeaturedCarousel";
 import CyberFeaturedGrid from "../shop/CyberFeaturedGrid";
 import CyberCarousel from "../shop/CyberCarousel";
 import CyberMarquee from "./CyberMarquee";
+import JuneMarquee from "./JuneMarquee";
+import JuneSpecialBanner from "./JuneSpecialBanner";
 import FurnitureShowcase from "./FurnitureShowcase";
 import GrandCement from "./GrandCement";
 import { Product } from "@/types/woocommerce";
@@ -21,6 +23,7 @@ import RetailStories from "../shop/RetailStories";
 import ProductQuickView from "../shop/ProductQuickView";
 import CyberdayCountdown from "./CyberdayCountdown";
 import { ArrowRight } from "lucide-react";
+import { CAMPAIGN_CONFIG } from "@/lib/constants";
 
 interface HomeClientProps {
   products: Product[];
@@ -29,12 +32,18 @@ interface HomeClientProps {
 export default function HomeClient({ products }: HomeClientProps) {
   const router = useRouter();
   const [selectedQuickProduct, setSelectedQuickProduct] = React.useState<Product | null>(null);
-  const [isMarqueeOpen, setIsMarqueeOpen] = React.useState(true);
+  const [isMarqueeOpen, setIsMarqueeOpen] = React.useState(CAMPAIGN_CONFIG.isCyberActive || CAMPAIGN_CONFIG.activeCampaign === "zanzini_june");
   const { scrollYProgress } = useScroll();
   const scaleProgress = useSpring(scrollYProgress, { stiffness: 100, damping: 30, restDelta: 0.001 });
-  const cyberProductsAll = products.filter(p => 
-    p.categories.some(cat => cat.slug.toLowerCase() === "cybermonday" || cat.slug.toLowerCase() === "cyberday")
-  );
+  const cyberProductsAll = CAMPAIGN_CONFIG.isCyberActive 
+    ? products.filter(p => 
+        p.categories.some(cat => cat.slug.toLowerCase() === "cybermonday" || cat.slug.toLowerCase() === "cyberday")
+      )
+    : (CAMPAIGN_CONFIG.activeCampaign === "zanzini_june"
+      ? products.filter(p => 
+          p.categories.some(cat => cat.slug.toLowerCase() === "zanzini-marca" || cat.slug.toLowerCase() === "zanzini")
+        )
+      : []);
   const SHOP_URL = "/shop";
 
   return (
@@ -45,7 +54,11 @@ export default function HomeClient({ products }: HomeClientProps) {
 
       {isMarqueeOpen && (
         <div style={{ position: 'fixed', top: 0, left: 0, right: 0, zIndex: 10000 }}>
-          <CyberMarquee onClose={() => setIsMarqueeOpen(false)} />
+          {CAMPAIGN_CONFIG.isCyberActive ? (
+            <CyberMarquee onClose={() => setIsMarqueeOpen(false)} />
+          ) : (
+            <JuneMarquee onClose={() => setIsMarqueeOpen(false)} />
+          )}
         </div>
       )}
 
@@ -73,24 +86,30 @@ export default function HomeClient({ products }: HomeClientProps) {
           onQuickView={(prod) => setSelectedQuickProduct(prod)} 
         />
 
-        <CyberdayCountdown />
+        {CAMPAIGN_CONFIG.isCyberActive && <CyberdayCountdown />}
+        {CAMPAIGN_CONFIG.activeCampaign === "zanzini_june" && <JuneSpecialBanner />}
 
         {cyberProductsAll.length > 0 && (
           <>
             <CyberFeaturedGrid 
               products={cyberProductsAll} 
               onQuickView={(prod) => setSelectedQuickProduct(prod)}
+              title={CAMPAIGN_CONFIG.activeCampaign === "zanzini_june" ? "SELECCIÓN DESTACADA ZANZINI" : undefined}
+              subtitle={CAMPAIGN_CONFIG.activeCampaign === "zanzini_june" ? "RECIÉN LLEGADO JUNIO" : undefined}
+              description={CAMPAIGN_CONFIG.activeCampaign === "zanzini_june" ? "Diseño sofisticado, estructuración reforzada y rieles telescópicos para tu organización." : undefined}
             />
             
             <CyberCarousel 
               products={cyberProductsAll} 
               onQuickView={(prod) => setSelectedQuickProduct(prod)}
+              title={CAMPAIGN_CONFIG.activeCampaign === "zanzini_june" ? "MUEBLES ZANZINI COMPLETO" : undefined}
+              subtitle={CAMPAIGN_CONFIG.activeCampaign === "zanzini_june" ? "CATÁLOGO TÉCNICO" : undefined}
             />
 
-            {/* 🏷️ ACCESO A TODAS LAS OFERTAS CYBER */}
+            {/* 🏷️ ACCESO A TODAS LAS OFERTAS CYBER / CAMPAIGN */}
             <div style={{ display: 'flex', justifyContent: 'center', marginTop: '50px', marginBottom: '80px' }}>
               <Link 
-                href="/shop?category=cyberday" 
+                href={CAMPAIGN_CONFIG.activeCampaign === "zanzini_june" ? "/shop?category=Zanzini" : "/shop?category=cyberday"} 
                 style={{ 
                   backgroundColor: '#0E1F33', 
                   border: '2px solid var(--primary-gold)',
@@ -110,7 +129,11 @@ export default function HomeClient({ products }: HomeClientProps) {
                 }}
                 className="hover:bg-[var(--primary-gold)] hover:text-black hover:border-[var(--primary-gold)] transition-all duration-300 active:scale-95"
               >
-                <span>Ver todas las ofertas Cyber</span>
+                <span>
+                  {CAMPAIGN_CONFIG.activeCampaign === "zanzini_june" 
+                    ? "Ver colección Zanzini" 
+                    : "Ver todas las ofertas Cyber"}
+                </span>
                 <ArrowRight size={14} />
               </Link>
             </div>

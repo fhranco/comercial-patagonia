@@ -9,9 +9,12 @@ import { Product } from "@/types/woocommerce";
 interface CyberFeaturedGridProps {
   products: Product[];
   onQuickView?: (product: Product) => void;
+  title?: string;
+  subtitle?: string;
+  description?: string;
 }
 
-export default function CyberFeaturedGrid({ products, onQuickView }: CyberFeaturedGridProps) {
+export default function CyberFeaturedGrid({ products, onQuickView, title, subtitle, description }: CyberFeaturedGridProps) {
   const [randomProducts, setRandomProducts] = useState<Product[]>([]);
 
   useEffect(() => {
@@ -33,7 +36,7 @@ export default function CyberFeaturedGrid({ products, onQuickView }: CyberFeatur
           <div style={{ display: 'flex', alignItems: 'center', gap: '8px', color: 'var(--brand-yellow)' }}>
             <Flame className="w-4 h-4 animate-pulse" />
             <span style={{ fontSize: '11px', fontWeight: 900, textTransform: 'uppercase', letterSpacing: '0.3em' }}>
-              EQUIPAMIENTO EN LIQUIDACIÓN
+              {subtitle || "EQUIPAMIENTO EN LIQUIDACIÓN"}
             </span>
           </div>
           <h2 style={{ 
@@ -46,10 +49,14 @@ export default function CyberFeaturedGrid({ products, onQuickView }: CyberFeatur
             letterSpacing: '-0.02em',
             margin: 0
           }}>
-            SELECCIÓN DESTACADA <span style={{ color: 'var(--brand-yellow)' }}>CYBER.</span>
+            {title ? (
+              <span>{title}</span>
+            ) : (
+              <>SELECCIÓN DESTACADA <span style={{ color: 'var(--brand-yellow)' }}>CYBER.</span></>
+            )}
           </h2>
           <p style={{ fontSize: '13px', opacity: 0.5, margin: '5px 0 0', maxWidth: '500px' }}>
-            Descuento del 25% y despacho directo coordinado en obra. Stock crítico con tarifas preferenciales.
+            {description || "Descuento del 25% y despacho directo coordinado en obra. Stock crítico con tarifas preferenciales."}
           </p>
         </div>
 

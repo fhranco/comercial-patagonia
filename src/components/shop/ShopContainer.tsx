@@ -16,6 +16,7 @@ import SpotlightSearch from "@/components/shop/SpotlightSearch";
 import PromotionHUD from "@/components/shop/PromotionHUD";
 import RetailStories from "@/components/shop/RetailStories";
 import { Product } from "@/types/woocommerce";
+import { CAMPAIGN_CONFIG } from "@/lib/constants";
 
 interface ShopContainerProps {
   initialProducts: Product[];
@@ -162,7 +163,12 @@ export default function ShopContainer({ initialProducts, initialCategory, isLive
   }, [initialProducts]);
 
   const displayProducts = filteredProducts.slice(0, visibleItems);
-  const categories = ["Todos", ...new Set(initialProducts.flatMap(p => p.categories.map(cat => cat.name)).filter(Boolean))];
+  const categories = ["Todos", ...new Set(initialProducts.flatMap(p => p.categories.map(cat => cat.name)).filter(Boolean))]
+    .filter(cat => {
+      if (CAMPAIGN_CONFIG.isCyberActive) return true;
+      const lower = cat.toLowerCase();
+      return lower !== "cyberday" && lower !== "cybermonday" && lower !== "cyber";
+    });
 
   return (
     <div className={`${styles.page} page-transition`} style={{ backgroundColor: 'var(--bg-color)', color: 'var(--text-color)', minHeight: '100vh', width: '100%' }}>

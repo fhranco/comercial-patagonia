@@ -9,9 +9,11 @@ import { Product } from "@/types/woocommerce";
 interface CyberCarouselProps {
   products: Product[];
   onQuickView?: (product: Product) => void;
+  title?: string;
+  subtitle?: string;
 }
 
-export default function CyberCarousel({ products, onQuickView }: CyberCarouselProps) {
+export default function CyberCarousel({ products, onQuickView, title, subtitle }: CyberCarouselProps) {
   const scrollRef = useRef<HTMLDivElement>(null);
 
   const scroll = (direction: 'left' | 'right') => {
@@ -50,7 +52,7 @@ export default function CyberCarousel({ products, onQuickView }: CyberCarouselPr
           <div style={{ display: 'flex', alignItems: 'center', gap: '8px', color: 'var(--brand-yellow)', marginBottom: '15px' }}>
             <Flame className="w-5 h-5 animate-pulse" />
             <span style={{ fontSize: '11px', fontWeight: 900, textTransform: 'uppercase', letterSpacing: '0.4em' }}>
-              Catálogo Completo Cyber
+              {subtitle || "Catálogo Completo Cyber"}
             </span>
           </div>
           <h2 style={{ 
@@ -62,7 +64,11 @@ export default function CyberCarousel({ products, onQuickView }: CyberCarouselPr
             fontFamily: 'var(--font-heading)',
             letterSpacing: '-0.02em'
           }}>
-            TODA LA <span style={{ color: 'var(--brand-yellow)' }}>CATEGORÍA CYBER</span>
+            {title ? (
+              <span>{title}</span>
+            ) : (
+              <>TODA LA <span style={{ color: 'var(--brand-yellow)' }}>CATEGORÍA CYBER</span></>
+            )}
           </h2>
         </motion.div>
 
