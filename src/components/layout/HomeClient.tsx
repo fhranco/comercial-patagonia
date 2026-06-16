@@ -16,6 +16,7 @@ import JuneMarquee from "./JuneMarquee";
 import JuneSpecialBanner from "./JuneSpecialBanner";
 import FurnitureShowcase from "./FurnitureShowcase";
 import GrandCement from "./GrandCement";
+import CeramicsFeatured from "./CeramicsFeatured";
 import { Product } from "@/types/woocommerce";
 import Link from "next/link";
 import PromotionHUD from "../shop/PromotionHUD";
@@ -85,6 +86,7 @@ export default function HomeClient({ products }: HomeClientProps) {
           products={products} 
           onQuickView={(prod) => setSelectedQuickProduct(prod)} 
         />
+        <CeramicsFeatured />
 
         {CAMPAIGN_CONFIG.isCyberActive && <CyberdayCountdown />}
         {CAMPAIGN_CONFIG.activeCampaign === "zanzini_june" && <JuneSpecialBanner />}

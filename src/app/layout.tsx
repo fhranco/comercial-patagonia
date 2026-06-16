@@ -24,6 +24,9 @@ const outfit = Outfit({
 export const metadata: Metadata = {
   title: "COMERCIAL PATAGONIA | Suministro Profesional",
   description: "Tradicción y Calidad en Magallanes",
+  icons: {
+    icon: "/icon.png",
+  },
 };
 
 export default function RootLayout({

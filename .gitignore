@@ -43,4 +43,8 @@ next-env.d.ts
 # local temporary and debug files
 /tmp/
 /patagonia_debug.log
+*.bak
+/next
+/comercial-de-la-patagonia@0.2.1
+
 
