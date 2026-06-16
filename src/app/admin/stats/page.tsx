@@ -8,15 +8,23 @@ interface Stats { pathname: string; total: number; today: number; history: DayDa
 export default function StatsPage() {
   const [stats, setStats] = useState<Stats | null>(null);
   const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
     fetch("/api/views?pathname=/&days=30")
-      .then(r => r.json())
+      .then(async (r) => {
+        if (!r.ok) {
+          const errData = await r.json().catch(() => ({}));
+          throw new Error(errData.error || `HTTP ${r.status}`);
+        }
+        return r.json();
+      })
       .then(setStats)
+      .catch((err) => setError(err.message))
       .finally(() => setLoading(false));
   }, []);
 
-  const maxVisits = stats ? Math.max(...stats.history.map(d => d.visits), 1) : 1;
+  const maxVisits = stats && stats.history ? Math.max(...stats.history.map(d => d.visits), 1) : 1;
 
   return (
     <div style={{
@@ -41,7 +49,21 @@ export default function StatsPage() {
           </div>
         )}
 
-        {!loading && stats && (
+        {error && (
+          <div style={{
+            background: "rgba(239, 68, 68, 0.08)",
+            border: "1px solid rgba(239, 68, 68, 0.25)",
+            borderRadius: "12px",
+            padding: "16px 20px",
+            color: "#f87171",
+            textAlign: "center",
+            margin: "40px 0"
+          }}>
+            ⚠️ Error al cargar estadísticas: {error}
+          </div>
+        )}
+
+        {!loading && !error && stats && stats.history && (
           <>
             {/* KPIs */}
             <div style={{ display: "grid", gridTemplateColumns: "repeat(3,1fr)", gap: 16, marginBottom: 40 }}>

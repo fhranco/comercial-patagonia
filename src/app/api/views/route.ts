@@ -1,4 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server';
+import { cookies } from 'next/headers';
 import { redis } from '@/lib/redis';
 
 // Simple SHA-256 hash helper using web crypto API (supported natively in Vercel Edge / Node.js)
@@ -55,6 +56,14 @@ export async function POST(req: NextRequest) {
 // Devuelve estadísticas históricas para el panel de reportes
 export async function GET(req: NextRequest) {
   try {
+    const cookieStore = await cookies();
+    const adminSession = cookieStore.get('admin_session')?.value;
+    const adminPassword = process.env.ADMIN_PASSWORD || 'patagonia2026';
+
+    if (adminSession !== adminPassword) {
+      return NextResponse.json({ error: 'No autorizado' }, { status: 401 });
+    }
+
     const { searchParams } = new URL(req.url);
     const pathname = searchParams.get('pathname') || '/';
     const days = Math.min(parseInt(searchParams.get('days') || '30'), 90);
