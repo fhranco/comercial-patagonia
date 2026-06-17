@@ -25,7 +25,7 @@ export async function POST(req: NextRequest) {
       '127.0.0.1';
 
     // 2. Anonimizar la IP (RGPD) — hash de IP + pathname + fecha
-    const today = new Date().toISOString().slice(0, 10); // YYYY-MM-DD
+    const today = new Date().toLocaleDateString('sv-SE', { timeZone: 'America/Santiago' }); // YYYY-MM-DD en Chile
     const ipHash = await hashIp(`${rawIp}:${pathname}:${today}`);
     
     const visitorKey = `visitor:${pathname}:${ipHash}`;
@@ -72,17 +72,20 @@ export async function GET(req: NextRequest) {
 
     // Historial día a día
     const history: { date: string; visits: number }[] = [];
-    const today = new Date();
+    const todayChile = new Date(new Date().toLocaleString('en-US', { timeZone: 'America/Santiago' }));
 
     for (let i = days - 1; i >= 0; i--) {
-      const d = new Date(today);
+      const d = new Date(todayChile);
       d.setDate(d.getDate() - i);
-      const dateStr = d.toISOString().slice(0, 10);
+      const year = d.getFullYear();
+      const month = String(d.getMonth() + 1).padStart(2, '0');
+      const day = String(d.getDate()).padStart(2, '0');
+      const dateStr = `${year}-${month}-${day}`;
       const count = (await redis.get<number>(`views:${pathname}:${dateStr}`)) || 0;
       history.push({ date: dateStr, visits: count });
     }
 
-    const todayStr = today.toISOString().slice(0, 10);
+    const todayStr = new Date().toLocaleDateString('sv-SE', { timeZone: 'America/Santiago' });
     const todayViews = history.find(h => h.date === todayStr)?.visits || 0;
 
     return NextResponse.json({ pathname, total, today: todayViews, history });

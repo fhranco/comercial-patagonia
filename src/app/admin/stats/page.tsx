@@ -93,33 +93,39 @@ export default function StatsPage() {
                 Visitas diarias — últimos 30 días
               </h2>
               <div style={{ display: "flex", alignItems: "flex-end", gap: 6, height: 180 }}>
-                {stats.history.map(day => {
-                  const pct = (day.visits / maxVisits) * 100;
-                  const isToday = day.date === new Date().toISOString().slice(0, 10);
-                  return (
-                    <div key={day.date} style={{ flex: 1, display: "flex", flexDirection: "column", alignItems: "center", gap: 4 }}>
-                      {day.visits > 0 && (
-                        <span style={{ fontSize: 10, color: "#888" }}>{day.visits}</span>
-                      )}
-                      <div
-                        title={`${day.date}: ${day.visits} visitas`}
-                        style={{
-                          width: "100%", borderRadius: 4,
-                          height: `${Math.max(pct, day.visits > 0 ? 4 : 2)}%`,
-                          background: isToday
-                            ? "#4ade80"
-                            : day.visits > 0 ? "#7c6fff" : "#1e1e2e",
-                          transition: "height 0.3s ease",
-                          minHeight: 3,
-                        }}
-                      />
-                      {/* Solo mostrar fecha cada 5 días para no saturar */}
-                      <span style={{ fontSize: 9, color: "#444", writingMode: "vertical-rl", transform: "rotate(180deg)" }}>
-                        {day.date.slice(5)}
-                      </span>
-                    </div>
-                  );
-                })}
+                {(() => {
+                  const todayStr = new Date().toLocaleDateString('sv-SE', { timeZone: 'America/Santiago' });
+                  return stats.history.map(day => {
+                    const pct = (day.visits / maxVisits) * 100;
+                    const isToday = day.date === todayStr;
+                    const [y, m, d] = day.date.split('-');
+                    const localDateLabel = `${d}/${m}/${y}`;
+                    const localMonthDayLabel = `${d}/${m}`;
+                    return (
+                      <div key={day.date} style={{ flex: 1, display: "flex", flexDirection: "column", alignItems: "center", gap: 4 }}>
+                        {day.visits > 0 && (
+                          <span style={{ fontSize: 10, color: "#888" }}>{day.visits}</span>
+                        )}
+                        <div
+                          title={`${localDateLabel}: ${day.visits} visitas`}
+                          style={{
+                            width: "100%", borderRadius: 4,
+                            height: `${Math.max(pct, day.visits > 0 ? 4 : 2)}%`,
+                            background: isToday
+                              ? "#4ade80"
+                              : day.visits > 0 ? "#7c6fff" : "#1e1e2e",
+                            transition: "height 0.3s ease",
+                            minHeight: 3,
+                          }}
+                        />
+                        {/* Solo mostrar fecha cada 5 días para no saturar */}
+                        <span style={{ fontSize: 9, color: "#444", writingMode: "vertical-rl", transform: "rotate(180deg)" }}>
+                          {localMonthDayLabel}
+                        </span>
+                      </div>
+                    );
+                  });
+                })()}
               </div>
               <div style={{ marginTop: 16, display: "flex", gap: 16, fontSize: 12, color: "#555" }}>
                 <span><span style={{ color: "#7c6fff" }}>■</span> Días anteriores</span>
@@ -142,14 +148,18 @@ export default function StatsPage() {
                   </tr>
                 </thead>
                 <tbody>
-                  {[...stats.history].reverse().filter(d => d.visits > 0).map((day, i) => (
-                    <tr key={day.date} style={{ borderTop: "1px solid #1a1a24", background: i % 2 === 0 ? "transparent" : "#0f0f18" }}>
-                      <td style={{ padding: "12px 24px", fontSize: 14 }}>{day.date}</td>
-                      <td style={{ padding: "12px 24px", textAlign: "right", fontSize: 14, fontWeight: 600, color: "#7c6fff" }}>
-                        {day.visits.toLocaleString()}
-                      </td>
-                    </tr>
-                  ))}
+                  {[...stats.history].reverse().filter(d => d.visits > 0).map((day, i) => {
+                    const [y, m, d] = day.date.split('-');
+                    const localDateLabel = `${d}/${m}/${y}`;
+                    return (
+                      <tr key={day.date} style={{ borderTop: "1px solid #1a1a24", background: i % 2 === 0 ? "transparent" : "#0f0f18" }}>
+                        <td style={{ padding: "12px 24px", fontSize: 14 }}>{localDateLabel}</td>
+                        <td style={{ padding: "12px 24px", textAlign: "right", fontSize: 14, fontWeight: 600, color: "#7c6fff" }}>
+                          {day.visits.toLocaleString()}
+                        </td>
+                      </tr>
+                    );
+                  })}
                   {stats.history.every(d => d.visits === 0) && (
                     <tr>
                       <td colSpan={2} style={{ padding: "32px 24px", textAlign: "center", color: "#444", fontSize: 14 }}>
