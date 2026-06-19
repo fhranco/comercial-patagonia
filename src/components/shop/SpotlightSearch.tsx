@@ -18,15 +18,7 @@ interface ProductImage {
   alt: string;
 }
 
-interface Product {
-  id: number;
-  name: string;
-  price: string;
-  regular_price?: string;
-  sku: string;
-  images: ProductImage[];
-  categories: Category[];
-}
+import { Product } from "@/types/woocommerce";
 
 interface SpotlightSearchProps {
   products: Product[];

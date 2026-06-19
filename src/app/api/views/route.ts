@@ -101,6 +101,7 @@ export async function GET(req: NextRequest) {
       const mockHistory: { date: string; visits: number }[] = [];
       const today = new Date(new Date().toLocaleString('en-US', { timeZone: 'America/Santiago' }));
       const days = 30; // Valor por defecto para generar historial mock
+      const pathname = '/'; // Valor por defecto
       
       for (let i = days - 1; i >= 0; i--) {
         const d = new Date(today);
