@@ -31,8 +31,8 @@ export default function ProductCard({ product, onQuickView }: ProductCardProps) 
       style={{ display: 'flex', flexDirection: 'column', position: 'relative' }}
       className="product-card"
     >
-       <Link 
-         href={`/shop/${product.id}`} 
+        <Link 
+         href={`/tienda/${product.slug}`} 
          style={{ textDecoration: 'none', color: 'inherit' }}
          onClick={(e) => {
            if (onQuickView) {

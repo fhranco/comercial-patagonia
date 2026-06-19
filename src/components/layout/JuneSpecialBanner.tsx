@@ -261,7 +261,7 @@ export default function JuneSpecialBanner() {
           </p>
 
           <Link 
-            href="/shop?category=Zanzini" 
+            href="/tienda?category=Zanzini" 
             className="june-gold-btn"
             style={{
               display: 'inline-flex',

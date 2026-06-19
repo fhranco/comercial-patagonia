@@ -1,5 +1,919 @@
 [
   {
+    "id": 2280,
+    "name": "Cerámica Nantes Negro 56x56 2.17m2",
+    "slug": "ceramica-nantes-negro-56x56-2-17m2",
+    "permalink": "https://tiendacp.boostpatagonia.online/producto/ceramica-nantes-negro-56x56-2-17m2/",
+    "date_created": "2026-06-13T12:34:50",
+    "date_created_gmt": "2026-06-13T15:34:50",
+    "date_modified": "2026-06-13T12:34:50",
+    "date_modified_gmt": "2026-06-13T15:34:50",
+    "type": "simple",
+    "status": "publish",
+    "featured": false,
+    "catalog_visibility": "visible",
+    "description": "<p>Cerámica para pisos y muros. De acabado brillante. Para uso interior. apariencia de mármol, para tráfico medio. Recomendada para living, comedor y dormitorios. Rendimiento por caja de 2.17m2. 7 piezas por caja.</p>\n",
+    "short_description": "",
+    "sku": "2699955",
+    "price": "19590",
+    "regular_price": "19590",
+    "sale_price": "",
+    "date_on_sale_from": null,
+    "date_on_sale_from_gmt": null,
+    "date_on_sale_to": null,
+    "date_on_sale_to_gmt": null,
+    "on_sale": false,
+    "purchasable": true,
+    "total_sales": 0,
+    "virtual": false,
+    "downloadable": false,
+    "downloads": [],
+    "download_limit": -1,
+    "download_expiry": -1,
+    "external_url": "",
+    "button_text": "",
+    "tax_status": "taxable",
+    "tax_class": "",
+    "manage_stock": false,
+    "stock_quantity": null,
+    "backorders": "no",
+    "backorders_allowed": false,
+    "backordered": false,
+    "low_stock_amount": null,
+    "sold_individually": false,
+    "weight": "33.3",
+    "dimensions": {
+      "length": "56",
+      "width": "56",
+      "height": "0.7"
+    },
+    "shipping_required": true,
+    "shipping_taxable": true,
+    "shipping_class": "",
+    "shipping_class_id": 0,
+    "reviews_allowed": true,
+    "average_rating": "0.00",
+    "rating_count": 0,
+    "upsell_ids": [
+      81,
+      79
+    ],
+    "cross_sell_ids": [],
+    "parent_id": 0,
+    "purchase_note": "",
+    "categories": [
+      {
+        "id": 69,
+        "name": "Cerámicas",
+        "slug": "ceramicas"
+      },
+      {
+        "id": 56,
+        "name": "Construcción",
+        "slug": "construccion"
+      },
+      {
+        "id": 77,
+        "name": "Lourdes",
+        "slug": "lourdes"
+      },
+      {
+        "id": 18,
+        "name": "Marca",
+        "slug": "marca"
+      }
+    ],
+    "brands": [],
+    "tags": [],
+    "images": [
+      {
+        "id": 2281,
+        "date_created": "2026-06-13T09:34:19",
+        "date_created_gmt": "2026-06-13T15:34:19",
+        "date_modified": "2026-06-13T09:34:19",
+        "date_modified_gmt": "2026-06-13T15:34:19",
+        "src": "https://tiendacp.boostpatagonia.online/wp-content/uploads/2026/06/1.jpg",
+        "name": "1",
+        "alt": "",
+        "srcset": "https://tiendacp.boostpatagonia.online/wp-content/uploads/2026/06/1.jpg 1400w, https://tiendacp.boostpatagonia.online/wp-content/uploads/2026/06/1-300x300.jpg 300w, https://tiendacp.boostpatagonia.online/wp-content/uploads/2026/06/1-1024x1024.jpg 1024w, https://tiendacp.boostpatagonia.online/wp-content/uploads/2026/06/1-150x150.jpg 150w, https://tiendacp.boostpatagonia.online/wp-content/uploads/2026/06/1-768x768.jpg 768w, https://tiendacp.boostpatagonia.online/wp-content/uploads/2026/06/1-600x600.jpg 600w, https://tiendacp.boostpatagonia.online/wp-content/uploads/2026/06/1-100x100.jpg 100w",
+        "sizes": "(max-width: 1400px) 100vw, 1400px",
+        "thumbnail": "https://tiendacp.boostpatagonia.online/wp-content/uploads/2026/06/1-300x300.jpg"
+      }
+    ],
+    "attributes": [],
+    "default_attributes": [],
+    "variations": [],
+    "grouped_products": [],
+    "menu_order": 0,
+    "price_html": "<span class=\"woocommerce-Price-amount amount\"><bdi><span class=\"woocommerce-Price-currencySymbol\">&#36;</span>19.590</bdi></span>",
+    "related_ids": [
+      1429,
+      1042,
+      1049,
+      1393,
+      1383
+    ],
+    "meta_data": [],
+    "stock_status": "instock",
+    "has_options": false,
+    "post_password": "",
+    "global_unique_id": "",
+    "_links": {
+      "self": [
+        {
+          "href": "https://tiendacp.boostpatagonia.online/wp-json/wc/v3/products/2280",
+          "targetHints": {
+            "allow": [
+              "GET",
+              "POST",
+              "PUT",
+              "PATCH",
+              "DELETE"
+            ]
+          }
+        }
+      ],
+      "collection": [
+        {
+          "href": "https://tiendacp.boostpatagonia.online/wp-json/wc/v3/products"
+        }
+      ]
+    }
+  },
+  {
+    "id": 2278,
+    "name": "Cerámica Nantes Gris 56x56 2.17m2",
+    "slug": "ceramica-nantes-gris-56x56-2-17m2",
+    "permalink": "https://tiendacp.boostpatagonia.online/producto/ceramica-nantes-gris-56x56-2-17m2/",
+    "date_created": "2026-06-13T12:32:04",
+    "date_created_gmt": "2026-06-13T15:32:04",
+    "date_modified": "2026-06-13T12:32:04",
+    "date_modified_gmt": "2026-06-13T15:32:04",
+    "type": "simple",
+    "status": "publish",
+    "featured": false,
+    "catalog_visibility": "visible",
+    "description": "<p>Cerámica para pisos y muros. De acabado brillante. Para uso interior. apariencia de mármol, para tráfico medio. Recomendada para living, comedor y dormitorios. Rendimiento por caja de 2.17m2. 7 piezas por caja.</p>\n",
+    "short_description": "",
+    "sku": "2699954",
+    "price": "21560",
+    "regular_price": "21560",
+    "sale_price": "",
+    "date_on_sale_from": null,
+    "date_on_sale_from_gmt": null,
+    "date_on_sale_to": null,
+    "date_on_sale_to_gmt": null,
+    "on_sale": false,
+    "purchasable": true,
+    "total_sales": 0,
+    "virtual": false,
+    "downloadable": false,
+    "downloads": [],
+    "download_limit": -1,
+    "download_expiry": -1,
+    "external_url": "",
+    "button_text": "",
+    "tax_status": "taxable",
+    "tax_class": "",
+    "manage_stock": false,
+    "stock_quantity": null,
+    "backorders": "no",
+    "backorders_allowed": false,
+    "backordered": false,
+    "low_stock_amount": null,
+    "sold_individually": false,
+    "weight": "33.3",
+    "dimensions": {
+      "length": "56",
+      "width": "56",
+      "height": "0.7"
+    },
+    "shipping_required": true,
+    "shipping_taxable": true,
+    "shipping_class": "",
+    "shipping_class_id": 0,
+    "reviews_allowed": true,
+    "average_rating": "0.00",
+    "rating_count": 0,
+    "upsell_ids": [
+      81,
+      79
+    ],
+    "cross_sell_ids": [],
+    "parent_id": 0,
+    "purchase_note": "",
+    "categories": [
+      {
+        "id": 69,
+        "name": "Cerámicas",
+        "slug": "ceramicas"
+      },
+      {
+        "id": 56,
+        "name": "Construcción",
+        "slug": "construccion"
+      },
+      {
+        "id": 77,
+        "name": "Lourdes",
+        "slug": "lourdes"
+      }
+    ],
+    "brands": [],
+    "tags": [],
+    "images": [
+      {
+        "id": 2279,
+        "date_created": "2026-06-13T09:30:52",
+        "date_created_gmt": "2026-06-13T15:30:52",
+        "date_modified": "2026-06-13T09:30:52",
+        "date_modified_gmt": "2026-06-13T15:30:52",
+        "src": "https://tiendacp.boostpatagonia.online/wp-content/uploads/2026/06/2.jpg",
+        "name": "2",
+        "alt": "",
+        "srcset": "https://tiendacp.boostpatagonia.online/wp-content/uploads/2026/06/2.jpg 1400w, https://tiendacp.boostpatagonia.online/wp-content/uploads/2026/06/2-300x300.jpg 300w, https://tiendacp.boostpatagonia.online/wp-content/uploads/2026/06/2-1024x1024.jpg 1024w, https://tiendacp.boostpatagonia.online/wp-content/uploads/2026/06/2-150x150.jpg 150w, https://tiendacp.boostpatagonia.online/wp-content/uploads/2026/06/2-768x768.jpg 768w, https://tiendacp.boostpatagonia.online/wp-content/uploads/2026/06/2-600x600.jpg 600w, https://tiendacp.boostpatagonia.online/wp-content/uploads/2026/06/2-100x100.jpg 100w",
+        "sizes": "(max-width: 1400px) 100vw, 1400px",
+        "thumbnail": "https://tiendacp.boostpatagonia.online/wp-content/uploads/2026/06/2-300x300.jpg"
+      }
+    ],
+    "attributes": [],
+    "default_attributes": [],
+    "variations": [],
+    "grouped_products": [],
+    "menu_order": 0,
+    "price_html": "<span class=\"woocommerce-Price-amount amount\"><bdi><span class=\"woocommerce-Price-currencySymbol\">&#36;</span>21.560</bdi></span>",
+    "related_ids": [
+      46,
+      76,
+      71,
+      48,
+      16
+    ],
+    "meta_data": [],
+    "stock_status": "instock",
+    "has_options": false,
+    "post_password": "",
+    "global_unique_id": "",
+    "_links": {
+      "self": [
+        {
+          "href": "https://tiendacp.boostpatagonia.online/wp-json/wc/v3/products/2278",
+          "targetHints": {
+            "allow": [
+              "GET",
+              "POST",
+              "PUT",
+              "PATCH",
+              "DELETE"
+            ]
+          }
+        }
+      ],
+      "collection": [
+        {
+          "href": "https://tiendacp.boostpatagonia.online/wp-json/wc/v3/products"
+        }
+      ]
+    }
+  },
+  {
+    "id": 2274,
+    "name": "Cerámica Yunga Gris 18x56 2.0m2",
+    "slug": "ceramica-yunga-gris-18x56-2-0m2",
+    "permalink": "https://tiendacp.boostpatagonia.online/producto/ceramica-yunga-gris-18x56-2-0m2/",
+    "date_created": "2026-06-13T12:28:30",
+    "date_created_gmt": "2026-06-13T15:28:30",
+    "date_modified": "2026-06-13T12:41:59",
+    "date_modified_gmt": "2026-06-13T15:41:59",
+    "type": "simple",
+    "status": "publish",
+    "featured": false,
+    "catalog_visibility": "visible",
+    "description": "<p>Cerámica para pisos y muros. De acabado satinado. Para uso residencial. apariencia de madera, para tráfico medio. Recomendada para living, comedor, dormitorios, cocinas y baños. No rectificada. Biseladas. Rendimiento por caja de 2.0m2.</p>\n",
+    "short_description": "",
+    "sku": "2699958",
+    "price": "21560",
+    "regular_price": "21560",
+    "sale_price": "",
+    "date_on_sale_from": null,
+    "date_on_sale_from_gmt": null,
+    "date_on_sale_to": null,
+    "date_on_sale_to_gmt": null,
+    "on_sale": false,
+    "purchasable": true,
+    "total_sales": 0,
+    "virtual": false,
+    "downloadable": false,
+    "downloads": [],
+    "download_limit": -1,
+    "download_expiry": -1,
+    "external_url": "",
+    "button_text": "",
+    "tax_status": "taxable",
+    "tax_class": "",
+    "manage_stock": false,
+    "stock_quantity": null,
+    "backorders": "no",
+    "backorders_allowed": false,
+    "backordered": false,
+    "low_stock_amount": null,
+    "sold_individually": false,
+    "weight": "30",
+    "dimensions": {
+      "length": "56",
+      "width": "18",
+      "height": "0.6"
+    },
+    "shipping_required": true,
+    "shipping_taxable": true,
+    "shipping_class": "",
+    "shipping_class_id": 0,
+    "reviews_allowed": true,
+    "average_rating": "0.00",
+    "rating_count": 0,
+    "upsell_ids": [
+      81,
+      79
+    ],
+    "cross_sell_ids": [],
+    "parent_id": 0,
+    "purchase_note": "",
+    "categories": [
+      {
+        "id": 69,
+        "name": "Cerámicas",
+        "slug": "ceramicas"
+      },
+      {
+        "id": 56,
+        "name": "Construcción",
+        "slug": "construccion"
+      },
+      {
+        "id": 77,
+        "name": "Lourdes",
+        "slug": "lourdes"
+      }
+    ],
+    "brands": [],
+    "tags": [],
+    "images": [
+      {
+        "id": 2275,
+        "date_created": "2026-06-13T09:27:21",
+        "date_created_gmt": "2026-06-13T15:27:21",
+        "date_modified": "2026-06-13T09:27:21",
+        "date_modified_gmt": "2026-06-13T15:27:21",
+        "src": "https://tiendacp.boostpatagonia.online/wp-content/uploads/2026/06/7.jpg",
+        "name": "7",
+        "alt": "",
+        "srcset": "https://tiendacp.boostpatagonia.online/wp-content/uploads/2026/06/7.jpg 1400w, https://tiendacp.boostpatagonia.online/wp-content/uploads/2026/06/7-300x300.jpg 300w, https://tiendacp.boostpatagonia.online/wp-content/uploads/2026/06/7-1024x1024.jpg 1024w, https://tiendacp.boostpatagonia.online/wp-content/uploads/2026/06/7-150x150.jpg 150w, https://tiendacp.boostpatagonia.online/wp-content/uploads/2026/06/7-768x768.jpg 768w, https://tiendacp.boostpatagonia.online/wp-content/uploads/2026/06/7-600x600.jpg 600w, https://tiendacp.boostpatagonia.online/wp-content/uploads/2026/06/7-100x100.jpg 100w",
+        "sizes": "(max-width: 1400px) 100vw, 1400px",
+        "thumbnail": "https://tiendacp.boostpatagonia.online/wp-content/uploads/2026/06/7-300x300.jpg"
+      },
+      {
+        "id": 2276,
+        "date_created": "2026-06-13T09:27:50",
+        "date_created_gmt": "2026-06-13T15:27:50",
+        "date_modified": "2026-06-13T09:27:50",
+        "date_modified_gmt": "2026-06-13T15:27:50",
+        "src": "https://tiendacp.boostpatagonia.online/wp-content/uploads/2026/06/yunga-gris.webp",
+        "name": "yunga gris",
+        "alt": "",
+        "srcset": "https://tiendacp.boostpatagonia.online/wp-content/uploads/2026/06/yunga-gris.webp 1024w, https://tiendacp.boostpatagonia.online/wp-content/uploads/2026/06/yunga-gris-300x300.webp 300w, https://tiendacp.boostpatagonia.online/wp-content/uploads/2026/06/yunga-gris-150x150.webp 150w, https://tiendacp.boostpatagonia.online/wp-content/uploads/2026/06/yunga-gris-768x768.webp 768w, https://tiendacp.boostpatagonia.online/wp-content/uploads/2026/06/yunga-gris-600x600.webp 600w, https://tiendacp.boostpatagonia.online/wp-content/uploads/2026/06/yunga-gris-100x100.webp 100w",
+        "sizes": "(max-width: 1024px) 100vw, 1024px",
+        "thumbnail": "https://tiendacp.boostpatagonia.online/wp-content/uploads/2026/06/yunga-gris-300x300.webp"
+      },
+      {
+        "id": 2277,
+        "date_created": "2026-06-13T09:27:54",
+        "date_created_gmt": "2026-06-13T15:27:54",
+        "date_modified": "2026-06-13T09:27:54",
+        "date_modified_gmt": "2026-06-13T15:27:54",
+        "src": "https://tiendacp.boostpatagonia.online/wp-content/uploads/2026/06/YUNGA-GRIS-18x56-1.jpg",
+        "name": "YUNGA-GRIS-18&#215;56-1",
+        "alt": "",
+        "srcset": "https://tiendacp.boostpatagonia.online/wp-content/uploads/2026/06/YUNGA-GRIS-18x56-1.jpg 2000w, https://tiendacp.boostpatagonia.online/wp-content/uploads/2026/06/YUNGA-GRIS-18x56-1-300x300.jpg 300w, https://tiendacp.boostpatagonia.online/wp-content/uploads/2026/06/YUNGA-GRIS-18x56-1-1024x1024.jpg 1024w, https://tiendacp.boostpatagonia.online/wp-content/uploads/2026/06/YUNGA-GRIS-18x56-1-150x150.jpg 150w, https://tiendacp.boostpatagonia.online/wp-content/uploads/2026/06/YUNGA-GRIS-18x56-1-768x768.jpg 768w, https://tiendacp.boostpatagonia.online/wp-content/uploads/2026/06/YUNGA-GRIS-18x56-1-1536x1536.jpg 1536w, https://tiendacp.boostpatagonia.online/wp-content/uploads/2026/06/YUNGA-GRIS-18x56-1-600x600.jpg 600w, https://tiendacp.boostpatagonia.online/wp-content/uploads/2026/06/YUNGA-GRIS-18x56-1-100x100.jpg 100w",
+        "sizes": "(max-width: 2000px) 100vw, 2000px",
+        "thumbnail": "https://tiendacp.boostpatagonia.online/wp-content/uploads/2026/06/YUNGA-GRIS-18x56-1-300x300.jpg"
+      }
+    ],
+    "attributes": [],
+    "default_attributes": [],
+    "variations": [],
+    "grouped_products": [],
+    "menu_order": 0,
+    "price_html": "<span class=\"woocommerce-Price-amount amount\"><bdi><span class=\"woocommerce-Price-currencySymbol\">&#36;</span>21.560</bdi></span>",
+    "related_ids": [
+      76,
+      40,
+      71,
+      57,
+      58
+    ],
+    "meta_data": [],
+    "stock_status": "instock",
+    "has_options": false,
+    "post_password": "",
+    "global_unique_id": "",
+    "_links": {
+      "self": [
+        {
+          "href": "https://tiendacp.boostpatagonia.online/wp-json/wc/v3/products/2274",
+          "targetHints": {
+            "allow": [
+              "GET",
+              "POST",
+              "PUT",
+              "PATCH",
+              "DELETE"
+            ]
+          }
+        }
+      ],
+      "collection": [
+        {
+          "href": "https://tiendacp.boostpatagonia.online/wp-json/wc/v3/products"
+        }
+      ]
+    }
+  },
+  {
+    "id": 2270,
+    "name": "Cerámica Haya Visón 18x56 2.0m2",
+    "slug": "ceramica-haya-vison-18x56-2-0m2",
+    "permalink": "https://tiendacp.boostpatagonia.online/producto/ceramica-haya-vison-18x56-2-0m2/",
+    "date_created": "2026-06-13T12:23:01",
+    "date_created_gmt": "2026-06-13T15:23:01",
+    "date_modified": "2026-06-13T12:23:01",
+    "date_modified_gmt": "2026-06-13T15:23:01",
+    "type": "simple",
+    "status": "publish",
+    "featured": false,
+    "catalog_visibility": "visible",
+    "description": "<p>Cerámica para pisos y muros. De acabado satinado. Para uso residencial. apariencia de madera, para tráfico medio. Recomendada para living, comedor, dormitorios, cocinas y baños. No rectificada. Biseladas. Rendimiento por caja de 2.0m2.</p>\n",
+    "short_description": "",
+    "sku": "2699957",
+    "price": "21560",
+    "regular_price": "21560",
+    "sale_price": "",
+    "date_on_sale_from": null,
+    "date_on_sale_from_gmt": null,
+    "date_on_sale_to": null,
+    "date_on_sale_to_gmt": null,
+    "on_sale": false,
+    "purchasable": true,
+    "total_sales": 0,
+    "virtual": false,
+    "downloadable": false,
+    "downloads": [],
+    "download_limit": -1,
+    "download_expiry": -1,
+    "external_url": "",
+    "button_text": "",
+    "tax_status": "taxable",
+    "tax_class": "",
+    "manage_stock": false,
+    "stock_quantity": null,
+    "backorders": "no",
+    "backorders_allowed": false,
+    "backordered": false,
+    "low_stock_amount": null,
+    "sold_individually": false,
+    "weight": "30",
+    "dimensions": {
+      "length": "56",
+      "width": "18",
+      "height": "0.6"
+    },
+    "shipping_required": true,
+    "shipping_taxable": true,
+    "shipping_class": "",
+    "shipping_class_id": 0,
+    "reviews_allowed": true,
+    "average_rating": "0.00",
+    "rating_count": 0,
+    "upsell_ids": [
+      81,
+      79,
+      80
+    ],
+    "cross_sell_ids": [],
+    "parent_id": 0,
+    "purchase_note": "",
+    "categories": [
+      {
+        "id": 69,
+        "name": "Cerámicas",
+        "slug": "ceramicas"
+      },
+      {
+        "id": 56,
+        "name": "Construcción",
+        "slug": "construccion"
+      },
+      {
+        "id": 77,
+        "name": "Lourdes",
+        "slug": "lourdes"
+      }
+    ],
+    "brands": [],
+    "tags": [],
+    "images": [
+      {
+        "id": 2271,
+        "date_created": "2026-06-13T09:21:27",
+        "date_created_gmt": "2026-06-13T15:21:27",
+        "date_modified": "2026-06-13T09:21:27",
+        "date_modified_gmt": "2026-06-13T15:21:27",
+        "src": "https://tiendacp.boostpatagonia.online/wp-content/uploads/2026/06/haya-vison-1024x1024-1.jpg",
+        "name": "haya-vison-1024&#215;1024",
+        "alt": "",
+        "srcset": "https://tiendacp.boostpatagonia.online/wp-content/uploads/2026/06/haya-vison-1024x1024-1.jpg 1024w, https://tiendacp.boostpatagonia.online/wp-content/uploads/2026/06/haya-vison-1024x1024-1-300x300.jpg 300w, https://tiendacp.boostpatagonia.online/wp-content/uploads/2026/06/haya-vison-1024x1024-1-150x150.jpg 150w, https://tiendacp.boostpatagonia.online/wp-content/uploads/2026/06/haya-vison-1024x1024-1-768x768.jpg 768w, https://tiendacp.boostpatagonia.online/wp-content/uploads/2026/06/haya-vison-1024x1024-1-600x600.jpg 600w, https://tiendacp.boostpatagonia.online/wp-content/uploads/2026/06/haya-vison-1024x1024-1-100x100.jpg 100w",
+        "sizes": "(max-width: 1024px) 100vw, 1024px",
+        "thumbnail": "https://tiendacp.boostpatagonia.online/wp-content/uploads/2026/06/haya-vison-1024x1024-1-300x300.jpg"
+      },
+      {
+        "id": 2272,
+        "date_created": "2026-06-13T09:21:54",
+        "date_created_gmt": "2026-06-13T15:21:54",
+        "date_modified": "2026-06-13T09:21:54",
+        "date_modified_gmt": "2026-06-13T15:21:54",
+        "src": "https://tiendacp.boostpatagonia.online/wp-content/uploads/2026/06/haya-vison.png",
+        "name": "haya vison",
+        "alt": "",
+        "srcset": "https://tiendacp.boostpatagonia.online/wp-content/uploads/2026/06/haya-vison.png 1024w, https://tiendacp.boostpatagonia.online/wp-content/uploads/2026/06/haya-vison-300x300.png 300w, https://tiendacp.boostpatagonia.online/wp-content/uploads/2026/06/haya-vison-150x150.png 150w, https://tiendacp.boostpatagonia.online/wp-content/uploads/2026/06/haya-vison-768x768.png 768w, https://tiendacp.boostpatagonia.online/wp-content/uploads/2026/06/haya-vison-600x600.png 600w, https://tiendacp.boostpatagonia.online/wp-content/uploads/2026/06/haya-vison-100x100.png 100w",
+        "sizes": "(max-width: 1024px) 100vw, 1024px",
+        "thumbnail": "https://tiendacp.boostpatagonia.online/wp-content/uploads/2026/06/haya-vison-300x300.png"
+      },
+      {
+        "id": 2273,
+        "date_created": "2026-06-13T09:21:58",
+        "date_created_gmt": "2026-06-13T15:21:58",
+        "date_modified": "2026-06-13T09:21:58",
+        "date_modified_gmt": "2026-06-13T15:21:58",
+        "src": "https://tiendacp.boostpatagonia.online/wp-content/uploads/2026/06/haya-vison33-ambiente.jpg",
+        "name": "haya-vison33 ambiente",
+        "alt": "",
+        "srcset": "https://tiendacp.boostpatagonia.online/wp-content/uploads/2026/06/haya-vison33-ambiente.jpg 1042w, https://tiendacp.boostpatagonia.online/wp-content/uploads/2026/06/haya-vison33-ambiente-300x300.jpg 300w, https://tiendacp.boostpatagonia.online/wp-content/uploads/2026/06/haya-vison33-ambiente-1024x1024.jpg 1024w, https://tiendacp.boostpatagonia.online/wp-content/uploads/2026/06/haya-vison33-ambiente-150x150.jpg 150w, https://tiendacp.boostpatagonia.online/wp-content/uploads/2026/06/haya-vison33-ambiente-768x768.jpg 768w, https://tiendacp.boostpatagonia.online/wp-content/uploads/2026/06/haya-vison33-ambiente-600x600.jpg 600w, https://tiendacp.boostpatagonia.online/wp-content/uploads/2026/06/haya-vison33-ambiente-100x100.jpg 100w",
+        "sizes": "(max-width: 1042px) 100vw, 1042px",
+        "thumbnail": "https://tiendacp.boostpatagonia.online/wp-content/uploads/2026/06/haya-vison33-ambiente-300x300.jpg"
+      }
+    ],
+    "attributes": [],
+    "default_attributes": [],
+    "variations": [],
+    "grouped_products": [],
+    "menu_order": 0,
+    "price_html": "<span class=\"woocommerce-Price-amount amount\"><bdi><span class=\"woocommerce-Price-currencySymbol\">&#36;</span>21.560</bdi></span>",
+    "related_ids": [
+      76,
+      57,
+      51,
+      55,
+      67
+    ],
+    "meta_data": [],
+    "stock_status": "instock",
+    "has_options": false,
+    "post_password": "",
+    "global_unique_id": "",
+    "_links": {
+      "self": [
+        {
+          "href": "https://tiendacp.boostpatagonia.online/wp-json/wc/v3/products/2270",
+          "targetHints": {
+            "allow": [
+              "GET",
+              "POST",
+              "PUT",
+              "PATCH",
+              "DELETE"
+            ]
+          }
+        }
+      ],
+      "collection": [
+        {
+          "href": "https://tiendacp.boostpatagonia.online/wp-json/wc/v3/products"
+        }
+      ]
+    }
+  },
+  {
+    "id": 2265,
+    "name": "Cerámica Castor Gris 31x53 1.65m2",
+    "slug": "ceramica-castor-gris-31x53-1-65m2",
+    "permalink": "https://tiendacp.boostpatagonia.online/producto/ceramica-castor-gris-31x53-1-65m2/",
+    "date_created": "2026-06-13T12:06:10",
+    "date_created_gmt": "2026-06-13T15:06:10",
+    "date_modified": "2026-06-13T12:18:36",
+    "date_modified_gmt": "2026-06-13T15:18:36",
+    "type": "simple",
+    "status": "publish",
+    "featured": false,
+    "catalog_visibility": "visible",
+    "description": "<p>Cerámica para pisos y muros. De acabado satinado. Levemente rugosa. Para uso interior. Apariencia de madera reciclada, para tráfico medio. Recomendada para todo tipo de ambiente interior. Biselada. No rectificada. Rendimiento por caja de 1.65m2. 10 placas por caja.</p>\n",
+    "short_description": "",
+    "sku": "2699728",
+    "price": "14850",
+    "regular_price": "14850",
+    "sale_price": "",
+    "date_on_sale_from": null,
+    "date_on_sale_from_gmt": null,
+    "date_on_sale_to": null,
+    "date_on_sale_to_gmt": null,
+    "on_sale": false,
+    "purchasable": true,
+    "total_sales": 0,
+    "virtual": false,
+    "downloadable": false,
+    "downloads": [],
+    "download_limit": -1,
+    "download_expiry": -1,
+    "external_url": "",
+    "button_text": "",
+    "tax_status": "taxable",
+    "tax_class": "",
+    "manage_stock": false,
+    "stock_quantity": null,
+    "backorders": "no",
+    "backorders_allowed": false,
+    "backordered": false,
+    "low_stock_amount": null,
+    "sold_individually": false,
+    "weight": "25",
+    "dimensions": {
+      "length": "31",
+      "width": "53",
+      "height": "0.6"
+    },
+    "shipping_required": true,
+    "shipping_taxable": true,
+    "shipping_class": "",
+    "shipping_class_id": 0,
+    "reviews_allowed": true,
+    "average_rating": "0.00",
+    "rating_count": 0,
+    "upsell_ids": [],
+    "cross_sell_ids": [],
+    "parent_id": 0,
+    "purchase_note": "",
+    "categories": [
+      {
+        "id": 87,
+        "name": "CyberDay",
+        "slug": "cyberday"
+      }
+    ],
+    "brands": [],
+    "tags": [],
+    "images": [
+      {
+        "id": 2266,
+        "date_created": "2026-06-13T09:05:07",
+        "date_created_gmt": "2026-06-13T15:05:07",
+        "date_modified": "2026-06-13T09:05:07",
+        "date_modified_gmt": "2026-06-13T15:05:07",
+        "src": "https://tiendacp.boostpatagonia.online/wp-content/uploads/2026/06/6.jpg",
+        "name": "6",
+        "alt": "",
+        "srcset": "https://tiendacp.boostpatagonia.online/wp-content/uploads/2026/06/6.jpg 1400w, https://tiendacp.boostpatagonia.online/wp-content/uploads/2026/06/6-300x300.jpg 300w, https://tiendacp.boostpatagonia.online/wp-content/uploads/2026/06/6-1024x1024.jpg 1024w, https://tiendacp.boostpatagonia.online/wp-content/uploads/2026/06/6-150x150.jpg 150w, https://tiendacp.boostpatagonia.online/wp-content/uploads/2026/06/6-768x768.jpg 768w, https://tiendacp.boostpatagonia.online/wp-content/uploads/2026/06/6-600x600.jpg 600w, https://tiendacp.boostpatagonia.online/wp-content/uploads/2026/06/6-100x100.jpg 100w",
+        "sizes": "(max-width: 1400px) 100vw, 1400px",
+        "thumbnail": "https://tiendacp.boostpatagonia.online/wp-content/uploads/2026/06/6-300x300.jpg"
+      },
+      {
+        "id": 2267,
+        "date_created": "2026-06-13T09:05:30",
+        "date_created_gmt": "2026-06-13T15:05:30",
+        "date_modified": "2026-06-13T09:05:30",
+        "date_modified_gmt": "2026-06-13T15:05:30",
+        "src": "https://tiendacp.boostpatagonia.online/wp-content/uploads/2026/06/castor-gris.webp",
+        "name": "castor gris",
+        "alt": "",
+        "srcset": "https://tiendacp.boostpatagonia.online/wp-content/uploads/2026/06/castor-gris.webp 1020w, https://tiendacp.boostpatagonia.online/wp-content/uploads/2026/06/castor-gris-300x300.webp 300w, https://tiendacp.boostpatagonia.online/wp-content/uploads/2026/06/castor-gris-150x150.webp 150w, https://tiendacp.boostpatagonia.online/wp-content/uploads/2026/06/castor-gris-768x768.webp 768w, https://tiendacp.boostpatagonia.online/wp-content/uploads/2026/06/castor-gris-600x600.webp 600w, https://tiendacp.boostpatagonia.online/wp-content/uploads/2026/06/castor-gris-100x100.webp 100w",
+        "sizes": "(max-width: 1020px) 100vw, 1020px",
+        "thumbnail": "https://tiendacp.boostpatagonia.online/wp-content/uploads/2026/06/castor-gris-300x300.webp"
+      },
+      {
+        "id": 2268,
+        "date_created": "2026-06-13T09:05:31",
+        "date_created_gmt": "2026-06-13T15:05:31",
+        "date_modified": "2026-06-13T09:05:31",
+        "date_modified_gmt": "2026-06-13T15:05:31",
+        "src": "https://tiendacp.boostpatagonia.online/wp-content/uploads/2026/06/Castor-Gris-31x53-1.jpg",
+        "name": "Castor-Gris-31&#215;53-1",
+        "alt": "",
+        "srcset": "https://tiendacp.boostpatagonia.online/wp-content/uploads/2026/06/Castor-Gris-31x53-1.jpg 2000w, https://tiendacp.boostpatagonia.online/wp-content/uploads/2026/06/Castor-Gris-31x53-1-300x300.jpg 300w, https://tiendacp.boostpatagonia.online/wp-content/uploads/2026/06/Castor-Gris-31x53-1-1024x1024.jpg 1024w, https://tiendacp.boostpatagonia.online/wp-content/uploads/2026/06/Castor-Gris-31x53-1-150x150.jpg 150w, https://tiendacp.boostpatagonia.online/wp-content/uploads/2026/06/Castor-Gris-31x53-1-768x768.jpg 768w, https://tiendacp.boostpatagonia.online/wp-content/uploads/2026/06/Castor-Gris-31x53-1-1536x1536.jpg 1536w, https://tiendacp.boostpatagonia.online/wp-content/uploads/2026/06/Castor-Gris-31x53-1-600x600.jpg 600w, https://tiendacp.boostpatagonia.online/wp-content/uploads/2026/06/Castor-Gris-31x53-1-100x100.jpg 100w",
+        "sizes": "(max-width: 2000px) 100vw, 2000px",
+        "thumbnail": "https://tiendacp.boostpatagonia.online/wp-content/uploads/2026/06/Castor-Gris-31x53-1-300x300.jpg"
+      }
+    ],
+    "attributes": [],
+    "default_attributes": [],
+    "variations": [],
+    "grouped_products": [],
+    "menu_order": 0,
+    "price_html": "<span class=\"woocommerce-Price-amount amount\"><bdi><span class=\"woocommerce-Price-currencySymbol\">&#36;</span>14.850</bdi></span>",
+    "related_ids": [
+      92,
+      49,
+      99,
+      67,
+      59
+    ],
+    "meta_data": [],
+    "stock_status": "instock",
+    "has_options": false,
+    "post_password": "",
+    "global_unique_id": "",
+    "_links": {
+      "self": [
+        {
+          "href": "https://tiendacp.boostpatagonia.online/wp-json/wc/v3/products/2265",
+          "targetHints": {
+            "allow": [
+              "GET",
+              "POST",
+              "PUT",
+              "PATCH",
+              "DELETE"
+            ]
+          }
+        }
+      ],
+      "collection": [
+        {
+          "href": "https://tiendacp.boostpatagonia.online/wp-json/wc/v3/products"
+        }
+      ]
+    }
+  },
+  {
+    "id": 2261,
+    "name": "Cerámica Leño Cerezo 56x56 2.17m2",
+    "slug": "ceramica-leno-cerezo-56x56-2-17m2",
+    "permalink": "https://tiendacp.boostpatagonia.online/producto/ceramica-leno-cerezo-56x56-2-17m2/",
+    "date_created": "2026-06-13T11:58:01",
+    "date_created_gmt": "2026-06-13T14:58:01",
+    "date_modified": "2026-06-13T11:58:01",
+    "date_modified_gmt": "2026-06-13T14:58:01",
+    "type": "simple",
+    "status": "publish",
+    "featured": false,
+    "catalog_visibility": "visible",
+    "description": "<p>Cerámica para pisos y muros. De acabado brillante. Para uso interior. Apariencia de madera, para tráfico medio. Recomendada para living, comedor. No rectificada. Rendimiento por caja de 2.17m2. 7 piezas por caja</p>\n",
+    "short_description": "",
+    "sku": "2699956",
+    "price": "19590",
+    "regular_price": "19590",
+    "sale_price": "",
+    "date_on_sale_from": null,
+    "date_on_sale_from_gmt": null,
+    "date_on_sale_to": null,
+    "date_on_sale_to_gmt": null,
+    "on_sale": false,
+    "purchasable": true,
+    "total_sales": 0,
+    "virtual": false,
+    "downloadable": false,
+    "downloads": [],
+    "download_limit": -1,
+    "download_expiry": -1,
+    "external_url": "",
+    "button_text": "",
+    "tax_status": "taxable",
+    "tax_class": "",
+    "manage_stock": false,
+    "stock_quantity": null,
+    "backorders": "no",
+    "backorders_allowed": false,
+    "backordered": false,
+    "low_stock_amount": null,
+    "sold_individually": false,
+    "weight": "",
+    "dimensions": {
+      "length": "",
+      "width": "",
+      "height": ""
+    },
+    "shipping_required": true,
+    "shipping_taxable": true,
+    "shipping_class": "",
+    "shipping_class_id": 0,
+    "reviews_allowed": true,
+    "average_rating": "0.00",
+    "rating_count": 0,
+    "upsell_ids": [
+      81,
+      79,
+      80
+    ],
+    "cross_sell_ids": [],
+    "parent_id": 0,
+    "purchase_note": "",
+    "categories": [
+      {
+        "id": 69,
+        "name": "Cerámicas",
+        "slug": "ceramicas"
+      },
+      {
+        "id": 56,
+        "name": "Construcción",
+        "slug": "construccion"
+      },
+      {
+        "id": 77,
+        "name": "Lourdes",
+        "slug": "lourdes"
+      }
+    ],
+    "brands": [],
+    "tags": [],
+    "images": [
+      {
+        "id": 2262,
+        "date_created": "2026-06-13T08:49:27",
+        "date_created_gmt": "2026-06-13T14:49:27",
+        "date_modified": "2026-06-13T08:49:27",
+        "date_modified_gmt": "2026-06-13T14:49:27",
+        "src": "https://tiendacp.boostpatagonia.online/wp-content/uploads/2026/06/9.jpg",
+        "name": "9",
+        "alt": "",
+        "srcset": "https://tiendacp.boostpatagonia.online/wp-content/uploads/2026/06/9.jpg 1400w, https://tiendacp.boostpatagonia.online/wp-content/uploads/2026/06/9-300x300.jpg 300w, https://tiendacp.boostpatagonia.online/wp-content/uploads/2026/06/9-1024x1024.jpg 1024w, https://tiendacp.boostpatagonia.online/wp-content/uploads/2026/06/9-150x150.jpg 150w, https://tiendacp.boostpatagonia.online/wp-content/uploads/2026/06/9-768x768.jpg 768w, https://tiendacp.boostpatagonia.online/wp-content/uploads/2026/06/9-600x600.jpg 600w, https://tiendacp.boostpatagonia.online/wp-content/uploads/2026/06/9-100x100.jpg 100w",
+        "sizes": "(max-width: 1400px) 100vw, 1400px",
+        "thumbnail": "https://tiendacp.boostpatagonia.online/wp-content/uploads/2026/06/9-300x300.jpg"
+      },
+      {
+        "id": 2263,
+        "date_created": "2026-06-13T08:50:08",
+        "date_created_gmt": "2026-06-13T14:50:08",
+        "date_modified": "2026-06-13T08:50:08",
+        "date_modified_gmt": "2026-06-13T14:50:08",
+        "src": "https://tiendacp.boostpatagonia.online/wp-content/uploads/2026/06/Leno-cerezo3.jpg",
+        "name": "Leno-cerezo3",
+        "alt": "",
+        "srcset": "https://tiendacp.boostpatagonia.online/wp-content/uploads/2026/06/Leno-cerezo3.jpg 2000w, https://tiendacp.boostpatagonia.online/wp-content/uploads/2026/06/Leno-cerezo3-300x150.jpg 300w, https://tiendacp.boostpatagonia.online/wp-content/uploads/2026/06/Leno-cerezo3-1024x512.jpg 1024w, https://tiendacp.boostpatagonia.online/wp-content/uploads/2026/06/Leno-cerezo3-768x384.jpg 768w, https://tiendacp.boostpatagonia.online/wp-content/uploads/2026/06/Leno-cerezo3-1536x768.jpg 1536w, https://tiendacp.boostpatagonia.online/wp-content/uploads/2026/06/Leno-cerezo3-600x300.jpg 600w",
+        "sizes": "(max-width: 2000px) 100vw, 2000px",
+        "thumbnail": "https://tiendacp.boostpatagonia.online/wp-content/uploads/2026/06/Leno-cerezo3-300x300.jpg"
+      },
+      {
+        "id": 2264,
+        "date_created": "2026-06-13T08:57:12",
+        "date_created_gmt": "2026-06-13T14:57:12",
+        "date_modified": "2026-06-13T08:57:12",
+        "date_modified_gmt": "2026-06-13T14:57:12",
+        "src": "https://tiendacp.boostpatagonia.online/wp-content/uploads/2026/06/leno-cerezo.jpg",
+        "name": "leno-cerezo",
+        "alt": "",
+        "srcset": "https://tiendacp.boostpatagonia.online/wp-content/uploads/2026/06/leno-cerezo.jpg 2000w, https://tiendacp.boostpatagonia.online/wp-content/uploads/2026/06/leno-cerezo-300x300.jpg 300w, https://tiendacp.boostpatagonia.online/wp-content/uploads/2026/06/leno-cerezo-1024x1024.jpg 1024w, https://tiendacp.boostpatagonia.online/wp-content/uploads/2026/06/leno-cerezo-150x150.jpg 150w, https://tiendacp.boostpatagonia.online/wp-content/uploads/2026/06/leno-cerezo-768x768.jpg 768w, https://tiendacp.boostpatagonia.online/wp-content/uploads/2026/06/leno-cerezo-1536x1536.jpg 1536w, https://tiendacp.boostpatagonia.online/wp-content/uploads/2026/06/leno-cerezo-600x600.jpg 600w, https://tiendacp.boostpatagonia.online/wp-content/uploads/2026/06/leno-cerezo-100x100.jpg 100w",
+        "sizes": "(max-width: 2000px) 100vw, 2000px",
+        "thumbnail": "https://tiendacp.boostpatagonia.online/wp-content/uploads/2026/06/leno-cerezo-300x300.jpg"
+      }
+    ],
+    "attributes": [],
+    "default_attributes": [],
+    "variations": [],
+    "grouped_products": [],
+    "menu_order": 0,
+    "price_html": "<span class=\"woocommerce-Price-amount amount\"><bdi><span class=\"woocommerce-Price-currencySymbol\">&#36;</span>19.590</bdi></span>",
+    "related_ids": [
+      48,
+      61,
+      44,
+      49,
+      66
+    ],
+    "meta_data": [],
+    "stock_status": "instock",
+    "has_options": false,
+    "post_password": "",
+    "global_unique_id": "",
+    "_links": {
+      "self": [
+        {
+          "href": "https://tiendacp.boostpatagonia.online/wp-json/wc/v3/products/2261",
+          "targetHints": {
+            "allow": [
+              "GET",
+              "POST",
+              "PUT",
+              "PATCH",
+              "DELETE"
+            ]
+          }
+        }
+      ],
+      "collection": [
+        {
+          "href": "https://tiendacp.boostpatagonia.online/wp-json/wc/v3/products"
+        }
+      ]
+    }
+  },
+  {
     "id": 2213,
     "name": "Cómoda Zapatera Imperial Cinamomo Areia",
     "slug": "comoda-zapatera-imperial-cinamomo-areia",
@@ -117,11 +1031,11 @@
     "menu_order": 0,
     "price_html": "<span class=\"woocommerce-Price-amount amount\"><bdi><span class=\"woocommerce-Price-currencySymbol\">&#36;</span>192.900</bdi></span>",
     "related_ids": [
+      277,
+      266,
       263,
-      275,
-      265,
-      244,
-      239
+      256,
+      273
     ],
     "meta_data": [
       {
@@ -289,11 +1203,11 @@
     "menu_order": 0,
     "price_html": "<span class=\"woocommerce-Price-amount amount\"><bdi><span class=\"woocommerce-Price-currencySymbol\">&#36;</span>50.700</bdi></span>",
     "related_ids": [
-      247,
-      250,
-      244,
       239,
-      264
+      266,
+      256,
+      243,
+      275
     ],
     "meta_data": [],
     "stock_status": "instock",
@@ -422,11 +1336,11 @@
     "menu_order": 0,
     "price_html": "<span class=\"woocommerce-Price-amount amount\"><bdi><span class=\"woocommerce-Price-currencySymbol\">&#36;</span>206.900</bdi></span>",
     "related_ids": [
-      218,
-      228,
       191,
-      183,
-      222
+      231,
+      226,
+      212,
+      221
     ],
     "meta_data": [],
     "stock_status": "instock",
@@ -560,11 +1474,11 @@
     "menu_order": 0,
     "price_html": "<span class=\"woocommerce-Price-amount amount\"><bdi><span class=\"woocommerce-Price-currencySymbol\">&#36;</span>192.900</bdi></span>",
     "related_ids": [
-      245,
-      258,
-      274,
-      256,
-      246
+      278,
+      242,
+      250,
+      244,
+      259
     ],
     "meta_data": [
       {
@@ -729,11 +1643,11 @@
     "menu_order": 0,
     "price_html": "<span class=\"woocommerce-Price-amount amount\"><bdi><span class=\"woocommerce-Price-currencySymbol\">&#36;</span>192.900</bdi></span>",
     "related_ids": [
-      243,
-      265,
-      235,
-      245,
-      244
+      242,
+      246,
+      253,
+      266,
+      250
     ],
     "meta_data": [
       {
@@ -893,11 +1807,11 @@
     "menu_order": 0,
     "price_html": "<span class=\"woocommerce-Price-amount amount\"><bdi><span class=\"woocommerce-Price-currencySymbol\">&#36;</span>350.000</bdi></span>",
     "related_ids": [
-      67,
-      68,
-      1779,
-      103,
-      1383
+      44,
+      57,
+      90,
+      1638,
+      1368
     ],
     "meta_data": [
       {
@@ -1133,11 +2047,11 @@
     "menu_order": 0,
     "price_html": "<span class=\"woocommerce-Price-amount amount\"><bdi><span class=\"woocommerce-Price-currencySymbol\">&#36;</span>105.900</bdi></span>",
     "related_ids": [
-      66,
-      48,
-      63,
+      74,
       58,
-      60
+      60,
+      17,
+      63
     ],
     "meta_data": [
       {
@@ -1381,11 +2295,11 @@
     "menu_order": 0,
     "price_html": "<span class=\"woocommerce-Price-amount amount\"><bdi><span class=\"woocommerce-Price-currencySymbol\">&#36;</span>77.900</bdi></span>",
     "related_ids": [
-      46,
-      69,
-      67,
-      76,
-      16
+      71,
+      16,
+      66,
+      17,
+      60
     ],
     "meta_data": [
       {
@@ -1629,11 +2543,11 @@
     "menu_order": 0,
     "price_html": "<span class=\"woocommerce-Price-amount amount\"><bdi><span class=\"woocommerce-Price-currencySymbol\">&#36;</span>50.900</bdi></span>",
     "related_ids": [
-      59,
-      76,
       67,
-      55,
-      44
+      46,
+      74,
+      58,
+      54
     ],
     "meta_data": [
       {
@@ -1863,11 +2777,11 @@
     "menu_order": 0,
     "price_html": "<span class=\"woocommerce-Price-amount amount\"><bdi><span class=\"woocommerce-Price-currencySymbol\">&#36;</span>69.500</bdi></span>",
     "related_ids": [
-      258,
-      235,
-      246,
-      263,
-      274
+      259,
+      243,
+      265,
+      278,
+      239
     ],
     "meta_data": [
       {
@@ -2127,11 +3041,11 @@
     "menu_order": 0,
     "price_html": "<span class=\"woocommerce-Price-amount amount\"><bdi><span class=\"woocommerce-Price-currencySymbol\">&#36;</span>69.500</bdi></span>",
     "related_ids": [
+      244,
+      245,
+      235,
       248,
-      279,
-      263,
-      281,
-      258
+      256
     ],
     "meta_data": [
       {
@@ -2405,11 +3319,11 @@
     "menu_order": 0,
     "price_html": "<span class=\"woocommerce-Price-amount amount\"><bdi><span class=\"woocommerce-Price-currencySymbol\">&#36;</span>123.650</bdi></span>",
     "related_ids": [
-      248,
-      256,
-      274,
-      265,
-      244
+      259,
+      235,
+      264,
+      258,
+      277
     ],
     "meta_data": [
       {
@@ -2683,11 +3597,11 @@
     "menu_order": 0,
     "price_html": "<span class=\"woocommerce-Price-amount amount\"><bdi><span class=\"woocommerce-Price-currencySymbol\">&#36;</span>123.650</bdi></span>",
     "related_ids": [
-      279,
-      277,
-      256,
+      250,
+      258,
       274,
-      275
+      242,
+      263
     ],
     "meta_data": [
       {
@@ -2942,10 +3856,10 @@
     "menu_order": 0,
     "price_html": "<span class=\"woocommerce-Price-amount amount\"><bdi><span class=\"woocommerce-Price-currencySymbol\">&#36;</span>131.900</bdi></span>",
     "related_ids": [
-      247,
+      273,
       242,
-      245,
-      243,
+      250,
+      281,
       256
     ],
     "meta_data": [
@@ -3184,11 +4098,11 @@
     "menu_order": 0,
     "price_html": "<span class=\"woocommerce-Price-amount amount\"><bdi><span class=\"woocommerce-Price-currencySymbol\">&#36;</span>131.900</bdi></span>",
     "related_ids": [
-      242,
-      243,
-      244,
-      264,
-      235
+      256,
+      266,
+      239,
+      259,
+      265
     ],
     "meta_data": [
       {
@@ -3431,11 +4345,11 @@
     "menu_order": 0,
     "price_html": "<span class=\"woocommerce-Price-amount amount\"><bdi><span class=\"woocommerce-Price-currencySymbol\">&#36;</span>131.900</bdi></span>",
     "related_ids": [
-      244,
+      278,
+      275,
+      281,
       250,
-      243,
-      279,
-      235
+      245
     ],
     "meta_data": [
       {
@@ -3703,11 +4617,11 @@
     "menu_order": 0,
     "price_html": "<span class=\"woocommerce-Price-amount amount\"><bdi><span class=\"woocommerce-Price-currencySymbol\">&#36;</span>84.550</bdi></span>",
     "related_ids": [
-      243,
-      259,
-      247,
-      266,
-      274
+      277,
+      242,
+      246,
+      239,
+      258
     ],
     "meta_data": [
       {
@@ -3945,11 +4859,11 @@
     "menu_order": 0,
     "price_html": "<span class=\"woocommerce-Price-amount amount\"><bdi><span class=\"woocommerce-Price-currencySymbol\">&#36;</span>84.550</bdi></span>",
     "related_ids": [
-      281,
       239,
       247,
-      273,
-      263
+      235,
+      250,
+      259
     ],
     "meta_data": [
       {
@@ -4192,11 +5106,11 @@
     "menu_order": 0,
     "price_html": "<span class=\"woocommerce-Price-amount amount\"><bdi><span class=\"woocommerce-Price-currencySymbol\">&#36;</span>39.900</bdi></span>",
     "related_ids": [
-      266,
-      264,
-      244,
-      279,
-      245
+      250,
+      281,
+      247,
+      246,
+      258
     ],
     "meta_data": [
       {
@@ -4459,11 +5373,11 @@
     "menu_order": 0,
     "price_html": "<span class=\"woocommerce-Price-amount amount\"><bdi><span class=\"woocommerce-Price-currencySymbol\">&#36;</span>39.900</bdi></span>",
     "related_ids": [
+      248,
+      281,
       265,
       266,
-      244,
-      248,
-      235
+      264
     ],
     "meta_data": [
       {
@@ -4706,11 +5620,11 @@
     "menu_order": 0,
     "price_html": "<span class=\"woocommerce-Price-amount amount\"><bdi><span class=\"woocommerce-Price-currencySymbol\">&#36;</span>120.300</bdi></span>",
     "related_ids": [
-      265,
-      279,
-      258,
+      247,
       274,
-      256
+      253,
+      263,
+      248
     ],
     "meta_data": [
       {
@@ -4978,11 +5892,11 @@
     "menu_order": 0,
     "price_html": "<span class=\"woocommerce-Price-amount amount\"><bdi><span class=\"woocommerce-Price-currencySymbol\">&#36;</span>120.300</bdi></span>",
     "related_ids": [
-      274,
-      242,
-      259,
+      243,
       244,
-      266
+      239,
+      278,
+      242
     ],
     "meta_data": [
       {
@@ -5245,11 +6159,11 @@
     "menu_order": 0,
     "price_html": "<span class=\"woocommerce-Price-amount amount\"><bdi><span class=\"woocommerce-Price-currencySymbol\">&#36;</span>120.300</bdi></span>",
     "related_ids": [
-      277,
-      278,
-      266,
-      275,
-      263
+      248,
+      274,
+      258,
+      247,
+      250
     ],
     "meta_data": [
       {
@@ -5487,11 +6401,11 @@
     "menu_order": 0,
     "price_html": "<span class=\"woocommerce-Price-amount amount\"><bdi><span class=\"woocommerce-Price-currencySymbol\">&#36;</span>119.500</bdi></span>",
     "related_ids": [
-      264,
-      259,
-      235,
-      273,
-      248
+      279,
+      248,
+      242,
+      239,
+      273
     ],
     "meta_data": [
       {
@@ -5739,11 +6653,11 @@
     "menu_order": 0,
     "price_html": "<span class=\"woocommerce-Price-amount amount\"><bdi><span class=\"woocommerce-Price-currencySymbol\">&#36;</span>119.500</bdi></span>",
     "related_ids": [
-      248,
-      265,
-      258,
-      247,
-      264
+      279,
+      266,
+      250,
+      244,
+      247
     ],
     "meta_data": [
       {
@@ -5991,11 +6905,11 @@
     "menu_order": 0,
     "price_html": "<span class=\"woocommerce-Price-amount amount\"><bdi><span class=\"woocommerce-Price-currencySymbol\">&#36;</span>92.700</bdi></span>",
     "related_ids": [
-      243,
       235,
-      273,
-      248,
-      277
+      274,
+      253,
+      281,
+      259
     ],
     "meta_data": [
       {
@@ -6238,11 +7152,11 @@
     "menu_order": 0,
     "price_html": "<span class=\"woocommerce-Price-amount amount\"><bdi><span class=\"woocommerce-Price-currencySymbol\">&#36;</span>92.700</bdi></span>",
     "related_ids": [
-      244,
-      263,
-      239,
+      279,
       274,
-      273
+      244,
+      258,
+      259
     ],
     "meta_data": [
       {
@@ -6495,11 +7409,11 @@
     "menu_order": 0,
     "price_html": "<span class=\"woocommerce-Price-amount amount\"><bdi><span class=\"woocommerce-Price-currencySymbol\">&#36;</span>117.200</bdi></span>",
     "related_ids": [
-      263,
-      256,
-      244,
-      245,
-      259
+      2216,
+      253,
+      265,
+      1972,
+      263
     ],
     "meta_data": [
       {
@@ -6767,11 +7681,11 @@
     "menu_order": 0,
     "price_html": "<span class=\"woocommerce-Price-amount amount\"><bdi><span class=\"woocommerce-Price-currencySymbol\">&#36;</span>188.150</bdi></span>",
     "related_ids": [
-      277,
-      278,
+      239,
+      242,
       256,
       258,
-      264
+      281
     ],
     "meta_data": [
       {
@@ -7039,11 +7953,11 @@
     "menu_order": 0,
     "price_html": "<span class=\"woocommerce-Price-amount amount\"><bdi><span class=\"woocommerce-Price-currencySymbol\">&#36;</span>188.150</bdi></span>",
     "related_ids": [
-      259,
-      263,
-      235,
-      264,
-      273
+      256,
+      258,
+      246,
+      247,
+      239
     ],
     "meta_data": [
       {
@@ -7306,11 +8220,11 @@
     "menu_order": 0,
     "price_html": "<span class=\"woocommerce-Price-amount amount\"><bdi><span class=\"woocommerce-Price-currencySymbol\">&#36;</span>126.100</bdi></span>",
     "related_ids": [
-      247,
-      256,
-      275,
+      239,
+      242,
       281,
-      258
+      248,
+      245
     ],
     "meta_data": [
       {
@@ -7553,11 +8467,11 @@
     "menu_order": 0,
     "price_html": "<span class=\"woocommerce-Price-amount amount\"><bdi><span class=\"woocommerce-Price-currencySymbol\">&#36;</span>241.350</bdi></span>",
     "related_ids": [
-      253,
-      247,
-      263,
       244,
-      246
+      275,
+      266,
+      256,
+      245
     ],
     "meta_data": [
       {
@@ -7815,11 +8729,11 @@
     "menu_order": 0,
     "price_html": "<span class=\"woocommerce-Price-amount amount\"><bdi><span class=\"woocommerce-Price-currencySymbol\">&#36;</span>241.350</bdi></span>",
     "related_ids": [
-      69,
-      1383,
       51,
-      1972,
-      87
+      85,
+      1788,
+      90,
+      1368
     ],
     "meta_data": [
       {
@@ -8082,11 +8996,11 @@
     "menu_order": 0,
     "price_html": "<span class=\"woocommerce-Price-amount amount\"><bdi><span class=\"woocommerce-Price-currencySymbol\">&#36;</span>19.400</bdi></span>",
     "related_ids": [
-      60,
-      44,
-      51,
+      67,
       66,
-      46
+      48,
+      40,
+      74
     ],
     "meta_data": [
       {
@@ -8236,8 +9150,8 @@
     "permalink": "https://tiendacp.boostpatagonia.online/producto/ceramica-castano-beige-18x56/",
     "date_created": "2025-06-24T15:33:59",
     "date_created_gmt": "2025-06-24T18:33:59",
-    "date_modified": "2026-06-08T17:08:50",
-    "date_modified_gmt": "2026-06-08T20:08:50",
+    "date_modified": "2026-06-13T11:43:13",
+    "date_modified_gmt": "2026-06-13T14:43:13",
     "type": "simple",
     "status": "publish",
     "featured": false,
@@ -8245,8 +9159,8 @@
     "description": "",
     "short_description": "",
     "sku": "2699943",
-    "price": "19400",
-    "regular_price": "19400",
+    "price": "21560",
+    "regular_price": "21560",
     "sale_price": "",
     "date_on_sale_from": null,
     "date_on_sale_from_gmt": null,
@@ -8358,13 +9272,13 @@
     "variations": [],
     "grouped_products": [],
     "menu_order": 0,
-    "price_html": "<span class=\"woocommerce-Price-amount amount\"><bdi><span class=\"woocommerce-Price-currencySymbol\">&#36;</span>19.400</bdi></span>",
+    "price_html": "<span class=\"woocommerce-Price-amount amount\"><bdi><span class=\"woocommerce-Price-currencySymbol\">&#36;</span>21.560</bdi></span>",
     "related_ids": [
+      55,
+      58,
       59,
-      51,
-      40,
-      78,
-      55
+      54,
+      78
     ],
     "meta_data": [
       {
@@ -8653,11 +9567,11 @@
     "menu_order": 0,
     "price_html": "<span class=\"woocommerce-Price-amount amount\"><bdi><span class=\"woocommerce-Price-currencySymbol\">&#36;</span>18.300</bdi></span>",
     "related_ids": [
-      68,
-      61,
-      46,
-      63,
-      49
+      78,
+      51,
+      71,
+      69,
+      48
     ],
     "meta_data": [
       {
@@ -8939,10 +9853,10 @@
     "price_html": "<span class=\"woocommerce-Price-amount amount\"><bdi><span class=\"woocommerce-Price-currencySymbol\">&#36;</span>25.200</bdi></span>",
     "related_ids": [
       57,
-      68,
-      44,
-      54,
-      17
+      16,
+      43,
+      58,
+      66
     ],
     "meta_data": [
       {
@@ -9223,11 +10137,11 @@
     "menu_order": 0,
     "price_html": "<span class=\"woocommerce-Price-amount amount\"><bdi><span class=\"woocommerce-Price-currencySymbol\">&#36;</span>21.480</bdi></span>",
     "related_ids": [
-      69,
+      48,
+      17,
       71,
       66,
-      46,
-      78
+      69
     ],
     "meta_data": [
       {
@@ -9508,11 +10422,11 @@
     "menu_order": 0,
     "price_html": "<span class=\"woocommerce-Price-amount amount\"><bdi><span class=\"woocommerce-Price-currencySymbol\">&#36;</span>21.480</bdi></span>",
     "related_ids": [
-      43,
-      69,
-      68,
-      63,
-      57
+      55,
+      49,
+      66,
+      57,
+      51
     ],
     "meta_data": [
       {
@@ -9793,11 +10707,11 @@
     "menu_order": 0,
     "price_html": "<span class=\"woocommerce-Price-amount amount\"><bdi><span class=\"woocommerce-Price-currencySymbol\">&#36;</span>20.500</bdi></span>",
     "related_ids": [
+      44,
+      43,
+      60,
       63,
-      48,
-      61,
-      59,
-      74
+      67
     ],
     "meta_data": [
       {
@@ -10078,11 +10992,11 @@
     "menu_order": 0,
     "price_html": "<span class=\"woocommerce-Price-amount amount\"><bdi><span class=\"woocommerce-Price-currencySymbol\">&#36;</span>15.700</bdi></span>",
     "related_ids": [
-      17,
-      40,
       55,
-      71,
-      60
+      63,
+      16,
+      58,
+      76
     ],
     "meta_data": [
       {
@@ -10252,8 +11166,8 @@
     "permalink": "https://tiendacp.boostpatagonia.online/producto/ceramica-eucalipto-beige-56x56/",
     "date_created": "2025-06-24T15:06:37",
     "date_created_gmt": "2025-06-24T18:06:37",
-    "date_modified": "2026-06-08T17:08:50",
-    "date_modified_gmt": "2026-06-08T20:08:50",
+    "date_modified": "2026-06-13T11:43:41",
+    "date_modified_gmt": "2026-06-13T14:43:41",
     "type": "simple",
     "status": "publish",
     "featured": false,
@@ -10261,8 +11175,8 @@
     "description": "",
     "short_description": "",
     "sku": "2699936",
-    "price": "18300",
-    "regular_price": "18300",
+    "price": "19590",
+    "regular_price": "19590",
     "sale_price": "",
     "date_on_sale_from": null,
     "date_on_sale_from_gmt": null,
@@ -10374,13 +11288,13 @@
     "variations": [],
     "grouped_products": [],
     "menu_order": 0,
-    "price_html": "<span class=\"woocommerce-Price-amount amount\"><bdi><span class=\"woocommerce-Price-currencySymbol\">&#36;</span>18.300</bdi></span>",
+    "price_html": "<span class=\"woocommerce-Price-amount amount\"><bdi><span class=\"woocommerce-Price-currencySymbol\">&#36;</span>19.590</bdi></span>",
     "related_ids": [
+      44,
+      57,
+      59,
       51,
-      78,
-      63,
-      71,
-      55
+      68
     ],
     "meta_data": [
       {
@@ -10550,8 +11464,8 @@
     "permalink": "https://tiendacp.boostpatagonia.online/producto/ceramica-madera-brillante-56x56/",
     "date_created": "2025-06-24T15:03:49",
     "date_created_gmt": "2025-06-24T18:03:49",
-    "date_modified": "2026-06-08T17:08:50",
-    "date_modified_gmt": "2026-06-08T20:08:50",
+    "date_modified": "2026-06-13T11:44:00",
+    "date_modified_gmt": "2026-06-13T14:44:00",
     "type": "simple",
     "status": "publish",
     "featured": false,
@@ -10559,8 +11473,8 @@
     "description": "",
     "short_description": "",
     "sku": "2699946",
-    "price": "18300",
-    "regular_price": "18300",
+    "price": "19590",
+    "regular_price": "19590",
     "sale_price": "",
     "date_on_sale_from": null,
     "date_on_sale_from_gmt": null,
@@ -10646,13 +11560,13 @@
     "variations": [],
     "grouped_products": [],
     "menu_order": 0,
-    "price_html": "<span class=\"woocommerce-Price-amount amount\"><bdi><span class=\"woocommerce-Price-currencySymbol\">&#36;</span>18.300</bdi></span>",
+    "price_html": "<span class=\"woocommerce-Price-amount amount\"><bdi><span class=\"woocommerce-Price-currencySymbol\">&#36;</span>19.590</bdi></span>",
     "related_ids": [
-      76,
-      49,
+      71,
       59,
       48,
-      57
+      58,
+      67
     ],
     "meta_data": [
       {
@@ -10946,11 +11860,11 @@
     "menu_order": 0,
     "price_html": "<span class=\"woocommerce-Price-amount amount\"><bdi><span class=\"woocommerce-Price-currencySymbol\">&#36;</span>18.300</bdi></span>",
     "related_ids": [
-      40,
-      74,
-      63,
-      16,
-      68
+      54,
+      68,
+      66,
+      49,
+      17
     ],
     "meta_data": [
       {
@@ -11244,11 +12158,11 @@
     "menu_order": 0,
     "price_html": "<span class=\"woocommerce-Price-amount amount\"><bdi><span class=\"woocommerce-Price-currencySymbol\">&#36;</span>18.300</bdi></span>",
     "related_ids": [
-      78,
-      63,
-      58,
+      51,
+      46,
+      66,
       76,
-      66
+      16
     ],
     "meta_data": [
       {
@@ -11542,11 +12456,11 @@
     "menu_order": 0,
     "price_html": "<span class=\"woocommerce-Price-amount amount\"><bdi><span class=\"woocommerce-Price-currencySymbol\">&#36;</span>18.300</bdi></span>",
     "related_ids": [
+      68,
+      17,
       51,
-      63,
-      78,
-      76,
-      46
+      55,
+      63
     ],
     "meta_data": [
       {
@@ -11835,11 +12749,11 @@
     "menu_order": 0,
     "price_html": "<span class=\"woocommerce-Price-amount amount\"><bdi><span class=\"woocommerce-Price-currencySymbol\">&#36;</span>13.900</bdi></span>",
     "related_ids": [
-      16,
       55,
       43,
-      67,
-      17
+      46,
+      54,
+      61
     ],
     "meta_data": [
       {
@@ -11994,17 +12908,17 @@
     "permalink": "https://tiendacp.boostpatagonia.online/producto/ceramica-castor-marron-31x53/",
     "date_created": "2025-06-23T17:00:53",
     "date_created_gmt": "2025-06-23T20:00:53",
-    "date_modified": "2026-05-30T18:44:23",
-    "date_modified_gmt": "2026-05-30T21:44:23",
+    "date_modified": "2026-06-13T12:38:52",
+    "date_modified_gmt": "2026-06-13T15:38:52",
     "type": "simple",
     "status": "publish",
     "featured": false,
     "catalog_visibility": "visible",
-    "description": "",
+    "description": "<p>Cerámica para pisos y muros. De acabado satinado. Levemente rugosa. Para uso interior. Apariencia de madera reciclada, para tráfico medio. Recomendada para todo tipo de ambiente interior. Biselada. No rectificada. Rendimiento por caja de 1.65m2. 10 Placas por caja.</p>\n",
     "short_description": "",
     "sku": "2699944",
-    "price": "13900",
-    "regular_price": "13900",
+    "price": "14850",
+    "regular_price": "14850",
     "sale_price": "",
     "date_on_sale_from": null,
     "date_on_sale_from_gmt": null,
@@ -12029,11 +12943,11 @@
     "backordered": false,
     "low_stock_amount": null,
     "sold_individually": false,
-    "weight": "",
+    "weight": "25",
     "dimensions": {
-      "length": "",
-      "width": "",
-      "height": ""
+      "length": "56",
+      "width": "18",
+      "height": "0.6"
     },
     "shipping_required": true,
     "shipping_taxable": true,
@@ -12042,7 +12956,10 @@
     "reviews_allowed": true,
     "average_rating": "0.00",
     "rating_count": 0,
-    "upsell_ids": [],
+    "upsell_ids": [
+      81,
+      79
+    ],
     "cross_sell_ids": [],
     "parent_id": 0,
     "purchase_note": "",
@@ -12098,13 +13015,13 @@
     "variations": [],
     "grouped_products": [],
     "menu_order": 0,
-    "price_html": "<span class=\"woocommerce-Price-amount amount\"><bdi><span class=\"woocommerce-Price-currencySymbol\">&#36;</span>13.900</bdi></span>",
+    "price_html": "<span class=\"woocommerce-Price-amount amount\"><bdi><span class=\"woocommerce-Price-currencySymbol\">&#36;</span>14.850</bdi></span>",
     "related_ids": [
-      63,
-      55,
+      58,
+      17,
+      66,
       76,
-      46,
-      40
+      49
     ],
     "meta_data": [
       {
@@ -12221,7 +13138,7 @@
         "value": []
       }
     ],
-    "stock_status": "outofstock",
+    "stock_status": "instock",
     "has_options": false,
     "post_password": "",
     "global_unique_id": "",
@@ -12254,8 +13171,8 @@
     "permalink": "https://tiendacp.boostpatagonia.online/producto/ceramica-stone-meadow-45x45/",
     "date_created": "2025-06-23T16:54:33",
     "date_created_gmt": "2025-06-23T19:54:33",
-    "date_modified": "2026-05-30T18:44:22",
-    "date_modified_gmt": "2026-05-30T21:44:22",
+    "date_modified": "2026-06-13T11:45:06",
+    "date_modified_gmt": "2026-06-13T14:45:06",
     "type": "simple",
     "status": "publish",
     "featured": false,
@@ -12360,11 +13277,11 @@
     "menu_order": 0,
     "price_html": "<span class=\"woocommerce-Price-amount amount\"><bdi><span class=\"woocommerce-Price-currencySymbol\">&#36;</span>21.200</bdi></span>",
     "related_ids": [
-      16,
-      68,
-      67,
-      71,
-      17
+      17,
+      78,
+      60,
+      40,
+      48
     ],
     "meta_data": [
       {
@@ -12481,7 +13398,7 @@
         "value": []
       }
     ],
-    "stock_status": "instock",
+    "stock_status": "outofstock",
     "has_options": false,
     "post_password": "",
     "global_unique_id": "",
@@ -12638,11 +13555,11 @@
     "menu_order": 0,
     "price_html": "<span class=\"woocommerce-Price-amount amount\"><bdi><span class=\"woocommerce-Price-currencySymbol\">&#36;</span>18.500</bdi></span>",
     "related_ids": [
-      16,
-      55,
-      71,
-      46,
-      69
+      43,
+      51,
+      57,
+      17,
+      48
     ],
     "meta_data": [
       {
@@ -12936,11 +13853,11 @@
     "menu_order": 0,
     "price_html": "<span class=\"woocommerce-Price-amount amount\"><bdi><span class=\"woocommerce-Price-currencySymbol\">&#36;</span>18.900</bdi></span>",
     "related_ids": [
-      76,
-      74,
-      54,
-      49,
-      67
+      60,
+      16,
+      67,
+      69,
+      61
     ],
     "meta_data": [
       {
@@ -13221,11 +14138,11 @@
     "menu_order": 0,
     "price_html": "<span class=\"woocommerce-Price-amount amount\"><bdi><span class=\"woocommerce-Price-currencySymbol\">&#36;</span>18.900</bdi></span>",
     "related_ids": [
-      66,
-      49,
+      61,
+      16,
+      46,
       60,
-      74,
-      59
+      55
     ],
     "meta_data": [
       {
@@ -13497,10 +14414,10 @@
     "price_html": "<span class=\"woocommerce-Price-amount amount\"><bdi><span class=\"woocommerce-Price-currencySymbol\">&#36;</span>18.900</bdi></span>",
     "related_ids": [
       1705,
-      1737,
-      1717,
-      1683,
-      1743
+      2270,
+      2274,
+      1743,
+      1683
     ],
     "meta_data": [
       {
@@ -13765,10 +14682,10 @@
     "price_html": "<span class=\"woocommerce-Price-amount amount\"><bdi><span class=\"woocommerce-Price-currencySymbol\">&#36;</span>18.900</bdi></span>",
     "related_ids": [
       1717,
-      90,
       1972,
-      1668,
-      1654
+      1673,
+      1649,
+      1779
     ],
     "meta_data": [
       {
@@ -14011,11 +14928,11 @@
     "menu_order": 0,
     "price_html": "<span class=\"woocommerce-Price-amount amount\"><bdi><span class=\"woocommerce-Price-currencySymbol\">&#36;</span>146.900</bdi></span>",
     "related_ids": [
-      201,
-      1383,
-      191,
-      195,
-      1377
+      328,
+      1368,
+      1380,
+      331,
+      192
     ],
     "meta_data": [
       {
@@ -14283,11 +15200,11 @@
     "menu_order": 0,
     "price_html": "<span class=\"woocommerce-Price-amount amount\"><bdi><span class=\"woocommerce-Price-currencySymbol\">&#36;</span>146.900</bdi></span>",
     "related_ids": [
-      1397,
-      1430,
+      1383,
       1416,
-      1386,
-      1051
+      1048,
+      1050,
+      1049
     ],
     "meta_data": [
       {
@@ -14568,11 +15485,11 @@
     "menu_order": 0,
     "price_html": "<span class=\"woocommerce-Price-amount amount\"><bdi><span class=\"woocommerce-Price-currencySymbol\">&#36;</span>101.500</bdi></span>",
     "related_ids": [
-      1451,
+      1420,
       1423,
-      1412,
-      1047,
-      1430
+      2280,
+      1400,
+      1051
     ],
     "meta_data": [
       {
@@ -14835,11 +15752,11 @@
     "menu_order": 0,
     "price_html": "<span class=\"woocommerce-Price-amount amount\"><bdi><span class=\"woocommerce-Price-currencySymbol\">&#36;</span>165.550</bdi></span>",
     "related_ids": [
-      286,
-      1420,
-      182,
-      1451,
-      1412
+      1412,
+      2280,
+      1048,
+      1049,
+      1368
     ],
     "meta_data": [
       {
@@ -15095,11 +16012,11 @@
     "menu_order": 0,
     "price_html": "<span class=\"woocommerce-Price-amount amount\"><bdi><span class=\"woocommerce-Price-currencySymbol\">&#36;</span>165.550</bdi></span>",
     "related_ids": [
-      1416,
+      1047,
       1051,
-      1429,
-      1412,
-      1049
+      286,
+      1426,
+      1397
     ],
     "meta_data": [
       {
@@ -15360,10 +16277,10 @@
     "menu_order": 0,
     "price_html": "<span class=\"woocommerce-Price-amount amount\"><bdi><span class=\"woocommerce-Price-currencySymbol\">&#36;</span>109.500</bdi></span>",
     "related_ids": [
+      1048,
+      1368,
+      1400,
       1447,
-      1412,
-      1386,
-      1440,
       1451
     ],
     "meta_data": [
@@ -15645,11 +16562,11 @@
     "menu_order": 0,
     "price_html": "<span class=\"woocommerce-Price-amount amount\"><bdi><span class=\"woocommerce-Price-currencySymbol\">&#36;</span>109.500</bdi></span>",
     "related_ids": [
-      1436,
-      1393,
-      1368,
-      1433,
-      1412
+      1050,
+      1429,
+      1051,
+      1416,
+      1436
     ],
     "meta_data": [
       {
@@ -15898,11 +16815,11 @@
     "menu_order": 0,
     "price_html": "<span class=\"woocommerce-Price-amount amount\"><bdi><span class=\"woocommerce-Price-currencySymbol\">&#36;</span>109.500</bdi></span>",
     "related_ids": [
-      1433,
+      1048,
       1412,
-      1451,
-      1423,
-      1436
+      1050,
+      1420,
+      1047
     ],
     "meta_data": [
       {
@@ -16165,11 +17082,11 @@
     "menu_order": 0,
     "price_html": "<span class=\"woocommerce-Price-amount amount\"><bdi><span class=\"woocommerce-Price-currencySymbol\">&#36;</span>132.200</bdi></span>",
     "related_ids": [
-      286,
-      1416,
-      1400,
-      1386,
-      1440
+      1440,
+      1393,
+      1429,
+      1049,
+      1048
     ],
     "meta_data": [
       {
@@ -16437,11 +17354,11 @@
     "menu_order": 0,
     "price_html": "<span class=\"woocommerce-Price-amount amount\"><bdi><span class=\"woocommerce-Price-currencySymbol\">&#36;</span>132.200</bdi></span>",
     "related_ids": [
-      1397,
+      1447,
+      1416,
       1429,
-      1050,
       1420,
-      1393
+      1042
     ],
     "meta_data": [
       {
@@ -16709,11 +17626,11 @@
     "menu_order": 0,
     "price_html": "<span class=\"woocommerce-Price-amount amount\"><bdi><span class=\"woocommerce-Price-currencySymbol\">&#36;</span>132.200</bdi></span>",
     "related_ids": [
-      1426,
-      1423,
+      1447,
       1383,
-      1416,
-      1386
+      1436,
+      1400,
+      1049
     ],
     "meta_data": [
       {
@@ -16989,11 +17906,11 @@
     "menu_order": 0,
     "price_html": "<span class=\"woocommerce-Price-amount amount\"><bdi><span class=\"woocommerce-Price-currencySymbol\">&#36;</span>256.400</bdi></span>",
     "related_ids": [
-      1420,
-      1042,
-      182,
+      1423,
+      1433,
       1368,
-      1447
+      1042,
+      1451
     ],
     "meta_data": [
       {
@@ -17241,11 +18158,11 @@
     "menu_order": 0,
     "price_html": "<span class=\"woocommerce-Price-amount amount\"><bdi><span class=\"woocommerce-Price-currencySymbol\">&#36;</span>256.400</bdi></span>",
     "related_ids": [
-      1436,
-      1368,
-      1048,
-      1426,
-      1420
+      1430,
+      1433,
+      1400,
+      1440,
+      286
     ],
     "meta_data": [
       {
@@ -17508,11 +18425,11 @@
     "menu_order": 0,
     "price_html": "<span class=\"woocommerce-Price-amount amount\"><bdi><span class=\"woocommerce-Price-currencySymbol\">&#36;</span>82.800</bdi></span>",
     "related_ids": [
+      1430,
+      1423,
       1397,
-      1440,
-      1412,
-      1420,
-      1393
+      1416,
+      1429
     ],
     "meta_data": [
       {
@@ -17755,11 +18672,11 @@
     "menu_order": 0,
     "price_html": "<span class=\"woocommerce-Price-amount amount\"><bdi><span class=\"woocommerce-Price-currencySymbol\">&#36;</span>82.800</bdi></span>",
     "related_ids": [
+      1047,
+      1051,
       286,
-      1383,
-      1048,
-      182,
-      1423
+      1386,
+      1440
     ],
     "meta_data": [
       {
@@ -18033,11 +18950,11 @@
     "menu_order": 0,
     "price_html": "<span class=\"woocommerce-Price-amount amount\"><bdi><span class=\"woocommerce-Price-currencySymbol\">&#36;</span>82.800</bdi></span>",
     "related_ids": [
-      1423,
-      286,
-      1412,
-      1383,
-      1440
+      1426,
+      1397,
+      1430,
+      1050,
+      1436
     ],
     "meta_data": [
       {
@@ -18300,10 +19217,10 @@
     "menu_order": 0,
     "price_html": "<span class=\"woocommerce-Price-amount amount\"><bdi><span class=\"woocommerce-Price-currencySymbol\">&#36;</span>80.100</bdi></span>",
     "related_ids": [
-      1048,
-      1400,
       1042,
-      1451,
+      1430,
+      1383,
+      1050,
       1049
     ],
     "meta_data": [
@@ -18572,11 +19489,11 @@
     "menu_order": 0,
     "price_html": "<span class=\"woocommerce-Price-amount amount\"><bdi><span class=\"woocommerce-Price-currencySymbol\">&#36;</span>80.100</bdi></span>",
     "related_ids": [
-      1972,
-      286,
-      1050,
-      1048,
-      1638
+      1423,
+      1400,
+      1397,
+      1047,
+      1051
     ],
     "meta_data": [
       {
@@ -18819,11 +19736,11 @@
     "menu_order": 0,
     "price_html": "<span class=\"woocommerce-Price-amount amount\"><bdi><span class=\"woocommerce-Price-currencySymbol\">&#36;</span>45.500</bdi></span>",
     "related_ids": [
-      328,
+      189,
+      326,
+      195,
       1368,
-      192,
-      194,
-      333
+      1383
     ],
     "meta_data": [
       {
@@ -19099,11 +20016,11 @@
     "menu_order": 0,
     "price_html": "<span class=\"woocommerce-Price-amount amount\"><bdi><span class=\"woocommerce-Price-currencySymbol\">&#36;</span>45.500</bdi></span>",
     "related_ids": [
-      192,
-      326,
-      1383,
-      1370,
-      194
+      333,
+      210,
+      328,
+      193,
+      201
     ],
     "meta_data": [
       {
@@ -19366,11 +20283,11 @@
     "menu_order": 0,
     "price_html": "<span class=\"woocommerce-Price-amount amount\"><bdi><span class=\"woocommerce-Price-currencySymbol\">&#36;</span>146.900</bdi></span>",
     "related_ids": [
+      333,
+      194,
+      1377,
       209,
-      329,
-      1368,
-      201,
-      195
+      1370
     ],
     "meta_data": [
       {
@@ -19646,11 +20563,11 @@
     "menu_order": 0,
     "price_html": "<span class=\"woocommerce-Price-amount amount\"><bdi><span class=\"woocommerce-Price-currencySymbol\">&#36;</span>146.900</bdi></span>",
     "related_ids": [
-      1397,
-      329,
-      1372,
-      210,
-      211
+      331,
+      1393,
+      1377,
+      326,
+      189
     ],
     "meta_data": [
       {
@@ -19918,11 +20835,11 @@
     "menu_order": 0,
     "price_html": "<span class=\"woocommerce-Price-amount amount\"><bdi><span class=\"woocommerce-Price-currencySymbol\">&#36;</span>37.400</bdi></span>",
     "related_ids": [
-      1430,
-      1779,
-      1048,
-      1386,
-      1049
+      1972,
+      90,
+      1393,
+      1050,
+      1430
     ],
     "meta_data": [
       {
@@ -20165,11 +21082,11 @@
     "menu_order": 0,
     "price_html": "<del aria-hidden=\"true\"><span class=\"woocommerce-Price-amount amount\"><bdi><span class=\"woocommerce-Price-currencySymbol\">&#36;</span>49.500</bdi></span></del> <span class=\"screen-reader-text\">El precio original era: &#036;49.500.</span><ins aria-hidden=\"true\"><span class=\"woocommerce-Price-amount amount\"><bdi><span class=\"woocommerce-Price-currencySymbol\">&#36;</span>48.100</bdi></span></ins><span class=\"screen-reader-text\">El precio actual es: &#036;48.100.</span>",
     "related_ids": [
-      565,
-      46,
-      68,
+      76,
       61,
-      40
+      66,
+      49,
+      562
     ],
     "meta_data": [
       {
@@ -20412,11 +21329,11 @@
     "menu_order": 0,
     "price_html": "<del aria-hidden=\"true\"><span class=\"woocommerce-Price-amount amount\"><bdi><span class=\"woocommerce-Price-currencySymbol\">&#36;</span>49.500</bdi></span></del> <span class=\"screen-reader-text\">El precio original era: &#036;49.500.</span><ins aria-hidden=\"true\"><span class=\"woocommerce-Price-amount amount\"><bdi><span class=\"woocommerce-Price-currencySymbol\">&#36;</span>44.100</bdi></span></ins><span class=\"screen-reader-text\">El precio actual es: &#036;44.100.</span>",
     "related_ids": [
-      59,
       67,
-      58,
-      51,
-      48
+      49,
+      59,
+      60,
+      43
     ],
     "meta_data": [
       {
@@ -20654,11 +21571,11 @@
     "menu_order": 0,
     "price_html": "<del aria-hidden=\"true\"><span class=\"woocommerce-Price-amount amount\"><bdi><span class=\"woocommerce-Price-currencySymbol\">&#36;</span>63.900</bdi></span></del> <span class=\"screen-reader-text\">El precio original era: &#036;63.900.</span><ins aria-hidden=\"true\"><span class=\"woocommerce-Price-amount amount\"><bdi><span class=\"woocommerce-Price-currencySymbol\">&#36;</span>61.600</bdi></span></ins><span class=\"screen-reader-text\">El precio actual es: &#036;61.600.</span>",
     "related_ids": [
-      69,
-      562,
-      76,
-      78,
-      63
+      66,
+      58,
+      59,
+      74,
+      40
     ],
     "meta_data": [
       {
@@ -20896,11 +21813,11 @@
     "menu_order": 0,
     "price_html": "<del aria-hidden=\"true\"><span class=\"woocommerce-Price-amount amount\"><bdi><span class=\"woocommerce-Price-currencySymbol\">&#36;</span>49.500</bdi></span></del> <span class=\"screen-reader-text\">El precio original era: &#036;49.500.</span><ins aria-hidden=\"true\"><span class=\"woocommerce-Price-amount amount\"><bdi><span class=\"woocommerce-Price-currencySymbol\">&#36;</span>48.100</bdi></span></ins><span class=\"screen-reader-text\">El precio actual es: &#036;48.100.</span>",
     "related_ids": [
-      44,
-      60,
-      68,
-      40,
-      78
+      71,
+      562,
+      78,
+      43,
+      44
     ],
     "meta_data": [
       {
@@ -21143,11 +22060,11 @@
     "menu_order": 0,
     "price_html": "<span class=\"woocommerce-Price-amount amount\"><bdi><span class=\"woocommerce-Price-currencySymbol\">&#36;</span>23.930</bdi></span>",
     "related_ids": [
-      76,
-      63,
+      49,
+      71,
       69,
-      54,
-      58
+      562,
+      74
     ],
     "meta_data": [
       {
@@ -21415,11 +22332,11 @@
     "menu_order": 0,
     "price_html": "<span class=\"woocommerce-Price-amount amount\"><bdi><span class=\"woocommerce-Price-currencySymbol\">&#36;</span>17.100</bdi></span>",
     "related_ids": [
-      67,
-      74,
-      78,
-      43,
-      63
+      60,
+      565,
+      61,
+      63,
+      46
     ],
     "meta_data": [
       {
@@ -21698,11 +22615,11 @@
     "menu_order": 0,
     "price_html": "<span class=\"woocommerce-Price-amount amount\"><bdi><span class=\"woocommerce-Price-currencySymbol\">&#36;</span>233.100</bdi></span>",
     "related_ids": [
-      244,
-      235,
+      239,
+      279,
       278,
-      250,
-      245
+      281,
+      246
     ],
     "meta_data": [
       {
@@ -21945,11 +22862,11 @@
     "menu_order": 0,
     "price_html": "<span class=\"woocommerce-Price-amount amount\"><bdi><span class=\"woocommerce-Price-currencySymbol\">&#36;</span>179.900</bdi></span>",
     "related_ids": [
-      247,
-      273,
-      266,
-      274,
-      239
+      265,
+      239,
+      279,
+      264,
+      243
     ],
     "meta_data": [
       {
@@ -22233,11 +23150,11 @@
     "menu_order": 0,
     "price_html": "<span class=\"woocommerce-Price-amount amount\"><bdi><span class=\"woocommerce-Price-currencySymbol\">&#36;</span>179.900</bdi></span>",
     "related_ids": [
-      265,
-      248,
-      263,
-      278,
-      247
+      235,
+      273,
+      245,
+      275,
+      246
     ],
     "meta_data": [
       {
@@ -22505,11 +23422,11 @@
     "menu_order": 0,
     "price_html": "<span class=\"woocommerce-Price-amount amount\"><bdi><span class=\"woocommerce-Price-currencySymbol\">&#36;</span>179.900</bdi></span>",
     "related_ids": [
-      244,
-      279,
-      259,
-      266,
-      246
+      281,
+      239,
+      278,
+      235,
+      275
     ],
     "meta_data": [
       {
@@ -22762,11 +23679,11 @@
     "menu_order": 0,
     "price_html": "<span class=\"woocommerce-Price-amount amount\"><bdi><span class=\"woocommerce-Price-currencySymbol\">&#36;</span>190.300</bdi></span>",
     "related_ids": [
-      247,
-      277,
-      274,
-      273,
-      258
+      263,
+      235,
+      244,
+      239,
+      250
     ],
     "meta_data": [
       {
@@ -23004,11 +23921,11 @@
     "menu_order": 0,
     "price_html": "<span class=\"woocommerce-Price-amount amount\"><bdi><span class=\"woocommerce-Price-currencySymbol\">&#36;</span>190.300</bdi></span>",
     "related_ids": [
-      265,
-      235,
-      256,
-      281,
-      246
+      273,
+      245,
+      243,
+      259,
+      278
     ],
     "meta_data": [
       {
@@ -23246,11 +24163,11 @@
     "menu_order": 0,
     "price_html": "<span class=\"woocommerce-Price-amount amount\"><bdi><span class=\"woocommerce-Price-currencySymbol\">&#36;</span>190.300</bdi></span>",
     "related_ids": [
-      250,
-      235,
-      279,
+      278,
+      242,
+      243,
       248,
-      246
+      250
     ],
     "meta_data": [
       {
@@ -23493,11 +24410,11 @@
     "menu_order": 0,
     "price_html": "<span class=\"woocommerce-Price-amount amount\"><bdi><span class=\"woocommerce-Price-currencySymbol\">&#36;</span>126.100</bdi></span>",
     "related_ids": [
-      250,
-      275,
-      258,
-      235,
-      281
+      266,
+      274,
+      278,
+      245,
+      250
     ],
     "meta_data": [
       {
@@ -23760,11 +24677,11 @@
     "menu_order": 0,
     "price_html": "<span class=\"woocommerce-Price-amount amount\"><bdi><span class=\"woocommerce-Price-currencySymbol\">&#36;</span>117.200</bdi></span>",
     "related_ids": [
-      265,
+      279,
+      278,
+      250,
       243,
-      248,
-      256,
-      250
+      235
     ],
     "meta_data": [
       {
@@ -24012,11 +24929,11 @@
     "menu_order": 0,
     "price_html": "<span class=\"woocommerce-Price-amount amount\"><bdi><span class=\"woocommerce-Price-currencySymbol\">&#36;</span>117.200</bdi></span>",
     "related_ids": [
-      263,
-      278,
-      264,
-      246,
-      266
+      242,
+      279,
+      258,
+      274,
+      244
     ],
     "meta_data": [
       {
@@ -24280,10 +25197,10 @@
     "price_html": "<del aria-hidden=\"true\"><span class=\"woocommerce-Price-amount amount\"><bdi><span class=\"woocommerce-Price-currencySymbol\">&#36;</span>113.400</bdi></span></del> <span class=\"screen-reader-text\">El precio original era: &#036;113.400.</span><ins aria-hidden=\"true\"><span class=\"woocommerce-Price-amount amount\"><bdi><span class=\"woocommerce-Price-currencySymbol\">&#36;</span>90.720</bdi></span></ins><span class=\"screen-reader-text\">El precio actual es: &#036;90.720.</span>",
     "related_ids": [
       256,
-      259,
-      275,
-      250,
-      244
+      258,
+      243,
+      279,
+      248
     ],
     "meta_data": [
       {
@@ -24531,11 +25448,11 @@
     "menu_order": 0,
     "price_html": "<span class=\"woocommerce-Price-amount amount\"><bdi><span class=\"woocommerce-Price-currencySymbol\">&#36;</span>99.900</bdi></span>",
     "related_ids": [
-      253,
-      256,
-      274,
+      264,
+      243,
+      248,
       279,
-      239
+      253
     ],
     "meta_data": [
       {
@@ -24799,10 +25716,10 @@
     "price_html": "<span class=\"woocommerce-Price-amount amount\"><bdi><span class=\"woocommerce-Price-currencySymbol\">&#36;</span>99.900</bdi></span>",
     "related_ids": [
       265,
+      247,
       258,
-      250,
-      248,
-      256
+      281,
+      259
     ],
     "meta_data": [
       {
@@ -25050,11 +25967,11 @@
     "menu_order": 0,
     "price_html": "<span class=\"woocommerce-Price-amount amount\"><bdi><span class=\"woocommerce-Price-currencySymbol\">&#36;</span>99.900</bdi></span>",
     "related_ids": [
-      239,
-      253,
-      245,
-      243,
-      244
+      274,
+      265,
+      242,
+      266,
+      279
     ],
     "meta_data": [
       {
@@ -25340,11 +26257,11 @@
     "menu_order": 0,
     "price_html": "<span class=\"woocommerce-Price-amount amount\"><bdi><span class=\"woocommerce-Price-currencySymbol\">&#36;</span>20.700</bdi></span>",
     "related_ids": [
-      1423,
-      1433,
-      16,
-      1440,
-      1429
+      1430,
+      1383,
+      1047,
+      1050,
+      1416
     ],
     "meta_data": [
       {
@@ -25633,11 +26550,11 @@
     "menu_order": 0,
     "price_html": "<span class=\"woocommerce-Price-amount amount\"><bdi><span class=\"woocommerce-Price-currencySymbol\">&#36;</span>20.800</bdi></span>",
     "related_ids": [
-      16,
-      1436,
-      1051,
-      1423,
-      1440
+      1416,
+      1433,
+      1451,
+      286,
+      1048
     ],
     "meta_data": [
       {
@@ -26022,11 +26939,11 @@
     "menu_order": 0,
     "price_html": "<span class=\"woocommerce-Price-amount amount\"><bdi><span class=\"woocommerce-Price-currencySymbol\">&#36;</span>21.480</bdi></span>",
     "related_ids": [
-      1393,
-      1048,
+      1383,
+      1368,
       1423,
-      16,
-      1051
+      2280,
+      1416
     ],
     "meta_data": [
       {
@@ -26307,11 +27224,11 @@
     "menu_order": 0,
     "price_html": "<span class=\"woocommerce-Price-amount amount\"><bdi><span class=\"woocommerce-Price-currencySymbol\">&#36;</span>18.500</bdi></span>",
     "related_ids": [
-      1447,
-      1393,
+      1429,
       1051,
-      1430,
-      1383
+      1400,
+      1386,
+      1440
     ],
     "meta_data": [
       {
@@ -26592,11 +27509,11 @@
     "menu_order": 0,
     "price_html": "<span class=\"woocommerce-Price-amount amount\"><bdi><span class=\"woocommerce-Price-currencySymbol\">&#36;</span>20.700</bdi></span>",
     "related_ids": [
-      16,
-      1050,
-      1440,
-      1423,
-      1436
+      1436,
+      1051,
+      1433,
+      1412,
+      1440
     ],
     "meta_data": [
       {
@@ -26859,11 +27776,11 @@
     "menu_order": 0,
     "price_html": "<span class=\"woocommerce-Price-amount amount\"><bdi><span class=\"woocommerce-Price-currencySymbol\">&#36;</span>18.330</bdi></span>",
     "related_ids": [
+      60,
+      68,
       76,
-      17,
-      44,
-      43,
-      63
+      59,
+      78
     ],
     "meta_data": [
       {
@@ -27152,11 +28069,11 @@
     "menu_order": 0,
     "price_html": "<span class=\"woocommerce-Price-amount amount\"><bdi><span class=\"woocommerce-Price-currencySymbol\">&#36;</span>16.500</bdi></span>",
     "related_ids": [
-      71,
-      40,
-      60,
-      74,
-      51
+      68,
+      63,
+      78,
+      76,
+      58
     ],
     "meta_data": [
       {
@@ -27445,11 +28362,11 @@
     "menu_order": 0,
     "price_html": "<span class=\"woocommerce-Price-amount amount\"><bdi><span class=\"woocommerce-Price-currencySymbol\">&#36;</span>16.100</bdi></span>",
     "related_ids": [
-      63,
-      74,
+      61,
       71,
-      69,
-      17
+      43,
+      63,
+      67
     ],
     "meta_data": [
       {
@@ -27730,11 +28647,11 @@
     "menu_order": 0,
     "price_html": "<span class=\"woocommerce-Price-amount amount\"><bdi><span class=\"woocommerce-Price-currencySymbol\">&#36;</span>16.100</bdi></span>",
     "related_ids": [
-      1051,
-      1433,
-      1383,
-      1420,
-      1447
+      1397,
+      1436,
+      1412,
+      2280,
+      1433
     ],
     "meta_data": [
       {
@@ -27992,11 +28909,11 @@
     "menu_order": 0,
     "price_html": "<span class=\"woocommerce-Price-amount amount\"><bdi><span class=\"woocommerce-Price-currencySymbol\">&#36;</span>3.950</bdi></span>",
     "related_ids": [
-      54,
-      60,
-      78,
-      43,
-      51
+      71,
+      57,
+      48,
+      74,
+      67
     ],
     "meta_data": [
       {
@@ -28186,10 +29103,10 @@
     "menu_order": 0,
     "price_html": "<span class=\"woocommerce-Price-amount amount\"><bdi><span class=\"woocommerce-Price-currencySymbol\">&#36;</span>3.950</bdi></span>",
     "related_ids": [
+      76,
+      49,
+      40,
       67,
-      78,
-      44,
-      58,
       60
     ],
     "meta_data": [
@@ -28380,11 +29297,11 @@
     "menu_order": 0,
     "price_html": "<span class=\"woocommerce-Price-amount amount\"><bdi><span class=\"woocommerce-Price-currencySymbol\">&#36;</span>3.950</bdi></span>",
     "related_ids": [
-      16,
-      57,
+      59,
+      63,
+      69,
       71,
-      51,
-      43
+      17
     ],
     "meta_data": [
       {
@@ -28579,11 +29496,11 @@
     "menu_order": 0,
     "price_html": "<span class=\"woocommerce-Price-amount amount\"><bdi><span class=\"woocommerce-Price-currencySymbol\">&#36;</span>16.500</bdi></span>",
     "related_ids": [
-      55,
-      60,
-      74,
-      54,
-      63
+      59,
+      61,
+      51,
+      69,
+      57
     ],
     "meta_data": [
       {
@@ -28851,11 +29768,11 @@
     "menu_order": 0,
     "price_html": "<span class=\"woocommerce-Price-amount amount\"><bdi><span class=\"woocommerce-Price-currencySymbol\">&#36;</span>16.500</bdi></span>",
     "related_ids": [
-      63,
-      1314,
-      40,
-      44,
-      565
+      78,
+      60,
+      49,
+      51,
+      61
     ],
     "meta_data": [
       {
@@ -29118,11 +30035,11 @@
     "menu_order": 0,
     "price_html": "<span class=\"woocommerce-Price-amount amount\"><bdi><span class=\"woocommerce-Price-currencySymbol\">&#36;</span>15.400</bdi></span>",
     "related_ids": [
-      176,
-      69,
-      49,
-      43,
-      51
+      67,
+      66,
+      174,
+      74,
+      176
     ],
     "meta_data": [
       {
@@ -29370,11 +30287,11 @@
     "menu_order": 0,
     "price_html": "<span class=\"woocommerce-Price-amount amount\"><bdi><span class=\"woocommerce-Price-currencySymbol\">&#36;</span>17.600</bdi></span>",
     "related_ids": [
-      49,
-      54,
-      74,
+      128,
       57,
-      16
+      43,
+      68,
+      17
     ],
     "meta_data": [
       {
@@ -29565,11 +30482,11 @@
     "menu_order": 0,
     "price_html": "<del aria-hidden=\"true\"><span class=\"woocommerce-Price-amount amount\"><bdi><span class=\"woocommerce-Price-currencySymbol\">&#36;</span>32.500</bdi></span></del> <span class=\"screen-reader-text\">El precio original era: &#036;32.500.</span><ins aria-hidden=\"true\"><span class=\"woocommerce-Price-amount amount\"><bdi><span class=\"woocommerce-Price-currencySymbol\">&#36;</span>30.800</bdi></span></ins><span class=\"screen-reader-text\">El precio actual es: &#036;30.800.</span>",
     "related_ids": [
-      58,
+      71,
       43,
-      66,
-      55,
-      54
+      49,
+      17,
+      48
     ],
     "meta_data": [
       {
@@ -29820,11 +30737,11 @@
     "menu_order": 0,
     "price_html": "<span class=\"woocommerce-Price-amount amount\"><bdi><span class=\"woocommerce-Price-currencySymbol\">&#36;</span>50.300</bdi></span>",
     "related_ids": [
-      84,
-      86,
-      88,
+      69,
+      92,
+      85,
       59,
-      95
+      44
     ],
     "meta_data": [
       {
@@ -30090,11 +31007,11 @@
     "menu_order": 0,
     "price_html": "<span class=\"woocommerce-Price-amount amount\"><bdi><span class=\"woocommerce-Price-currencySymbol\">&#36;</span>30.900</bdi></span>",
     "related_ids": [
-      338,
-      94,
-      99,
+      98,
       1972,
-      98
+      97,
+      104,
+      94
     ],
     "meta_data": [
       {
@@ -30340,11 +31257,11 @@
     "menu_order": 0,
     "price_html": "<span class=\"woocommerce-Price-amount amount\"><bdi><span class=\"woocommerce-Price-currencySymbol\">&#36;</span>26.900</bdi></span>",
     "related_ids": [
-      82,
-      44,
       104,
-      59,
-      95
+      49,
+      57,
+      44,
+      87
     ],
     "meta_data": [
       {
@@ -30597,11 +31514,11 @@
     "menu_order": 0,
     "price_html": "<span class=\"woocommerce-Price-amount amount\"><bdi><span class=\"woocommerce-Price-currencySymbol\">&#36;</span>27.900</bdi></span>",
     "related_ids": [
-      59,
-      103,
+      67,
       86,
-      71,
-      57
+      1972,
+      69,
+      83
     ],
     "meta_data": [
       {
@@ -30878,10 +31795,10 @@
     "price_html": "<span class=\"woocommerce-Price-amount amount\"><bdi><span class=\"woocommerce-Price-currencySymbol\">&#36;</span>84.600</bdi></span>",
     "related_ids": [
       328,
+      1393,
+      209,
       192,
-      193,
-      194,
-      1377
+      1372
     ],
     "meta_data": [
       {
@@ -31071,11 +31988,11 @@
     "menu_order": 0,
     "price_html": "<span class=\"woocommerce-Price-amount amount\"><bdi><span class=\"woocommerce-Price-currencySymbol\">&#36;</span>80.900</bdi></span>",
     "related_ids": [
-      192,
+      1377,
       328,
-      1380,
-      329,
-      182
+      1397,
+      209,
+      1370
     ],
     "meta_data": [
       {
@@ -31255,11 +32172,11 @@
     "menu_order": 0,
     "price_html": "<span class=\"woocommerce-Price-amount amount\"><bdi><span class=\"woocommerce-Price-currencySymbol\">&#36;</span>173.600</bdi></span>",
     "related_ids": [
-      1370,
-      182,
-      1368,
-      1393,
-      193
+      1383,
+      195,
+      194,
+      193,
+      1370
     ],
     "meta_data": [
       {
@@ -31502,11 +32419,11 @@
     "menu_order": 0,
     "price_html": "<span class=\"woocommerce-Price-amount amount\"><bdi><span class=\"woocommerce-Price-currencySymbol\">&#36;</span>158.900</bdi></span>",
     "related_ids": [
-      1383,
       1397,
-      331,
-      183,
-      210
+      209,
+      1383,
+      194,
+      1377
     ],
     "meta_data": [
       {
@@ -31754,11 +32671,11 @@
     "menu_order": 0,
     "price_html": "<span class=\"woocommerce-Price-amount amount\"><bdi><span class=\"woocommerce-Price-currencySymbol\">&#36;</span>88.200</bdi></span>",
     "related_ids": [
-      1368,
-      328,
-      209,
-      1397,
-      191
+      210,
+      191,
+      1377,
+      1386,
+      1372
     ],
     "meta_data": [
       {
@@ -32016,10 +32933,10 @@
     "menu_order": 0,
     "price_html": "<span class=\"woocommerce-Price-amount amount\"><bdi><span class=\"woocommerce-Price-currencySymbol\">&#36;</span>69.500</bdi></span>",
     "related_ids": [
-      318,
-      317,
+      312,
       308,
-      312
+      317,
+      318
     ],
     "meta_data": [
       {
@@ -32255,9 +33172,9 @@
     "menu_order": 0,
     "price_html": "<span class=\"woocommerce-Price-amount amount\"><bdi><span class=\"woocommerce-Price-currencySymbol\">&#36;</span>81.000</bdi></span>",
     "related_ids": [
-      312,
+      320,
       317,
-      320
+      312
     ],
     "meta_data": [
       {
@@ -32491,9 +33408,9 @@
     "price_html": "<span class=\"woocommerce-Price-amount amount\"><bdi><span class=\"woocommerce-Price-currencySymbol\">&#36;</span>84.000</bdi></span>",
     "related_ids": [
       312,
+      308,
       320,
-      318,
-      308
+      318
     ],
     "meta_data": [
       {
@@ -32726,10 +33643,10 @@
     "menu_order": 0,
     "price_html": "<span class=\"woocommerce-Price-amount amount\"><bdi><span class=\"woocommerce-Price-currencySymbol\">&#36;</span>136.000</bdi></span>",
     "related_ids": [
-      320,
-      317,
       318,
-      308
+      320,
+      308,
+      317
     ],
     "meta_data": [
       {
@@ -32958,11 +33875,11 @@
     "menu_order": 0,
     "price_html": "<span class=\"woocommerce-Price-amount amount\"><bdi><span class=\"woocommerce-Price-currencySymbol\">&#36;</span>121.900</bdi></span>",
     "related_ids": [
-      239,
-      248,
-      266,
-      258,
-      235
+      264,
+      273,
+      245,
+      275,
+      274
     ],
     "meta_data": [
       {
@@ -33152,11 +34069,11 @@
     "menu_order": 0,
     "price_html": "<span class=\"woocommerce-Price-amount amount\"><bdi><span class=\"woocommerce-Price-currencySymbol\">&#36;</span>131.900</bdi></span>",
     "related_ids": [
-      245,
-      281,
-      259,
-      265,
-      248
+      243,
+      242,
+      258,
+      273,
+      263
     ],
     "meta_data": [
       {
@@ -33346,11 +34263,11 @@
     "menu_order": 0,
     "price_html": "<span class=\"woocommerce-Price-amount amount\"><bdi><span class=\"woocommerce-Price-currencySymbol\">&#36;</span>131.900</bdi></span>",
     "related_ids": [
-      253,
-      258,
-      248,
-      279,
-      246
+      250,
+      274,
+      245,
+      278,
+      256
     ],
     "meta_data": [
       {
@@ -33540,11 +34457,11 @@
     "menu_order": 0,
     "price_html": "<del aria-hidden=\"true\"><span class=\"woocommerce-Price-amount amount\"><bdi><span class=\"woocommerce-Price-currencySymbol\">&#36;</span>131.900</bdi></span></del> <span class=\"screen-reader-text\">El precio original era: &#036;131.900.</span><ins aria-hidden=\"true\"><span class=\"woocommerce-Price-amount amount\"><bdi><span class=\"woocommerce-Price-currencySymbol\">&#36;</span>105.520</bdi></span></ins><span class=\"screen-reader-text\">El precio actual es: &#036;105.520.</span>",
     "related_ids": [
-      274,
-      256,
-      265,
-      278,
-      245
+      239,
+      245,
+      242,
+      243,
+      266
     ],
     "meta_data": [
       {
@@ -33748,11 +34665,11 @@
     "menu_order": 0,
     "price_html": "<span class=\"woocommerce-Price-amount amount\"><bdi><span class=\"woocommerce-Price-currencySymbol\">&#36;</span>120.300</bdi></span>",
     "related_ids": [
-      274,
-      281,
-      247,
+      265,
+      256,
       245,
-      243
+      273,
+      275
     ],
     "meta_data": [
       {
@@ -34003,11 +34920,11 @@
     "menu_order": 0,
     "price_html": "<span class=\"woocommerce-Price-amount amount\"><bdi><span class=\"woocommerce-Price-currencySymbol\">&#36;</span>84.550</bdi></span>",
     "related_ids": [
+      265,
+      245,
+      278,
       258,
-      264,
-      235,
-      279,
-      246
+      277
     ],
     "meta_data": [
       {
@@ -34245,11 +35162,11 @@
     "menu_order": 0,
     "price_html": "<del aria-hidden=\"true\"><span class=\"woocommerce-Price-amount amount\"><bdi><span class=\"woocommerce-Price-currencySymbol\">&#36;</span>81.400</bdi></span></del> <span class=\"screen-reader-text\">El precio original era: &#036;81.400.</span><ins aria-hidden=\"true\"><span class=\"woocommerce-Price-amount amount\"><bdi><span class=\"woocommerce-Price-currencySymbol\">&#36;</span>59.900</bdi></span></ins><span class=\"screen-reader-text\">El precio actual es: &#036;59.900.</span>",
     "related_ids": [
-      264,
-      256,
+      277,
       239,
-      274,
-      248
+      266,
+      273,
+      253
     ],
     "meta_data": [
       {
@@ -34457,11 +35374,11 @@
     "menu_order": 0,
     "price_html": "<span class=\"woocommerce-Price-amount amount\"><bdi><span class=\"woocommerce-Price-currencySymbol\">&#36;</span>120.300</bdi></span>",
     "related_ids": [
+      264,
+      239,
       281,
-      265,
-      266,
-      245,
-      258
+      278,
+      266
     ],
     "meta_data": [
       {
@@ -34586,11 +35503,11 @@
     "menu_order": 0,
     "price_html": "<span class=\"woocommerce-Price-amount amount\"><bdi><span class=\"woocommerce-Price-currencySymbol\">&#36;</span>113.500</bdi></span>",
     "related_ids": [
-      235,
-      273,
-      274,
-      258,
-      253
+      246,
+      256,
+      239,
+      281,
+      266
     ],
     "meta_data": [
       {
@@ -34828,11 +35745,11 @@
     "menu_order": 0,
     "price_html": "<span class=\"woocommerce-Price-amount amount\"><bdi><span class=\"woocommerce-Price-currencySymbol\">&#36;</span>120.300</bdi></span>",
     "related_ids": [
-      246,
-      277,
-      275,
-      248,
-      242
+      266,
+      250,
+      273,
+      253,
+      263
     ],
     "meta_data": [
       {
@@ -35075,11 +35992,11 @@
     "menu_order": 0,
     "price_html": "<span class=\"woocommerce-Price-amount amount\"><bdi><span class=\"woocommerce-Price-currencySymbol\">&#36;</span>62.100</bdi></span>",
     "related_ids": [
-      265,
-      253,
-      250,
-      242,
-      263
+      266,
+      281,
+      258,
+      279,
+      277
     ],
     "meta_data": [
       {
@@ -35284,11 +36201,11 @@
     "menu_order": 0,
     "price_html": "<span class=\"woocommerce-Price-amount amount\"><bdi><span class=\"woocommerce-Price-currencySymbol\">&#36;</span>62.100</bdi></span>",
     "related_ids": [
+      265,
+      250,
       259,
-      245,
-      243,
-      253,
-      279
+      247,
+      239
     ],
     "meta_data": [
       {
@@ -35526,11 +36443,11 @@
     "menu_order": 0,
     "price_html": "<span class=\"woocommerce-Price-amount amount\"><bdi><span class=\"woocommerce-Price-currencySymbol\">&#36;</span>62.100</bdi></span>",
     "related_ids": [
+      250,
+      253,
+      248,
       259,
-      258,
-      242,
-      239,
-      248
+      265
     ],
     "meta_data": [
       {
@@ -35725,11 +36642,11 @@
     "menu_order": 0,
     "price_html": "<span class=\"woocommerce-Price-amount amount\"><bdi><span class=\"woocommerce-Price-currencySymbol\">&#36;</span>92.700</bdi></span>",
     "related_ids": [
-      1393,
-      1429,
+      1430,
+      1420,
+      1049,
       1042,
-      1412,
-      1048
+      1397
     ],
     "meta_data": [
       {
@@ -35972,11 +36889,11 @@
     "menu_order": 0,
     "price_html": "<span class=\"woocommerce-Price-amount amount\"><bdi><span class=\"woocommerce-Price-currencySymbol\">&#36;</span>164.900</bdi></span>",
     "related_ids": [
-      253,
+      263,
       248,
-      239,
       279,
-      247
+      274,
+      250
     ],
     "meta_data": [
       {
@@ -36171,11 +37088,11 @@
     "menu_order": 0,
     "price_html": "<span class=\"woocommerce-Price-amount amount\"><bdi><span class=\"woocommerce-Price-currencySymbol\">&#36;</span>188.150</bdi></span>",
     "related_ids": [
-      264,
-      274,
-      244,
-      258,
-      245
+      256,
+      253,
+      279,
+      247,
+      274
     ],
     "meta_data": [
       {
@@ -36438,11 +37355,11 @@
     "menu_order": 0,
     "price_html": "<span class=\"woocommerce-Price-amount amount\"><bdi><span class=\"woocommerce-Price-currencySymbol\">&#36;</span>61.900</bdi></span>",
     "related_ids": [
-      250,
-      273,
+      248,
       263,
-      239,
-      253
+      274,
+      235,
+      259
     ],
     "meta_data": [
       {
@@ -36637,11 +37554,11 @@
     "menu_order": 0,
     "price_html": "<span class=\"woocommerce-Price-amount amount\"><bdi><span class=\"woocommerce-Price-currencySymbol\">&#36;</span>61.900</bdi></span>",
     "related_ids": [
-      242,
+      275,
       243,
-      279,
+      259,
       244,
-      248
+      235
     ],
     "meta_data": [
       {
@@ -36836,11 +37753,11 @@
     "menu_order": 0,
     "price_html": "<span class=\"woocommerce-Price-amount amount\"><bdi><span class=\"woocommerce-Price-currencySymbol\">&#36;</span>69.500</bdi></span>",
     "related_ids": [
-      281,
-      235,
+      258,
+      273,
       266,
-      263,
-      243
+      253,
+      265
     ],
     "meta_data": [
       {
@@ -37089,10 +38006,10 @@
     "price_html": "<span class=\"woocommerce-Price-amount amount\"><bdi><span class=\"woocommerce-Price-currencySymbol\">&#36;</span>117.200</bdi></span>",
     "related_ids": [
       250,
-      239,
-      281,
-      253,
-      265
+      263,
+      244,
+      242,
+      281
     ],
     "meta_data": [
       {
@@ -37360,11 +38277,11 @@
     "menu_order": 0,
     "price_html": "<span class=\"woocommerce-Price-amount amount\"><bdi><span class=\"woocommerce-Price-currencySymbol\">&#36;</span>117.200</bdi></span>",
     "related_ids": [
-      256,
-      253,
-      242,
-      243,
-      274
+      274,
+      258,
+      273,
+      282,
+      265
     ],
     "meta_data": [
       {
@@ -37627,11 +38544,11 @@
     "menu_order": 0,
     "price_html": "<del aria-hidden=\"true\"><span class=\"woocommerce-Price-amount amount\"><bdi><span class=\"woocommerce-Price-currencySymbol\">&#36;</span>61.900</bdi></span></del> <span class=\"screen-reader-text\">El precio original era: &#036;61.900.</span><ins aria-hidden=\"true\"><span class=\"woocommerce-Price-amount amount\"><bdi><span class=\"woocommerce-Price-currencySymbol\">&#36;</span>49.520</bdi></span></ins><span class=\"screen-reader-text\">El precio actual es: &#036;49.520.</span>",
     "related_ids": [
-      245,
-      246,
-      242,
-      250,
-      256
+      253,
+      243,
+      256,
+      279,
+      265
     ],
     "meta_data": [
       {
@@ -37826,11 +38743,11 @@
     "menu_order": 0,
     "price_html": "<span class=\"woocommerce-Price-amount amount\"><bdi><span class=\"woocommerce-Price-currencySymbol\">&#36;</span>50.700</bdi></span>",
     "related_ids": [
-      277,
-      245,
-      266,
       263,
-      273
+      242,
+      259,
+      279,
+      235
     ],
     "meta_data": [
       {
@@ -38073,11 +38990,11 @@
     "menu_order": 0,
     "price_html": "<span class=\"woocommerce-Price-amount amount\"><bdi><span class=\"woocommerce-Price-currencySymbol\">&#36;</span>50.700</bdi></span>",
     "related_ids": [
+      235,
+      282,
       266,
-      245,
-      263,
-      264,
-      239
+      278,
+      242
     ],
     "meta_data": [
       {
@@ -38320,11 +39237,11 @@
     "menu_order": 0,
     "price_html": "<span class=\"woocommerce-Price-amount amount\"><bdi><span class=\"woocommerce-Price-currencySymbol\">&#36;</span>100.800</bdi></span>",
     "related_ids": [
-      245,
-      264,
-      275,
+      281,
       248,
-      279
+      275,
+      282,
+      273
     ],
     "meta_data": [
       {
@@ -38600,11 +39517,11 @@
     "menu_order": 0,
     "price_html": "<span class=\"woocommerce-Price-amount amount\"><bdi><span class=\"woocommerce-Price-currencySymbol\">&#36;</span>100.800</bdi></span>",
     "related_ids": [
-      278,
-      239,
+      282,
       263,
-      275,
-      281
+      244,
+      243,
+      275
     ],
     "meta_data": [
       {
@@ -38872,11 +39789,11 @@
     "menu_order": 0,
     "price_html": "<span class=\"woocommerce-Price-amount amount\"><bdi><span class=\"woocommerce-Price-currencySymbol\">&#36;</span>100.800</bdi></span>",
     "related_ids": [
-      258,
-      282,
-      253,
-      275,
-      248
+      273,
+      239,
+      256,
+      281,
+      235
     ],
     "meta_data": [
       {
@@ -39139,11 +40056,11 @@
     "menu_order": 0,
     "price_html": "<span class=\"woocommerce-Price-amount amount\"><bdi><span class=\"woocommerce-Price-currencySymbol\">&#36;</span>117.200</bdi></span>",
     "related_ids": [
-      235,
-      266,
-      250,
-      264,
-      265
+      277,
+      256,
+      258,
+      242,
+      248
     ],
     "meta_data": [
       {
@@ -39381,11 +40298,11 @@
     "menu_order": 0,
     "price_html": "<span class=\"woocommerce-Price-amount amount\"><bdi><span class=\"woocommerce-Price-currencySymbol\">&#36;</span>67.900</bdi></span>",
     "related_ids": [
-      264,
-      245,
-      247,
-      263,
-      239
+      279,
+      258,
+      256,
+      253,
+      274
     ],
     "meta_data": [
       {
@@ -39553,11 +40470,11 @@
     "menu_order": 0,
     "price_html": "<span class=\"woocommerce-Price-amount amount\"><bdi><span class=\"woocommerce-Price-currencySymbol\">&#36;</span>63.300</bdi></span>",
     "related_ids": [
-      273,
-      248,
-      235,
-      246,
-      244
+      281,
+      239,
+      256,
+      266,
+      253
     ],
     "meta_data": [
       {
@@ -39800,11 +40717,11 @@
     "menu_order": 0,
     "price_html": "<span class=\"woocommerce-Price-amount amount\"><bdi><span class=\"woocommerce-Price-currencySymbol\">&#36;</span>62.100</bdi></span>",
     "related_ids": [
-      235,
-      248,
-      281,
       245,
-      239
+      242,
+      246,
+      248,
+      277
     ],
     "meta_data": [
       {
@@ -39994,11 +40911,11 @@
     "menu_order": 0,
     "price_html": "<span class=\"woocommerce-Price-amount amount\"><bdi><span class=\"woocommerce-Price-currencySymbol\">&#36;</span>39.900</bdi></span>",
     "related_ids": [
-      281,
-      266,
-      259,
-      277,
-      274
+      275,
+      256,
+      258,
+      273,
+      277
     ],
     "meta_data": [
       {
@@ -40236,11 +41153,11 @@
     "menu_order": 0,
     "price_html": "<del aria-hidden=\"true\"><span class=\"woocommerce-Price-amount amount\"><bdi><span class=\"woocommerce-Price-currencySymbol\">&#36;</span>119.500</bdi></span></del> <span class=\"screen-reader-text\">El precio original era: &#036;119.500.</span><ins aria-hidden=\"true\"><span class=\"woocommerce-Price-amount amount\"><bdi><span class=\"woocommerce-Price-currencySymbol\">&#36;</span>95.600</bdi></span></ins><span class=\"screen-reader-text\">El precio actual es: &#036;95.600.</span>",
     "related_ids": [
+      243,
+      266,
+      273,
       245,
-      279,
-      258,
-      259,
-      275
+      256
     ],
     "meta_data": [
       {
@@ -40503,11 +41420,11 @@
     "menu_order": 0,
     "price_html": "<span class=\"woocommerce-Price-amount amount\"><bdi><span class=\"woocommerce-Price-currencySymbol\">&#36;</span>99.900</bdi></span>",
     "related_ids": [
-      273,
+      275,
       256,
-      239,
-      245,
-      274
+      281,
+      263,
+      273
     ],
     "meta_data": [
       {
@@ -40770,11 +41687,11 @@
     "menu_order": 0,
     "price_html": "<span class=\"woocommerce-Price-amount amount\"><bdi><span class=\"woocommerce-Price-currencySymbol\">&#36;</span>99.900</bdi></span>",
     "related_ids": [
-      282,
-      242,
-      277,
-      273,
-      243
+      245,
+      275,
+      256,
+      243,
+      248
     ],
     "meta_data": [
       {
@@ -41037,10 +41954,10 @@
     "menu_order": 0,
     "price_html": "<span class=\"woocommerce-Price-amount amount\"><bdi><span class=\"woocommerce-Price-currencySymbol\">&#36;</span>99.900</bdi></span>",
     "related_ids": [
+      245,
+      248,
       258,
-      263,
-      275,
-      277,
+      253,
       244
     ],
     "meta_data": [
@@ -41294,11 +42211,11 @@
     "menu_order": 0,
     "price_html": "<del aria-hidden=\"true\"><span class=\"woocommerce-Price-amount amount\"><bdi><span class=\"woocommerce-Price-currencySymbol\">&#36;</span>55.100</bdi></span></del> <span class=\"screen-reader-text\">El precio original era: &#036;55.100.</span><ins aria-hidden=\"true\"><span class=\"woocommerce-Price-amount amount\"><bdi><span class=\"woocommerce-Price-currencySymbol\">&#36;</span>44.080</bdi></span></ins><span class=\"screen-reader-text\">El precio actual es: &#036;44.080.</span>",
     "related_ids": [
-      273,
+      244,
       243,
-      246,
-      277,
-      263
+      273,
+      263,
+      253
     ],
     "meta_data": [
       {
@@ -41536,11 +42453,11 @@
     "menu_order": 0,
     "price_html": "<del aria-hidden=\"true\"><span class=\"woocommerce-Price-amount amount\"><bdi><span class=\"woocommerce-Price-currencySymbol\">&#36;</span>55.100</bdi></span></del> <span class=\"screen-reader-text\">El precio original era: &#036;55.100.</span><ins aria-hidden=\"true\"><span class=\"woocommerce-Price-amount amount\"><bdi><span class=\"woocommerce-Price-currencySymbol\">&#36;</span>44.080</bdi></span></ins><span class=\"screen-reader-text\">El precio actual es: &#036;44.080.</span>",
     "related_ids": [
-      263,
-      275,
-      258,
-      248,
-      278
+      239,
+      279,
+      247,
+      246,
+      281
     ],
     "meta_data": [
       {
@@ -41796,11 +42713,11 @@
     "menu_order": 0,
     "price_html": "<span class=\"woocommerce-Price-amount amount\"><bdi><span class=\"woocommerce-Price-currencySymbol\">&#36;</span>206.900</bdi></span>",
     "related_ids": [
-      253,
-      278,
-      266,
-      259,
-      263
+      247,
+      274,
+      279,
+      235,
+      258
     ],
     "meta_data": [
       {
@@ -41943,11 +42860,11 @@
     "menu_order": 0,
     "price_html": "<span class=\"woocommerce-Price-amount amount\"><bdi><span class=\"woocommerce-Price-currencySymbol\">&#36;</span>206.900</bdi></span>",
     "related_ids": [
-      282,
-      273,
-      265,
+      266,
+      244,
       246,
-      244
+      258,
+      275
     ],
     "meta_data": [
       {
@@ -42087,11 +43004,11 @@
     "menu_order": 0,
     "price_html": "<del aria-hidden=\"true\"><span class=\"woocommerce-Price-amount amount\"><bdi><span class=\"woocommerce-Price-currencySymbol\">&#36;</span>123.650</bdi></span></del> <span class=\"screen-reader-text\">El precio original era: &#036;123.650.</span><ins aria-hidden=\"true\"><span class=\"woocommerce-Price-amount amount\"><bdi><span class=\"woocommerce-Price-currencySymbol\">&#36;</span>98.920</bdi></span></ins><span class=\"screen-reader-text\">El precio actual es: &#036;98.920.</span>",
     "related_ids": [
-      256,
-      244,
-      253,
+      263,
+      266,
+      279,
       247,
-      279
+      245
     ],
     "meta_data": [
       {
@@ -42329,11 +43246,11 @@
     "menu_order": 0,
     "price_html": "<span class=\"woocommerce-Price-amount amount\"><bdi><span class=\"woocommerce-Price-currencySymbol\">&#36;</span>241.350</bdi></span>",
     "related_ids": [
-      265,
-      281,
-      275,
-      258,
-      246
+      277,
+      243,
+      278,
+      246,
+      247
     ],
     "meta_data": [
       {
@@ -42596,11 +43513,11 @@
     "menu_order": 0,
     "price_html": "<span class=\"woocommerce-Price-amount amount\"><bdi><span class=\"woocommerce-Price-currencySymbol\">&#36;</span>95.500</bdi></span>",
     "related_ids": [
-      214,
-      229,
-      221,
-      217,
-      231
+      227,
+      183,
+      215,
+      195,
+      194
     ],
     "meta_data": [
       {
@@ -42863,11 +43780,11 @@
     "menu_order": 0,
     "price_html": "<del aria-hidden=\"true\"><span class=\"woocommerce-Price-amount amount\"><bdi><span class=\"woocommerce-Price-currencySymbol\">&#36;</span>95.500</bdi></span></del> <span class=\"screen-reader-text\">El precio original era: &#036;95.500.</span><ins aria-hidden=\"true\"><span class=\"woocommerce-Price-amount amount\"><bdi><span class=\"woocommerce-Price-currencySymbol\">&#36;</span>62.075</bdi></span></ins><span class=\"screen-reader-text\">El precio actual es: &#036;62.075.</span>",
     "related_ids": [
-      219,
-      213,
-      229,
-      220,
-      225
+      217,
+      239,
+      183,
+      212,
+      227
     ],
     "meta_data": [
       {
@@ -43135,11 +44052,11 @@
     "menu_order": 0,
     "price_html": "<span class=\"woocommerce-Price-amount amount\"><bdi><span class=\"woocommerce-Price-currencySymbol\">&#36;</span>76.500</bdi></span>",
     "related_ids": [
-      191,
-      216,
-      195,
-      217,
-      227
+      183,
+      194,
+      215,
+      182,
+      214
     ],
     "meta_data": [
       {
@@ -43407,11 +44324,11 @@
     "menu_order": 0,
     "price_html": "<span class=\"woocommerce-Price-amount amount\"><bdi><span class=\"woocommerce-Price-currencySymbol\">&#36;</span>76.500</bdi></span>",
     "related_ids": [
-      195,
-      234,
-      219,
       182,
-      227
+      227,
+      231,
+      212,
+      226
     ],
     "meta_data": [
       {
@@ -43679,11 +44596,11 @@
     "menu_order": 0,
     "price_html": "<span class=\"woocommerce-Price-amount amount\"><bdi><span class=\"woocommerce-Price-currencySymbol\">&#36;</span>76.500</bdi></span>",
     "related_ids": [
-      220,
       219,
-      222,
-      213,
-      239
+      214,
+      215,
+      194,
+      212
     ],
     "meta_data": [
       {
@@ -43951,11 +44868,11 @@
     "menu_order": 0,
     "price_html": "<span class=\"woocommerce-Price-amount amount\"><bdi><span class=\"woocommerce-Price-currencySymbol\">&#36;</span>76.500</bdi></span>",
     "related_ids": [
-      216,
-      229,
-      219,
-      221,
-      183
+      215,
+      192,
+      225,
+      194,
+      229
     ],
     "meta_data": [
       {
@@ -44218,11 +45135,11 @@
     "menu_order": 0,
     "price_html": "<del aria-hidden=\"true\"><span class=\"woocommerce-Price-amount amount\"><bdi><span class=\"woocommerce-Price-currencySymbol\">&#36;</span>76.500</bdi></span></del> <span class=\"screen-reader-text\">El precio original era: &#036;76.500.</span><ins aria-hidden=\"true\"><span class=\"woocommerce-Price-amount amount\"><bdi><span class=\"woocommerce-Price-currencySymbol\">&#36;</span>49.725</bdi></span></ins><span class=\"screen-reader-text\">El precio actual es: &#036;49.725.</span>",
     "related_ids": [
-      216,
-      231,
-      218,
-      239,
-      192
+      183,
+      182,
+      192,
+      220,
+      227
     ],
     "meta_data": [
       {
@@ -44490,11 +45407,11 @@
     "menu_order": 0,
     "price_html": "<span class=\"woocommerce-Price-amount amount\"><bdi><span class=\"woocommerce-Price-currencySymbol\">&#36;</span>86.900</bdi></span>",
     "related_ids": [
-      193,
-      226,
-      195,
-      229,
-      225
+      225,
+      221,
+      227,
+      219,
+      193
     ],
     "meta_data": [
       {
@@ -44762,11 +45679,11 @@
     "menu_order": 0,
     "price_html": "<span class=\"woocommerce-Price-amount amount\"><bdi><span class=\"woocommerce-Price-currencySymbol\">&#36;</span>85.100</bdi></span>",
     "related_ids": [
-      183,
-      194,
-      216,
-      231,
-      218
+      222,
+      215,
+      226,
+      225,
+      192
     ],
     "meta_data": [
       {
@@ -45034,11 +45951,11 @@
     "menu_order": 0,
     "price_html": "<span class=\"woocommerce-Price-amount amount\"><bdi><span class=\"woocommerce-Price-currencySymbol\">&#36;</span>85.100</bdi></span>",
     "related_ids": [
+      222,
+      183,
       239,
-      227,
-      215,
-      213,
-      212
+      182,
+      228
     ],
     "meta_data": [
       {
@@ -45306,11 +46223,11 @@
     "menu_order": 0,
     "price_html": "<span class=\"woocommerce-Price-amount amount\"><bdi><span class=\"woocommerce-Price-currencySymbol\">&#36;</span>64.000</bdi></span>",
     "related_ids": [
-      191,
+      192,
+      195,
       182,
-      234,
-      226,
-      214
+      194,
+      229
     ],
     "meta_data": [
       {
@@ -45578,11 +46495,11 @@
     "menu_order": 0,
     "price_html": "<span class=\"woocommerce-Price-amount amount\"><bdi><span class=\"woocommerce-Price-currencySymbol\">&#36;</span>64.000</bdi></span>",
     "related_ids": [
-      219,
-      182,
       195,
-      228,
-      215
+      216,
+      222,
+      239,
+      234
     ],
     "meta_data": [
       {
@@ -45850,11 +46767,11 @@
     "menu_order": 0,
     "price_html": "<span class=\"woocommerce-Price-amount amount\"><bdi><span class=\"woocommerce-Price-currencySymbol\">&#36;</span>43.600</bdi></span>",
     "related_ids": [
-      220,
-      216,
-      228,
-      182,
-      193
+      195,
+      194,
+      229,
+      215,
+      225
     ],
     "meta_data": [
       {
@@ -46112,11 +47029,11 @@
     "menu_order": 0,
     "price_html": "<del aria-hidden=\"true\"><span class=\"woocommerce-Price-amount amount\"><bdi><span class=\"woocommerce-Price-currencySymbol\">&#36;</span>43.600</bdi></span></del> <span class=\"screen-reader-text\">El precio original era: &#036;43.600.</span><ins aria-hidden=\"true\"><span class=\"woocommerce-Price-amount amount\"><bdi><span class=\"woocommerce-Price-currencySymbol\">&#36;</span>32.700</bdi></span></ins><span class=\"screen-reader-text\">El precio actual es: &#036;32.700.</span>",
     "related_ids": [
+      213,
+      220,
+      214,
       234,
-      182,
-      183,
-      239,
-      195
+      212
     ],
     "meta_data": [
       {
@@ -46364,11 +47281,11 @@
     "menu_order": 0,
     "price_html": "<span class=\"woocommerce-Price-amount amount\"><bdi><span class=\"woocommerce-Price-currencySymbol\">&#36;</span>43.600</bdi></span>",
     "related_ids": [
-      212,
-      227,
-      234,
-      231,
-      213
+      222,
+      218,
+      194,
+      216,
+      220
     ],
     "meta_data": [
       {
@@ -46637,10 +47554,10 @@
     "price_html": "<span class=\"woocommerce-Price-amount amount\"><bdi><span class=\"woocommerce-Price-currencySymbol\">&#36;</span>42.100</bdi></span>",
     "related_ids": [
       216,
-      234,
-      239,
+      227,
+      212,
       225,
-      183
+      192
     ],
     "meta_data": [
       {
@@ -46908,11 +47825,11 @@
     "menu_order": 0,
     "price_html": "<span class=\"woocommerce-Price-amount amount\"><bdi><span class=\"woocommerce-Price-currencySymbol\">&#36;</span>42.100</bdi></span>",
     "related_ids": [
-      192,
       222,
       217,
-      182,
-      221
+      228,
+      216,
+      234
     ],
     "meta_data": [
       {
@@ -47180,11 +48097,11 @@
     "menu_order": 0,
     "price_html": "<span class=\"woocommerce-Price-amount amount\"><bdi><span class=\"woocommerce-Price-currencySymbol\">&#36;</span>42.100</bdi></span>",
     "related_ids": [
-      183,
-      216,
+      226,
+      193,
+      215,
       217,
-      182,
-      194
+      214
     ],
     "meta_data": [
       {
@@ -47447,11 +48364,11 @@
     "menu_order": 0,
     "price_html": "<span class=\"woocommerce-Price-amount amount\"><bdi><span class=\"woocommerce-Price-currencySymbol\">&#36;</span>122.900</bdi></span>",
     "related_ids": [
-      193,
-      210,
       209,
-      328,
-      329
+      1372,
+      1377,
+      182,
+      191
     ],
     "meta_data": [
       {
@@ -47722,11 +48639,11 @@
     "menu_order": 0,
     "price_html": "<span class=\"woocommerce-Price-amount amount\"><bdi><span class=\"woocommerce-Price-currencySymbol\">&#36;</span>122.900</bdi></span>",
     "related_ids": [
-      201,
-      191,
-      1386,
-      1397,
-      1377
+      326,
+      183,
+      1377,
+      182,
+      1380
     ],
     "meta_data": [
       {
@@ -47984,11 +48901,11 @@
     "menu_order": 0,
     "price_html": "<span class=\"woocommerce-Price-amount amount\"><bdi><span class=\"woocommerce-Price-currencySymbol\">&#36;</span>122.900</bdi></span>",
     "related_ids": [
-      195,
-      192,
-      1370,
-      194,
-      1383
+      189,
+      182,
+      1372,
+      1380,
+      1377
     ],
     "meta_data": [
       {
@@ -48246,10 +49163,10 @@
     "menu_order": 0,
     "price_html": "<span class=\"woocommerce-Price-amount amount\"><bdi><span class=\"woocommerce-Price-currencySymbol\">&#36;</span>101.500</bdi></span>",
     "related_ids": [
-      211,
+      331,
       192,
-      210,
-      195,
+      326,
+      209,
       183
     ],
     "meta_data": [
@@ -48508,11 +49425,11 @@
     "menu_order": 0,
     "price_html": "<span class=\"woocommerce-Price-amount amount\"><bdi><span class=\"woocommerce-Price-currencySymbol\">&#36;</span>158.900</bdi></span>",
     "related_ids": [
-      1386,
-      1377,
-      211,
+      183,
       1393,
-      189
+      201,
+      1380,
+      193
     ],
     "meta_data": [
       {
@@ -48755,11 +49672,11 @@
     "menu_order": 0,
     "price_html": "<span class=\"woocommerce-Price-amount amount\"><bdi><span class=\"woocommerce-Price-currencySymbol\">&#36;</span>158.900</bdi></span>",
     "related_ids": [
-      329,
-      209,
+      1393,
       333,
-      191,
-      195
+      192,
+      1368,
+      1397
     ],
     "meta_data": [
       {
@@ -49007,11 +49924,11 @@
     "menu_order": 0,
     "price_html": "<span class=\"woocommerce-Price-amount amount\"><bdi><span class=\"woocommerce-Price-currencySymbol\">&#36;</span>132.200</bdi></span>",
     "related_ids": [
-      328,
-      211,
-      209,
-      183,
-      182
+      1380,
+      194,
+      1370,
+      1368,
+      195
     ],
     "meta_data": [
       {
@@ -49279,11 +50196,11 @@
     "menu_order": 0,
     "price_html": "<span class=\"woocommerce-Price-amount amount\"><bdi><span class=\"woocommerce-Price-currencySymbol\">&#36;</span>132.200</bdi></span>",
     "related_ids": [
-      1383,
-      328,
-      191,
       1397,
-      1380
+      329,
+      326,
+      1380,
+      211
     ],
     "meta_data": [
       {
@@ -49547,10 +50464,10 @@
     "price_html": "<span class=\"woocommerce-Price-amount amount\"><bdi><span class=\"woocommerce-Price-currencySymbol\">&#36;</span>132.200</bdi></span>",
     "related_ids": [
       333,
-      192,
-      201,
+      194,
       1386,
-      1377
+      1377,
+      1393
     ],
     "meta_data": [
       {
@@ -49788,11 +50705,11 @@
     "menu_order": 0,
     "price_html": "<del aria-hidden=\"true\"><span class=\"woocommerce-Price-amount amount\"><bdi><span class=\"woocommerce-Price-currencySymbol\">&#36;</span>173.600</bdi></span></del> <span class=\"screen-reader-text\">El precio original era: &#036;173.600.</span><ins aria-hidden=\"true\"><span class=\"woocommerce-Price-amount amount\"><bdi><span class=\"woocommerce-Price-currencySymbol\">&#36;</span>138.880</bdi></span></ins><span class=\"screen-reader-text\">El precio actual es: &#036;138.880.</span>",
     "related_ids": [
-      326,
-      1386,
-      1368,
-      192,
-      191
+      1372,
+      209,
+      195,
+      328,
+      192
     ],
     "meta_data": [
       {
@@ -50040,11 +50957,11 @@
     "menu_order": 0,
     "price_html": "<span class=\"woocommerce-Price-amount amount\"><bdi><span class=\"woocommerce-Price-currencySymbol\">&#36;</span>88.200</bdi></span>",
     "related_ids": [
-      329,
-      333,
       209,
+      194,
       331,
-      193
+      193,
+      1383
     ],
     "meta_data": [
       {
@@ -50312,11 +51229,11 @@
     "menu_order": 0,
     "price_html": "<span class=\"woocommerce-Price-amount amount\"><bdi><span class=\"woocommerce-Price-currencySymbol\">&#36;</span>88.200</bdi></span>",
     "related_ids": [
-      1393,
-      183,
-      1397,
-      329,
-      192
+      211,
+      331,
+      195,
+      1377,
+      1368
     ],
     "meta_data": [
       {
@@ -50579,11 +51496,11 @@
     "menu_order": 0,
     "price_html": "<span class=\"woocommerce-Price-amount amount\"><bdi><span class=\"woocommerce-Price-currencySymbol\">&#36;</span>18.600</bdi></span>",
     "related_ids": [
-      71,
-      17,
+      60,
       16,
+      44,
       58,
-      48
+      356
     ],
     "meta_data": [
       {
@@ -50773,11 +51690,11 @@
     "menu_order": 0,
     "price_html": "<span class=\"woocommerce-Price-amount amount\"><bdi><span class=\"woocommerce-Price-currencySymbol\">&#36;</span>9.990</bdi></span>",
     "related_ids": [
+      16,
+      71,
+      46,
       58,
-      54,
-      66,
-      48,
-      55
+      68
     ],
     "meta_data": [
       {
@@ -50958,8 +51875,8 @@
     "price_html": "<span class=\"woocommerce-Price-amount amount\"><bdi><span class=\"woocommerce-Price-currencySymbol\">&#36;</span>25.900</bdi></span>",
     "related_ids": [
       129,
-      110,
-      111
+      111,
+      110
     ],
     "meta_data": [
       {
@@ -51125,9 +52042,9 @@
     "menu_order": 0,
     "price_html": "<del aria-hidden=\"true\"><span class=\"woocommerce-Price-amount amount\"><bdi><span class=\"woocommerce-Price-currencySymbol\">&#36;</span>35.900</bdi></span></del> <span class=\"screen-reader-text\">El precio original era: &#036;35.900.</span><ins aria-hidden=\"true\"><span class=\"woocommerce-Price-amount amount\"><bdi><span class=\"woocommerce-Price-currencySymbol\">&#36;</span>29.990</bdi></span></ins><span class=\"screen-reader-text\">El precio actual es: &#036;29.990.</span>",
     "related_ids": [
-      110,
+      111,
       130,
-      111
+      110
     ],
     "meta_data": [
       {
@@ -51282,11 +52199,11 @@
     "menu_order": 0,
     "price_html": "<span class=\"woocommerce-Price-amount amount\"><bdi><span class=\"woocommerce-Price-currencySymbol\">&#36;</span>38.900</bdi></span>",
     "related_ids": [
-      46,
+      355,
+      60,
       51,
-      71,
-      43,
-      67
+      48,
+      16
     ],
     "meta_data": [
       {
@@ -51525,9 +52442,9 @@
     "menu_order": 0,
     "price_html": "<span class=\"woocommerce-Price-amount amount\"><bdi><span class=\"woocommerce-Price-currencySymbol\">&#36;</span>16.900</bdi></span>",
     "related_ids": [
-      130,
       110,
-      129
+      129,
+      130
     ],
     "meta_data": [
       {
@@ -51654,8 +52571,8 @@
     "price_html": "<del aria-hidden=\"true\"><span class=\"woocommerce-Price-amount amount\"><bdi><span class=\"woocommerce-Price-currencySymbol\">&#36;</span>14.900</bdi></span></del> <span class=\"screen-reader-text\">El precio original era: &#036;14.900.</span><ins aria-hidden=\"true\"><span class=\"woocommerce-Price-amount amount\"><bdi><span class=\"woocommerce-Price-currencySymbol\">&#36;</span>13.900</bdi></span></ins><span class=\"screen-reader-text\">El precio actual es: &#036;13.900.</span>",
     "related_ids": [
       130,
-      129,
-      111
+      111,
+      129
     ],
     "meta_data": [
       {
@@ -51800,11 +52717,11 @@
     "menu_order": 0,
     "price_html": "<span class=\"woocommerce-Price-amount amount\"><bdi><span class=\"woocommerce-Price-currencySymbol\">&#36;</span>95.100</bdi></span>",
     "related_ids": [
-      99,
+      97,
+      83,
       68,
-      85,
-      63,
-      67
+      59,
+      98
     ],
     "meta_data": [
       {
@@ -52062,11 +52979,11 @@
     "menu_order": 0,
     "price_html": "<span class=\"woocommerce-Price-amount amount\"><bdi><span class=\"woocommerce-Price-currencySymbol\">&#36;</span>87.400</bdi></span>",
     "related_ids": [
-      83,
-      69,
-      98,
-      63,
-      71
+      99,
+      95,
+      82,
+      68,
+      63
     ],
     "meta_data": [
       {
@@ -52337,11 +53254,11 @@
     "menu_order": 0,
     "price_html": "<span class=\"woocommerce-Price-amount amount\"><bdi><span class=\"woocommerce-Price-currencySymbol\">&#36;</span>43.000</bdi></span>",
     "related_ids": [
-      98,
+      68,
+      338,
       87,
-      1972,
-      71,
-      59
+      98,
+      94
     ],
     "meta_data": [
       {
@@ -52607,11 +53524,11 @@
     "menu_order": 0,
     "price_html": "<span class=\"woocommerce-Price-amount amount\"><bdi><span class=\"woocommerce-Price-currencySymbol\">&#36;</span>79.900</bdi></span>",
     "related_ids": [
+      104,
+      103,
       340,
-      339,
-      1972,
-      99,
-      97
+      94,
+      339
     ],
     "meta_data": [
       {
@@ -52751,11 +53668,11 @@
     "menu_order": 0,
     "price_html": "<span class=\"woocommerce-Price-amount amount\"><bdi><span class=\"woocommerce-Price-currencySymbol\">&#36;</span>106.600</bdi></span>",
     "related_ids": [
-      63,
-      57,
-      59,
+      51,
+      67,
+      95,
       98,
-      86
+      63
     ],
     "meta_data": [
       {
@@ -53019,10 +53936,10 @@
     "price_html": "<span class=\"woocommerce-Price-amount amount\"><bdi><span class=\"woocommerce-Price-currencySymbol\">&#36;</span>1.150.000</bdi></span>",
     "related_ids": [
       67,
+      57,
+      339,
       338,
-      103,
-      59,
-      82
+      44
     ],
     "meta_data": [
       {
@@ -53285,11 +54202,11 @@
     "menu_order": 0,
     "price_html": "<span class=\"woocommerce-Price-amount amount\"><bdi><span class=\"woocommerce-Price-currencySymbol\">&#36;</span>950.000</bdi></span>",
     "related_ids": [
-      51,
+      44,
       87,
-      85,
-      99,
-      103
+      340,
+      51,
+      69
     ],
     "meta_data": [
       {
@@ -53552,11 +54469,11 @@
     "menu_order": 0,
     "price_html": "<span class=\"woocommerce-Price-amount amount\"><bdi><span class=\"woocommerce-Price-currencySymbol\">&#36;</span>89.400</bdi></span>",
     "related_ids": [
-      82,
-      94,
+      67,
       68,
-      99,
-      69
+      63,
+      83,
+      90
     ],
     "meta_data": [
       {
@@ -53809,11 +54726,11 @@
     "menu_order": 0,
     "price_html": "<span class=\"woocommerce-Price-amount amount\"><bdi><span class=\"woocommerce-Price-currencySymbol\">&#36;</span>51.300</bdi></span>",
     "related_ids": [
+      345,
+      92,
       82,
       86,
-      89,
-      84,
-      87
+      84
     ],
     "meta_data": [
       {
@@ -54054,11 +54971,11 @@
     "menu_order": 0,
     "price_html": "<span class=\"woocommerce-Price-amount amount\"><bdi><span class=\"woocommerce-Price-currencySymbol\">&#36;</span>74.900</bdi></span>",
     "related_ids": [
-      87,
-      86,
-      91,
-      82,
-      92
+      92,
+      88,
+      2216,
+      1788,
+      1779
     ],
     "meta_data": [
       {
@@ -54311,11 +55228,11 @@
     "menu_order": 0,
     "price_html": "<span class=\"woocommerce-Price-amount amount\"><bdi><span class=\"woocommerce-Price-currencySymbol\">&#36;</span>120.100</bdi></span>",
     "related_ids": [
-      85,
-      57,
-      84,
-      71,
-      83
+      92,
+      87,
+      44,
+      90,
+      59
     ],
     "meta_data": [
       {
@@ -54574,10 +55491,10 @@
     "price_html": "<span class=\"woocommerce-Price-amount amount\"><bdi><span class=\"woocommerce-Price-currencySymbol\">&#36;</span>61.400</bdi></span>",
     "related_ids": [
       97,
-      94,
-      345,
-      82,
-      57
+      63,
+      68,
+      85,
+      95
     ],
     "meta_data": [
       {
@@ -54835,11 +55752,11 @@
     "menu_order": 0,
     "price_html": "<span class=\"woocommerce-Price-amount amount\"><bdi><span class=\"woocommerce-Price-currencySymbol\">&#36;</span>55.800</bdi></span>",
     "related_ids": [
-      59,
       86,
-      95,
-      90,
-      49
+      89,
+      94,
+      97,
+      90
     ],
     "meta_data": [
       {
@@ -55097,11 +56014,11 @@
     "menu_order": 0,
     "price_html": "<span class=\"woocommerce-Price-amount amount\"><bdi><span class=\"woocommerce-Price-currencySymbol\">&#36;</span>35.100</bdi></span>",
     "related_ids": [
-      59,
-      44,
-      85,
-      87,
-      90
+      83,
+      95,
+      97,
+      51,
+      59
     ],
     "meta_data": [
       {
@@ -55359,11 +56276,11 @@
     "menu_order": 0,
     "price_html": "<span class=\"woocommerce-Price-amount amount\"><bdi><span class=\"woocommerce-Price-currencySymbol\">&#36;</span>24.580</bdi></span>",
     "related_ids": [
-      44,
+      87,
+      84,
       89,
       68,
-      84,
-      90
+      71
     ],
     "meta_data": [
       {
@@ -55629,11 +56546,11 @@
     "menu_order": 0,
     "price_html": "<span class=\"woocommerce-Price-amount amount\"><bdi><span class=\"woocommerce-Price-currencySymbol\">&#36;</span>54.900</bdi></span>",
     "related_ids": [
+      86,
       85,
-      83,
-      90,
-      92,
-      89
+      87,
+      89,
+      88
     ],
     "meta_data": [
       {
@@ -55866,11 +56783,11 @@
     "menu_order": 0,
     "price_html": "<span class=\"woocommerce-Price-amount amount\"><bdi><span class=\"woocommerce-Price-currencySymbol\">&#36;</span>100.500</bdi></span>",
     "related_ids": [
-      82,
       84,
+      86,
+      90,
       92,
-      95,
-      88
+      44
     ],
     "meta_data": [
       {
@@ -56128,11 +57045,11 @@
     "menu_order": 0,
     "price_html": "<span class=\"woocommerce-Price-amount amount\"><bdi><span class=\"woocommerce-Price-currencySymbol\">&#36;</span>125.600</bdi></span>",
     "related_ids": [
-      89,
-      97,
-      92,
+      90,
+      83,
+      63,
       44,
-      59
+      85
     ],
     "meta_data": [
       {
@@ -56390,11 +57307,11 @@
     "menu_order": 0,
     "price_html": "<span class=\"woocommerce-Price-amount amount\"><bdi><span class=\"woocommerce-Price-currencySymbol\">&#36;</span>27.900</bdi></span>",
     "related_ids": [
-      49,
-      68,
+      69,
       44,
-      55,
-      16
+      59,
+      51,
+      63
     ],
     "meta_data": [
       {
@@ -56579,11 +57496,11 @@
     "menu_order": 0,
     "price_html": "<span class=\"woocommerce-Price-amount amount\"><bdi><span class=\"woocommerce-Price-currencySymbol\">&#36;</span>16.900</bdi></span>",
     "related_ids": [
+      71,
       60,
-      58,
-      81,
       59,
-      40
+      43,
+      63
     ],
     "meta_data": [
       {
@@ -56773,11 +57690,11 @@
     "menu_order": 0,
     "price_html": "<span class=\"woocommerce-Price-amount amount\"><bdi><span class=\"woocommerce-Price-currencySymbol\">&#36;</span>8.190</bdi></span>",
     "related_ids": [
-      69,
+      67,
       80,
-      57,
-      59,
-      49
+      46,
+      44,
+      61
     ],
     "meta_data": [
       {
@@ -57016,10 +57933,10 @@
     "price_html": "<span class=\"woocommerce-Price-amount amount\"><bdi><span class=\"woocommerce-Price-currencySymbol\">&#36;</span>49.500</bdi></span>",
     "related_ids": [
       69,
+      67,
+      55,
       60,
-      68,
-      59,
-      61
+      1314
     ],
     "meta_data": [
       {
@@ -57257,11 +58174,11 @@
     "menu_order": 0,
     "price_html": "<span class=\"woocommerce-Price-amount amount\"><bdi><span class=\"woocommerce-Price-currencySymbol\">&#36;</span>49.500</bdi></span>",
     "related_ids": [
-      40,
-      59,
-      48,
-      43,
-      63
+      69,
+      57,
+      562,
+      67,
+      61
     ],
     "meta_data": [
       {
@@ -57499,11 +58416,11 @@
     "menu_order": 0,
     "price_html": "<del aria-hidden=\"true\"><span class=\"woocommerce-Price-amount amount\"><bdi><span class=\"woocommerce-Price-currencySymbol\">&#36;</span>17.100</bdi></span></del> <span class=\"screen-reader-text\">El precio original era: &#036;17.100.</span><ins aria-hidden=\"true\"><span class=\"woocommerce-Price-amount amount\"><bdi><span class=\"woocommerce-Price-currencySymbol\">&#36;</span>16.600</bdi></span></ins><span class=\"screen-reader-text\">El precio actual es: &#036;16.600.</span>",
     "related_ids": [
-      68,
-      58,
-      40,
-      76,
-      49
+      1314,
+      49,
+      78,
+      44,
+      60
     ],
     "meta_data": [
       {
@@ -57751,11 +58668,11 @@
     "menu_order": 0,
     "price_html": "<span class=\"woocommerce-Price-amount amount\"><bdi><span class=\"woocommerce-Price-currencySymbol\">&#36;</span>17.100</bdi></span>",
     "related_ids": [
-      58,
       55,
-      49,
-      1314,
-      76
+      60,
+      61,
+      67,
+      63
     ],
     "meta_data": [
       {
@@ -58023,11 +58940,11 @@
     "menu_order": 0,
     "price_html": "<span class=\"woocommerce-Price-amount amount\"><bdi><span class=\"woocommerce-Price-currencySymbol\">&#36;</span>17.100</bdi></span>",
     "related_ids": [
-      54,
-      51,
-      43,
-      49,
-      78
+      46,
+      66,
+      74,
+      60,
+      44
     ],
     "meta_data": [
       {
@@ -58295,11 +59212,11 @@
     "menu_order": 0,
     "price_html": "<span class=\"woocommerce-Price-amount amount\"><bdi><span class=\"woocommerce-Price-currencySymbol\">&#36;</span>18.500</bdi></span>",
     "related_ids": [
-      565,
-      562,
-      59,
-      51,
-      76
+      1314,
+      40,
+      63,
+      46,
+      44
     ],
     "meta_data": [
       {
@@ -58567,11 +59484,11 @@
     "menu_order": 0,
     "price_html": "<span class=\"woocommerce-Price-amount amount\"><bdi><span class=\"woocommerce-Price-currencySymbol\">&#36;</span>17.100</bdi></span>",
     "related_ids": [
-      66,
-      55,
-      57,
-      76,
-      68
+      74,
+      562,
+      58,
+      565,
+      61
     ],
     "meta_data": [
       {
@@ -58834,11 +59751,11 @@
     "menu_order": 0,
     "price_html": "<span class=\"woocommerce-Price-amount amount\"><bdi><span class=\"woocommerce-Price-currencySymbol\">&#36;</span>49.500</bdi></span>",
     "related_ids": [
-      57,
-      43,
-      51,
-      49,
-      74
+      76,
+      565,
+      44,
+      48,
+      54
     ],
     "meta_data": [
       {
@@ -59081,11 +59998,11 @@
     "menu_order": 0,
     "price_html": "<span class=\"woocommerce-Price-amount amount\"><bdi><span class=\"woocommerce-Price-currencySymbol\">&#36;</span>17.100</bdi></span>",
     "related_ids": [
-      565,
-      55,
-      43,
-      48,
-      54
+      69,
+      49,
+      60,
+      57,
+      74
     ],
     "meta_data": [
       {
@@ -59348,11 +60265,11 @@
     "menu_order": 0,
     "price_html": "<del aria-hidden=\"true\"><span class=\"woocommerce-Price-amount amount\"><bdi><span class=\"woocommerce-Price-currencySymbol\">&#36;</span>13.600</bdi></span></del> <span class=\"screen-reader-text\">El precio original era: &#036;13.600.</span><ins aria-hidden=\"true\"><span class=\"woocommerce-Price-amount amount\"><bdi><span class=\"woocommerce-Price-currencySymbol\">&#36;</span>11.900</bdi></span></ins><span class=\"screen-reader-text\">El precio actual es: &#036;11.900.</span>",
     "related_ids": [
-      74,
-      49,
-      68,
-      44,
-      55
+      43,
+      58,
+      78,
+      40,
+      66
     ],
     "meta_data": [
       {
@@ -59585,11 +60502,11 @@
     "menu_order": 0,
     "price_html": "<del aria-hidden=\"true\"><span class=\"woocommerce-Price-amount amount\"><bdi><span class=\"woocommerce-Price-currencySymbol\">&#36;</span>61.500</bdi></span></del> <span class=\"screen-reader-text\">El precio original era: &#036;61.500.</span><ins aria-hidden=\"true\"><span class=\"woocommerce-Price-amount amount\"><bdi><span class=\"woocommerce-Price-currencySymbol\">&#36;</span>54.900</bdi></span></ins><span class=\"screen-reader-text\">El precio actual es: &#036;54.900.</span>",
     "related_ids": [
-      54,
-      67,
+      51,
+      69,
+      1314,
       59,
-      66,
-      57
+      55
     ],
     "meta_data": [
       {
@@ -59827,11 +60744,11 @@
     "menu_order": 0,
     "price_html": "<span class=\"woocommerce-Price-amount amount\"><bdi><span class=\"woocommerce-Price-currencySymbol\">&#36;</span>63.900</bdi></span>",
     "related_ids": [
-      1314,
-      44,
-      78,
-      57,
-      60
+      71,
+      76,
+      565,
+      66,
+      61
     ],
     "meta_data": [
       {
@@ -60097,11 +61014,11 @@
     "menu_order": 0,
     "price_html": "<del aria-hidden=\"true\"><span class=\"woocommerce-Price-amount amount\"><bdi><span class=\"woocommerce-Price-currencySymbol\">&#36;</span>89.600</bdi></span></del> <span class=\"screen-reader-text\">El precio original era: &#036;89.600.</span><ins aria-hidden=\"true\"><span class=\"woocommerce-Price-amount amount\"><bdi><span class=\"woocommerce-Price-currencySymbol\">&#36;</span>79.900</bdi></span></ins><span class=\"screen-reader-text\">El precio actual es: &#036;79.900.</span>",
     "related_ids": [
-      59,
+      49,
+      562,
       46,
-      1314,
-      48,
-      44
+      68,
+      78
     ],
     "meta_data": [
       {
@@ -60339,11 +61256,11 @@
     "menu_order": 0,
     "price_html": "<span class=\"woocommerce-Price-amount amount\"><bdi><span class=\"woocommerce-Price-currencySymbol\">&#36;</span>69.200</bdi></span>",
     "related_ids": [
-      74,
-      68,
-      76,
-      48,
-      69
+      1314,
+      61,
+      55,
+      69,
+      66
     ],
     "meta_data": [
       {
@@ -60606,11 +61523,11 @@
     "menu_order": 0,
     "price_html": "<del aria-hidden=\"true\"><span class=\"woocommerce-Price-amount amount\"><bdi><span class=\"woocommerce-Price-currencySymbol\">&#36;</span>14.800</bdi></span></del> <span class=\"screen-reader-text\">El precio original era: &#036;14.800.</span><ins aria-hidden=\"true\"><span class=\"woocommerce-Price-amount amount\"><bdi><span class=\"woocommerce-Price-currencySymbol\">&#36;</span>14.000</bdi></span></ins><span class=\"screen-reader-text\">El precio actual es: &#036;14.000.</span>",
     "related_ids": [
-      46,
+      40,
       54,
+      67,
       71,
-      1314,
-      40
+      43
     ],
     "meta_data": [
       {
@@ -60843,11 +61760,11 @@
     "menu_order": 0,
     "price_html": "<del aria-hidden=\"true\"><span class=\"woocommerce-Price-amount amount\"><bdi><span class=\"woocommerce-Price-currencySymbol\">&#36;</span>17.100</bdi></span></del> <span class=\"screen-reader-text\">El precio original era: &#036;17.100.</span><ins aria-hidden=\"true\"><span class=\"woocommerce-Price-amount amount\"><bdi><span class=\"woocommerce-Price-currencySymbol\">&#36;</span>16.600</bdi></span></ins><span class=\"screen-reader-text\">El precio actual es: &#036;16.600.</span>",
     "related_ids": [
-      43,
-      46,
+      48,
+      51,
+      44,
       562,
-      57,
-      66
+      59
     ],
     "meta_data": [
       {
@@ -61085,11 +62002,11 @@
     "menu_order": 0,
     "price_html": "<span class=\"woocommerce-Price-amount amount\"><bdi><span class=\"woocommerce-Price-currencySymbol\">&#36;</span>17.100</bdi></span>",
     "related_ids": [
-      43,
+      68,
       69,
-      46,
-      1314,
-      78
+      71,
+      43,
+      74
     ],
     "meta_data": [
       {
@@ -61357,11 +62274,11 @@
     "menu_order": 0,
     "price_html": "<span class=\"woocommerce-Price-amount amount\"><bdi><span class=\"woocommerce-Price-currencySymbol\">&#36;</span>17.100</bdi></span>",
     "related_ids": [
-      74,
+      78,
+      60,
+      71,
       58,
-      69,
-      44,
-      55
+      57
     ],
     "meta_data": [
       {
@@ -61624,11 +62541,11 @@
     "menu_order": 0,
     "price_html": "<del aria-hidden=\"true\"><span class=\"woocommerce-Price-amount amount\"><bdi><span class=\"woocommerce-Price-currencySymbol\">&#36;</span>17.100</bdi></span></del> <span class=\"screen-reader-text\">El precio original era: &#036;17.100.</span><ins aria-hidden=\"true\"><span class=\"woocommerce-Price-amount amount\"><bdi><span class=\"woocommerce-Price-currencySymbol\">&#36;</span>16.600</bdi></span></ins><span class=\"screen-reader-text\">El precio actual es: &#036;16.600.</span>",
     "related_ids": [
-      61,
-      57,
+      55,
+      40,
       1314,
-      66,
-      55
+      43,
+      61
     ],
     "meta_data": [
       {
@@ -61861,11 +62778,11 @@
     "menu_order": 0,
     "price_html": "<del aria-hidden=\"true\"><span class=\"woocommerce-Price-amount amount\"><bdi><span class=\"woocommerce-Price-currencySymbol\">&#36;</span>19.800</bdi></span></del> <span class=\"screen-reader-text\">El precio original era: &#036;19.800.</span><ins aria-hidden=\"true\"><span class=\"woocommerce-Price-amount amount\"><bdi><span class=\"woocommerce-Price-currencySymbol\">&#36;</span>18.400</bdi></span></ins><span class=\"screen-reader-text\">El precio actual es: &#036;18.400.</span>",
     "related_ids": [
-      74,
-      51,
-      40,
-      565,
-      1314
+      76,
+      48,
+      57,
+      44,
+      78
     ],
     "meta_data": [
       {
@@ -62065,11 +62982,11 @@
     "menu_order": 0,
     "price_html": "<span class=\"woocommerce-Price-amount amount\"><bdi><span class=\"woocommerce-Price-currencySymbol\">&#36;</span>14.900</bdi></span>",
     "related_ids": [
-      68,
       74,
-      49,
-      51,
-      1314
+      565,
+      48,
+      71,
+      59
     ],
     "meta_data": [
       {
@@ -62364,10 +63281,10 @@
     "price_html": "<span class=\"woocommerce-Price-amount amount\"><bdi><span class=\"woocommerce-Price-currencySymbol\">&#36;</span>14.800</bdi></span>",
     "related_ids": [
       55,
-      69,
-      74,
-      48,
-      61
+      51,
+      78,
+      61,
+      57
     ],
     "meta_data": [
       {
@@ -62600,11 +63517,11 @@
     "menu_order": 0,
     "price_html": "<span class=\"woocommerce-Price-amount amount\"><bdi><span class=\"woocommerce-Price-currencySymbol\">&#36;</span>16.500</bdi></span>",
     "related_ids": [
+      43,
       71,
-      54,
-      67,
-      562,
-      58
+      63,
+      69,
+      76
     ],
     "meta_data": [
       {
@@ -62744,8 +63661,8 @@
     "permalink": "https://tiendacp.boostpatagonia.online/producto/cemento-comodoro-cpp-25-kilos/",
     "date_created": "2024-04-15T19:55:13",
     "date_created_gmt": "2024-04-15T22:55:13",
-    "date_modified": "2026-04-10T09:15:10",
-    "date_modified_gmt": "2026-04-10T12:15:10",
+    "date_modified": "2026-06-17T16:25:17",
+    "date_modified_gmt": "2026-06-17T19:25:17",
     "type": "simple",
     "status": "publish",
     "featured": false,
@@ -62753,8 +63670,8 @@
     "description": "",
     "short_description": "<p>Por sus propiedades, este cemento es un producto de amplia utilización para cualquier tipo de aplicación, y especialmente recomendado para la elaboración de hormigones especiales.</p>\n",
     "sku": "199012",
-    "price": "6190",
-    "regular_price": "6190",
+    "price": "6390",
+    "regular_price": "6390",
     "sale_price": "",
     "date_on_sale_from": null,
     "date_on_sale_from_gmt": null,
@@ -62830,13 +63747,13 @@
     "variations": [],
     "grouped_products": [],
     "menu_order": 0,
-    "price_html": "<span class=\"woocommerce-Price-amount amount\"><bdi><span class=\"woocommerce-Price-currencySymbol\">&#36;</span>6.190</bdi></span>",
+    "price_html": "<span class=\"woocommerce-Price-amount amount\"><bdi><span class=\"woocommerce-Price-currencySymbol\">&#36;</span>6.390</bdi></span>",
     "related_ids": [
+      49,
+      61,
+      51,
       43,
-      57,
-      40,
-      76,
-      58
+      76
     ],
     "meta_data": [
       {
@@ -62933,8 +63850,8 @@
     "permalink": "https://tiendacp.boostpatagonia.online/producto/cemento-comodoro-cpn-25-kilos/",
     "date_created": "2024-04-15T19:55:13",
     "date_created_gmt": "2024-04-15T22:55:13",
-    "date_modified": "2026-04-10T09:14:51",
-    "date_modified_gmt": "2026-04-10T12:14:51",
+    "date_modified": "2026-06-17T16:25:04",
+    "date_modified_gmt": "2026-06-17T19:25:04",
     "type": "simple",
     "status": "publish",
     "featured": false,
@@ -62942,8 +63859,8 @@
     "description": "",
     "short_description": "<p>El cemento portland “Comodoro Normal” – CPN40, cuyas características técnicas están establecidas en la norma IRAM 50.000, es el producto de la molienda conjunta de clinker y pequeñas cantidades de yeso para regular su fraguado. Por sus propiedades, este cemento es un producto de amplia utilización para cualquier tipo de aplicación, y especialmente recomendado para la elaboración de hormigones especiales.</p>\n",
     "sku": "199011",
-    "price": "6590",
-    "regular_price": "6590",
+    "price": "6790",
+    "regular_price": "6790",
     "sale_price": "",
     "date_on_sale_from": null,
     "date_on_sale_from_gmt": null,
@@ -63019,13 +63936,13 @@
     "variations": [],
     "grouped_products": [],
     "menu_order": 0,
-    "price_html": "<span class=\"woocommerce-Price-amount amount\"><bdi><span class=\"woocommerce-Price-currencySymbol\">&#36;</span>6.590</bdi></span>",
+    "price_html": "<span class=\"woocommerce-Price-amount amount\"><bdi><span class=\"woocommerce-Price-currencySymbol\">&#36;</span>6.790</bdi></span>",
     "related_ids": [
-      78,
-      76,
+      79,
+      68,
       58,
-      51,
-      49
+      71,
+      43
     ],
     "meta_data": [
       {

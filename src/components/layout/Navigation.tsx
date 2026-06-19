@@ -94,7 +94,7 @@ export default function Navigation({ transparent = true }: NavigationProps) {
 
 
 
-                  <Link href="/shop" style={{ 
+                  <Link href="/tienda" style={{ 
                       background: 'var(--brand-navy)', color: '#FFF',
                       padding: '14px 32px', borderRadius: '4px', 
                       fontSize: '11px', fontWeight: 900, textTransform: 'uppercase', letterSpacing: '0.2em', textDecoration: 'none',
@@ -106,7 +106,7 @@ export default function Navigation({ transparent = true }: NavigationProps) {
               </div>
           </div>
       </div>
-
+ 
       {/* 🚀 APP-STYLE MOBILE MENU OVERLAY */}
       <AnimatePresence>
         {isMobileMenuOpen && (
@@ -121,7 +121,7 @@ export default function Navigation({ transparent = true }: NavigationProps) {
               display: 'flex', flexDirection: 'column', gap: '15px'
             }}
           >
-            <Link href="/shop" onClick={() => setIsMobileMenuOpen(false)} style={{ 
+            <Link href="/tienda" onClick={() => setIsMobileMenuOpen(false)} style={{ 
               display: 'flex', alignItems: 'center', justifyContent: 'space-between', 
               padding: '24px', backgroundColor: 'var(--brand-blue)', color: '#FFF', 
               borderRadius: '12px', textDecoration: 'none' 

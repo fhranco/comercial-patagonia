@@ -22,8 +22,8 @@ const outfit = Outfit({
 });
 
 export const metadata: Metadata = {
-  title: "COMERCIAL PATAGONIA | Suministro Profesional",
-  description: "Tradicción y Calidad en Magallanes",
+  title: "Comercial de la Patagonia | Suministro Profesional en Magallanes",
+  description: "Distribuidor oficial de cemento, herramientas y materiales de construcción en Punta Arenas y la Región de Magallanes. Tradición y Trayectoria.",
   icons: {
     icon: "/icon.png",
   },
@@ -72,6 +72,18 @@ export default function RootLayout({
   return (
     <html lang="es" suppressHydrationWarning>
       <head>
+        {/* Google tag (gtag.js) */}
+        <script async src="https://www.googletagmanager.com/gtag/js?id=G-3ZL06WB636"></script>
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `
+              window.dataLayer = window.dataLayer || [];
+              function gtag(){dataLayer.push(arguments);}
+              gtag('js', new Date());
+              gtag('config', 'G-3ZL06WB636');
+            `,
+          }}
+        />
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}

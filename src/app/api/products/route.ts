@@ -24,7 +24,7 @@ export async function GET() {
           "Content-Type": "application/json",
           "User-Agent": "PatagoniaCommerce-Bridge/1.0"
         },
-        next: { revalidate: 3600 } 
+        next: { revalidate: 0 } 
       });
       return response.ok ? await response.json() : [];
     };

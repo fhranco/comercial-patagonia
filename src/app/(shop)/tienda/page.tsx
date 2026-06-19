@@ -1,9 +1,15 @@
 import React from "react";
+import { Metadata } from "next";
 import ShopContainer from "@/components/shop/ShopContainer";
 import { fetchWooCommerceProducts } from "@/lib/woocommerce";
 import { writeLog } from "@/lib/logger";
 
 export const revalidate = 3600; // Cache de 1 hora para evitar colapso de API
+
+export const metadata: Metadata = {
+  title: "Catálogo de Materiales y Muebles | Comercial de la Patagonia",
+  description: "Explora nuestra oferta de cemento Comodoro, herramientas profesionales, muebles para el hogar, seguridad y materiales para construcción en Punta Arenas.",
+};
 
 export default async function ShopPage({ searchParams }: { searchParams: Promise<{ [key: string]: string | string[] | undefined }> }) {
   let products = [];

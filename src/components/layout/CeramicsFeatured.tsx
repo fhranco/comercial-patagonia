@@ -379,7 +379,7 @@ export default function CeramicsFeatured() {
 
           {/* Pulsing Blue CTA Button */}
           <Link 
-            href="/shop?category=Cerámicas"
+            href="/tienda?category=Cerámicas"
             style={{ 
               padding: "22px 55px", 
               borderRadius: "4px",

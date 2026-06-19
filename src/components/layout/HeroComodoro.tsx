@@ -160,7 +160,7 @@ export default function HeroSpectacular({ products = [], onQuickView }: HeroSpec
  
           <motion.div className="hero-cta-container" variants={itemVariants} style={{ display: 'flex', gap: '20px', alignItems: 'center', flexWrap: 'wrap' }}>
             <Link 
-              href="/shop/17" 
+              href="/tienda/cemento-comodoro-cpp-25-kilos" 
               className="gold-shimmer" 
               style={{ 
                 textDecoration: 'none', color: 'var(--brand-navy)', padding: '20px 40px', borderRadius: '4px',

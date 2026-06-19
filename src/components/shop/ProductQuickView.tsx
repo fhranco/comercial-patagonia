@@ -195,7 +195,7 @@ export default function ProductQuickView({ product, isOpen, onClose }: ProductQu
                   </button>
 
                   <a 
-                    href={`/shop/${product.id}`}
+                    href={`/tienda/${product.slug}`}
                     style={{ 
                       width: '100%', border: '1px solid rgba(14, 31, 51, 0.1)', backgroundColor: 'transparent', color: '#0E1F33', padding: '18px', borderRadius: '4px',
                       display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '15px',

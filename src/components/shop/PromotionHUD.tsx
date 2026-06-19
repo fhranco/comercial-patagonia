@@ -62,7 +62,7 @@ export default function PromotionHUD({ products, onQuickView }: PromotionHUDProp
     if (onQuickView) {
       onQuickView(promoProduct);
     } else {
-      router.push(`/shop/${promoProduct.id}`);
+      router.push(`/tienda/${promoProduct.slug}`);
     }
   };
 
@@ -182,8 +182,8 @@ export default function PromotionHUD({ products, onQuickView }: PromotionHUDProp
               onClick={(e) => { 
                 e.stopPropagation(); 
                 router.push(isCyberProduct 
-                  ? '/shop?category=cyberday' 
-                  : (isZanziniProduct ? '/shop?category=Zanzini' : '/shop?category=Ofertas')); 
+                  ? '/tienda?category=cyberday' 
+                  : (isZanziniProduct ? '/tienda?category=Zanzini' : '/tienda?category=Ofertas')); 
               }}
               style={{
                 width: '100%',

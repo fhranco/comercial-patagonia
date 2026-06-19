@@ -17,7 +17,7 @@ export default function HistorialPage() {
       
       <main style={{ maxWidth: '1200px', margin: '0 auto', padding: '150px 5% 100px' }}>
         <div style={{ marginBottom: '60px' }}>
-            <Link href="/shop" style={{ display: 'flex', alignItems: 'center', gap: '10px', color: 'inherit', textDecoration: 'none', opacity: 0.5, fontSize: '11px', fontWeight: 900, textTransform: 'uppercase', marginBottom: '20px' }} className="hover:opacity-100 transition">
+            <Link href="/tienda" style={{ display: 'flex', alignItems: 'center', gap: '10px', color: 'inherit', textDecoration: 'none', opacity: 0.5, fontSize: '11px', fontWeight: 900, textTransform: 'uppercase', marginBottom: '20px' }} className="hover:opacity-100 transition">
                 <ChevronLeft size={16} /> Volver a Tienda
             </Link>
             <h1 style={{ fontSize: 'clamp(2.5rem, 5vw, 4rem)', fontWeight: 900, textTransform: 'uppercase', letterSpacing: '-0.02em', lineHeight: 1 }}>Historial de <br/><span style={{ color: 'var(--brand-blue)' }}>Cotizaciones Guardadas</span></h1>
@@ -30,7 +30,7 @@ export default function HistorialPage() {
             <div style={{ padding: '100px 0', textAlign: 'center', backgroundColor: '#FFF', borderRadius: '24px', border: '1px solid rgba(0,0,0,0.05)' }}>
                 <Inbox size={60} style={{ opacity: 0.1, marginBottom: '20px' }} />
                 <h2 style={{ fontSize: '14px', fontWeight: 900, textTransform: 'uppercase', opacity: 0.4 }}>No hay cotizaciones guardadas</h2>
-                <Link href="/shop" style={{ display: 'inline-block', marginTop: '30px', color: 'var(--brand-blue)', fontWeight: 900, textTransform: 'uppercase', fontSize: '12px', textDecoration: 'none' }}>Empezar a Cotizar Ahora</Link>
+                <Link href="/tienda" style={{ display: 'inline-block', marginTop: '30px', color: 'var(--brand-blue)', fontWeight: 900, textTransform: 'uppercase', fontSize: '12px', textDecoration: 'none' }}>Empezar a Cotizar Ahora</Link>
             </div>
         ) : (
             <div style={{ display: 'flex', flexDirection: 'column', gap: '20px' }}>

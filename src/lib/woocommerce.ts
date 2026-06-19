@@ -16,7 +16,7 @@ const CS = process.env.WOOCOMMERCE_CS || "";
 // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 // 🧠 IN-MEMORY CACHE — Prevents re-fetch storm
 // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-const CACHE_TTL_MS = 5 * 60 * 1000; // 5 minutes
+const CACHE_TTL_MS = 0; // 0 minutes (disabled for real-time sync)
 
 interface CacheEntry<T> {
   data: T;
@@ -246,7 +246,7 @@ async function _fetchProductsFromAPI(): Promise<any[] | null> {
             "Content-Type": "application/json",
             "User-Agent": "ComercialPatagonia-B2B-Agent/1.0"
           },
-          next: { revalidate: 3600 }
+          next: { revalidate: 0 }
         }, timeoutMs, maxRetries);
         
         writeLog(`[RESPONSE] Page ${page} received. Status: ${response.status} ok: ${response.ok}`);
@@ -355,7 +355,7 @@ async function _fetchCategoriesFromAPI(): Promise<any[] | null> {
         "Content-Type": "application/json",
         "User-Agent": "ComercialPatagonia-B2B-Agent/1.0"
       },
-      next: { revalidate: 3600 }
+      next: { revalidate: 0 }
     }, timeoutMs, maxRetries);
 
     writeLog(`[RESPONSE] Categories received. Status: ${response.status} ok: ${response.ok}`);

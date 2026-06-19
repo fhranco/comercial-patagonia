@@ -660,7 +660,7 @@ export default function CyberdayCountdown() {
 
             {/* 🔘 ACTIVE SHIMMER ACTION BUTTON */}
             <Link 
-              href="/shop?category=cyberday" 
+              href="/tienda?category=cyberday" 
               style={{
                 boxShadow: '0 20px 40px rgba(255, 230, 0, 0.3)'
               }} 

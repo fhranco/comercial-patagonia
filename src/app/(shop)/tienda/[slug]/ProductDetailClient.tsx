@@ -91,7 +91,7 @@ export default function ProductDetailClient({ initialProduct: product }: Product
                       <div style={{ width: '1px', height: '15px', background: '#DDD' }} />
                       <span style={{ fontSize: '10px', opacity: 0.4, fontWeight: 900 }}>REF: {product.sku || 'N/A'}</span>
                   </div>
-
+ 
                   <h1 style={{ fontSize: 'clamp(2rem, 5vw, 3.5rem)', fontWeight: 900, lineHeight: 0.95, textTransform: 'uppercase', marginBottom: '40px', letterSpacing: '-0.02em' }}>
                       {product.name}
                   </h1>

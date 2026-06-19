@@ -45,7 +45,7 @@ export default function HomeClient({ products }: HomeClientProps) {
           p.categories.some(cat => cat.slug.toLowerCase() === "zanzini-marca" || cat.slug.toLowerCase() === "zanzini")
         )
       : []);
-  const SHOP_URL = "/shop";
+  const SHOP_URL = "/tienda";
 
   return (
     <div className={styles.page} style={{ backgroundColor: '#FFFFFF', color: 'var(--brand-navy)', minHeight: '100vh', width: '100%' }}>
@@ -111,7 +111,7 @@ export default function HomeClient({ products }: HomeClientProps) {
             {/* 🏷️ ACCESO A TODAS LAS OFERTAS CYBER / CAMPAIGN */}
             <div style={{ display: 'flex', justifyContent: 'center', marginTop: '50px', marginBottom: '80px' }}>
               <Link 
-                href={CAMPAIGN_CONFIG.activeCampaign === "zanzini_june" ? "/shop?category=Zanzini" : "/shop?category=cyberday"} 
+                href={CAMPAIGN_CONFIG.activeCampaign === "zanzini_june" ? "/tienda?category=Zanzini" : "/tienda?category=cyberday"} 
                 style={{ 
                   backgroundColor: '#0E1F33', 
                   border: '2px solid var(--primary-gold)',
@@ -145,7 +145,7 @@ export default function HomeClient({ products }: HomeClientProps) {
         <div style={{ marginTop: '40px', marginBottom: '40px', display: 'flex', justifyContent: 'center' }}>
           <RetailStories 
               activeCategory="Todos" 
-              onCategoryChange={(cat) => router.push(`/shop?category=${cat}`)} 
+              onCategoryChange={(cat) => router.push(`/tienda?category=${cat}`)} 
           />
         </div>
 

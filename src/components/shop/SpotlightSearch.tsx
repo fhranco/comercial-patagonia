@@ -85,7 +85,7 @@ export default function SpotlightSearch({ products, isOpen, onClose }: Spotlight
       if (e.key === "ArrowDown") setSelectedIndex(prev => (prev < results.length - 1 ? prev + 1 : prev));
       if (e.key === "ArrowUp") setSelectedIndex(prev => (prev > 0 ? prev - 1 : prev));
       if (e.key === "Enter" && results[selectedIndex]) {
-        router.push(`/shop/${results[selectedIndex].id}`);
+        router.push(`/tienda/${results[selectedIndex].slug}`);
         onClose();
       }
     };
@@ -176,7 +176,7 @@ export default function SpotlightSearch({ products, isOpen, onClose }: Spotlight
                       key={product.id}
                       onMouseEnter={() => setSelectedIndex(idx)}
                       onClick={() => {
-                        router.push(`/shop/${product.id}`);
+                        router.push(`/tienda/${product.slug}`);
                         onClose();
                       }}
                       style={{ 

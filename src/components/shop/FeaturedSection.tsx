@@ -45,7 +45,7 @@ export default function FeaturedSection({ products }: FeaturedSectionProps) {
             </h2>
           </motion.div>
 
-          <Link href="/shop" style={{ 
+          <Link href="/tienda" style={{ 
             color: '#000', 
             textDecoration: 'none', 
             fontSize: '11px', 

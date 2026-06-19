@@ -42,7 +42,7 @@ export default function GrandCement({ onQuickView }: GrandCementProps) {
           </div>
 
           <Link 
-            href="/shop/17"
+            href="/tienda/cemento-comodoro-cpp-25-kilos"
             style={{ 
               background: 'transparent', color: 'var(--brand-navy)', border: '2px solid var(--brand-navy)', padding: '24px 60px', borderRadius: '100px',
               fontSize: '12px', fontWeight: 900, textTransform: 'uppercase', letterSpacing: '0.4em', display: 'inline-flex', alignItems: 'center', gap: '20px',

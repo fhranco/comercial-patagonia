@@ -99,7 +99,7 @@ export default function CategoryGrid() {
               SUMINISTRO <br/><span style={{ opacity: 0.2 }}>ESTRATEGICO</span>
             </h3>
           </div>
-          <Link href="/shop" style={{ 
+          <Link href="/tienda" style={{ 
             color: '#000', 
             textDecoration: 'none', 
             fontSize: '11px', 
@@ -112,7 +112,7 @@ export default function CategoryGrid() {
             Ver Catálogo Completo
           </Link>
         </div>
-
+ 
         {/* 📐 GRID BENTO ELITE (3X2) */}
         <div style={{ 
           display: 'grid', 
@@ -133,7 +133,7 @@ export default function CategoryGrid() {
               }}
               className="group category-card-responsive"
             >
-              <Link href={`/shop?category=${cat.id}`} style={{ textDecoration: 'none', color: 'inherit' }}>
+              <Link href={`/tienda?category=${cat.id}`} style={{ textDecoration: 'none', color: 'inherit' }}>
                 {/* 🖼️ IMAGEN INDUSTRIAL DE ALTA GAMA */}
                 <div style={{ position: 'absolute', inset: 0, zIndex: 0 }} className="group-hover:scale-105 transition-transform duration-[2000ms]">
                   <Image 

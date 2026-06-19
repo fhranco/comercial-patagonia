@@ -59,7 +59,7 @@ export default function FurnitureShowcase() {
               Detalles que marcan la diferencia. Cajoneras, clósets y mobiliario de alta terminación para vestir tus espacios íntimos.
             </p>
             <div>
-                <Link href="/shop?category=Cerámicas" style={{ 
+                <Link href="/tienda?category=Cerámicas" style={{ 
                 color: 'var(--brand-navy)', textDecoration: 'none', border: '1px solid rgba(14,31,51,0.3)', padding: '24px 60px', borderRadius: '2px',
                 fontSize: '11px', fontWeight: 900, textTransform: 'uppercase', letterSpacing: '0.3em'
                 }} className="hover:bg-[var(--brand-navy)] hover:text-white transition-all duration-700">
@@ -105,7 +105,7 @@ export default function FurnitureShowcase() {
               Vinotecas integradas y estanterías de alto tráfico con texturas de madera oscura. Excelencia funcional para el hogar.
             </p>
             <div>
-                <Link href="/shop?category=Cocina" style={{ 
+                <Link href="/tienda?category=Cocina" style={{ 
                 color: '#FFF', textDecoration: 'none', border: '1px solid rgba(255,255,255,0.3)', padding: '24px 60px', borderRadius: '2px',
                 fontSize: '11px', fontWeight: 900, textTransform: 'uppercase', letterSpacing: '0.3em'
                 }} className="hover:bg-white hover:text-[var(--brand-navy)] transition-all duration-700">
