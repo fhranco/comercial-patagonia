@@ -70,6 +70,7 @@ export default function RootLayout({
   };
 
   return (
+    <html lang="es" suppressHydrationWarning>
       <head>
         <meta name="google-site-verification" content="google37a431e967a22c49" />
         {/* Google tag (gtag.js) */}
