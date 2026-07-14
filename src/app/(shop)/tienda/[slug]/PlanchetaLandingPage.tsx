@@ -9,6 +9,7 @@ import {
 } from 'lucide-react';
 import { Product } from '@/types/woocommerce';
 import { useCart } from '@/context/CartContext';
+import Navigation from '@/components/layout/Navigation';
 
 interface PlanchetaLandingPageProps {
   product: Product;
@@ -217,9 +218,10 @@ export default function PlanchetaLandingPage({ product }: PlanchetaLandingPagePr
 
   return (
     <div className="bg-white text-grafito min-h-screen">
+      <Navigation transparent={false} />
       
       {/* HERO SECTION */}
-      <section className="relative overflow-hidden bg-white text-grafito py-12 md:py-24 border-b border-neutral-200">
+      <section className="relative overflow-hidden bg-white text-grafito pt-28 pb-12 md:pt-36 md:pb-24 border-b border-neutral-200">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
             
