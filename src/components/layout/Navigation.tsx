@@ -25,12 +25,12 @@ export default function Navigation({ transparent = true }: NavigationProps) {
     <nav style={{ 
       position: 'fixed', top: 0, width: '100%', zIndex: 9000, 
       padding: isScrolled ? '15px 5%' : '30px 5%',
-      background: (isMobileMenuOpen || isScrolled) 
+      background: (!transparent || isMobileMenuOpen || isScrolled) 
         ? 'rgba(255, 255, 255, 0.95)' 
         : 'transparent',
-      backdropFilter: (isMobileMenuOpen || isScrolled) ? 'blur(20px)' : 'none',
+      backdropFilter: (!transparent || isMobileMenuOpen || isScrolled) ? 'blur(20px)' : 'none',
       transition: 'all 0.6s cubic-bezier(0.16, 1, 0.3, 1)',
-      borderBottom: (isScrolled || isMobileMenuOpen) ? '1px solid rgba(14, 31, 51, 0.1)' : 'none',
+      borderBottom: (!transparent || isScrolled || isMobileMenuOpen) ? '1px solid rgba(14, 31, 51, 0.1)' : 'none',
       color: (transparent && !isScrolled && !isMobileMenuOpen) ? '#FFFFFF' : 'var(--brand-navy)'
     }} className="nav-container">
       <style jsx>{`
