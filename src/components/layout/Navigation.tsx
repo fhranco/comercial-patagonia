@@ -2,7 +2,7 @@
 
 import React, { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { ArrowRight, Menu, X, ShoppingBag, Clock, Image as ImageIcon } from "lucide-react";
+import { ArrowRight, Menu, X, ShoppingBag, Clock, Image as ImageIcon, Home } from "lucide-react";
 import Image from "next/image";
 import Link from 'next/link';
 import { BRAND_CONFIG } from "@/lib/constants";
@@ -78,8 +78,11 @@ export default function Navigation({ transparent = true }: NavigationProps) {
                   {isMobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
               </button>
 
-              {/* 🖥️ DESKTOP NAV */}
               <div className="hidden lg:flex" style={{ alignItems: 'center', gap: '40px', marginLeft: '40px' }}>
+                  <Link href="/" style={{ fontSize: '11px', fontWeight: 900, textTransform: 'uppercase', letterSpacing: '0.2em', textDecoration: 'none', color: 'inherit', opacity: 0.9 }} className="hover:opacity-100 transition">
+                      INICIO
+                  </Link>
+
                   <Link href="/historial" style={{ fontSize: '11px', fontWeight: 900, textTransform: 'uppercase', letterSpacing: '0.2em', textDecoration: 'none', color: 'inherit', opacity: 0.9 }} className="hover:opacity-100 transition">
                       HISTORIAL
                   </Link>
@@ -130,7 +133,15 @@ export default function Navigation({ transparent = true }: NavigationProps) {
                 <ShoppingBag size={20} />
                 <span style={{ fontWeight: 900, fontSize: '14px', textTransform: 'uppercase', letterSpacing: '0.1em' }}>Ver Catálogo</span>
               </div>
-              <ArrowRight size={18} />
+            </Link>
+
+            <Link href="/" onClick={() => setIsMobileMenuOpen(false)} style={{ 
+              display: 'flex', alignItems: 'center', gap: '15px', 
+              padding: '20px', borderRadius: '12px', textDecoration: 'none', color: 'inherit',
+              border: '1px solid var(--border-color)'
+            }}>
+              <Home size={20} opacity={0.5} />
+              <span style={{ fontWeight: 700, fontSize: '13px', textTransform: 'uppercase', letterSpacing: '0.05em' }}>Volver al Inicio</span>
             </Link>
 
             <Link href="/historial" onClick={() => setIsMobileMenuOpen(false)} style={{ 
