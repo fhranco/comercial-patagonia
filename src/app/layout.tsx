@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import { Inter, Outfit } from "next/font/google";
+import Script from "next/script";
 import "./globals.css";
+import "./plancheta.css";
 import { ThemeProvider } from "../context/ThemeContext";
 import { CartProvider } from "../context/CartContext";
 import CartDrawer from "../components/shop/CartDrawer";
@@ -74,8 +76,10 @@ export default function RootLayout({
       <head>
         <meta name="google-site-verification" content="google37a431e967a22c49" />
         {/* Google tag (gtag.js) */}
-        <script async src="https://www.googletagmanager.com/gtag/js?id=G-3ZL06WB636"></script>
-        <script
+        <Script async src="https://www.googletagmanager.com/gtag/js?id=G-3ZL06WB636" strategy="afterInteractive" />
+        <Script
+          id="gtag-init"
+          strategy="afterInteractive"
           dangerouslySetInnerHTML={{
             __html: `
               window.dataLayer = window.dataLayer || [];

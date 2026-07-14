@@ -1,10 +1,13 @@
 import React from "react";
 import { Product } from "@/types/woocommerce";
 import ProductDetailClient from "./ProductDetailClient";
+import PlanchetaLandingPage from "./PlanchetaLandingPage";
 import { writeLog } from "@/lib/logger";
 import { fetchWooCommerceProducts } from "@/lib/woocommerce";
 import { Metadata } from "next";
 import { notFound, redirect } from "next/navigation";
+
+export const revalidate = 60; // Revalidate dynamic product detail page every 60 seconds
 
 // Resolves a product by slug or id (retrocompatibility support)
 async function getProductBySlugOrId(slugOrId: string): Promise<{ product: Product | null, shouldRedirect: boolean, targetSlug?: string }> {
@@ -113,7 +116,11 @@ export default async function Page({ params }: { params: Promise<{ slug: string 
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(productJsonLd) }}
       />
-      <ProductDetailClient initialProduct={product} />
+      {resolvedParams.slug === "plancheta" ? (
+        <PlanchetaLandingPage product={product} />
+      ) : (
+        <ProductDetailClient initialProduct={product} />
+      )}
     </>
   );
 }
