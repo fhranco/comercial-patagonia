@@ -14,6 +14,7 @@ import CyberCarousel from "../shop/CyberCarousel";
 import CyberMarquee from "./CyberMarquee";
 import JuneMarquee from "./JuneMarquee";
 import JuneSpecialBanner from "./JuneSpecialBanner";
+import XylazelShowcase from "./XylazelShowcase";
 import FurnitureShowcase from "./FurnitureShowcase";
 import GrandCement from "./GrandCement";
 import CeramicsFeatured from "./CeramicsFeatured";
@@ -104,6 +105,9 @@ export default function HomeClient({ products }: HomeClientProps) {
           onQuickView={(prod) => setSelectedQuickProduct(prod)} 
         />
         <CeramicsFeatured />
+
+        {/* 🎨 SECCIÓN DESTACADA BARNICES Y LASURES XYLAZEL */}
+        <XylazelShowcase />
 
         {/* 🍳 PLANCHETTA FEATURED BANNER */}
         <section style={{ 
