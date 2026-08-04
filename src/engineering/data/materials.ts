@@ -9,7 +9,7 @@ export const materials: Material[] = [
     icon: 'Package',
     unit: 'saco',
     defaultRendimiento: 0.06, 
-    defaultPrice: 4990,
+    defaultPrice: 6390,
     unitType: 'volume',
     description: 'Cemento secado normal, saco de 25 kilos, rendimiento 0.06 m³',
     tips: [
@@ -25,45 +25,13 @@ export const materials: Material[] = [
     icon: 'Package',
     unit: 'saco',
     defaultRendimiento: 0.06,
-    defaultPrice: 5490,
+    defaultPrice: 6790,
     unitType: 'volume',
     description: 'Cemento secado rápido, saco de 25 kilos, rendimiento 0.06 m³',
     tips: [
       'Fraguado más rápido que el cemento normal',
       'Perfecto para clima patagónico con cambios bruscos',
       'Mayor resistencia inicial'
-    ]
-  },
-
-  // ÁRIDOS
-  {
-    id: 'arena_gruesa',
-    name: 'Arena Gruesa Planta',
-    category: 'aggregates',
-    icon: 'Activity',
-    unit: 'm³',
-    defaultRendimiento: 1,
-    defaultPrice: 28500,
-    unitType: 'volume',
-    description: 'Arena gruesa de planta, ideal para mezclas de hormigón y mortero.',
-    tips: [
-      'Material base para cualquier mezcla de construcción.',
-      'En Magallanes, considerar el acopio protegido del viento.'
-    ]
-  },
-  {
-    id: 'gravilla_limpia',
-    name: 'Gravilla Limpia 3/4',
-    category: 'aggregates',
-    icon: 'Activity',
-    unit: 'm³',
-    defaultRendimiento: 1,
-    defaultPrice: 32000,
-    unitType: 'volume',
-    description: 'Gravilla seleccionada para drenajes y hormigón estructural.',
-    tips: [
-      'Rendimiento directo por volumen excavado.',
-      'Excelente capacidad de drenaje en terrenos húmedos.'
     ]
   },
 
@@ -75,10 +43,46 @@ export const materials: Material[] = [
     icon: 'Square',
     unit: 'caja',
     defaultRendimiento: 1.65,
-    defaultPrice: 13900,
+    defaultPrice: 14850,
     unitType: 'area',
     description: 'Cerámica para piso formato 31x53cm, rendimiento 1.65 m² por caja',
     tips: ['Considerar 10% extra para cortes y ajustes']
+  },
+  {
+    id: 'ceramica_piso_56x56',
+    name: 'Cerámica Piso 56x56cm',
+    category: 'ceramics',
+    icon: 'Square',
+    unit: 'caja',
+    defaultRendimiento: 2.0,
+    defaultPrice: 19590,
+    unitType: 'area',
+    description: 'Cerámica para piso formato 56x56cm, rendimiento 2.0 m² por caja',
+    tips: ['Considerar 10% extra para cortes y ajustes']
+  },
+  {
+    id: 'ceramica_piso_18x56',
+    name: 'Cerámica Piso 18x56cm',
+    category: 'ceramics',
+    icon: 'Square',
+    unit: 'caja',
+    defaultRendimiento: 1.65,
+    defaultPrice: 21560,
+    unitType: 'area',
+    description: 'Cerámica para piso formato 18x56cm, rendimiento 1.65 m² por caja',
+    tips: ['Formato tipo tabla para pisos de alta estética']
+  },
+  {
+    id: 'ceramica_muro_25x35',
+    name: 'Cerámica Muro 25x35cm',
+    category: 'ceramics',
+    icon: 'Square',
+    unit: 'caja',
+    defaultRendimiento: 1.65,
+    defaultPrice: 20500,
+    unitType: 'area',
+    description: 'Cerámica para muro formato 25x35cm, rendimiento 1.65 m² por caja',
+    tips: ['Resistente a la humedad extrema, ideal para baños y cocinas']
   },
   {
     id: 'ceramica_muro_31x53',

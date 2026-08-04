@@ -4,7 +4,7 @@ import React, { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Calculator, BrickWall, Ruler, Droplets, ChevronRight, Package, Truck, Activity, LayoutGrid } from "lucide-react";
 
-type CalculatorType = 'concrete' | 'ceramic' | 'roof';
+type CalculatorType = 'concrete' | 'ceramic';
 
 export default function MaterialCalculator() {
   const [activeTab, setActiveTab] = useState<CalculatorType>('concrete');
@@ -52,8 +52,7 @@ export default function MaterialCalculator() {
                 <div style={{ display: 'flex', gap: '15px', marginBottom: '40px' }}>
                     {[
                         { id: 'concrete', icon: <Droplets />, label: 'Hormigón' },
-                        { id: 'ceramic', icon: <LayoutGrid />, label: 'Cerámicos' },
-                        { id: 'roof', icon: <BrickWall />, label: 'Techumbre' }
+                        { id: 'ceramic', icon: <LayoutGrid />, label: 'Cerámicos' }
                     ].map(tab => (
                         <button 
                             key={tab.id}

@@ -8,7 +8,7 @@ interface MaterialSelectorProps {
   onMaterialSelect: (materialId: string) => void;
 }
 
-type FilterCategory = 'all' | 'cement' | 'aggregates' | 'ceramics' | 'flooring' | 'roofing' | 'drywall' | 'dormitorios';
+type FilterCategory = 'all' | 'cement' | 'ceramics' | 'drywall' | 'roofing' | 'dormitorios';
 
 const MaterialSelector: React.FC<MaterialSelectorProps> = ({
   selectedMaterialId,
@@ -27,9 +27,7 @@ const MaterialSelector: React.FC<MaterialSelectorProps> = ({
   const categories = [
     { id: 'all' as FilterCategory, name: 'TODOS' },
     { id: 'cement' as FilterCategory, name: 'CEMENTOS' },
-    { id: 'aggregates' as FilterCategory, name: 'ÁRIDOS' },
     { id: 'ceramics' as FilterCategory, name: 'CERÁMICAS' },
-    { id: 'flooring' as FilterCategory, name: 'REVESTIMIENTOS' },
     { id: 'drywall' as FilterCategory, name: 'TABIQUERÍA' },
     { id: 'roofing' as FilterCategory, name: 'TECHUMBRES' },
     { id: 'dormitorios' as FilterCategory, name: 'DORMITORIOS' }

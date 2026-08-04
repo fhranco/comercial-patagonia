@@ -110,7 +110,7 @@ const MaterialCard: React.FC<MaterialCardProps> = ({ material, isSelected, onSel
         </div>
         <div style={{ textAlign: 'right' }}>
             <p style={{ fontSize: '18px', fontWeight: 900, color: 'var(--brand-navy)' }}>
-                {formatCurrency(material.defaultPrice)}
+                {material.category !== 'cement' ? 'Desde ' : ''}{formatCurrency(material.defaultPrice)}
             </p>
             <p style={{ fontSize: '10px', fontWeight: 600, opacity: 0.4 }}>
                 por {material.unit}
