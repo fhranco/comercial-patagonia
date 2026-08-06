@@ -88,7 +88,7 @@ export default function Navigation({ transparent = true }: NavigationProps) {
                   </Link>
 
                   <Link 
-                    href="/calculadora"
+                    href={BRAND_CONFIG.calculatorUrl}
                     style={{ fontSize: '11px', fontWeight: 900, textTransform: 'uppercase', letterSpacing: '0.2em', textDecoration: 'none', color: 'inherit', opacity: 0.9 }} 
                     className="hover:opacity-100 transition"
                   >
@@ -154,7 +154,7 @@ export default function Navigation({ transparent = true }: NavigationProps) {
             </Link>
 
             <Link 
-              href="/calculadora"
+              href={BRAND_CONFIG.calculatorUrl}
               onClick={() => setIsMobileMenuOpen(false)} 
               style={{ 
                 display: 'flex', alignItems: 'center', gap: '15px', 
