@@ -35,22 +35,6 @@ export default function HomeClient({ products }: HomeClientProps) {
   const router = useRouter();
   const [selectedQuickProduct, setSelectedQuickProduct] = React.useState<Product | null>(null);
   const [isMarqueeOpen, setIsMarqueeOpen] = React.useState(CAMPAIGN_CONFIG.isCyberActive || CAMPAIGN_CONFIG.activeCampaign === "zanzini_june");
-  const [showPromoPopup, setShowPromoPopup] = React.useState(false);
-
-  React.useEffect(() => {
-    const hasSeenPopup = sessionStorage.getItem("hasSeenPlanchetaPromo");
-    if (!hasSeenPopup) {
-      const timer = setTimeout(() => {
-        setShowPromoPopup(true);
-      }, 2000);
-      return () => clearTimeout(timer);
-    }
-  }, []);
-
-  const handleClosePopup = () => {
-    setShowPromoPopup(false);
-    sessionStorage.setItem("hasSeenPlanchetaPromo", "true");
-  };
 
   const { scrollYProgress } = useScroll();
   const scaleProgress = useSpring(scrollYProgress, { stiffness: 100, damping: 30, restDelta: 0.001 });
@@ -104,146 +88,53 @@ export default function HomeClient({ products }: HomeClientProps) {
           products={products} 
           onQuickView={(prod) => setSelectedQuickProduct(prod)} 
         />
+
+        {/* 🌟 FOGÓN CLÁSICO BANNER IMAGEN COMPLETA CLICKEABLE CON MOVIMIENTO */}
+        <motion.section 
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: "-100px" }}
+          transition={{ duration: 0.8, ease: "easeOut" }}
+          style={{ 
+            maxWidth: '1400px', 
+            margin: '40px auto 60px auto',
+            padding: '0 5%'
+          }}
+        >
+          <Link href="/tienda/fogon-clasico" style={{ display: 'block', textDecoration: 'none' }}>
+            <motion.div
+              whileHover={{ 
+                scale: 1.015,
+                y: -6,
+                boxShadow: '0 30px 60px rgba(0,0,0,0.15)'
+              }}
+              transition={{ type: "spring", stiffness: 400, damping: 25 }}
+              style={{
+                borderRadius: '24px',
+                overflow: 'hidden',
+                boxShadow: '0 20px 40px rgba(0,0,0,0.08)',
+                display: 'block'
+              }}
+            >
+              <img 
+                src="/images/Fogon-oferta.webp" 
+                style={{ 
+                  width: '100%', 
+                  height: 'auto', 
+                  display: 'block'
+                }} 
+                alt="Oferta Fogón Clásico" 
+              />
+            </motion.div>
+          </Link>
+        </motion.section>
+
         <CeramicsFeatured />
 
         {/* 🎨 SECCIÓN DESTACADA BARNICES Y LASURES XYLAZEL */}
         <XylazelShowcase />
 
-        {/* 🍳 PLANCHETTA FEATURED BANNER */}
-        <section style={{ 
-          padding: '80px 5%', 
-          maxWidth: '1400px', 
-          margin: '40px auto 60px auto', 
-          backgroundColor: '#F4F7FA',
-          borderRadius: '24px',
-          boxShadow: '0 20px 40px rgba(0,0,0,0.02)',
-          overflow: 'hidden',
-          position: 'relative'
-        }}>
-          <div style={{
-            position: 'absolute',
-            top: 0,
-            right: 0,
-            width: '400px',
-            height: '400px',
-            background: 'radial-gradient(circle, rgba(33, 97, 168, 0.04) 0%, transparent 70%)',
-            pointerEvents: 'none',
-            zIndex: 0
-          }} />
 
-          <div style={{ 
-            display: 'grid', 
-            gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))', 
-            gap: '60px', 
-            alignItems: 'center',
-            position: 'relative',
-            zIndex: 1
-          }}>
-            {/* Left Column: Text & CTA */}
-            <div style={{ textAlign: 'left' }}>
-              <span style={{ 
-                color: 'var(--primary-gold)', 
-                fontSize: '11px', 
-                fontWeight: 900, 
-                letterSpacing: '0.4em', 
-                textTransform: 'uppercase',
-                display: 'block',
-                marginBottom: '15px'
-              }}>
-                Oportunidad Destacada
-              </span>
-              <h2 style={{ 
-                fontSize: 'clamp(2.2rem, 4vw, 3.5rem)', 
-                fontWeight: 900, 
-                textTransform: 'uppercase', 
-                lineHeight: 1.0, 
-                color: 'var(--brand-navy)',
-                margin: '0 0 25px 0'
-              }}>
-                LA PLANCHETTA <br/>2 QUEMADORES
-              </h2>
-              <p style={{ 
-                fontSize: '1rem', 
-                lineHeight: 1.6, 
-                opacity: 0.8, 
-                marginBottom: '35px', 
-                maxWidth: '450px',
-                color: 'var(--brand-navy)'
-              }}>
-                Chapa de hierro laminado en caliente de 2.5 mm de espesor, diseñada para cocinar carnes, hamburguesas y vegetales. Incluye dos tapas de acero inoxidable con mangos de madera.
-              </p>
-
-              {/* Price display inside banner */}
-              <div style={{ display: 'flex', alignItems: 'baseline', gap: '15px', marginBottom: '40px' }}>
-                <span style={{ fontSize: '2.5rem', fontWeight: 900, color: 'var(--brand-navy)' }}>
-                  $34.000
-                </span>
-                <span style={{ fontSize: '1.2rem', opacity: 0.3, textDecoration: 'line-through' }}>
-                  $43.000
-                </span>
-                <span style={{ 
-                  fontSize: '11px', 
-                  fontWeight: 900, 
-                  color: 'var(--brand-navy)', 
-                  backgroundColor: 'var(--primary-gold)', 
-                  padding: '4px 8px', 
-                  borderRadius: '4px'
-                }}>
-                  -21% OFF
-                </span>
-              </div>
-
-              <div>
-                <Link 
-                  href="/tienda/plancheta" 
-                  className="gold-shimmer hover:scale-[1.02] transform transition-transform" 
-                  style={{ 
-                    display: 'inline-block',
-                    textDecoration: 'none', 
-                    color: 'var(--brand-navy)', 
-                    backgroundColor: 'var(--primary-gold)',
-                    padding: '20px 45px', 
-                    borderRadius: '4px', 
-                    fontSize: '12px', 
-                    fontWeight: 900, 
-                    textTransform: 'uppercase', 
-                    letterSpacing: '0.15em', 
-                    boxShadow: '0 10px 20px rgba(0,0,0,0.05)' 
-                  }}
-                >
-                  Ver Ficha y Comprar
-                </Link>
-              </div>
-            </div>
-            
-            {/* Right Column: Image */}
-            <div style={{ display: 'flex', justifyContent: 'center', position: 'relative' }}>
-              <div style={{
-                position: 'absolute',
-                width: '80%',
-                height: '80%',
-                backgroundColor: 'rgba(14, 31, 51, 0.02)',
-                borderRadius: '50%',
-                filter: 'blur(40px)',
-                zIndex: 0,
-                transform: 'translateY(20px)'
-              }} />
-              <img 
-                src="/images/producto-la-planchetta.jpg" 
-                style={{ 
-                  width: '90%', 
-                  maxHeight: '340px',
-                  objectFit: 'contain',
-                  borderRadius: '16px',
-                  position: 'relative', 
-                  zIndex: 1,
-                  filter: 'drop-shadow(0 25px 25px rgba(0, 0, 0, 0.08))'
-                }} 
-                alt="Planchetta Profesional" 
-              />
-            </div>
-          </div>
-        </section>
 
         {CAMPAIGN_CONFIG.isCyberActive && <CyberdayCountdown />}
         {CAMPAIGN_CONFIG.activeCampaign === "zanzini_june" && <JuneSpecialBanner />}
@@ -352,102 +243,7 @@ export default function HomeClient({ products }: HomeClientProps) {
         onClose={() => setSelectedQuickProduct(null)} 
       />
 
-      <AnimatePresence>
-        {showPromoPopup && (
-          <div 
-            style={{ 
-              position: 'fixed', inset: 0, zIndex: 100000, 
-              display: 'flex', alignItems: 'center', justifyContent: 'center', 
-              padding: '20px', backgroundColor: 'rgba(14, 31, 51, 0.85)', 
-              backdropFilter: 'blur(15px)' 
-            }}
-          >
-            <motion.div
-              initial={{ opacity: 0, scale: 0.9, y: 20 }}
-              animate={{ opacity: 1, scale: 1, y: 0 }}
-              exit={{ opacity: 0, scale: 0.9, y: 20 }}
-              style={{
-                position: 'relative', width: '100%', maxWidth: '550px',
-                backgroundColor: '#FFFFFF', borderRadius: '8px', overflow: 'hidden',
-                boxShadow: '0 50px 100px rgba(0,0,0,0.5)',
-                border: '1px solid rgba(58, 105, 168, 0.15)'
-              }}
-            >
-              {/* Header with yellow tag */}
-              <div style={{ backgroundColor: 'var(--primary-gold)', color: '#0E1F33', padding: '15px 30px', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-                <span style={{ fontSize: '10px', fontWeight: 900, textTransform: 'uppercase', letterSpacing: '0.2em' }}>
-                  🔥 OPORTUNIDAD IMPERDIBLE ONLINE
-                </span>
-                <button 
-                  onClick={handleClosePopup}
-                  style={{ background: 'none', border: 'none', cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center', padding: 0 }}
-                >
-                  <X className="w-5 h-5 text-brand-navy" />
-                </button>
-              </div>
 
-              {/* Body */}
-              <div style={{ padding: '40px 30px', textAlign: 'center', display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '20px' }}>
-                {/* Image */}
-                <div style={{ position: 'relative', width: '220px', height: '120px' }}>
-                  <img 
-                    src="/images/producto-la-planchetta.jpg" 
-                    alt="Plancheta 2 Quemadores" 
-                    style={{ width: '100%', height: '100%', objectFit: 'contain' }}
-                  />
-                </div>
-
-                <div style={{ display: 'flex', flexDirection: 'column', gap: '5px' }}>
-                  <h3 style={{ fontSize: '20px', fontWeight: 900, textTransform: 'uppercase', color: '#0E1F33', margin: 0 }}>
-                    Oportunidad 2 Quemadores
-                  </h3>
-                  <p style={{ fontSize: '13px', opacity: 0.6, margin: '5px 0 0 0' }}>
-                    Chapa de hierro + 2 tapas de acero inoxidable
-                  </p>
-                </div>
-
-                {/* Pricing info */}
-                <div style={{ display: 'flex', alignItems: 'baseline', gap: '15px', justifyContent: 'center' }}>
-                  <span style={{ fontSize: '2.5rem', fontWeight: 900, color: 'var(--brand-navy)' }}>
-                    $34.000
-                  </span>
-                  <span style={{ fontSize: '1.2rem', opacity: 0.3, textDecoration: 'line-through' }}>
-                    $43.000
-                  </span>
-                  <span style={{ 
-                    fontSize: '11px', 
-                    fontWeight: 900, 
-                    color: 'var(--brand-navy)', 
-                    backgroundColor: 'var(--primary-gold)', 
-                    padding: '4px 8px', 
-                    borderRadius: '4px'
-                  }}>
-                    -21% OFF
-                  </span>
-                </div>
-
-                {/* CTA */}
-                <div style={{ width: '100%', marginTop: '10px' }}>
-                  <Link 
-                    href="/tienda/plancheta"
-                    onClick={handleClosePopup}
-                    style={{ 
-                      display: 'block', textDecoration: 'none', textAlign: 'center',
-                      backgroundColor: 'var(--primary-gold)', color: 'var(--brand-navy)', 
-                      padding: '16px', borderRadius: '4px',
-                      fontWeight: 900, fontSize: '12px', textTransform: 'uppercase', 
-                      letterSpacing: '0.15em', transition: '0.3s'
-                    }}
-                    className="gold-shimmer hover:scale-[1.02] transform"
-                  >
-                    Ver Oferta Especial
-                  </Link>
-                </div>
-              </div>
-            </motion.div>
-          </div>
-        )}
-      </AnimatePresence>
     </div>
   );
 }
