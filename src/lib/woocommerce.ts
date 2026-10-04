@@ -1,6 +1,6 @@
 // 🛍️ WOOCOMMERCE API CLIENT CONFIGURATION
 // Status: CONNECTED 🏔️🔌 WITH IN-MEMORY CACHE + RETRIES + STATIC JSON BACKUP
-// Fix: Deduplication cache to prevent re-fetch storms, backoff retries, and offline backup filesystem cache
+// Fix: Cached WooCommerce reads with retries and read-only static fallback for Vercel
 
 if (process.env.NODE_ENV === 'development') {
   process.env.NODE_TLS_REJECT_UNAUTHORIZED = '0';
@@ -16,7 +16,7 @@ const CS = process.env.WOOCOMMERCE_CS || "";
 // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 // 🧠 IN-MEMORY CACHE — Prevents re-fetch storm
 // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-const CACHE_TTL_MS = 0; // 0 minutes (disabled for real-time sync)
+const CACHE_TTL_MS = 5 * 60 * 1000; // 5 minutes; avoids refetch storms across renders
 
 interface CacheEntry<T> {
   data: T;
@@ -36,21 +36,8 @@ function isCacheValid<T>(cache: CacheEntry<T> | null): cache is CacheEntry<T> {
 // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 // 💾 PERSISTENT FILE BACKUP (Offline / Crash Recovery)
 // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-async function saveBackupData(filename: string, data: any) {
-  try {
-    const fs = await import('fs');
-    const path = await import('path');
-    const dir = path.join(process.cwd(), 'src/data');
-    if (!fs.existsSync(dir)) {
-      fs.mkdirSync(dir, { recursive: true });
-    }
-    fs.writeFileSync(path.join(dir, filename), JSON.stringify(data, null, 2), 'utf-8');
-    writeLog(`[BACKUP WRITE] Successfully saved offline backup to ${filename} (${data.length} items)`);
-  } catch (error: any) {
-    writeLog(`[BACKUP WRITE ERROR] Could not save offline backup: ${error.message || error}`);
-  }
-}
-
+// Vercel deployments are read-only at runtime. Static JSON is fallback-only;
+// never attempt to persist WooCommerce responses into src/data from a Function.
 async function loadBackupData(filename: string): Promise<any[] | null> {
   try {
     const fs = await import('fs');
@@ -246,7 +233,7 @@ async function _fetchProductsFromAPI(): Promise<any[] | null> {
             "Content-Type": "application/json",
             "User-Agent": "ComercialPatagonia-B2B-Agent/1.0"
           },
-          next: { revalidate: 0 }
+          next: { revalidate: 300 }
         }, timeoutMs, maxRetries);
         
         writeLog(`[RESPONSE] Page ${page} received. Status: ${response.status} ok: ${response.ok}`);
@@ -286,8 +273,6 @@ async function _fetchProductsFromAPI(): Promise<any[] | null> {
     
     if (allProducts.length > 0) {
       writeLog(`[COMPLETE] fetchWooCommerceProducts completed. Total real products flattened: ${allProducts.length}`);
-      // Save to disk backup asynchronously for future offline/crash fallback
-      saveBackupData('backup-products.json', allProducts);
       return allProducts;
     } else {
       writeLog(`[FALLBACK] No products could be retrieved. Loading offline static backup...`);
@@ -297,6 +282,70 @@ async function _fetchProductsFromAPI(): Promise<any[] | null> {
     writeLog(`[FATAL EXCEPTION] fetchWooCommerceProducts caught error: ${error.message || error}. Falling back to disk backup...`, error);
     console.error("WooCommerce Fetch Error:", error);
     return loadBackupData('backup-products.json');
+  }
+}
+
+/**
+ * Fetch one product directly instead of downloading the complete catalog.
+ * Requests are cached by Next.js for 5 minutes and fall back to the bundled
+ * static product snapshot if WooCommerce is temporarily unavailable.
+ */
+export async function fetchWooCommerceProductBySlugOrId(slugOrId: string): Promise<any | null> {
+  const loadFallbackProduct = async () => {
+    const backup = await loadBackupData('backup-products.json');
+    if (!backup) return null;
+
+    return backup.find((product: any) =>
+      product?.slug === slugOrId || String(product?.id) === slugOrId
+    ) ?? null;
+  };
+
+  if (!CK || !CS || !WOOCOMMERCE_URL) {
+    writeLog("[PRODUCT DETAIL] Missing WooCommerce credentials or URL. Using static fallback.");
+    return loadFallbackProduct();
+  }
+
+  const isNumericId = /^\d+$/.test(slugOrId);
+  const encodedValue = encodeURIComponent(slugOrId);
+  const url = isNumericId
+    ? `${WOOCOMMERCE_URL}/products/${encodedValue}`
+    : `${WOOCOMMERCE_URL}/products?slug=${encodedValue}&status=publish&per_page=1`;
+
+  try {
+    const authHeader = `Basic ${Buffer.from(`${CK}:${CS}`).toString('base64')}`;
+    const response = await fetchWithRetry(url, {
+      method: "GET",
+      headers: {
+        "Authorization": authHeader,
+        "Accept": "application/json",
+        "Content-Type": "application/json",
+        "User-Agent": "ComercialPatagonia-B2B-Agent/1.0"
+      },
+      next: { revalidate: 300 }
+    }, 7000, 2);
+
+    if (!response.ok) {
+      writeLog(`[PRODUCT DETAIL] WooCommerce returned HTTP ${response.status} for ${slugOrId}. Using fallback.`);
+      return loadFallbackProduct();
+    }
+
+    const data = await response.json();
+    const product = isNumericId
+      ? data
+      : Array.isArray(data)
+        ? data[0]
+        : null;
+
+    if (!product || typeof product !== 'object') {
+      writeLog(`[PRODUCT DETAIL] Product not found for ${slugOrId}. Using fallback.`);
+      return loadFallbackProduct();
+    }
+
+    const rewritten = rewriteProductImageUrls([product]);
+    return rewritten?.[0] ?? null;
+  } catch (error: any) {
+    writeLog(`[PRODUCT DETAIL] Failed to fetch ${slugOrId}. Using fallback.`, error);
+    return loadFallbackProduct();
   }
 }
 
@@ -355,7 +404,7 @@ async function _fetchCategoriesFromAPI(): Promise<any[] | null> {
         "Content-Type": "application/json",
         "User-Agent": "ComercialPatagonia-B2B-Agent/1.0"
       },
-      next: { revalidate: 0 }
+      next: { revalidate: 300 }
     }, timeoutMs, maxRetries);
 
     writeLog(`[RESPONSE] Categories received. Status: ${response.status} ok: ${response.ok}`);
@@ -373,9 +422,6 @@ async function _fetchCategoriesFromAPI(): Promise<any[] | null> {
     
     const filtered = data.filter((cat: { slug: string }) => cat.slug !== 'uncategorized');
     writeLog(`[SUCCESS] Categories fetched successfully: ${filtered.length} categories.`);
-    
-    // Save offline backup asynchronously
-    saveBackupData('backup-categories.json', filtered);
     return filtered;
   } catch (error: any) {
     writeLog(`[FATAL EXCEPTION] fetchWooCommerceCategories caught error: ${error.message || error}. Falling back to disk backup...`, error);
