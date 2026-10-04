@@ -37,15 +37,19 @@ export default function HeroSpectacular({ products = [], onQuickView }: HeroSpec
   };
 
   return (
-    <section style={{ 
-      position: 'relative', 
-      height: '100vh', 
-      width: '100%', 
-      backgroundColor: 'var(--brand-sky)',
-      overflow: 'hidden',
-      display: 'flex',
-      alignItems: 'center'
-    }}>
+    <section 
+      id="hero-comodoro"
+      className="hero-spectacular-section"
+      style={{ 
+        position: 'relative', 
+        height: '100vh', 
+        width: '100%', 
+        backgroundColor: 'var(--brand-sky)',
+        overflow: 'hidden',
+        display: 'flex',
+        alignItems: 'center'
+      }}
+    >
       {/* 🎬 BACKDROP CINEMÁTICO */}
       <div style={{ position: 'absolute', inset: 0 }}>
         <motion.img 
@@ -85,7 +89,7 @@ export default function HeroSpectacular({ products = [], onQuickView }: HeroSpec
               padding-top: 100px !important;
               padding-bottom: 50px !important;
             }
-            :global(section) { height: auto !important; min-height: 100vh; }
+            :global(#hero-comodoro) { height: auto !important; min-height: 100vh; }
           }
           @media (max-width: 768px) {
             .hero-bento-cards {

@@ -19,17 +19,38 @@ export function useIsClient() {
   );
 }
 
+let currentTimestamp = typeof window !== "undefined" ? Date.now() : 0;
+const listeners = new Set<() => void>();
+let clockInterval: ReturnType<typeof setInterval> | null = null;
+
 function subscribeToClock(callback: () => void) {
-  const interval = setInterval(callback, 1000);
-  return () => clearInterval(interval);
+  listeners.add(callback);
+  if (clockInterval === null && typeof window !== "undefined") {
+    currentTimestamp = Date.now();
+    clockInterval = setInterval(() => {
+      currentTimestamp = Date.now();
+      listeners.forEach((cb) => cb());
+    }, 1000);
+  }
+  return () => {
+    listeners.delete(callback);
+    if (listeners.size === 0 && clockInterval !== null) {
+      clearInterval(clockInterval);
+      clockInterval = null;
+    }
+  };
 }
 
 function getClientTimeSnapshot(): number {
-  return Date.now();
+  if (currentTimestamp === 0 && typeof window !== "undefined") {
+    currentTimestamp = Date.now();
+  }
+  return currentTimestamp;
 }
 
+const serverTimestamp = Date.now();
 function getServerTimeSnapshot(): number {
-  return Date.now();
+  return serverTimestamp;
 }
 
 export interface CyberCampaignHookResult {

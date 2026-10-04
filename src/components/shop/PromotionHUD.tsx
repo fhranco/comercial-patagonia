@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useMemo } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Sparkles, X, ChevronRight } from "lucide-react";
 import Image from "next/image";
@@ -20,8 +20,8 @@ export default function PromotionHUD({ products, onQuickView }: PromotionHUDProp
   const { isActive: isCyberCampaignActive } = useCyberCampaign();
   
   // 🔍 BUSCAMOS PRODUCTOS QUE REALMENTE ESTÉN EN OFERTA
-  const dataSource = products || [];
-  const saleProducts = dataSource.filter(p => p.on_sale);
+  const dataSource = useMemo(() => products || [], [products]);
+  const saleProducts = useMemo(() => dataSource.filter(p => p.on_sale), [dataSource]);
   
   // Selección aleatoria para evitar sensación de "plantilla"
   const [promoProduct, setPromoProduct] = useState<Product | null>(null);
@@ -76,7 +76,29 @@ export default function PromotionHUD({ products, onQuickView }: PromotionHUDProp
   const isSpecialCampaign = isCyberProduct || isZanziniProduct;
 
   return (
-    <div style={{ position: 'fixed', bottom: '100px', left: '30px', zIndex: 9999 }}>
+    <div className="promotion-hud-wrapper">
+      <style jsx>{`
+        .promotion-hud-wrapper {
+          position: fixed;
+          bottom: 100px;
+          left: 30px;
+          z-index: 9999;
+        }
+        @media (max-width: 768px) {
+          .promotion-hud-wrapper {
+            bottom: 155px !important;
+            left: 15px !important;
+            max-width: calc(100vw - 30px) !important;
+          }
+        }
+        @media (max-width: 480px) {
+          .promotion-hud-wrapper {
+            bottom: 150px !important;
+            left: 12px !important;
+            max-width: 275px !important;
+          }
+        }
+      `}</style>
       <AnimatePresence>
         {isVisible && (
           <motion.div

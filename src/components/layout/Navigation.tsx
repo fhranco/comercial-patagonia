@@ -2,16 +2,17 @@
 
 import React, { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { ArrowRight, Menu, X, ShoppingBag, Clock, Image as ImageIcon, Home } from "lucide-react";
+import { ArrowRight, Menu, X, ShoppingBag, Clock, Home } from "lucide-react";
 import Image from "next/image";
 import Link from 'next/link';
 import { BRAND_CONFIG } from "@/lib/constants";
 
 interface NavigationProps {
   transparent?: boolean;
+  hideUntilScroll?: boolean;
 }
 
-export default function Navigation({ transparent = true }: NavigationProps) {
+export default function Navigation({ transparent = true, hideUntilScroll = false }: NavigationProps) {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
@@ -21,6 +22,8 @@ export default function Navigation({ transparent = true }: NavigationProps) {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
+  const isHidden = hideUntilScroll && !isScrolled && !isMobileMenuOpen;
+
   return (
     <nav style={{ 
       position: 'fixed', top: 0, width: '100%', zIndex: 9000, 
@@ -29,7 +32,10 @@ export default function Navigation({ transparent = true }: NavigationProps) {
         ? 'rgba(255, 255, 255, 0.95)' 
         : 'transparent',
       backdropFilter: (!transparent || isMobileMenuOpen || isScrolled) ? 'blur(20px)' : 'none',
-      transition: 'all 0.6s cubic-bezier(0.16, 1, 0.3, 1)',
+      transform: isHidden ? 'translateY(-100%)' : 'translateY(0)',
+      opacity: isHidden ? 0 : 1,
+      pointerEvents: isHidden ? 'none' : 'auto',
+      transition: 'transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.3s ease, background 0.6s cubic-bezier(0.16, 1, 0.3, 1), padding 0.6s cubic-bezier(0.16, 1, 0.3, 1)',
       borderBottom: (!transparent || isScrolled || isMobileMenuOpen) ? '1px solid rgba(14, 31, 51, 0.1)' : 'none',
       color: (transparent && !isScrolled && !isMobileMenuOpen) ? '#FFFFFF' : 'var(--brand-navy)'
     }} className="nav-container">
@@ -37,25 +43,42 @@ export default function Navigation({ transparent = true }: NavigationProps) {
         .nav-container {
           font-family: var(--font-heading);
         }
+        .nav-logo-box {
+          position: relative;
+          width: 280px;
+          height: 80px;
+        }
         @media (max-width: 1024px) {
           .nav-container {
-            padding: 15px 5% !important;
+            padding: 12px 5% !important;
+          }
+        }
+        @media (max-width: 768px) {
+          .nav-logo-box {
+            width: 195px !important;
+            height: 52px !important;
+          }
+        }
+        @media (max-width: 380px) {
+          .nav-logo-box {
+            width: 160px !important;
+            height: 45px !important;
           }
         }
       `}</style>
-      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', maxWidth: '1400px', margin: '0 auto' }}>
+      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', maxWidth: '1400px', margin: '0 auto', width: '100%' }}>
           
           {/* 🏔️ LOGO HUD */}
           <motion.div initial={{ opacity: 0, x: -10 }} animate={{ opacity: 1, x: 0 }}>
               <Link href="/" style={{ textDecoration: 'none', color: 'inherit' }} onClick={() => setIsMobileMenuOpen(false)}>
                 <div style={{ display: 'flex', alignItems: 'center', gap: '15px' }}>
-                  <div style={{ position: 'relative', width: '280px', height: '80px' }}>
+                  <div className="nav-logo-box">
                     <Image 
                       src="/branding/logo-comercial.webp" 
                       alt={BRAND_CONFIG.name} 
                       fill 
                       priority
-                      sizes="(max-width: 768px) 280px, 280px"
+                      sizes="(max-width: 768px) 195px, 280px"
                       unoptimized={true}
                       style={{ objectFit: 'contain', filter: (transparent && !isScrolled && !isMobileMenuOpen) ? 'brightness(0) invert(1)' : 'none' }} 
                     />
@@ -120,8 +143,11 @@ export default function Navigation({ transparent = true }: NavigationProps) {
             style={{ 
               position: 'absolute', top: '100%', left: 0, width: '100%', 
               backgroundColor: '#FFF',
-              padding: '40px 5%', borderBottom: '1px solid var(--border-color)',
-              display: 'flex', flexDirection: 'column', gap: '15px'
+              padding: '30px 5%', borderBottom: '1px solid var(--border-color)',
+              display: 'flex', flexDirection: 'column', gap: '12px',
+              maxHeight: 'calc(100vh - 80px)',
+              overflowY: 'auto',
+              boxShadow: '0 20px 40px rgba(0, 0, 0, 0.15)'
             }}
           >
             <Link href="/tienda" onClick={() => setIsMobileMenuOpen(false)} style={{ 

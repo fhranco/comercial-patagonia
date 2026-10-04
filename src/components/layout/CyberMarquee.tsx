@@ -41,14 +41,14 @@ export default function CyberMarquee({ onClose }: CyberMarqueeProps) {
       style={{ 
         position: 'relative',
         width: '100%', 
-        backgroundColor: isActive ? '#FF4B4B' : '#0E1F33', 
+        background: 'linear-gradient(90deg, #990000 0%, #D90429 50%, #990000 100%)', 
         color: '#FFFFFF', 
         height: '40px', 
         display: 'flex', 
         alignItems: 'center', 
         overflow: 'hidden',
-        boxShadow: isActive ? '0 4px 15px rgba(255, 75, 75, 0.25)' : '0 4px 15px rgba(14, 31, 51, 0.35)',
-        borderBottom: '2px solid var(--primary-gold)',
+        boxShadow: '0 4px 20px rgba(217, 4, 41, 0.45)',
+        borderBottom: '2px solid rgba(255, 255, 255, 0.25)',
         zIndex: 10000,
         fontFamily: 'var(--font-sans)',
         fontSize: '11px',
@@ -82,6 +82,13 @@ export default function CyberMarquee({ onClose }: CyberMarqueeProps) {
           margin-right: 40px;
           text-transform: uppercase;
         }
+        @media (max-width: 640px) {
+          .cyber-marquee-item {
+            font-size: 10px;
+            margin-right: 28px;
+            gap: 6px;
+          }
+        }
       `}</style>
 
       {/* Infinite scrolling marquee track */}
@@ -89,16 +96,30 @@ export default function CyberMarquee({ onClose }: CyberMarqueeProps) {
         {repeatedItems.map((item, index) => (
           <span key={index} className="cyber-marquee-item">
             {isActive ? (
-              index % 2 === 0 ? <Flame size={12} style={{ color: 'var(--primary-gold)' }} className="animate-pulse" /> : <Zap size={12} style={{ color: '#FFFFFF' }} />
+              index % 2 === 0 ? <Flame size={12} style={{ color: '#FFE600' }} className="animate-pulse" /> : <Zap size={12} style={{ color: '#FFFFFF' }} />
             ) : (
-              index % 2 === 0 ? <Clock size={12} style={{ color: 'var(--primary-gold)' }} /> : <Zap size={12} style={{ color: 'var(--primary-gold)' }} />
+              index % 2 === 0 ? <Clock size={12} style={{ color: '#FFE600' }} /> : <Zap size={12} style={{ color: '#FFE600' }} />
             )}
             <span>{item}</span>
           </span>
         ))}
       </div>
 
-      {/* Elegant close button */}
+      {/* Subtle fade mask on right edge to improve close button legibility */}
+      <div 
+        style={{ 
+          position: 'absolute', 
+          right: 0, 
+          top: 0, 
+          bottom: 0, 
+          width: '50px', 
+          background: 'linear-gradient(to right, transparent, #990000)', 
+          pointerEvents: 'none', 
+          zIndex: 10000 
+        }} 
+      />
+
+      {/* Accessible close button */}
       <button
         onClick={() => {
           setIsDismissed(true);
@@ -106,14 +127,14 @@ export default function CyberMarquee({ onClose }: CyberMarqueeProps) {
         }}
         style={{
           position: 'absolute',
-          right: '15px',
+          right: '10px',
           top: '50%',
           transform: 'translateY(-50%)',
-          background: 'rgba(0, 0, 0, 0.25)',
-          border: 'none',
+          background: 'rgba(0, 0, 0, 0.35)',
+          border: '1px solid rgba(255, 255, 255, 0.3)',
           color: '#FFFFFF',
-          width: '20px',
-          height: '20px',
+          width: '26px',
+          height: '26px',
           borderRadius: '50%',
           display: 'flex',
           alignItems: 'center',
@@ -125,7 +146,7 @@ export default function CyberMarquee({ onClose }: CyberMarqueeProps) {
         className="hover:bg-black hover:scale-110 active:scale-95"
         aria-label="Cerrar marquesina Cyber"
       >
-        <X size={10} />
+        <X size={12} />
       </button>
     </div>
   );

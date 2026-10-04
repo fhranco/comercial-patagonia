@@ -18,7 +18,7 @@ export default async function Page() {
         const [fetchedProducts, fetchedCyberProducts] = await Promise.all([
             fetchWooCommerceProducts(),
             isVisible
-              ? fetchWooCommerceProductsByCategorySlug(CYBER_CAMPAIGN_CONFIG.categorySlug, CYBER_CAMPAIGN_CONFIG.featuredLimit)
+              ? fetchWooCommerceProductsByCategorySlug(CYBER_CAMPAIGN_CONFIG.categorySlug, 16)
               : Promise.resolve([] as Product[])
         ]);
 

@@ -23,6 +23,8 @@ import RetailStories from "../shop/RetailStories";
 import ProductQuickView from "../shop/ProductQuickView";
 import CyberBanner from "@/components/cyber/CyberBanner";
 import CyberFeaturedSection from "@/components/cyber/CyberFeaturedSection";
+import CyberProductsMarquee from "@/components/cyber/CyberProductsMarquee";
+import CyberFloatingButton from "@/components/cyber/CyberFloatingButton";
 import { CAMPAIGN_CONFIG } from "@/lib/constants";
 import { useCyberCampaign } from "@/lib/campaigns/useCyberCampaign";
 
@@ -55,7 +57,7 @@ export default function HomeClient({ products, cyberProducts = [] }: HomeClientP
     <div className={styles.page} style={{ backgroundColor: '#FFFFFF', color: 'var(--brand-navy)', minHeight: '100vh', width: '100%' }}>
       
       {/* 🚀 BARRA DE PROGRESO */}
-      <motion.div style={{ scaleX: scaleProgress, position: 'fixed', top: 0, left: 0, right: 0, height: '3px', background: 'var(--primary-gold)', zIndex: 9999, transformOrigin: '0%' }} />
+      <motion.div style={{ scaleX: scaleProgress, position: 'fixed', top: 0, left: 0, right: 0, height: '3px', background: isCyberVisible ? '#D90429' : 'var(--primary-gold)', zIndex: 9999, transformOrigin: '0%' }} />
 
       {showMarquee && (
         <div style={{ position: 'fixed', top: 0, left: 0, right: 0, zIndex: 10000 }}>
@@ -82,8 +84,9 @@ export default function HomeClient({ products, cyberProducts = [] }: HomeClientP
         }
       `}</style>
 
-      <Navigation transparent={true} />
+      <Navigation transparent={true} hideUntilScroll={isCyberVisible} />
       <PromotionHUD products={products} onQuickView={(prod) => setSelectedQuickProduct(prod)} />
+      <CyberFloatingButton />
       
       <main style={{ width: '100%', paddingTop: showMarquee ? '40px' : '0px', transition: 'padding-top 0.4s cubic-bezier(0.16, 1, 0.3, 1)' }}>
         {/* ⚡ BANNER DESTACADO CYBER MONDAY 2026 */}
@@ -91,6 +94,12 @@ export default function HomeClient({ products, cyberProducts = [] }: HomeClientP
 
         <HeroSpectacular 
           products={products} 
+          onQuickView={(prod) => setSelectedQuickProduct(prod)} 
+        />
+
+        {/* ⚡ MARQUESINA DE PRODUCTOS CYBER BAJO EL HERO */}
+        <CyberProductsMarquee 
+          products={cyberProductsAll.length > 0 ? cyberProductsAll : products} 
           onQuickView={(prod) => setSelectedQuickProduct(prod)} 
         />
 

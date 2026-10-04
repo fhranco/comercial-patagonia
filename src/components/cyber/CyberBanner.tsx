@@ -24,10 +24,10 @@ export default function CyberBanner() {
           width: 100%;
           position: relative;
           overflow: hidden;
-          background: linear-gradient(135deg, #050B14 0%, #0A1424 55%, #0E1F33 100%);
-          border-top: 1px solid rgba(255, 255, 255, 0.08);
-          border-bottom: 2px solid ${isActive ? "var(--brand-yellow, #F9C300)" : "var(--primary-gold, #D4AF37)"};
-          box-shadow: 0 20px 50px rgba(0, 0, 0, 0.4);
+          background: linear-gradient(135deg, #1C0306 0%, #3D050C 35%, #7A0A15 70%, #A60F1E 100%);
+          border-top: 1px solid rgba(255, 75, 75, 0.25);
+          border-bottom: 3px solid #FF4B4B;
+          box-shadow: 0 20px 50px rgba(122, 10, 21, 0.4);
           padding: 40px 5%;
           color: #FFFFFF;
           font-family: var(--font-heading, inherit);
@@ -40,9 +40,7 @@ export default function CyberBanner() {
           transform: translate(-50%, -50%);
           width: 70%;
           height: 140%;
-          background: ${isActive
-            ? "radial-gradient(circle, rgba(255, 75, 75, 0.12) 0%, transparent 70%)"
-            : "radial-gradient(circle, rgba(212, 175, 55, 0.10) 0%, transparent 70%)"};
+          background: radial-gradient(circle, rgba(255, 75, 75, 0.25) 0%, transparent 70%);
           filter: blur(50px);
           pointer-events: none;
           z-index: 1;
@@ -84,10 +82,10 @@ export default function CyberBanner() {
           font-weight: 950;
           text-transform: uppercase;
           letter-spacing: 0.2em;
-          background: ${isActive ? "var(--brand-yellow, #F9C300)" : "rgba(212, 175, 55, 0.15)"};
-          color: ${isActive ? "#0E1F33" : "var(--primary-gold, #D4AF37)"};
-          border: 1px solid ${isActive ? "rgba(249, 195, 0, 0.8)" : "rgba(212, 175, 55, 0.4)"};
-          box-shadow: ${isActive ? "0 0 15px rgba(249, 195, 0, 0.5)" : "0 0 12px rgba(212, 175, 55, 0.15)"};
+          background: #FF4B4B;
+          color: #FFFFFF;
+          border: 1px solid rgba(255, 255, 255, 0.6);
+          box-shadow: 0 0 15px rgba(255, 75, 75, 0.6);
         }
 
         .trust-badge {
@@ -98,7 +96,7 @@ export default function CyberBanner() {
           font-weight: 800;
           text-transform: uppercase;
           letter-spacing: 0.12em;
-          color: rgba(255, 255, 255, 0.8);
+          color: rgba(255, 255, 255, 0.9);
         }
 
         .cyber-title {
@@ -112,14 +110,14 @@ export default function CyberBanner() {
         }
 
         .cyber-highlight {
-          color: ${isActive ? "var(--brand-yellow, #F9C300)" : "var(--primary-gold, #D4AF37)"};
-          text-shadow: 0 0 20px ${isActive ? "rgba(249, 195, 0, 0.4)" : "rgba(212, 175, 55, 0.3)"};
+          color: #FFE600;
+          text-shadow: 0 0 25px rgba(255, 75, 75, 0.8);
         }
 
         .cyber-description {
           font-size: 13px;
           line-height: 1.5;
-          color: #CBD5E1;
+          color: #FFE5E7;
           margin: 0;
           max-width: 580px;
         }
@@ -143,19 +141,20 @@ export default function CyberBanner() {
           text-transform: uppercase;
           letter-spacing: 0.2em;
           text-decoration: none;
-          background: ${isActive
-            ? "linear-gradient(90deg, #F9C300 0%, #FFE600 50%, #F9C300 100%)"
-            : "linear-gradient(90deg, #D4AF37 0%, #F3E5AB 50%, #D4AF37 100%)"};
-          color: #0E1F33;
-          border: none;
+          background: #FFFFFF;
+          color: #7A0A15;
+          border: 2px solid #FFFFFF;
           cursor: pointer;
-          box-shadow: 0 10px 25px rgba(212, 175, 55, 0.35);
-          transition: transform 0.2s ease, box-shadow 0.2s ease;
+          box-shadow: 0 10px 25px rgba(0, 0, 0, 0.35);
+          transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease, color 0.2s ease;
         }
 
         .cyber-cta-btn:hover {
           transform: translateY(-2px);
-          box-shadow: 0 15px 35px rgba(249, 195, 0, 0.5);
+          background: #FFE600;
+          color: #59040C;
+          border-color: #FFE600;
+          box-shadow: 0 15px 35px rgba(255, 230, 0, 0.5);
         }
 
         .cyber-cta-btn:active {
@@ -168,13 +167,47 @@ export default function CyberBanner() {
             align-items: stretch;
             gap: 25px;
           }
+          .cyber-info-col {
+            flex: 1 1 auto;
+            min-width: 0;
+            width: 100%;
+          }
           .cyber-actions-col {
             flex-direction: column;
             align-items: stretch;
             gap: 20px;
+            width: 100%;
           }
           .cyber-cta-btn {
             width: 100%;
+          }
+        }
+
+        @media (max-width: 640px) {
+          .cyber-banner-section {
+            padding: 26px 16px;
+          }
+          .status-badge {
+            font-size: 8px;
+            letter-spacing: 0.1em;
+            padding: 5px 10px;
+          }
+          .trust-badge {
+            font-size: 8px;
+            letter-spacing: 0.08em;
+          }
+          .cyber-title {
+            font-size: clamp(1.4rem, 5.5vw, 1.8rem);
+            line-height: 1.1;
+          }
+          .cyber-description {
+            font-size: 12px;
+            line-height: 1.45;
+          }
+          .cyber-cta-btn {
+            padding: 14px 18px;
+            font-size: 10px;
+            letter-spacing: 0.15em;
           }
         }
       `}</style>
@@ -200,7 +233,7 @@ export default function CyberBanner() {
               )}
             </div>
             <div className="trust-badge">
-              <ShieldCheck size={13} style={{ color: "var(--primary-gold, #D4AF37)" }} />
+              <ShieldCheck size={13} style={{ color: "#FFE600" }} />
               <span>Comercial de la Patagonia • Punta Arenas</span>
             </div>
           </div>

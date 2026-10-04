@@ -34,7 +34,7 @@ export default function CyberCountdown({ className = "" }: CyberCountdownProps) 
           font-weight: 900;
           text-transform: uppercase;
           letter-spacing: 0.2em;
-          color: ${isActive ? "#FF5C5C" : "var(--primary-gold, #D4AF37)"};
+          color: #FFE600;
         }
         .countdown-timer-grid {
           display: flex;
@@ -42,10 +42,10 @@ export default function CyberCountdown({ className = "" }: CyberCountdownProps) 
           gap: 8px;
         }
         .time-card {
-          background: rgba(14, 31, 51, 0.85);
+          background: rgba(0, 0, 0, 0.45);
           backdrop-filter: blur(15px);
-          border: 1px solid ${isActive ? "rgba(255, 75, 75, 0.4)" : "rgba(212, 175, 55, 0.3)"};
-          box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4), inset 0 1px 2px rgba(255, 255, 255, 0.05);
+          border: 1px solid rgba(255, 255, 255, 0.25);
+          box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4), inset 0 1px 2px rgba(255, 255, 255, 0.1);
           border-radius: 6px;
           padding: 10px 14px;
           min-width: 54px;
@@ -58,7 +58,7 @@ export default function CyberCountdown({ className = "" }: CyberCountdownProps) 
         }
         .time-card:hover {
           transform: translateY(-2px);
-          border-color: ${isActive ? "#FF4B4B" : "#FFD700"};
+          border-color: #FFE600;
         }
         .time-number {
           font-size: clamp(20px, 3vw, 24px);
@@ -73,13 +73,13 @@ export default function CyberCountdown({ className = "" }: CyberCountdownProps) 
           font-weight: 800;
           text-transform: uppercase;
           letter-spacing: 0.1em;
-          color: ${isActive ? "#FFA8A8" : "#E2E8F0"};
+          color: #FFE5E7;
           margin-top: 4px;
         }
         .colon-separator {
           font-size: 20px;
           font-weight: 900;
-          color: ${isActive ? "#FF4B4B" : "var(--primary-gold, #D4AF37)"};
+          color: #FFE600;
           opacity: 0.8;
           user-select: none;
         }
@@ -107,7 +107,7 @@ export default function CyberCountdown({ className = "" }: CyberCountdownProps) 
         {isActive ? (
           <Flame size={13} className="animate-pulse" style={{ color: "#FF4B4B" }} />
         ) : (
-          <Clock size={13} style={{ color: "var(--primary-gold, #D4AF37)" }} />
+          <Clock size={13} style={{ color: "#FFE600" }} />
         )}
         <span className="countdown-label-text">
           {isActive ? "OFERTAS EN VIVO — TERMINA EN:" : "CUENTA REGRESIVA AL INICIO:"}
@@ -141,8 +141,8 @@ export default function CyberCountdown({ className = "" }: CyberCountdownProps) 
           <span
             className="time-number"
             style={{
-              color: isActive ? "#FF5C5C" : "var(--primary-gold, #D4AF37)",
-              textShadow: isActive ? "0 0 10px rgba(255, 92, 92, 0.5)" : "0 0 10px rgba(212, 175, 55, 0.4)"
+              color: "#FF4B4B",
+              textShadow: "0 0 12px rgba(255, 75, 75, 0.6)"
             }}
           >
             {timeLeft.seconds.toString().padStart(2, "0")}

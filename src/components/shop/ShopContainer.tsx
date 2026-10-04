@@ -48,7 +48,17 @@ export default function ShopContainer({ initialProducts, initialCategory, isLive
   
   // 🧠 REAL-TIME PERSONALIZATION ENGINE
   const [userIntent, setUserIntent] = useState<{ category?: string; term?: string }>({});
-  const [aiSuggestions, setAiSuggestions] = useState<Product[]>([]);
+  const aiSuggestions = React.useMemo(() => {
+    if (userIntent.category || userIntent.term) {
+      return initialProducts
+        .filter(p => 
+          (userIntent.category && p.categories.some(c => c.name === userIntent.category)) ||
+          (userIntent.term && p.name.toLowerCase().includes(userIntent.term.toLowerCase()))
+        )
+        .slice(0, 4);
+    }
+    return [];
+  }, [userIntent, initialProducts]);
 
   // ⌨️ CMD+K Listener
   useEffect(() => {
@@ -61,18 +71,6 @@ export default function ShopContainer({ initialProducts, initialCategory, isLive
     window.addEventListener('keydown', handleKeyDown);
     return () => window.removeEventListener('keydown', handleKeyDown);
   }, []);
-  
-  useEffect(() => {
-    if (userIntent.category || userIntent.term) {
-        const suggestions = initialProducts
-            .filter(p => 
-                (userIntent.category && p.categories.some(c => c.name === userIntent.category)) ||
-                (userIntent.term && p.name.toLowerCase().includes(userIntent.term.toLowerCase()))
-            )
-            .slice(0, 4);
-        setAiSuggestions(suggestions);
-    }
-  }, [userIntent, initialProducts]);
 
   // 🧠 SMART CATEGORY MATCHING (NAME OR SLUG)
   const getCategoryNameFromParam = useCallback((param: string) => {
@@ -118,9 +116,9 @@ export default function ShopContainer({ initialProducts, initialCategory, isLive
   const handleCategoryParamChange = useCallback((param: string | null) => {
     if (param) {
       const targetCat = getCategoryNameFromParam(param);
-      setActiveCategory(targetCat);
+      setActiveCategory(prev => (prev !== targetCat ? targetCat : prev));
     } else if (!initialCategory) {
-      setActiveCategory("Todos");
+      setActiveCategory(prev => (prev !== "Todos" ? "Todos" : prev));
     }
   }, [getCategoryNameFromParam, initialCategory]);
 
@@ -186,13 +184,9 @@ export default function ShopContainer({ initialProducts, initialCategory, isLive
     });
   }
 
-  const [stockAlerts, setStockAlerts] = useState<{id: string | number, name: string}[]>([]);
-
-  useEffect(() => {
-    // Simulación de alertas de stock crítico
-    const criticalItems = initialProducts.filter(p => Math.random() > 0.8).slice(0, 2);
-    setStockAlerts(criticalItems.map(p => ({ id: p.id, name: p.name })));
-  }, [initialProducts]);
+  const [stockAlerts, setStockAlerts] = useState<{ id: string | number; name: string }[]>(() => {
+    return initialProducts.slice(0, 2).map(p => ({ id: p.id, name: p.name }));
+  });
 
   const displayProducts = filteredProducts.slice(0, visibleItems);
   const categories = ["Todos", ...new Set(initialProducts.flatMap(p => p.categories.map(cat => cat.name)).filter(Boolean))]

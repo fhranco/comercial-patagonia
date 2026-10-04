@@ -139,12 +139,14 @@ export default function ProductCard({ product, onQuickView }: ProductCardProps) 
 
                 let badgeText = "Oferta";
                 let badgeColor = "#D4AF37";
+                let textColor = "#000";
                 let shadow = "none";
 
                 if (isCyber) {
                   badgeText = "Cyber";
-                  badgeColor = "var(--brand-yellow)";
-                  shadow = "0 4px 12px rgba(249, 195, 0, 0.3)";
+                  badgeColor = "linear-gradient(135deg, #FF4B4B 0%, #D90429 100%)";
+                  textColor = "#FFFFFF";
+                  shadow = "0 4px 12px rgba(217, 4, 41, 0.4)";
                 } else if (isZanziniCampaign) {
                   badgeText = "Recién Llegado";
                   badgeColor = "#D4AF37";
@@ -157,7 +159,7 @@ export default function ProductCard({ product, onQuickView }: ProductCardProps) 
                     top: '15px', 
                     left: '15px', 
                     background: badgeColor, 
-                    color: '#000', 
+                    color: textColor, 
                     fontSize: '9px', 
                     fontWeight: 900, 
                     padding: '4px 10px', 

@@ -55,7 +55,7 @@ export default function CyberFeaturedSection({ products, onQuickView }: CyberFea
           display: inline-flex;
           align-items: center;
           gap: 8px;
-          color: var(--primary-gold, #D4AF37);
+          color: #D90429;
           font-size: 11px;
           font-weight: 950;
           text-transform: uppercase;
@@ -74,7 +74,7 @@ export default function CyberFeaturedSection({ products, onQuickView }: CyberFea
         }
 
         .cyber-title-accent {
-          color: var(--primary-gold, #D4AF37);
+          color: #D90429;
         }
 
         .cyber-section-subtitle {
@@ -118,9 +118,9 @@ export default function CyberFeaturedSection({ products, onQuickView }: CyberFea
           display: inline-flex;
           align-items: center;
           gap: 14px;
-          background: #0E1F33;
+          background: #D90429;
           color: #FFFFFF;
-          border: 2px solid var(--primary-gold, #D4AF37);
+          border: 2px solid #D90429;
           padding: 18px 45px;
           border-radius: 4px;
           font-size: 11px;
@@ -129,16 +129,16 @@ export default function CyberFeaturedSection({ products, onQuickView }: CyberFea
           letter-spacing: 0.2em;
           text-decoration: none;
           cursor: pointer;
-          box-shadow: 0 15px 35px rgba(14, 31, 51, 0.15);
+          box-shadow: 0 15px 35px rgba(217, 4, 41, 0.25);
           transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
         }
 
         .cyber-full-catalog-btn:hover {
-          background: var(--primary-gold, #D4AF37);
-          color: #0E1F33;
-          border-color: var(--primary-gold, #D4AF37);
+          background: #BA181B;
+          color: #FFFFFF;
+          border-color: #BA181B;
           transform: translateY(-2px);
-          box-shadow: 0 20px 40px rgba(212, 175, 55, 0.35);
+          box-shadow: 0 20px 40px rgba(217, 4, 41, 0.45);
         }
 
         .cyber-full-catalog-btn:active {
@@ -152,13 +152,39 @@ export default function CyberFeaturedSection({ products, onQuickView }: CyberFea
           letter-spacing: 0.1em;
           color: #94A3B8;
         }
+
+        @media (max-width: 640px) {
+          .cyber-featured-section {
+            padding: 45px 16px;
+          }
+          .cyber-featured-header {
+            margin-bottom: 30px;
+          }
+          .cyber-section-title {
+            font-size: clamp(1.6rem, 7vw, 2.2rem);
+          }
+          .cyber-section-subtitle {
+            font-size: 13px;
+          }
+          .cyber-full-catalog-btn {
+            width: 100%;
+            justify-content: center;
+            padding: 16px 20px;
+            font-size: 10px;
+            letter-spacing: 0.14em;
+          }
+          .cyber-cta-note {
+            font-size: 10px;
+            padding: 0 10px;
+          }
+        }
       `}</style>
 
       <div className="cyber-featured-container">
         {/* Header de la sección */}
         <div className="cyber-featured-header">
           <div className="cyber-section-badge">
-            <Flame size={16} className="animate-pulse" style={{ color: "var(--brand-yellow, #F9C300)" }} />
+            <Flame size={16} className="animate-pulse" style={{ color: "#D90429" }} />
             <span>SELECCIÓN DESTACADA • CYBER MONDAY</span>
           </div>
 
