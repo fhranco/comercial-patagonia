@@ -229,7 +229,7 @@ export default function CyberBanner() {
           <CyberCountdown />
 
           <Link href={categoryUrl} className="cyber-cta-btn" id="cyber-banner-cta">
-            <span>{isActive ? "Comprar ofertas Cyber" : "Ver ofertas Cyber"}</span>
+            <span>{isActive ? "Comprar ofertas Cyber" : "Ver productos Cyber"}</span>
             <ArrowRight size={14} />
           </Link>
         </div>

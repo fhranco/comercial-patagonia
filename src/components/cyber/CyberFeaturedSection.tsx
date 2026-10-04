@@ -14,10 +14,11 @@ interface CyberFeaturedSectionProps {
 }
 
 export default function CyberFeaturedSection({ products, onQuickView }: CyberFeaturedSectionProps) {
-  const { isVisible, categoryUrl } = useCyberCampaign();
+  const { isActive, categoryUrl } = useCyberCampaign();
 
-  // Si la campaña finalizó (ENDED), o no hay productos, la sección se oculta completamente sin dejar huecos
-  if (!isVisible || !products || products.length === 0) {
+  // La sección destacada Cyber se muestra exclusivamente en estado ACTIVE (durante la campaña)
+  // En PRE_START y ENDED se oculta completamente sin dejar huecos en la Home
+  if (!isActive || !products || products.length === 0) {
     return null;
   }
 

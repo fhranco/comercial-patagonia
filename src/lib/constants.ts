@@ -8,8 +8,11 @@ export const BRAND_CONFIG = {
   calculatorUrl: "https://calculadora.comercialpatagonia.cl",
 };
 
+/**
+ * Configuración de campañas estacionales legacy (ej. Zanzini).
+ * NOTA: La campaña Cyber Monday está centralizada de forma autónoma en
+ * `@/lib/campaigns/cyber.ts` y `@/lib/campaigns/useCyberCampaign.ts`.
+ */
 export const CAMPAIGN_CONFIG = {
-  isCyberActive: true, // Enable Cyberday banners, countdowns, badges and category in store
-  activeCampaign: "cyber", // Options: "cyber" | "zanzini_june" | "none"
+  activeCampaign: "none" as "zanzini_june" | "none",
 };
-

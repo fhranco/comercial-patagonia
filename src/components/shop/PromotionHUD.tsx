@@ -17,7 +17,7 @@ interface PromotionHUDProps {
 export default function PromotionHUD({ products, onQuickView }: PromotionHUDProps) {
   const [isVisible, setIsVisible] = useState(false);
   const router = useRouter();
-  const { isVisible: isCyberCampaignActive } = useCyberCampaign();
+  const { isActive: isCyberCampaignActive } = useCyberCampaign();
   
   // 🔍 BUSCAMOS PRODUCTOS QUE REALMENTE ESTÉN EN OFERTA
   const dataSource = products || [];

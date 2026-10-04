@@ -19,7 +19,7 @@ interface ProductCardProps {
 export default function ProductCard({ product, onQuickView }: ProductCardProps) {
   const { addToCart } = useCart();
   const { theme } = useTheme();
-  const { isVisible: isCyberCampaignActive } = useCyberCampaign();
+  const { isActive: isCyberCampaignActive } = useCyberCampaign();
   const mounted = useIsClient();
   const [viewers] = useState<number>(() => Math.floor(Math.random() * 25) + 12);
 

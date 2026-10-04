@@ -17,7 +17,7 @@ import SpotlightSearch from "@/components/shop/SpotlightSearch";
 import PromotionHUD from "@/components/shop/PromotionHUD";
 import RetailStories from "@/components/shop/RetailStories";
 import { Product } from "@/types/woocommerce";
-import { CAMPAIGN_CONFIG } from "@/lib/constants";
+import { CYBER_CAMPAIGN_CONFIG } from "@/lib/campaigns/cyber";
 
 interface ShopContainerProps {
   initialProducts: Product[];
@@ -197,7 +197,7 @@ export default function ShopContainer({ initialProducts, initialCategory, isLive
   const displayProducts = filteredProducts.slice(0, visibleItems);
   const categories = ["Todos", ...new Set(initialProducts.flatMap(p => p.categories.map(cat => cat.name)).filter(Boolean))]
     .filter(cat => {
-      if (CAMPAIGN_CONFIG.isCyberActive) return true;
+      if (CYBER_CAMPAIGN_CONFIG.enabled) return true;
       const lower = cat.toLowerCase();
       return lower !== "cyberday" && lower !== "cybermonday" && lower !== "cyber";
     });

@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState } from "react";
-import { Zap, Flame, X } from "lucide-react";
+import { Zap, Flame, X, Clock } from "lucide-react";
 import { useCyberCampaign } from "@/lib/campaigns/useCyberCampaign";
 
 interface CyberMarqueeProps {
@@ -9,7 +9,7 @@ interface CyberMarqueeProps {
 }
 
 export default function CyberMarquee({ onClose }: CyberMarqueeProps) {
-  const { isVisible: isCampaignVisible } = useCyberCampaign();
+  const { isVisible: isCampaignVisible, isActive } = useCyberCampaign();
   const [isDismissed, setIsDismissed] = useState(false);
 
   // Si la campaña finalizó (ENDED) o el usuario la cerró, no renderizar
@@ -17,13 +17,21 @@ export default function CyberMarquee({ onClose }: CyberMarqueeProps) {
     return null;
   }
 
-  const newsItems = [
-    "🔥 CYBER PATAGONIA 2026 EN COMERCIAL DE LA PATAGONIA",
-    "⚡ HASTA 35% DE DESCUENTO EN PRODUCTOS SELECCIONADOS",
-    "🏔️ PRECIOS EXCLUSIVOS CYBER EN PUNTA ARENAS Y MAGALLANES",
-    "⚡ APROVECHA LAS OFERTAS CYBER MONDAY 2026",
-    "🔥 DESCUENTOS CYBER EXCLUSIVOS POR TIEMPO LIMITADO"
-  ];
+  // Mensajes diferenciados según estado: Expectativa en PRE_START vs Ofertas en ACTIVE
+  const newsItems = isActive
+    ? [
+        "🔥 CYBER PATAGONIA 2026: OFERTAS EN VIVO EN COMERCIAL DE LA PATAGONIA",
+        "⚡ OFERTAS CYBER EN PRODUCTOS SELECCIONADOS",
+        "🏔️ PRECIOS EXCLUSIVOS CYBER EN PUNTA ARENAS Y MAGALLANES",
+        "⚡ HASTA 40% DE DESCUENTO EN LÍNEAS SELECCIONADAS",
+        "🔥 DESPACHO DIRECTO EN MAGALLANES • COMPRA ONLINE SEGURA"
+      ]
+    : [
+        "🏔️ CYBER MONDAY 2026 — COMIENZA ESTE 5 DE OCTUBRE",
+        "⚡ PREPÁRATE PARA NUESTRO CYBER EN COMERCIAL DE LA PATAGONIA",
+        "🏔️ EQUIPAMIENTO PARA EL HOGAR Y OBRAS EN MAGALLANES",
+        "⚡ DEL 05 AL 07 DE OCTUBRE EN PUNTA ARENAS"
+      ];
 
   // Repeat items to fill marquee and ensure seamless looping
   const repeatedItems = [...newsItems, ...newsItems, ...newsItems];
@@ -33,13 +41,13 @@ export default function CyberMarquee({ onClose }: CyberMarqueeProps) {
       style={{ 
         position: 'relative',
         width: '100%', 
-        backgroundColor: '#FF4B4B', 
+        backgroundColor: isActive ? '#FF4B4B' : '#0E1F33', 
         color: '#FFFFFF', 
         height: '40px', 
         display: 'flex', 
         alignItems: 'center', 
         overflow: 'hidden',
-        boxShadow: '0 4px 15px rgba(255, 75, 75, 0.25)',
+        boxShadow: isActive ? '0 4px 15px rgba(255, 75, 75, 0.25)' : '0 4px 15px rgba(14, 31, 51, 0.35)',
         borderBottom: '2px solid var(--primary-gold)',
         zIndex: 10000,
         fontFamily: 'var(--font-sans)',
@@ -89,10 +97,14 @@ export default function CyberMarquee({ onClose }: CyberMarqueeProps) {
       {/* Infinite scrolling marquee track */}
       <div className="cyber-marquee-container">
         {repeatedItems.map((item, index) => {
-          const isDiscountText = item.includes("35%");
+          const isDiscountText = item.includes("40%");
           return (
             <span key={index} className="cyber-marquee-item">
-              {index % 2 === 0 ? <Flame size={12} style={{ color: 'var(--primary-gold)' }} className="animate-pulse" /> : <Zap size={12} style={{ color: '#FFFFFF' }} />}
+              {isActive ? (
+                index % 2 === 0 ? <Flame size={12} style={{ color: 'var(--primary-gold)' }} className="animate-pulse" /> : <Zap size={12} style={{ color: '#FFFFFF' }} />
+              ) : (
+                index % 2 === 0 ? <Clock size={12} style={{ color: 'var(--primary-gold)' }} /> : <Zap size={12} style={{ color: 'var(--primary-gold)' }} />
+              )}
               <span>{item}</span>
               {discountTextBadge(isDiscountText)}
             </span>
@@ -137,7 +149,7 @@ function discountTextBadge(isDiscountText: boolean) {
   if (!isDiscountText) return null;
   return (
     <span className="cyber-marquee-badge">
-      35% DCTO
+      40% DCTO
     </span>
   );
 }
