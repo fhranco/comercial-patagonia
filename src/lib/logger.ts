@@ -1,28 +1,18 @@
-import fs from 'fs';
-import path from 'path';
-
-export function writeLog(message: string, error?: any) {
+export function writeLog(message: string, error?: unknown) {
   if (typeof window !== 'undefined') return; // Server-side only
-  
-  try {
-    const logDir = process.cwd();
-    const logPath = path.join(logDir, 'patagonia_debug.log');
-    const timestamp = new Date().toISOString();
-    
-    let logContent = `[${timestamp}] ${message}\n`;
-    if (error) {
-      if (error instanceof Error) {
-        logContent += `  Error Name: ${error.name}\n  Error Message: ${error.message}\n  Stack: ${error.stack}\n`;
-      } else if (typeof error === 'object') {
-        logContent += `  Error Detail: ${JSON.stringify(error, null, 2)}\n`;
-      } else {
-        logContent += `  Error Detail: ${error}\n`;
-      }
+
+  // Safe console logging: only active when explicitly enabled via environment variable
+  const isDebugEnabled = process.env.PATAGONIA_DEBUG === 'true' || process.env.DEBUG === 'true';
+  if (!isDebugEnabled) return;
+
+  const timestamp = new Date().toISOString();
+  if (error) {
+    if (error instanceof Error) {
+      console.error(`[${timestamp}] [DEBUG] ${message}:`, error.message, error.stack);
+    } else {
+      console.error(`[${timestamp}] [DEBUG] ${message}:`, error);
     }
-    logContent += `--------------------------------------------------\n`;
-    
-    fs.appendFileSync(logPath, logContent, 'utf8');
-  } catch (e) {
-    console.error("Failed to write to log file:", e);
+  } else {
+    console.log(`[${timestamp}] [DEBUG] ${message}`);
   }
 }

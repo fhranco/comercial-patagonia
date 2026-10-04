@@ -1,57 +1,55 @@
 // 🛍️ WOOCOMMERCE API CLIENT CONFIGURATION
-// Status: CONNECTED 🏔️🔌 WITH IN-MEMORY CACHE + RETRIES + STATIC JSON BACKUP
-// Fix: Deduplication cache to prevent re-fetch storms, backoff retries, and offline backup filesystem cache
-
-if (process.env.NODE_ENV === 'development') {
-  process.env.NODE_TLS_REJECT_UNAUTHORIZED = '0';
-}
+// Status: CONNECTED 🏔️🔌 WITH IN-MEMORY CACHE + RETRIES + STATIC READ-ONLY JSON BACKUP
+// Optimized for Vercel Serverless / ISR: 0 filesystem writes, 5-min caching, single-product fetches.
 
 import { writeLog } from './logger';
-// Removed Excel products mapping. Everything is retrieved directly from WooCommerce.
+import { Product } from '@/types/woocommerce';
 
 export const WOOCOMMERCE_URL = (process.env.NEXT_PUBLIC_WOOCOMMERCE_URL || "").replace(/\/$/, "");
 const CK = process.env.WOOCOMMERCE_CK || "";
 const CS = process.env.WOOCOMMERCE_CS || "";
 
+export interface CategoryItem {
+  id: number;
+  name: string;
+  slug: string;
+  image?: {
+    src?: string;
+    [key: string]: unknown;
+  } | null;
+  [key: string]: unknown;
+}
+
 // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-// 🧠 IN-MEMORY CACHE — Prevents re-fetch storm
+// 🧠 CACHE CONFIGURATION — 5-minute reasonable cache policy
 // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-const CACHE_TTL_MS = 0; // 0 minutes (disabled for real-time sync)
+const CACHE_TTL_MS = 5 * 60 * 1000; // 5 minutos en memoria de la instancia (300,000 ms)
+const REVALIDATE_SECONDS = 300;     // 5 minutos para Data Cache de Next.js / ISR
 
 interface CacheEntry<T> {
   data: T;
   timestamp: number;
 }
 
-let productsCache: CacheEntry<any[] | null> | null = null;
-let productsCachePromise: Promise<any[] | null> | null = null;
+let productsCache: CacheEntry<Product[] | null> | null = null;
+let productsCachePromise: Promise<Product[] | null> | null = null;
 
-let categoriesCache: CacheEntry<any[] | null> | null = null;
-let categoriesCachePromise: Promise<any[] | null> | null = null;
+let categoriesCache: CacheEntry<CategoryItem[] | null> | null = null;
+let categoriesCachePromise: Promise<CategoryItem[] | null> | null = null;
 
-function isCacheValid<T>(cache: CacheEntry<T> | null): cache is CacheEntry<T> {
-  return cache !== null && (Date.now() - cache.timestamp) < CACHE_TTL_MS;
+const singleProductCache = new Map<string, CacheEntry<Product | null>>();
+const singleProductPromises = new Map<string, Promise<Product | null>>();
+
+function isCacheValid<T>(cache: CacheEntry<T> | null | undefined): cache is CacheEntry<T> {
+  return !!cache && (Date.now() - cache.timestamp) < CACHE_TTL_MS;
 }
 
 // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-// 💾 PERSISTENT FILE BACKUP (Offline / Crash Recovery)
+// 💾 READ-ONLY STATIC BACKUP (Offline / Crash Recovery)
+// Runtime filesystem writes are completely disabled to prevent EROFS errors on Vercel.
 // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-async function saveBackupData(filename: string, data: any) {
-  try {
-    const fs = await import('fs');
-    const path = await import('path');
-    const dir = path.join(process.cwd(), 'src/data');
-    if (!fs.existsSync(dir)) {
-      fs.mkdirSync(dir, { recursive: true });
-    }
-    fs.writeFileSync(path.join(dir, filename), JSON.stringify(data, null, 2), 'utf-8');
-    writeLog(`[BACKUP WRITE] Successfully saved offline backup to ${filename} (${data.length} items)`);
-  } catch (error: any) {
-    writeLog(`[BACKUP WRITE ERROR] Could not save offline backup: ${error.message || error}`);
-  }
-}
 
-async function loadBackupData(filename: string): Promise<any[] | null> {
+export async function loadBackupData<T = unknown>(filename: string): Promise<T[] | null> {
   try {
     const fs = await import('fs');
     const path = await import('path');
@@ -60,14 +58,26 @@ async function loadBackupData(filename: string): Promise<any[] | null> {
       const content = fs.readFileSync(filePath, 'utf-8');
       const parsed = JSON.parse(content);
       if (Array.isArray(parsed) && parsed.length > 0) {
-        writeLog(`[BACKUP READ] Loaded ${parsed.length} actual items from local fallback backup: ${filename}`);
-        return parsed;
+        writeLog(`[BACKUP READ] Loaded ${parsed.length} items from local fallback backup: ${filename}`);
+        return parsed as T[];
       }
     }
-  } catch (error: any) {
-    writeLog(`[BACKUP READ ERROR] Could not load local fallback from ${filename}: ${error.message || error}`);
+  } catch (error: unknown) {
+    const msg = error instanceof Error ? error.message : String(error);
+    writeLog(`[BACKUP READ ERROR] Could not load local fallback from ${filename}: ${msg}`);
   }
   return null;
+}
+
+export async function loadBackupProduct(slugOrId: string): Promise<Product | null> {
+  const products = await loadBackupData<Product>('backup-products.json');
+  if (!products || !Array.isArray(products)) return null;
+  const isNumeric = /^\d+$/.test(slugOrId);
+  if (isNumeric) {
+    const foundById = products.find((p) => p.id?.toString() === slugOrId);
+    if (foundById) return foundById;
+  }
+  return products.find((p) => p.slug === slugOrId) || null;
 }
 
 // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
@@ -79,7 +89,7 @@ async function fetchWithRetry(
   timeoutMs: number = 8000,
   maxRetries: number = 3
 ): Promise<Response> {
-  let lastError: any;
+  let lastError: unknown;
   for (let attempt = 1; attempt <= maxRetries; attempt++) {
     const controller = new AbortController();
     const timeoutId = setTimeout(() => controller.abort(), timeoutMs);
@@ -96,10 +106,11 @@ async function fetchWithRetry(
       
       clearTimeout(timeoutId);
       return response;
-    } catch (err: any) {
+    } catch (err: unknown) {
       clearTimeout(timeoutId);
       lastError = err;
-      writeLog(`[RETRY ERROR] Attempt ${attempt}/${maxRetries} failed: ${err.message || err}`);
+      const msg = err instanceof Error ? err.message : String(err);
+      writeLog(`[RETRY ERROR] Attempt ${attempt}/${maxRetries} failed: ${msg}`);
       
       if (attempt < maxRetries) {
         const delay = Math.pow(2, attempt) * 250; // 500ms, 1000ms, 2000ms
@@ -110,15 +121,12 @@ async function fetchWithRetry(
   throw lastError || new Error(`Request failed after ${maxRetries} attempts`);
 }
 
-// Removed applyCyberDiscounts function.
-
+// ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 // 🔗 AUTOMATIC DOMAIN REWRITE FOR IMAGES
-// Non-intrusive approach: Preserves legitimate media endpoints (both legacy tienda.comercialpatagonia.cl and tiendacp.boostpatagonia.online for newly uploaded assets).
-// It only rewrites expired Hostinger preview domains to the active WooCommerce host configured in .env.local.
+// ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 export function rewriteImageUrl(url: string): string {
   if (!url || typeof url !== 'string') return url;
   
-  // Extraer el host activo de la configuración
   let activeHost = "tiendacp.boostpatagonia.online";
   try {
     const activeUrl = process.env.NEXT_PUBLIC_WOOCOMMERCE_URL || "";
@@ -128,10 +136,8 @@ export function rewriteImageUrl(url: string): string {
     }
   } catch {}
 
-  // Normalizar cualquier URL de http a https
   let rewrittenUrl = url.replace(/^http:\/\//i, 'https://');
 
-  // Reemplazar hosts antiguos de hostinger con el host activo en HTTPS
   rewrittenUrl = rewrittenUrl
     .replace(/https?:\/\/darkorange-bat-658298\.hostingersite\.com/g, `https://${activeHost}`)
     .replace(/https?:\/\/[\w-]+\.hostingersite\.com/g, `https://${activeHost}`);
@@ -139,42 +145,39 @@ export function rewriteImageUrl(url: string): string {
   return rewrittenUrl;
 }
 
-
-
-export function rewriteProductImageUrls(products: any[] | null): any[] | null {
-  if (!products || !Array.isArray(products)) return products;
-  return products.map(product => {
-    let images = product.images;
-    if (images && Array.isArray(images)) {
-      images = images.map((img: any) => {
-        if (img && typeof img === 'object') {
-          const newImg = { ...img };
-          for (const key in newImg) {
-            if (typeof newImg[key] === 'string') {
-              newImg[key] = rewriteImageUrl(newImg[key]);
-            }
-          }
-          return newImg;
+export function rewriteSingleProductImageUrls(product: Product | null): Product | null {
+  if (!product || typeof product !== 'object') return product;
+  let images = product.images;
+  if (images && Array.isArray(images)) {
+    images = images.map((img) => {
+      if (img && typeof img === 'object') {
+        const newImg = { ...img };
+        if (typeof newImg.src === 'string') {
+          newImg.src = rewriteImageUrl(newImg.src);
         }
-        return img;
-      });
-    }
-    return {
-      ...product,
-      images
-    };
-  });
+        return newImg;
+      }
+      return img;
+    });
+  }
+  return {
+    ...product,
+    images
+  };
 }
 
-function rewriteCategoryImageUrls(categories: any[] | null): any[] | null {
+export function rewriteProductImageUrls(products: Product[] | null): Product[] | null {
+  if (!products || !Array.isArray(products)) return products;
+  return products.map((product) => rewriteSingleProductImageUrls(product) as Product);
+}
+
+function rewriteCategoryImageUrls(categories: CategoryItem[] | null): CategoryItem[] | null {
   if (!categories || !Array.isArray(categories)) return categories;
-  return categories.map(cat => {
+  return categories.map((cat) => {
     if (cat.image && typeof cat.image === 'object') {
       const newImg = { ...cat.image };
-      for (const key in newImg) {
-        if (typeof newImg[key] === 'string') {
-          newImg[key] = rewriteImageUrl(newImg[key]);
-        }
+      if (typeof newImg.src === 'string') {
+        newImg.src = rewriteImageUrl(newImg.src);
       }
       return {
         ...cat,
@@ -185,10 +188,190 @@ function rewriteCategoryImageUrls(categories: any[] | null): any[] | null {
   });
 }
 
+// ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+// 🔍 SINGLE PRODUCT FETCH (by slug or by ID)
+// ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+/**
+ * Fetches a single product by slug from WooCommerce API (with memory cache, Next.js cache, and offline fallback)
+ * Uses endpoint: /products?slug=...&status=publish&per_page=1
+ */
+export async function fetchWooCommerceProductBySlug(slug: string): Promise<Product | null> {
+  if (!slug) return null;
+  const cacheKey = `slug:${slug}`;
+  const cached = singleProductCache.get(cacheKey);
+  if (isCacheValid(cached)) {
+    writeLog(`[CACHE HIT] Product slug '${slug}' returned from memory cache`);
+    return cached.data;
+  }
+
+  const inFlight = singleProductPromises.get(cacheKey);
+  if (inFlight) {
+    writeLog(`[CACHE DEDUP] In-flight fetch for product slug '${slug}'`);
+    return inFlight;
+  }
+
+  const promise = (async () => {
+    try {
+      if (!CK || !CS || !WOOCOMMERCE_URL) {
+        writeLog("[ERROR] fetchWooCommerceProductBySlug: Missing credentials or URL.");
+        const fallback = await loadBackupProduct(slug);
+        return fallback ? rewriteSingleProductImageUrls(fallback) : null;
+      }
+
+      const authHeader = `Basic ${Buffer.from(`${CK}:${CS}`).toString('base64')}`;
+      const url = `${WOOCOMMERCE_URL}/products?slug=${encodeURIComponent(slug)}&status=publish&per_page=1`;
+      const isVercel = process.env.VERCEL === "1" || process.env.NODE_ENV === "production";
+      const timeoutMs = 9000;
+      const maxRetries = isVercel ? 2 : 3;
+
+      writeLog(`[FETCH] Single product by slug requesting: ${url}`);
+      const response = await fetchWithRetry(
+        url,
+        {
+          method: "GET",
+          headers: {
+            Authorization: authHeader,
+            Accept: "application/json",
+            "Content-Type": "application/json",
+            "User-Agent": "ComercialPatagonia-B2B-Agent/1.0"
+          },
+          next: { revalidate: REVALIDATE_SECONDS }
+        },
+        timeoutMs,
+        maxRetries
+      );
+
+      if (!response.ok) {
+        writeLog(`[ERROR] Single product by slug '${slug}' failed with HTTP ${response.status}`);
+        const fallback = await loadBackupProduct(slug);
+        return fallback ? rewriteSingleProductImageUrls(fallback) : null;
+      }
+
+      const json = await response.json();
+      if (Array.isArray(json) && json.length > 0) {
+        const raw = json[0] as Product;
+        const product = rewriteSingleProductImageUrls(raw);
+        if (product) {
+          singleProductCache.set(cacheKey, { data: product, timestamp: Date.now() });
+          if (product.id) {
+            singleProductCache.set(`id:${product.id}`, { data: product, timestamp: Date.now() });
+          }
+        }
+        return product;
+      }
+
+      // If empty in API, check offline backup as safety fallback
+      const fallback = await loadBackupProduct(slug);
+      return fallback ? rewriteSingleProductImageUrls(fallback) : null;
+    } catch (err: unknown) {
+      const msg = err instanceof Error ? err.message : String(err);
+      writeLog(`[EXCEPTION] fetchWooCommerceProductBySlug('${slug}') failed: ${msg}`, err);
+      const fallback = await loadBackupProduct(slug);
+      return fallback ? rewriteSingleProductImageUrls(fallback) : null;
+    } finally {
+      singleProductPromises.delete(cacheKey);
+    }
+  })();
+
+  singleProductPromises.set(cacheKey, promise);
+  return promise;
+}
+
+/**
+ * Fetches a single product by numeric ID from WooCommerce API (with memory cache, Next.js cache, and offline fallback)
+ * Uses endpoint: /products/{id}
+ */
+export async function fetchWooCommerceProductById(id: number | string): Promise<Product | null> {
+  const idStr = String(id);
+  if (!idStr) return null;
+  const cacheKey = `id:${idStr}`;
+  const cached = singleProductCache.get(cacheKey);
+  if (isCacheValid(cached)) {
+    writeLog(`[CACHE HIT] Product ID '${idStr}' returned from memory cache`);
+    return cached.data;
+  }
+
+  const inFlight = singleProductPromises.get(cacheKey);
+  if (inFlight) {
+    writeLog(`[CACHE DEDUP] In-flight fetch for product ID '${idStr}'`);
+    return inFlight;
+  }
+
+  const promise = (async () => {
+    try {
+      if (!CK || !CS || !WOOCOMMERCE_URL) {
+        writeLog("[ERROR] fetchWooCommerceProductById: Missing credentials or URL.");
+        const fallback = await loadBackupProduct(idStr);
+        return fallback ? rewriteSingleProductImageUrls(fallback) : null;
+      }
+
+      const authHeader = `Basic ${Buffer.from(`${CK}:${CS}`).toString('base64')}`;
+      const url = `${WOOCOMMERCE_URL}/products/${encodeURIComponent(idStr)}`;
+      const isVercel = process.env.VERCEL === "1" || process.env.NODE_ENV === "production";
+      const timeoutMs = 9000;
+      const maxRetries = isVercel ? 2 : 3;
+
+      writeLog(`[FETCH] Single product by ID requesting: ${url}`);
+      const response = await fetchWithRetry(
+        url,
+        {
+          method: "GET",
+          headers: {
+            Authorization: authHeader,
+            Accept: "application/json",
+            "Content-Type": "application/json",
+            "User-Agent": "ComercialPatagonia-B2B-Agent/1.0"
+          },
+          next: { revalidate: REVALIDATE_SECONDS }
+        },
+        timeoutMs,
+        maxRetries
+      );
+
+      if (!response.ok) {
+        writeLog(`[ERROR] Single product by ID '${idStr}' failed with HTTP ${response.status}`);
+        const fallback = await loadBackupProduct(idStr);
+        return fallback ? rewriteSingleProductImageUrls(fallback) : null;
+      }
+
+      const json = await response.json();
+      if (json && typeof json === 'object' && 'id' in json) {
+        const raw = json as Product;
+        const product = rewriteSingleProductImageUrls(raw);
+        if (product) {
+          singleProductCache.set(cacheKey, { data: product, timestamp: Date.now() });
+          if (product.slug) {
+            singleProductCache.set(`slug:${product.slug}`, { data: product, timestamp: Date.now() });
+          }
+        }
+        return product;
+      }
+
+      const fallback = await loadBackupProduct(idStr);
+      return fallback ? rewriteSingleProductImageUrls(fallback) : null;
+    } catch (err: unknown) {
+      const msg = err instanceof Error ? err.message : String(err);
+      writeLog(`[EXCEPTION] fetchWooCommerceProductById('${idStr}') failed: ${msg}`, err);
+      const fallback = await loadBackupProduct(idStr);
+      return fallback ? rewriteSingleProductImageUrls(fallback) : null;
+    } finally {
+      singleProductPromises.delete(cacheKey);
+    }
+  })();
+
+  singleProductPromises.set(cacheKey, promise);
+  return promise;
+}
+
+// ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+// 📦 FULL CATALOG FETCH (for catalog, home and generateStaticParams)
+// ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
 /**
  * Fetches products from your WooCommerce server (with deduplication cache and backup fallback)
  */
-export async function fetchWooCommerceProducts() {
+export async function fetchWooCommerceProducts(): Promise<Product[] | null> {
   // 🧠 CACHE HIT — Return immediately without touching the network
   if (isCacheValid(productsCache)) {
     writeLog(`[CACHE HIT] Products returned from memory cache (${productsCache.data?.length ?? 0} products, age: ${Math.round((Date.now() - productsCache.timestamp) / 1000)}s)`);
@@ -208,6 +391,21 @@ export async function fetchWooCommerceProducts() {
     const result = await productsCachePromise;
     const finalResult = rewriteProductImageUrls(result);
     productsCache = { data: finalResult, timestamp: Date.now() };
+
+    // Prime the singleProductCache with the products for fast individual lookups
+    if (finalResult && Array.isArray(finalResult)) {
+      for (const prod of finalResult) {
+        if (prod && typeof prod === 'object') {
+          if (prod.slug) {
+            singleProductCache.set(`slug:${prod.slug}`, { data: prod, timestamp: Date.now() });
+          }
+          if (prod.id) {
+            singleProductCache.set(`id:${prod.id}`, { data: prod, timestamp: Date.now() });
+          }
+        }
+      }
+    }
+
     return finalResult;
   } finally {
     productsCachePromise = null;
@@ -217,23 +415,23 @@ export async function fetchWooCommerceProducts() {
 /**
  * Internal: Actually fetches products from WooCommerce API
  */
-async function _fetchProductsFromAPI(): Promise<any[] | null> {
+async function _fetchProductsFromAPI(): Promise<Product[] | null> {
   writeLog(`[INIT] fetchWooCommerceProducts: WOOCOMMERCE_URL="${WOOCOMMERCE_URL}", CK=${CK ? 'SET' : 'MISSING'}, CS=${CS ? 'SET' : 'MISSING'}`);
 
   if (!CK || !CS || !WOOCOMMERCE_URL) {
     writeLog("[ERROR] fetchWooCommerceProducts: Missing WooCommerce credentials or URL environment variables.");
     console.error("Missing WooCommerce credentials.");
-    return loadBackupData('backup-products.json');
+    return loadBackupData<Product>('backup-products.json');
   }
 
   try {
     const authHeader = `Basic ${Buffer.from(`${CK}:${CS}`).toString('base64')}`;
     
     const isVercel = process.env.VERCEL === "1" || process.env.NODE_ENV === "production";
-    const timeoutMs = isVercel ? 9000 : 9000; // Aumentado a 9s para soporte robusto a Hostinger
-    const maxRetries = isVercel ? 2 : 3;      // 2 intentos en producción para resiliencia sin exceder límites de Vercel
+    const timeoutMs = 9000;
+    const maxRetries = isVercel ? 2 : 3;
 
-    const fetchPage = async (page: number) => {
+    const fetchPage = async (page: number): Promise<Product[]> => {
       const url = `${WOOCOMMERCE_URL}/products?per_page=80&page=${page}&status=publish`;
       
       try {
@@ -246,7 +444,7 @@ async function _fetchProductsFromAPI(): Promise<any[] | null> {
             "Content-Type": "application/json",
             "User-Agent": "ComercialPatagonia-B2B-Agent/1.0"
           },
-          next: { revalidate: 0 }
+          next: { revalidate: REVALIDATE_SECONDS }
         }, timeoutMs, maxRetries);
         
         writeLog(`[RESPONSE] Page ${page} received. Status: ${response.status} ok: ${response.ok}`);
@@ -263,15 +461,16 @@ async function _fetchProductsFromAPI(): Promise<any[] | null> {
         }
         
         writeLog(`[SUCCESS] Page ${page} successfully fetched ${json.length} products.`);
-        return json;
-      } catch (err: any) {
-        writeLog(`[EXCEPTION] Page ${page} failed after retries: ${err.message || err}`, err);
+        return json as Product[];
+      } catch (err: unknown) {
+        const msg = err instanceof Error ? err.message : String(err);
+        writeLog(`[EXCEPTION] Page ${page} failed after retries: ${msg}`, err);
         return [];
       }
     };
 
     // Fetch pages sequentially to avoid Netlify timeouts / Hostinger blocking
-    const pages = [];
+    const pages: Product[][] = [];
     for (let i = 1; i <= 6; i++) {
       const pageData = await fetchPage(i);
       if (!pageData || pageData.length === 0) {
@@ -286,24 +485,27 @@ async function _fetchProductsFromAPI(): Promise<any[] | null> {
     
     if (allProducts.length > 0) {
       writeLog(`[COMPLETE] fetchWooCommerceProducts completed. Total real products flattened: ${allProducts.length}`);
-      // Save to disk backup asynchronously for future offline/crash fallback
-      saveBackupData('backup-products.json', allProducts);
       return allProducts;
     } else {
       writeLog(`[FALLBACK] No products could be retrieved. Loading offline static backup...`);
-      return loadBackupData('backup-products.json');
+      return loadBackupData<Product>('backup-products.json');
     }
-  } catch (error: any) {
-    writeLog(`[FATAL EXCEPTION] fetchWooCommerceProducts caught error: ${error.message || error}. Falling back to disk backup...`, error);
+  } catch (error: unknown) {
+    const msg = error instanceof Error ? error.message : String(error);
+    writeLog(`[FATAL EXCEPTION] fetchWooCommerceProducts caught error: ${msg}. Falling back to disk backup...`, error);
     console.error("WooCommerce Fetch Error:", error);
-    return loadBackupData('backup-products.json');
+    return loadBackupData<Product>('backup-products.json');
   }
 }
+
+// ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+// 🗂️ CATEGORIES FETCH
+// ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
 /**
  * Fetches categories from WooCommerce (with deduplication cache and backup fallback)
  */
-export async function fetchWooCommerceCategories() {
+export async function fetchWooCommerceCategories(): Promise<CategoryItem[] | null> {
   // 🧠 CACHE HIT
   if (isCacheValid(categoriesCache)) {
     writeLog(`[CACHE HIT] Categories returned from memory cache (age: ${Math.round((Date.now() - categoriesCache.timestamp) / 1000)}s)`);
@@ -331,11 +533,11 @@ export async function fetchWooCommerceCategories() {
 /**
  * Internal: Actually fetches categories from WooCommerce API
  */
-async function _fetchCategoriesFromAPI(): Promise<any[] | null> {
+async function _fetchCategoriesFromAPI(): Promise<CategoryItem[] | null> {
   writeLog(`[INIT] fetchWooCommerceCategories: WOOCOMMERCE_URL="${WOOCOMMERCE_URL}"`);
   if (!CK || !CS || !WOOCOMMERCE_URL) {
     writeLog("[ERROR] fetchWooCommerceCategories: Missing credentials or URL.");
-    return loadBackupData('backup-categories.json');
+    return loadBackupData<CategoryItem>('backup-categories.json');
   }
 
   try {
@@ -343,8 +545,8 @@ async function _fetchCategoriesFromAPI(): Promise<any[] | null> {
     const authUrl = `${WOOCOMMERCE_URL}/products/categories?per_page=100&hide_empty=true`;
     
     const isVercel = process.env.VERCEL === "1" || process.env.NODE_ENV === "production";
-    const timeoutMs = isVercel ? 9000 : 9000; // Aumentado a 9s para soporte robusto a Hostinger
-    const maxRetries = isVercel ? 2 : 3;      // 2 intentos en producción para resiliencia sin exceder límites de Vercel
+    const timeoutMs = 9000;
+    const maxRetries = isVercel ? 2 : 3;
 
     writeLog(`[FETCH] Categories requesting: ${authUrl}`);
     const response = await fetchWithRetry(authUrl, {
@@ -355,31 +557,30 @@ async function _fetchCategoriesFromAPI(): Promise<any[] | null> {
         "Content-Type": "application/json",
         "User-Agent": "ComercialPatagonia-B2B-Agent/1.0"
       },
-      next: { revalidate: 0 }
+      next: { revalidate: REVALIDATE_SECONDS }
     }, timeoutMs, maxRetries);
 
     writeLog(`[RESPONSE] Categories received. Status: ${response.status} ok: ${response.ok}`);
     
     if (!response.ok) {
       writeLog(`[ERROR] Categories request failed with HTTP status ${response.status}`);
-      return loadBackupData('backup-categories.json');
+      return loadBackupData<CategoryItem>('backup-categories.json');
     }
     
     const data = await response.json();
     if (!Array.isArray(data)) {
       writeLog(`[ERROR] Categories did not return an array. Response detail: ${JSON.stringify(data)}`);
-      return loadBackupData('backup-categories.json');
+      return loadBackupData<CategoryItem>('backup-categories.json');
     }
     
-    const filtered = data.filter((cat: { slug: string }) => cat.slug !== 'uncategorized');
+    const filtered = (data as CategoryItem[]).filter((cat) => cat.slug !== 'uncategorized');
     writeLog(`[SUCCESS] Categories fetched successfully: ${filtered.length} categories.`);
     
-    // Save offline backup asynchronously
-    saveBackupData('backup-categories.json', filtered);
     return filtered;
-  } catch (error: any) {
-    writeLog(`[FATAL EXCEPTION] fetchWooCommerceCategories caught error: ${error.message || error}. Falling back to disk backup...`, error);
+  } catch (error: unknown) {
+    const msg = error instanceof Error ? error.message : String(error);
+    writeLog(`[FATAL EXCEPTION] fetchWooCommerceCategories caught error: ${msg}. Falling back to disk backup...`, error);
     console.error("WooCommerce Categories Fetch Error:", error);
-    return loadBackupData('backup-categories.json');
+    return loadBackupData<CategoryItem>('backup-categories.json');
   }
 }

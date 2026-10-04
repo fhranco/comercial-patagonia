@@ -2,12 +2,13 @@ import React from "react";
 import HomeClient from "@/components/layout/HomeClient";
 import { fetchWooCommerceProducts } from "@/lib/woocommerce";
 import { writeLog } from "@/lib/logger";
+import { Product } from "@/types/woocommerce";
 
 // 🚀 ISR: Revalidar cada hora (en dev mode se ignora, pero el cache en memoria lo maneja)
 export const revalidate = 3600;
 
 export default async function Page() {
-    let products = [];
+    let products: Product[] = [];
     writeLog("[RENDER] Homepage Server Side render initiated.");
     
     try {
@@ -19,8 +20,9 @@ export default async function Page() {
             products = [];
             writeLog("[RENDER] Homepage loaded empty product list due to empty WooCommerce request.");
         }
-    } catch (error: any) {
-        writeLog(`[RENDER ERROR] Homepage products fetch crashed: ${error.message || error}`, error);
+    } catch (error: unknown) {
+        const msg = error instanceof Error ? error.message : String(error);
+        writeLog(`[RENDER ERROR] Homepage products fetch crashed: ${msg}`, error);
         console.error("Error fetching homepage products:", error);
         products = [];
     }

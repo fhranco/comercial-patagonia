@@ -1,49 +1,70 @@
-import React from "react";
+import React, { cache } from "react";
 import { Product } from "@/types/woocommerce";
 import ProductDetailClient from "./ProductDetailClient";
 import PlanchetaLandingPage from "./PlanchetaLandingPage";
 import { writeLog } from "@/lib/logger";
-import { fetchWooCommerceProducts } from "@/lib/woocommerce";
+import {
+  fetchWooCommerceProducts,
+  fetchWooCommerceProductBySlug,
+  fetchWooCommerceProductById
+} from "@/lib/woocommerce";
 import { Metadata } from "next";
 import { notFound, redirect } from "next/navigation";
 
-export const revalidate = 60; // Revalidate dynamic product detail page every 60 seconds
+// 5 minutos de ISR (300 segundos), alineado con la política de caché de WooCommerce
+export const revalidate = 300;
 
 // Resolves a product by slug or id (retrocompatibility support)
-async function getProductBySlugOrId(slugOrId: string): Promise<{ product: Product | null, shouldRedirect: boolean, targetSlug?: string }> {
-  writeLog(`[GET DETAIL] Resolving product slug/id: ${slugOrId}`);
-  
-  try {
-    const products = await fetchWooCommerceProducts();
-    if (products && products.length > 0) {
-      // 1. Try search by slug
-      const productBySlug = products.find((p: any) => p.slug === slugOrId);
-      if (productBySlug) {
-        return { product: productBySlug, shouldRedirect: false };
-      }
-      
-      // 2. Try search by numeric ID (retrocompatibility support)
-      const productById = products.find((p: any) => p.id.toString() === slugOrId);
-      if (productById) {
-        writeLog(`[RETRO DETAIL] Found by numeric ID: ${slugOrId}, redirecting to slug: ${productById.slug}`);
-        return { product: productById, shouldRedirect: true, targetSlug: productById.slug };
-      }
-    }
-  } catch (err: any) {
-    writeLog(`[EXCEPTION DETAIL] Error searching product slug/id: ${slugOrId}: ${err.message || err}`);
-  }
+// Wrapped with React cache() to deduplicate execution between generateMetadata() and Page()
+const getProductBySlugOrId = cache(
+  async (
+    slugOrId: string
+  ): Promise<{ product: Product | null; shouldRedirect: boolean; targetSlug?: string }> => {
+    writeLog(`[GET DETAIL] Resolving product slug/id: ${slugOrId}`);
 
-  return { product: null, shouldRedirect: false };
-}
+    const isNumeric = /^\d+$/.test(slugOrId);
+
+    try {
+      if (isNumeric) {
+        // 1. Try search by numeric ID (retrocompatibility support)
+        const productById = await fetchWooCommerceProductById(slugOrId);
+        if (productById) {
+          if (productById.slug && productById.slug !== slugOrId) {
+            writeLog(`[RETRO DETAIL] Found by numeric ID: ${slugOrId}, redirecting to slug: ${productById.slug}`);
+            return { product: productById, shouldRedirect: true, targetSlug: productById.slug };
+          }
+          return { product: productById, shouldRedirect: false };
+        }
+
+        // Fallback: in case a slug itself is composed of digits
+        const productBySlug = await fetchWooCommerceProductBySlug(slugOrId);
+        if (productBySlug) {
+          return { product: productBySlug, shouldRedirect: false };
+        }
+      } else {
+        // 1. Search single product by slug (/products?slug=...&status=publish&per_page=1)
+        const productBySlug = await fetchWooCommerceProductBySlug(slugOrId);
+        if (productBySlug) {
+          return { product: productBySlug, shouldRedirect: false };
+        }
+      }
+    } catch (err: unknown) {
+      const msg = err instanceof Error ? err.message : String(err);
+      writeLog(`[EXCEPTION DETAIL] Error searching product slug/id: ${slugOrId}: ${msg}`);
+    }
+
+    return { product: null, shouldRedirect: false };
+  }
+);
 
 // Generate static params for optimal server rendering speed
 export async function generateStaticParams() {
   try {
     const products = await fetchWooCommerceProducts();
     if (products && products.length > 0) {
-      return products.map((p: any) => ({ slug: p.slug }));
+      return products.map((p) => ({ slug: p.slug }));
     }
-  } catch (e) {
+  } catch (e: unknown) {
     writeLog(`[STATIC PARAMS ERROR] Could not generate static params: ${e}`);
   }
   return [];
@@ -97,7 +118,7 @@ export default async function Page({ params }: { params: Promise<{ slug: string 
     "@context": "https://schema.org",
     "@type": "Product",
     "name": product.name,
-    "image": product.images?.map((img: any) => img.src) || [],
+    "image": product.images?.map((img) => img.src) || [],
     "description": product.description?.replace(/<[^>]*>/g, ''),
     "sku": product.sku || `sku-${product.id}`,
     "offers": {

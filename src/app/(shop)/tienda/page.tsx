@@ -3,20 +3,21 @@ import { Metadata } from "next";
 import ShopContainer from "@/components/shop/ShopContainer";
 import { fetchWooCommerceProducts } from "@/lib/woocommerce";
 import { writeLog } from "@/lib/logger";
+import { Product } from "@/types/woocommerce";
 
-export const revalidate = 3600; // Cache de 1 hora para evitar colapso de API
+// 5 minutos de ISR (300 segundos), alineado con /tienda/[slug]
+export const revalidate = 300;
 
 export const metadata: Metadata = {
   title: "Catálogo de Materiales y Muebles | Comercial de la Patagonia",
   description: "Explora nuestra oferta de cemento Comodoro, herramientas profesionales, muebles para el hogar, seguridad y materiales para construcción en Punta Arenas.",
 };
 
-export default async function ShopPage({ searchParams }: { searchParams: Promise<{ [key: string]: string | string[] | undefined }> }) {
-  let products = [];
+export default async function ShopPage() {
+  let products: Product[] = [];
   let isLive = false;
-  const params = await searchParams;
   
-  writeLog(`[RENDER] ShopPage Server Side render initiated. Category parameter: ${params.category}`);
+  writeLog("[RENDER] ShopPage Server Side render initiated.");
 
   try {
     const data = await fetchWooCommerceProducts();
@@ -28,15 +29,15 @@ export default async function ShopPage({ searchParams }: { searchParams: Promise
         products = [];
         writeLog("[RENDER] ShopPage loaded empty product list due to empty WooCommerce request.");
     }
-  } catch (error: any) {
-    writeLog(`[RENDER ERROR] ShopPage products fetch crashed: ${error.message || error}`, error);
+  } catch (error: unknown) {
+    const msg = error instanceof Error ? error.message : String(error);
+    writeLog(`[RENDER ERROR] ShopPage products fetch crashed: ${msg}`, error);
     products = [];
   }
 
   return (
     <ShopContainer 
       initialProducts={products} 
-      initialCategory={params.category as string} 
       isLive={isLive}
     />
   );

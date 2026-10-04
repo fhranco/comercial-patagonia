@@ -1,6 +1,7 @@
 "use client";
 
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useCallback, Suspense } from "react";
+import { useSearchParams } from "next/navigation";
 import styles from "../../app/page.module.css";
 import { motion, AnimatePresence } from "framer-motion";
 import { 
@@ -22,6 +23,21 @@ interface ShopContainerProps {
   initialProducts: Product[];
   initialCategory?: string;
   isLive?: boolean;
+}
+
+function CategoryQuerySync({
+  onCategoryParamChange
+}: {
+  onCategoryParamChange: (param: string | null) => void;
+}) {
+  const searchParams = useSearchParams();
+  const categoryParam = searchParams ? searchParams.get("category") : null;
+
+  useEffect(() => {
+    onCategoryParamChange(categoryParam);
+  }, [categoryParam, onCategoryParamChange]);
+
+  return null;
 }
 
 export default function ShopContainer({ initialProducts, initialCategory, isLive = true }: ShopContainerProps) {
@@ -59,11 +75,11 @@ export default function ShopContainer({ initialProducts, initialCategory, isLive
   }, [userIntent, initialProducts]);
 
   // 🧠 SMART CATEGORY MATCHING (NAME OR SLUG)
-  const getCategoryNameFromParam = (param: string) => {
+  const getCategoryNameFromParam = useCallback((param: string) => {
     if (!param || param === "Todos") return "Todos";
     if (param === "Ofertas") return "Ofertas";
     
-    let normalizedParam = param.toLowerCase().trim();
+    const normalizedParam = param.toLowerCase().trim();
     
     // Buscamos en todas las categorías disponibles en los productos
     const allUniqueCategories = Array.from(new Set(initialProducts.flatMap(p => p.categories)));
@@ -90,7 +106,7 @@ export default function ShopContainer({ initialProducts, initialCategory, isLive
     }
 
     return matchedCat ? matchedCat.name : "Todos";
-  };
+  }, [initialProducts]);
 
   const [activeCategory, setActiveCategory] = useState(() => {
     return initialCategory ? getCategoryNameFromParam(initialCategory) : "Todos";
@@ -99,14 +115,30 @@ export default function ShopContainer({ initialProducts, initialCategory, isLive
   const [viewMode, setViewMode] = useState<"grid" | "list">("grid");
   const [visibleItems, setVisibleItems] = useState(60);
 
-  useEffect(() => {
-    if (initialCategory) {
-      const targetCat = getCategoryNameFromParam(initialCategory);
+  const handleCategoryParamChange = useCallback((param: string | null) => {
+    if (param) {
+      const targetCat = getCategoryNameFromParam(param);
       setActiveCategory(targetCat);
-    } else {
+    } else if (!initialCategory) {
       setActiveCategory("Todos");
     }
-  }, [initialCategory, initialProducts]);
+  }, [getCategoryNameFromParam, initialCategory]);
+
+  const handleCategorySelect = (cat: string) => {
+    setActiveCategory(cat);
+    setVisibleItems(60);
+    setUserIntent(prev => ({ ...prev, category: cat }));
+
+    if (typeof window !== "undefined") {
+      const url = new URL(window.location.href);
+      if (cat === "Todos") {
+        url.searchParams.delete("category");
+      } else {
+        url.searchParams.set("category", cat.toLowerCase());
+      }
+      window.history.replaceState({}, "", url.toString());
+    }
+  };
 
   const filteredProducts = initialProducts.filter(p => {
     const term = searchTerm.toLowerCase().trim();
@@ -204,11 +236,16 @@ export default function ShopContainer({ initialProducts, initialCategory, isLive
         )}
       </AnimatePresence>
 
+      {/* 🧠 URL CATEGORY SYNCHRONIZER (MÍNIMO BOUNDARY SUSPENSE PARA USE_SEARCH_PARAMS) */}
+      <Suspense fallback={null}>
+        <CategoryQuerySync onCategoryParamChange={handleCategoryParamChange} />
+      </Suspense>
+
       <PromotionHUD products={initialProducts} />
       
       <RetailStories 
         activeCategory={activeCategory} 
-        onCategoryChange={setActiveCategory} 
+        onCategoryChange={handleCategorySelect} 
       />
 
       <nav className="titanium-glass" style={{ padding: '30px 5%', display: 'flex', justifyContent: 'space-between', alignItems: 'center', position: 'sticky', top: 0, zIndex: 2000 }}>
@@ -257,7 +294,7 @@ export default function ShopContainer({ initialProducts, initialCategory, isLive
                       </div>
                   </div>
                   <div style={{ marginTop: '5px' }}>
-                    <BentoFilters categories={categories} activeCategory={activeCategory} onSelect={(cat) => { setActiveCategory(cat); setVisibleItems(60); setUserIntent(prev => ({ ...prev, category: cat })); }} />
+                    <BentoFilters categories={categories} activeCategory={activeCategory} onSelect={handleCategorySelect} />
                   </div>
               </div>
           </section>
