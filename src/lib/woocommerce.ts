@@ -584,3 +584,126 @@ async function _fetchCategoriesFromAPI(): Promise<CategoryItem[] | null> {
     return loadBackupData<CategoryItem>('backup-categories.json');
   }
 }
+
+// ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+// 🏷️ CATEGORY PRODUCTS FETCH (CYBER & ESPECIALES)
+// ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+const categoryProductsCache: Record<string, { data: Product[]; timestamp: number }> = {};
+const categoryProductsPromises: Record<string, Promise<Product[]> | null> = {};
+
+/**
+ * Fetches products by category slug (dedicated query, e.g. limit = 8 for Cyber)
+ */
+export async function fetchWooCommerceProductsByCategorySlug(slug: string, limit = 8): Promise<Product[]> {
+  const cacheKey = `${slug.toLowerCase()}_${limit}`;
+  const cached = categoryProductsCache[cacheKey];
+
+  if (cached && (Date.now() - cached.timestamp < CACHE_TTL_MS)) {
+    writeLog(`[CACHE HIT] Products for category "${slug}" returned from memory cache`);
+    return cached.data;
+  }
+
+  if (categoryProductsPromises[cacheKey]) {
+    writeLog(`[DEDUP] Joining existing category products fetch for "${slug}"`);
+    return categoryProductsPromises[cacheKey]!;
+  }
+
+  categoryProductsPromises[cacheKey] = _fetchProductsByCategorySlugFromAPI(slug, limit);
+
+  try {
+    const products = await categoryProductsPromises[cacheKey]!;
+    categoryProductsCache[cacheKey] = { data: products, timestamp: Date.now() };
+    return products;
+  } finally {
+    categoryProductsPromises[cacheKey] = null;
+  }
+}
+
+/**
+ * Internal: Fetches products by category from WooCommerce API
+ */
+async function _fetchProductsByCategorySlugFromAPI(slug: string, limit: number): Promise<Product[]> {
+  const normalizedSlug = slug.toLowerCase().trim();
+  writeLog(`[INIT] fetchWooCommerceProductsByCategorySlug: slug="${slug}", limit=${limit}`);
+
+  if (!CK || !CS || !WOOCOMMERCE_URL) {
+    writeLog("[ERROR] fetchWooCommerceProductsByCategorySlug: Missing credentials or URL.");
+    return _fallbackCategoryProducts(normalizedSlug, limit);
+  }
+
+  try {
+    // 1. Resolve numeric category ID
+    let categoryId: number | null = null;
+    if (normalizedSlug === "cyberday" || normalizedSlug === "cybermonday" || normalizedSlug === "cyber") {
+      categoryId = 87; // ID conocido de CyberDay en WooCommerce
+    } else {
+      const categories = await fetchWooCommerceCategories();
+      const matched = categories?.find(
+        (c) => c.slug.toLowerCase() === normalizedSlug || c.name.toLowerCase() === normalizedSlug
+      );
+      if (matched) categoryId = matched.id;
+    }
+
+    if (!categoryId) {
+      writeLog(`[WARN] Category slug "${slug}" not found. Falling back to local filter...`);
+      return _fallbackCategoryProducts(normalizedSlug, limit);
+    }
+
+    const authHeader = `Basic ${Buffer.from(`${CK}:${CS}`).toString('base64')}`;
+    const endpoint = `${WOOCOMMERCE_URL}/products?category=${categoryId}&per_page=${limit}&status=publish`;
+
+    const isVercel = process.env.VERCEL === "1" || process.env.NODE_ENV === "production";
+    const timeoutMs = 9000;
+    const maxRetries = isVercel ? 2 : 3;
+
+    writeLog(`[FETCH] Category products requesting: ${endpoint}`);
+    const response = await fetchWithRetry(endpoint, {
+      method: "GET",
+      headers: {
+        "Authorization": authHeader,
+        "Accept": "application/json",
+        "Content-Type": "application/json",
+        "User-Agent": "ComercialPatagonia-B2B-Agent/1.0"
+      },
+      next: { revalidate: REVALIDATE_SECONDS }
+    }, timeoutMs, maxRetries);
+
+    if (!response.ok) {
+      writeLog(`[ERROR] Category products request failed with HTTP ${response.status}`);
+      return _fallbackCategoryProducts(normalizedSlug, limit);
+    }
+
+    const data = await response.json();
+    if (!Array.isArray(data)) {
+      writeLog(`[ERROR] Category products did not return array: ${JSON.stringify(data)}`);
+      return _fallbackCategoryProducts(normalizedSlug, limit);
+    }
+
+    const products = (rewriteProductImageUrls(data as Product[]) || []) as Product[];
+    writeLog(`[SUCCESS] Category products for "${slug}" fetched: ${products.length} products.`);
+    return products;
+  } catch (error: unknown) {
+    const msg = error instanceof Error ? error.message : String(error);
+    writeLog(`[EXCEPTION] fetchWooCommerceProductsByCategorySlug error: ${msg}. Using fallback...`, error);
+    return _fallbackCategoryProducts(normalizedSlug, limit);
+  }
+}
+
+/**
+ * Fallback: filters backup products by category slug/name
+ */
+async function _fallbackCategoryProducts(slug: string, limit: number): Promise<Product[]> {
+  const allBackup = (await loadBackupData<Product>('backup-products.json')) || [];
+  const filtered = allBackup.filter((p) =>
+    p.categories.some(
+      (c) =>
+        c.slug.toLowerCase() === slug ||
+        c.name.toLowerCase() === slug ||
+        (slug === "cyberday" && (c.slug.toLowerCase() === "cyber" || c.name.toLowerCase().includes("cyber")))
+    )
+  );
+  return (rewriteProductImageUrls(filtered.slice(0, limit)) || []) as Product[];
+}
+
+

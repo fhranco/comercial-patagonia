@@ -9,7 +9,7 @@ export const BRAND_CONFIG = {
 };
 
 export const CAMPAIGN_CONFIG = {
-  isCyberActive: false, // Set to true to enable Cyberday banners, countdowns, and products
-  activeCampaign: "zanzini_june", // Options: "cyber" | "zanzini_june" | "none"
+  isCyberActive: true, // Enable Cyberday banners, countdowns, badges and category in store
+  activeCampaign: "cyber", // Options: "cyber" | "zanzini_june" | "none"
 };
 

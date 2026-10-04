@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { Zap, Flame, X } from "lucide-react";
 
 interface CyberMarqueeProps {
@@ -13,11 +13,11 @@ export default function CyberMarquee({ onClose }: CyberMarqueeProps) {
   if (!isVisible) return null;
 
   const newsItems = [
-    "🔥 CYBERDAY PATAGONIA AHORA ACTIVO",
+    "🔥 CYBER PATAGONIA 2026 EN COMERCIAL DE LA PATAGONIA",
     "⚡ HASTA 35% DE DESCUENTO EN PRODUCTOS SELECCIONADOS",
-    "🏔️ PRECIOS EXCLUSIVOS CYBERDAY EN MAGALLANES",
-    "⚡ APROVECHA LAS OFERTAS CYBERDAY DE JUNIO 2026",
-    "🔥 DESCUENTOS CYBERDAY EXCLUSIVOS POR TIEMPO LIMITADO"
+    "🏔️ PRECIOS EXCLUSIVOS CYBER EN PUNTA ARENAS Y MAGALLANES",
+    "⚡ APROVECHA LAS OFERTAS CYBER MONDAY 2026",
+    "🔥 DESCUENTOS CYBER EXCLUSIVOS POR TIEMPO LIMITADO"
   ];
 
   // Repeat items to fill marquee and ensure seamless looping

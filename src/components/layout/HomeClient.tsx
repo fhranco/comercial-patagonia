@@ -2,15 +2,13 @@
 
 import React from "react";
 import styles from "../../app/page.module.css";
-import { motion, useScroll, useSpring, AnimatePresence } from "framer-motion";
+import { motion, useScroll, useSpring } from "framer-motion";
 import { useRouter } from "next/navigation";
 import Navigation from "./Navigation";
 import HeroSpectacular from "./HeroComodoro";
 import CategoryBento from "../shop/CategoryBento";
 import TrustBar from "./TrustBar";
 import FeaturedCarousel from "../shop/FeaturedCarousel";
-import CyberFeaturedGrid from "../shop/CyberFeaturedGrid";
-import CyberCarousel from "../shop/CyberCarousel";
 import CyberMarquee from "./CyberMarquee";
 import JuneMarquee from "./JuneMarquee";
 import JuneSpecialBanner from "./JuneSpecialBanner";
@@ -23,15 +21,16 @@ import Link from "next/link";
 import PromotionHUD from "../shop/PromotionHUD";
 import RetailStories from "../shop/RetailStories";
 import ProductQuickView from "../shop/ProductQuickView";
-import CyberdayCountdown from "./CyberdayCountdown";
-import { ArrowRight, X } from "lucide-react";
+import CyberBanner from "@/components/cyber/CyberBanner";
+import CyberFeaturedSection from "@/components/cyber/CyberFeaturedSection";
 import { CAMPAIGN_CONFIG } from "@/lib/constants";
 
 interface HomeClientProps {
   products: Product[];
+  cyberProducts?: Product[];
 }
 
-export default function HomeClient({ products }: HomeClientProps) {
+export default function HomeClient({ products, cyberProducts = [] }: HomeClientProps) {
   const router = useRouter();
   const [selectedQuickProduct, setSelectedQuickProduct] = React.useState<Product | null>(null);
   const [isMarqueeOpen, setIsMarqueeOpen] = React.useState(CAMPAIGN_CONFIG.isCyberActive || CAMPAIGN_CONFIG.activeCampaign === "zanzini_june");
@@ -39,9 +38,9 @@ export default function HomeClient({ products }: HomeClientProps) {
   const { scrollYProgress } = useScroll();
   const scaleProgress = useSpring(scrollYProgress, { stiffness: 100, damping: 30, restDelta: 0.001 });
   const cyberProductsAll = CAMPAIGN_CONFIG.isCyberActive 
-    ? products.filter(p => 
+    ? (cyberProducts.length > 0 ? cyberProducts : products.filter(p => 
         p.categories.some(cat => cat.slug.toLowerCase() === "cybermonday" || cat.slug.toLowerCase() === "cyberday")
-      )
+      ))
     : (CAMPAIGN_CONFIG.activeCampaign === "zanzini_june"
       ? products.filter(p => 
           p.categories.some(cat => cat.slug.toLowerCase() === "zanzini-marca" || cat.slug.toLowerCase() === "zanzini")
@@ -84,6 +83,9 @@ export default function HomeClient({ products }: HomeClientProps) {
       <PromotionHUD products={products} onQuickView={(prod) => setSelectedQuickProduct(prod)} />
       
       <main style={{ width: '100%', paddingTop: isMarqueeOpen ? '40px' : '0px', transition: 'padding-top 0.4s cubic-bezier(0.16, 1, 0.3, 1)' }}>
+        {/* ⚡ BANNER DESTACADO CYBER MONDAY 2026 */}
+        <CyberBanner />
+
         <HeroSpectacular 
           products={products} 
           onQuickView={(prod) => setSelectedQuickProduct(prod)} 
@@ -134,61 +136,14 @@ export default function HomeClient({ products }: HomeClientProps) {
         {/* 🎨 SECCIÓN DESTACADA BARNICES Y LASURES XYLAZEL */}
         <XylazelShowcase />
 
+        {/* 🔥 SECCIÓN DESTACADA CYBER MONDAY CON 8 PRODUCTOS REALES CONECTADOS A WOOCOMMERCE */}
+        <CyberFeaturedSection 
+          products={cyberProductsAll} 
+          onQuickView={(prod) => setSelectedQuickProduct(prod)} 
+        />
 
-
-        {CAMPAIGN_CONFIG.isCyberActive && <CyberdayCountdown />}
         {CAMPAIGN_CONFIG.activeCampaign === "zanzini_june" && <JuneSpecialBanner />}
 
-        {cyberProductsAll.length > 0 && (
-          <>
-            <CyberFeaturedGrid 
-              products={cyberProductsAll} 
-              onQuickView={(prod) => setSelectedQuickProduct(prod)}
-              title={CAMPAIGN_CONFIG.activeCampaign === "zanzini_june" ? "SELECCIÓN DESTACADA ZANZINI" : undefined}
-              subtitle={CAMPAIGN_CONFIG.activeCampaign === "zanzini_june" ? "RECIÉN LLEGADO JUNIO" : undefined}
-              description={CAMPAIGN_CONFIG.activeCampaign === "zanzini_june" ? "Diseño sofisticado, estructuración reforzada y rieles telescópicos para tu organización." : undefined}
-            />
-            
-            <CyberCarousel 
-              products={cyberProductsAll} 
-              onQuickView={(prod) => setSelectedQuickProduct(prod)}
-              title={CAMPAIGN_CONFIG.activeCampaign === "zanzini_june" ? "MUEBLES ZANZINI COMPLETO" : undefined}
-              subtitle={CAMPAIGN_CONFIG.activeCampaign === "zanzini_june" ? "CATÁLOGO TÉCNICO" : undefined}
-            />
-
-            {/* 🏷️ ACCESO A TODAS LAS OFERTAS CYBER / CAMPAIGN */}
-            <div style={{ display: 'flex', justifyContent: 'center', marginTop: '50px', marginBottom: '80px' }}>
-              <Link 
-                href={CAMPAIGN_CONFIG.activeCampaign === "zanzini_june" ? "/tienda?category=Zanzini" : "/tienda?category=cyberday"} 
-                style={{ 
-                  backgroundColor: '#0E1F33', 
-                  border: '2px solid var(--primary-gold)',
-                  color: '#FFFFFF',
-                  padding: '20px 50px', 
-                  borderRadius: '4px', 
-                  fontSize: '11px', 
-                  fontWeight: 950, 
-                  textTransform: 'uppercase', 
-                  letterSpacing: '0.2em', 
-                  cursor: 'pointer',
-                  display: 'inline-flex',
-                  alignItems: 'center',
-                  gap: '12px',
-                  textDecoration: 'none',
-                  boxShadow: '0 15px 35px rgba(14, 31, 51, 0.15)'
-                }}
-                className="hover:bg-[var(--primary-gold)] hover:text-black hover:border-[var(--primary-gold)] transition-all duration-300 active:scale-95"
-              >
-                <span>
-                  {CAMPAIGN_CONFIG.activeCampaign === "zanzini_june" 
-                    ? "Ver colección Zanzini" 
-                    : "Ver todas las ofertas Cyber"}
-                </span>
-                <ArrowRight size={14} />
-              </Link>
-            </div>
-          </>
-        )}
 
         <div style={{ marginTop: '40px', marginBottom: '40px', display: 'flex', justifyContent: 'center' }}>
           <RetailStories 
