@@ -7,9 +7,9 @@ import CyberCountdown from "./CyberCountdown";
 import { useCyberCampaign } from "@/lib/campaigns/useCyberCampaign";
 
 export default function CyberBanner() {
-  const { isClient, isVisible, isActive, categoryUrl } = useCyberCampaign();
+  const { isVisible, isActive, categoryUrl } = useCyberCampaign();
 
-  if (!isClient || !isVisible) {
+  if (!isVisible) {
     return null;
   }
 

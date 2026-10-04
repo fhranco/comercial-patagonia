@@ -40,7 +40,7 @@ function getClientTimeSnapshot(): number {
 }
 
 function getServerTimeSnapshot(): number {
-  return new Date(CYBER_CAMPAIGN_CONFIG.startAt).getTime();
+  return Date.now();
 }
 
 export interface CyberCampaignHookResult {
@@ -57,8 +57,8 @@ export interface CyberCampaignHookResult {
 /**
  * Hook reactivo para el ciclo de vida de la Campaña Cyber Monday 2026.
  * Usa useSyncExternalStore para total compatibilidad SSR/React 19 y cero cascading renders.
- * Soporta simulación mediante parámetro de URL (?cyber_preview=pre_start|active|ended)
- * para validación en entornos Preview.
+ * Permite SSR para SEO y pre-renderizado del banner y productos sin layout shifts.
+ * Soporta simulación mediante parámetro de URL (?cyber_preview=pre_start|active|ended).
  */
 export function useCyberCampaign(): CyberCampaignHookResult {
   const isClient = useIsClient();
@@ -72,7 +72,7 @@ export function useCyberCampaign(): CyberCampaignHookResult {
   const isPreStart = state === "PRE_START";
   const isActive = state === "ACTIVE";
   const isEnded = state === "ENDED";
-  const isVisible = isClient && !isEnded && CYBER_CAMPAIGN_CONFIG.enabled;
+  const isVisible = !isEnded && CYBER_CAMPAIGN_CONFIG.enabled;
 
   const targetTime = isPreStart
     ? new Date(CYBER_CAMPAIGN_CONFIG.startAt).getTime()

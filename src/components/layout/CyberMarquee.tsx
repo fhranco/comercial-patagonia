@@ -9,11 +9,11 @@ interface CyberMarqueeProps {
 }
 
 export default function CyberMarquee({ onClose }: CyberMarqueeProps) {
-  const { isClient, isVisible: isCampaignVisible } = useCyberCampaign();
+  const { isVisible: isCampaignVisible } = useCyberCampaign();
   const [isDismissed, setIsDismissed] = useState(false);
 
-  // Si la campaña finalizó (ENDED) o no está en cliente o el usuario la cerró, no renderizar
-  if (!isClient || !isCampaignVisible || isDismissed) {
+  // Si la campaña finalizó (ENDED) o el usuario la cerró, no renderizar
+  if (!isCampaignVisible || isDismissed) {
     return null;
   }
 

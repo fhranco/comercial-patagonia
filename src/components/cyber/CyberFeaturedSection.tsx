@@ -14,10 +14,10 @@ interface CyberFeaturedSectionProps {
 }
 
 export default function CyberFeaturedSection({ products, onQuickView }: CyberFeaturedSectionProps) {
-  const { isClient, isVisible, categoryUrl } = useCyberCampaign();
+  const { isVisible, categoryUrl } = useCyberCampaign();
 
   // Si la campaña finalizó (ENDED), o no hay productos, la sección se oculta completamente sin dejar huecos
-  if (!isClient || !isVisible || !products || products.length === 0) {
+  if (!isVisible || !products || products.length === 0) {
     return null;
   }
 
