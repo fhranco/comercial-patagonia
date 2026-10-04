@@ -1,34 +1,17 @@
 "use client";
 
-import React, { useState, useSyncExternalStore } from "react";
+import React from "react";
 import Link from "next/link";
 import { ArrowRight, Flame, ShieldCheck, Zap } from "lucide-react";
 import CyberCountdown from "./CyberCountdown";
-import {
-  CYBER_CAMPAIGN_CONFIG,
-  CyberCampaignState,
-  getCyberCampaignState
-} from "@/lib/campaigns/cyber";
-
-const emptySubscribe = () => () => {};
-function useIsClient() {
-  return useSyncExternalStore(
-    emptySubscribe,
-    () => true,
-    () => false
-  );
-}
+import { useCyberCampaign } from "@/lib/campaigns/useCyberCampaign";
 
 export default function CyberBanner() {
-  const isClient = useIsClient();
-  const [campaignState, setCampaignState] = useState<CyberCampaignState>(() => getCyberCampaignState(Date.now()));
+  const { isClient, isVisible, isActive, categoryUrl } = useCyberCampaign();
 
-  if (!isClient || campaignState === "ENDED") {
+  if (!isClient || !isVisible) {
     return null;
   }
-
-  const isActive = campaignState === "ACTIVE";
-  const categoryUrl = `/tienda?category=${CYBER_CAMPAIGN_CONFIG.categorySlug}`;
 
   return (
     <section
@@ -243,7 +226,7 @@ export default function CyberBanner() {
 
         {/* Columna de acción: Countdown + CTA */}
         <div className="cyber-actions-col">
-          <CyberCountdown onStateChange={setCampaignState} />
+          <CyberCountdown />
 
           <Link href={categoryUrl} className="cyber-cta-btn" id="cyber-banner-cta">
             <span>{isActive ? "Comprar ofertas Cyber" : "Ver ofertas Cyber"}</span>

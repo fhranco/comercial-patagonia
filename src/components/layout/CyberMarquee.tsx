@@ -2,15 +2,20 @@
 
 import React, { useState } from "react";
 import { Zap, Flame, X } from "lucide-react";
+import { useCyberCampaign } from "@/lib/campaigns/useCyberCampaign";
 
 interface CyberMarqueeProps {
   onClose?: () => void;
 }
 
 export default function CyberMarquee({ onClose }: CyberMarqueeProps) {
-  const [isVisible, setIsVisible] = useState(true);
+  const { isClient, isVisible: isCampaignVisible } = useCyberCampaign();
+  const [isDismissed, setIsDismissed] = useState(false);
 
-  if (!isVisible) return null;
+  // Si la campaña finalizó (ENDED) o no está en cliente o el usuario la cerró, no renderizar
+  if (!isClient || !isCampaignVisible || isDismissed) {
+    return null;
+  }
 
   const newsItems = [
     "🔥 CYBER PATAGONIA 2026 EN COMERCIAL DE LA PATAGONIA",
@@ -39,7 +44,7 @@ export default function CyberMarquee({ onClose }: CyberMarqueeProps) {
         zIndex: 10000,
         fontFamily: 'var(--font-sans)',
         fontSize: '11px',
-        fontWeight: 900,
+        fontWeight: 950,
         letterSpacing: '0.1em'
       }}
     >
@@ -89,11 +94,7 @@ export default function CyberMarquee({ onClose }: CyberMarqueeProps) {
             <span key={index} className="cyber-marquee-item">
               {index % 2 === 0 ? <Flame size={12} style={{ color: 'var(--primary-gold)' }} className="animate-pulse" /> : <Zap size={12} style={{ color: '#FFFFFF' }} />}
               <span>{item}</span>
-              {isDiscountText && (
-                <span className="cyber-marquee-badge">
-                  35% DCTO
-                </span>
-              )}
+              {discountTextBadge(isDiscountText)}
             </span>
           );
         })}
@@ -102,7 +103,7 @@ export default function CyberMarquee({ onClose }: CyberMarqueeProps) {
       {/* Elegant close button */}
       <button
         onClick={() => {
-          setIsVisible(false);
+          setIsDismissed(true);
           onClose?.();
         }}
         style={{
@@ -124,9 +125,19 @@ export default function CyberMarquee({ onClose }: CyberMarqueeProps) {
           transition: 'all 0.2s ease'
         }}
         className="hover:bg-black hover:scale-110 active:scale-95"
+        aria-label="Cerrar marquesina Cyber"
       >
         <X size={10} />
       </button>
     </div>
+  );
+}
+
+function discountTextBadge(isDiscountText: boolean) {
+  if (!isDiscountText) return null;
+  return (
+    <span className="cyber-marquee-badge">
+      35% DCTO
+    </span>
   );
 }

@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import Image from "next/image";
 import { motion } from "framer-motion";
 import { Plus, Maximize2, ExternalLink } from "lucide-react";
@@ -9,6 +9,7 @@ import { useCart } from "@/context/CartContext";
 import { useTheme } from "@/context/ThemeContext";
 import { Product } from "@/types/woocommerce";
 import { CAMPAIGN_CONFIG } from "@/lib/constants";
+import { useCyberCampaign, useIsClient } from "@/lib/campaigns/useCyberCampaign";
 
 interface ProductCardProps {
   product: Product;
@@ -18,13 +19,9 @@ interface ProductCardProps {
 export default function ProductCard({ product, onQuickView }: ProductCardProps) {
   const { addToCart } = useCart();
   const { theme } = useTheme();
-  const [mounted, setMounted] = useState(false);
-  const [viewers, setViewers] = useState<number>(15);
-
-  useEffect(() => {
-    setMounted(true);
-    setViewers(Math.floor(Math.random() * 25) + 12);
-  }, []);
+  const { isVisible: isCyberCampaignActive } = useCyberCampaign();
+  const mounted = useIsClient();
+  const [viewers] = useState<number>(() => Math.floor(Math.random() * 25) + 12);
 
   return (
     <div 
@@ -135,7 +132,7 @@ export default function ProductCard({ product, onQuickView }: ProductCardProps) 
                </div>
 
               {(() => {
-                const isCyber = CAMPAIGN_CONFIG.isCyberActive && product.categories && product.categories.some(cat => cat.slug && (cat.slug.toLowerCase() === "cybermonday" || cat.slug.toLowerCase() === "cyberday"));
+                const isCyber = isCyberCampaignActive && product.categories && product.categories.some(cat => cat.slug && (cat.slug.toLowerCase() === "cybermonday" || cat.slug.toLowerCase() === "cyberday"));
                 const isZanziniCampaign = CAMPAIGN_CONFIG.activeCampaign === "zanzini_june" && product.categories && product.categories.some(cat => cat.slug && (cat.slug.toLowerCase() === "zanzini-marca" || cat.slug.toLowerCase() === "zanzini"));
                 
                 if (!product.on_sale && !isZanziniCampaign) return null;

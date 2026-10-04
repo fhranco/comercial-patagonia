@@ -1,7 +1,7 @@
 import React from "react";
 import HomeClient from "@/components/layout/HomeClient";
 import { fetchWooCommerceProducts, fetchWooCommerceProductsByCategorySlug } from "@/lib/woocommerce";
-import { CYBER_CAMPAIGN_CONFIG } from "@/lib/campaigns/cyber";
+import { CYBER_CAMPAIGN_CONFIG, isCyberCampaignVisible } from "@/lib/campaigns/cyber";
 import { writeLog } from "@/lib/logger";
 import { Product } from "@/types/woocommerce";
 
@@ -14,9 +14,12 @@ export default async function Page() {
     writeLog("[RENDER] Homepage Server Side render initiated.");
     
     try {
+        const isVisible = isCyberCampaignVisible();
         const [fetchedProducts, fetchedCyberProducts] = await Promise.all([
             fetchWooCommerceProducts(),
-            fetchWooCommerceProductsByCategorySlug(CYBER_CAMPAIGN_CONFIG.categorySlug, CYBER_CAMPAIGN_CONFIG.featuredLimit)
+            isVisible
+              ? fetchWooCommerceProductsByCategorySlug(CYBER_CAMPAIGN_CONFIG.categorySlug, CYBER_CAMPAIGN_CONFIG.featuredLimit)
+              : Promise.resolve([] as Product[])
         ]);
 
         if (fetchedProducts && fetchedProducts.length > 0) {

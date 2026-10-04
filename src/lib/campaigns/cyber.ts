@@ -53,6 +53,23 @@ export function getCyberCampaignState(currentDate: Date | number = Date.now()): 
 }
 
 /**
+ * Determina si la campaña está activa para compras (entre startAt y endAt).
+ */
+export function isCyberCampaignActive(currentDate: Date | number = Date.now()): boolean {
+  return getCyberCampaignState(currentDate) === "ACTIVE";
+}
+
+/**
+ * Determina si la campaña es visible en la Home (PRE_START o ACTIVE).
+ * Cuando retorna false (después de endAt o deshabilitada), TODOS los componentes
+ * Cyber deben ocultarse automáticamente.
+ */
+export function isCyberCampaignVisible(currentDate: Date | number = Date.now()): boolean {
+  const state = getCyberCampaignState(currentDate);
+  return state === "PRE_START" || state === "ACTIVE";
+}
+
+/**
  * Calcula el desglose de tiempo restante hasta un objetivo.
  */
 export function calculateTimeRemaining(targetTime: number, nowTime: number = Date.now()): TimeRemaining {

@@ -6,6 +6,7 @@ import { ArrowRight, Flame } from "lucide-react";
 import ProductCard from "@/components/shop/ProductCard";
 import { Product } from "@/types/woocommerce";
 import { CYBER_CAMPAIGN_CONFIG } from "@/lib/campaigns/cyber";
+import { useCyberCampaign } from "@/lib/campaigns/useCyberCampaign";
 
 interface CyberFeaturedSectionProps {
   products: Product[];
@@ -13,13 +14,15 @@ interface CyberFeaturedSectionProps {
 }
 
 export default function CyberFeaturedSection({ products, onQuickView }: CyberFeaturedSectionProps) {
-  if (!products || products.length === 0) {
+  const { isClient, isVisible, categoryUrl } = useCyberCampaign();
+
+  // Si la campaña finalizó (ENDED), o no hay productos, la sección se oculta completamente sin dejar huecos
+  if (!isClient || !isVisible || !products || products.length === 0) {
     return null;
   }
 
   // Asegurar mostrar exactamente hasta 8 productos según requerimiento
   const displayProducts = products.slice(0, CYBER_CAMPAIGN_CONFIG.featuredLimit || 8);
-  const categoryUrl = `/tienda?category=${CYBER_CAMPAIGN_CONFIG.categorySlug}`;
 
   return (
     <section

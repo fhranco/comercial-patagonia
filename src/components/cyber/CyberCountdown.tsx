@@ -1,72 +1,19 @@
 "use client";
 
-import React, { useState, useEffect, useSyncExternalStore } from "react";
+import React from "react";
 import { Clock, Flame } from "lucide-react";
-import {
-  CYBER_CAMPAIGN_CONFIG,
-  CyberCampaignState,
-  getCyberCampaignState,
-  calculateTimeRemaining,
-  TimeRemaining
-} from "@/lib/campaigns/cyber";
+import { useCyberCampaign } from "@/lib/campaigns/useCyberCampaign";
 
 interface CyberCountdownProps {
-  onStateChange?: (state: CyberCampaignState) => void;
   className?: string;
 }
 
-const emptySubscribe = () => () => {};
-function useIsClient() {
-  return useSyncExternalStore(
-    emptySubscribe,
-    () => true,
-    () => false
-  );
-}
+export default function CyberCountdown({ className = "" }: CyberCountdownProps) {
+  const { isClient, isVisible, isActive, timeLeft } = useCyberCampaign();
 
-export default function CyberCountdown({ onStateChange, className = "" }: CyberCountdownProps) {
-  const isClient = useIsClient();
-  const [campaignState, setCampaignState] = useState<CyberCampaignState>("PRE_START");
-  const [timeLeft, setTimeLeft] = useState<TimeRemaining>({
-    days: 0,
-    hours: 0,
-    minutes: 0,
-    seconds: 0,
-    totalMs: 0
-  });
-
-  useEffect(() => {
-    if (!isClient) return;
-
-    const updateTimer = () => {
-      const now = Date.now();
-      const state = getCyberCampaignState(now);
-      setCampaignState(state);
-      onStateChange?.(state);
-
-      if (state === "ENDED") {
-        setTimeLeft({ days: 0, hours: 0, minutes: 0, seconds: 0, totalMs: 0 });
-        return;
-      }
-
-      const targetTime = state === "PRE_START"
-        ? new Date(CYBER_CAMPAIGN_CONFIG.startAt).getTime()
-        : new Date(CYBER_CAMPAIGN_CONFIG.endAt).getTime();
-
-      const remaining = calculateTimeRemaining(targetTime, now);
-      setTimeLeft(remaining);
-    };
-
-    updateTimer();
-    const interval = setInterval(updateTimer, 1000);
-    return () => clearInterval(interval);
-  }, [isClient, onStateChange]);
-
-  if (!isClient || campaignState === "ENDED") {
+  if (!isClient || !isVisible) {
     return null;
   }
-
-  const isActive = campaignState === "ACTIVE";
 
   return (
     <div className={`cyber-countdown-wrapper ${className}`}>

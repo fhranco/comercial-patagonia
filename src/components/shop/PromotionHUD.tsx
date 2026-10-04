@@ -2,59 +2,61 @@
 
 import React, { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Sparkles, X, ChevronRight, ShoppingBag } from "lucide-react";
+import { Sparkles, X, ChevronRight } from "lucide-react";
 import Image from "next/image";
 import { Product } from "@/types/woocommerce";
-import { useCart } from "@/context/CartContext";
 import { useRouter } from "next/navigation";
 import { CAMPAIGN_CONFIG } from "@/lib/constants";
+import { useCyberCampaign } from "@/lib/campaigns/useCyberCampaign";
 
 interface PromotionHUDProps {
-  products?: any[];
+  products?: Product[];
   onQuickView?: (product: Product) => void;
 }
 
 export default function PromotionHUD({ products, onQuickView }: PromotionHUDProps) {
   const [isVisible, setIsVisible] = useState(false);
-  const { addToCart } = useCart();
   const router = useRouter();
+  const { isVisible: isCyberCampaignActive } = useCyberCampaign();
   
   // 🔍 BUSCAMOS PRODUCTOS QUE REALMENTE ESTÉN EN OFERTA
   const dataSource = products || [];
   const saleProducts = dataSource.filter(p => p.on_sale);
   
   // Selección aleatoria para evitar sensación de "plantilla"
-  const [promoProduct, setPromoProduct] = useState<any>(null);
+  const [promoProduct, setPromoProduct] = useState<Product | null>(null);
 
   useEffect(() => {
     // 🏆 PRIORIDAD CAMPAÑA: Buscamos productos de la categoría Cyber o de Zanzini en junio
-    let campaignProducts = [];
+    let campaignProducts: Product[] = [];
     
-    if (CAMPAIGN_CONFIG.isCyberActive) {
+    if (isCyberCampaignActive) {
       campaignProducts = saleProducts.filter(p =>
         p.categories && Array.isArray(p.categories) && 
-        p.categories.some((cat: any) => cat.slug && (cat.slug.toLowerCase() === "cybermonday" || cat.slug.toLowerCase() === "cyberday"))
+        p.categories.some((cat: { slug?: string }) => cat.slug && (cat.slug.toLowerCase() === "cybermonday" || cat.slug.toLowerCase() === "cyberday"))
       );
     } else if (CAMPAIGN_CONFIG.activeCampaign === "zanzini_june") {
       campaignProducts = dataSource.filter(p =>
         p.categories && Array.isArray(p.categories) && 
-        p.categories.some((cat: any) => cat.slug && (cat.slug.toLowerCase() === "zanzini-marca" || cat.slug.toLowerCase() === "zanzini"))
+        p.categories.some((cat: { slug?: string }) => cat.slug && (cat.slug.toLowerCase() === "zanzini-marca" || cat.slug.toLowerCase() === "zanzini"))
       );
     }
 
-    if (campaignProducts.length > 0) {
-      const randomProduct = campaignProducts[Math.floor(Math.random() * campaignProducts.length)];
-      setPromoProduct(randomProduct);
-    } else if (saleProducts.length > 0) {
-      const randomProduct = saleProducts[Math.floor(Math.random() * saleProducts.length)];
-      setPromoProduct(randomProduct);
-    } else {
-      setPromoProduct(dataSource[0]);
-    }
+    const timer = setTimeout(() => {
+      if (campaignProducts.length > 0) {
+        const randomProduct = campaignProducts[Math.floor(Math.random() * campaignProducts.length)];
+        setPromoProduct(randomProduct);
+      } else if (saleProducts.length > 0) {
+        const randomProduct = saleProducts[Math.floor(Math.random() * saleProducts.length)];
+        setPromoProduct(randomProduct);
+      } else {
+        setPromoProduct(dataSource[0]);
+      }
+      setIsVisible(true);
+    }, 1000); 
 
-    const timer = setTimeout(() => setIsVisible(true), 1000); 
     return () => clearTimeout(timer);
-  }, [products?.length]);
+  }, [dataSource, saleProducts, isCyberCampaignActive]);
 
   if (!isVisible || !promoProduct) return null;
 
@@ -68,8 +70,8 @@ export default function PromotionHUD({ products, onQuickView }: PromotionHUDProp
 
   // Cálculo de descuento real dinámico
   const discount = promoProduct.regular_price ? Math.round((1 - (Number(promoProduct.price) / Number(promoProduct.regular_price))) * 100) : 0;
-  const isCyberProduct = CAMPAIGN_CONFIG.isCyberActive && promoProduct.categories && promoProduct.categories.some((cat: any) => cat.slug && (cat.slug.toLowerCase() === "cybermonday" || cat.slug.toLowerCase() === "cyberday"));
-  const isZanziniProduct = CAMPAIGN_CONFIG.activeCampaign === "zanzini_june" && promoProduct.categories && promoProduct.categories.some((cat: any) => cat.slug && (cat.slug.toLowerCase() === "zanzini-marca" || cat.slug.toLowerCase() === "zanzini"));
+  const isCyberProduct = isCyberCampaignActive && promoProduct.categories && promoProduct.categories.some((cat: { slug?: string }) => cat.slug && (cat.slug.toLowerCase() === "cybermonday" || cat.slug.toLowerCase() === "cyberday"));
+  const isZanziniProduct = CAMPAIGN_CONFIG.activeCampaign === "zanzini_june" && promoProduct.categories && promoProduct.categories.some((cat: { slug?: string }) => cat.slug && (cat.slug.toLowerCase() === "zanzini-marca" || cat.slug.toLowerCase() === "zanzini"));
 
   const isSpecialCampaign = isCyberProduct || isZanziniProduct;
 

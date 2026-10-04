@@ -24,6 +24,7 @@ import ProductQuickView from "../shop/ProductQuickView";
 import CyberBanner from "@/components/cyber/CyberBanner";
 import CyberFeaturedSection from "@/components/cyber/CyberFeaturedSection";
 import { CAMPAIGN_CONFIG } from "@/lib/constants";
+import { useCyberCampaign } from "@/lib/campaigns/useCyberCampaign";
 
 interface HomeClientProps {
   products: Product[];
@@ -33,11 +34,13 @@ interface HomeClientProps {
 export default function HomeClient({ products, cyberProducts = [] }: HomeClientProps) {
   const router = useRouter();
   const [selectedQuickProduct, setSelectedQuickProduct] = React.useState<Product | null>(null);
-  const [isMarqueeOpen, setIsMarqueeOpen] = React.useState(CAMPAIGN_CONFIG.isCyberActive || CAMPAIGN_CONFIG.activeCampaign === "zanzini_june");
+  const { isVisible: isCyberVisible } = useCyberCampaign();
+  const [isMarqueeDismissed, setIsMarqueeDismissed] = React.useState(false);
+  const showMarquee = !isMarqueeDismissed && (isCyberVisible || CAMPAIGN_CONFIG.activeCampaign === "zanzini_june");
 
   const { scrollYProgress } = useScroll();
   const scaleProgress = useSpring(scrollYProgress, { stiffness: 100, damping: 30, restDelta: 0.001 });
-  const cyberProductsAll = CAMPAIGN_CONFIG.isCyberActive 
+  const cyberProductsAll = isCyberVisible 
     ? (cyberProducts.length > 0 ? cyberProducts : products.filter(p => 
         p.categories.some(cat => cat.slug.toLowerCase() === "cybermonday" || cat.slug.toLowerCase() === "cyberday")
       ))
@@ -54,12 +57,12 @@ export default function HomeClient({ products, cyberProducts = [] }: HomeClientP
       {/* 🚀 BARRA DE PROGRESO */}
       <motion.div style={{ scaleX: scaleProgress, position: 'fixed', top: 0, left: 0, right: 0, height: '3px', background: 'var(--primary-gold)', zIndex: 9999, transformOrigin: '0%' }} />
 
-      {isMarqueeOpen && (
+      {showMarquee && (
         <div style={{ position: 'fixed', top: 0, left: 0, right: 0, zIndex: 10000 }}>
-          {CAMPAIGN_CONFIG.isCyberActive ? (
-            <CyberMarquee onClose={() => setIsMarqueeOpen(false)} />
+          {isCyberVisible ? (
+            <CyberMarquee onClose={() => setIsMarqueeDismissed(true)} />
           ) : (
-            <JuneMarquee onClose={() => setIsMarqueeOpen(false)} />
+            <JuneMarquee onClose={() => setIsMarqueeDismissed(true)} />
           )}
         </div>
       )}
@@ -67,7 +70,7 @@ export default function HomeClient({ products, cyberProducts = [] }: HomeClientP
       {/* Override navigation top position if marquee is open & responsive styling */}
       <style jsx global>{`
         .nav-container {
-          top: ${isMarqueeOpen ? '40px' : '0px'} !important;
+          top: ${showMarquee ? '40px' : '0px'} !important;
           transition: top 0.4s cubic-bezier(0.16, 1, 0.3, 1) !important;
         }
         @media (max-width: 1024px) {
@@ -82,7 +85,7 @@ export default function HomeClient({ products, cyberProducts = [] }: HomeClientP
       <Navigation transparent={true} />
       <PromotionHUD products={products} onQuickView={(prod) => setSelectedQuickProduct(prod)} />
       
-      <main style={{ width: '100%', paddingTop: isMarqueeOpen ? '40px' : '0px', transition: 'padding-top 0.4s cubic-bezier(0.16, 1, 0.3, 1)' }}>
+      <main style={{ width: '100%', paddingTop: showMarquee ? '40px' : '0px', transition: 'padding-top 0.4s cubic-bezier(0.16, 1, 0.3, 1)' }}>
         {/* ⚡ BANNER DESTACADO CYBER MONDAY 2026 */}
         <CyberBanner />
 
