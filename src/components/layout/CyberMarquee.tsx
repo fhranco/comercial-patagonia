@@ -23,7 +23,7 @@ export default function CyberMarquee({ onClose }: CyberMarqueeProps) {
         "🔥 CYBER PATAGONIA 2026: OFERTAS EN VIVO EN COMERCIAL DE LA PATAGONIA",
         "⚡ OFERTAS CYBER EN PRODUCTOS SELECCIONADOS",
         "🏔️ PRECIOS EXCLUSIVOS CYBER EN PUNTA ARENAS Y MAGALLANES",
-        "⚡ HASTA 40% DE DESCUENTO EN LÍNEAS SELECCIONADAS",
+        "⚡ PRECIOS ESPECIALES CYBER DEL 5 AL 7 DE OCTUBRE",
         "🔥 DESPACHO DIRECTO EN MAGALLANES • COMPRA ONLINE SEGURA"
       ]
     : [
@@ -82,34 +82,20 @@ export default function CyberMarquee({ onClose }: CyberMarqueeProps) {
           margin-right: 40px;
           text-transform: uppercase;
         }
-        .cyber-marquee-badge {
-          background-color: #FFFFFF;
-          color: #FF4B4B;
-          font-size: 9px;
-          font-weight: 1000;
-          padding: 2px 8px;
-          border-radius: 100px;
-          border: 1px solid var(--primary-gold);
-          box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-        }
       `}</style>
 
       {/* Infinite scrolling marquee track */}
       <div className="cyber-marquee-container">
-        {repeatedItems.map((item, index) => {
-          const isDiscountText = item.includes("40%");
-          return (
-            <span key={index} className="cyber-marquee-item">
-              {isActive ? (
-                index % 2 === 0 ? <Flame size={12} style={{ color: 'var(--primary-gold)' }} className="animate-pulse" /> : <Zap size={12} style={{ color: '#FFFFFF' }} />
-              ) : (
-                index % 2 === 0 ? <Clock size={12} style={{ color: 'var(--primary-gold)' }} /> : <Zap size={12} style={{ color: 'var(--primary-gold)' }} />
-              )}
-              <span>{item}</span>
-              {discountTextBadge(isDiscountText)}
-            </span>
-          );
-        })}
+        {repeatedItems.map((item, index) => (
+          <span key={index} className="cyber-marquee-item">
+            {isActive ? (
+              index % 2 === 0 ? <Flame size={12} style={{ color: 'var(--primary-gold)' }} className="animate-pulse" /> : <Zap size={12} style={{ color: '#FFFFFF' }} />
+            ) : (
+              index % 2 === 0 ? <Clock size={12} style={{ color: 'var(--primary-gold)' }} /> : <Zap size={12} style={{ color: 'var(--primary-gold)' }} />
+            )}
+            <span>{item}</span>
+          </span>
+        ))}
       </div>
 
       {/* Elegant close button */}
@@ -142,14 +128,5 @@ export default function CyberMarquee({ onClose }: CyberMarqueeProps) {
         <X size={10} />
       </button>
     </div>
-  );
-}
-
-function discountTextBadge(isDiscountText: boolean) {
-  if (!isDiscountText) return null;
-  return (
-    <span className="cyber-marquee-badge">
-      40% DCTO
-    </span>
   );
 }
