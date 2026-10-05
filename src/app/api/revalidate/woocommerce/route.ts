@@ -142,7 +142,27 @@ export async function POST(req: NextRequest) {
   });
 
   if (!isValid) {
-    console.warn(`[WC WEBHOOK WARN] Rejected request: Invalid webhook signature. (Header len: ${headerLength}, Computed len: ${computedLength}, Topic: ${topicHeader || "none"})`);
+    if (!signatureHeader) {
+      console.warn("[WC WEBHOOK UNSIGNED REQUEST]", {
+        method: req.method,
+        userAgent: req.headers.get("user-agent"),
+        contentType: req.headers.get("content-type"),
+        contentLength: req.headers.get("content-length"),
+        host: req.headers.get("host"),
+        forwardedFor: req.headers.get("x-forwarded-for"),
+        forwardedHost: req.headers.get("x-forwarded-host"),
+        vercelId: req.headers.get("x-vercel-id"),
+        referer: req.headers.get("referer"),
+        origin: req.headers.get("origin"),
+        wcWebhookId: req.headers.get("x-wc-webhook-id"),
+        wcWebhookDeliveryId: req.headers.get("x-wc-webhook-delivery-id"),
+        wcWebhookSource: req.headers.get("x-wc-webhook-source"),
+        rawBytesLength: rawBuffer.length
+      });
+    } else {
+      console.warn(`[WC WEBHOOK WARN] Rejected request: Invalid webhook signature. (Header len: ${headerLength}, Computed len: ${computedLength}, Topic: ${topicHeader || "none"})`);
+    }
+
     return NextResponse.json(
       {
         error: "Invalid webhook signature",
@@ -151,7 +171,10 @@ export async function POST(req: NextRequest) {
           signatureHeaderLength: headerLength,
           computedSignatureLength: computedLength,
           signaturesMatch: false,
-          topic: topicHeader || "none"
+          topic: topicHeader || "none",
+          userAgent: req.headers.get("user-agent") || "none",
+          contentType: req.headers.get("content-type") || "none",
+          rawBytesLength: rawBuffer.length
         }
       },
       { status: 401 }
