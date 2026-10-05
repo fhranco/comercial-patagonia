@@ -5,8 +5,8 @@ import { CYBER_CAMPAIGN_CONFIG, isCyberCampaignVisible } from "@/lib/campaigns/c
 import { writeLog } from "@/lib/logger";
 import { Product } from "@/types/woocommerce";
 
-// 🚀 ISR: 5 minutos (300 segundos), alineado con /tienda y fichas de producto
-export const revalidate = 300;
+// 🚀 ISR: Fallback de seguridad de 1 hora (3600s), revalidado bajo demanda por webhook de WooCommerce
+export const revalidate = 3600;
 
 export default async function Page() {
     let products: Product[] = [];

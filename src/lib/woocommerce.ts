@@ -21,27 +21,62 @@ export interface CategoryItem {
 }
 
 // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-// 🧠 CACHE CONFIGURATION — 5-minute reasonable cache policy
+// 🧠 CACHE ARCHITECTURE — Next.js Data Cache + In-Flight Dedup
+// Se elimina la caché persistente en memoria de instancia (Map/Object) para evitar
+// el problema de Split-Brain / Stale Replica en Vercel Serverless (donde una Instancia B
+// conservaría datos antiguos en memoria tras un webhook recibido por Instancia A).
+// La persistencia y revalidación se delegan 100% al Data Cache compartido de Next.js
+// mediante tags ('products', 'product:id', etc.), manteniendo únicamente deduplicación in-flight.
 // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-const CACHE_TTL_MS = 5 * 60 * 1000; // 5 minutos en memoria de la instancia (300,000 ms)
-const REVALIDATE_SECONDS = 300;     // 5 minutos para Data Cache de Next.js / ISR
+const REVALIDATE_SECONDS = 3600;     // 1 hora de fallback de seguridad para Data Cache / ISR
 
-interface CacheEntry<T> {
-  data: T;
-  timestamp: number;
+let productsCachePromise: Promise<Product[] | null> | null = null;
+let categoriesCachePromise: Promise<CategoryItem[] | null> | null = null;
+const singleProductPromises = new Map<string, Promise<Product | null>>();
+const categoryProductsPromises: Record<string, Promise<Product[]> | null> = {};
+
+/**
+ * Invalida promesas in-flight de producto si estuvieran activas
+ */
+export function invalidateProductMemoryCache(id?: number | string, slug?: string): void {
+  if (id) {
+    singleProductPromises.delete(`id:${id}`);
+  }
+  if (slug) {
+    singleProductPromises.delete(`slug:${slug}`);
+  }
 }
 
-let productsCache: CacheEntry<Product[] | null> | null = null;
-let productsCachePromise: Promise<Product[] | null> | null = null;
+/**
+ * Invalida la promesa in-flight del catálogo completo
+ */
+export function invalidateCatalogMemoryCache(): void {
+  productsCachePromise = null;
+}
 
-let categoriesCache: CacheEntry<CategoryItem[] | null> | null = null;
-let categoriesCachePromise: Promise<CategoryItem[] | null> | null = null;
+/**
+ * Invalida la promesa in-flight de categorías
+ */
+export function invalidateCategoriesMemoryCache(): void {
+  categoriesCachePromise = null;
+}
 
-const singleProductCache = new Map<string, CacheEntry<Product | null>>();
-const singleProductPromises = new Map<string, Promise<Product | null>>();
-
-function isCacheValid<T>(cache: CacheEntry<T> | null | undefined): cache is CacheEntry<T> {
-  return !!cache && (Date.now() - cache.timestamp) < CACHE_TTL_MS;
+/**
+ * Invalida la promesa in-flight de productos por categoría
+ */
+export function invalidateCategoryProductsMemoryCache(categorySlug?: string): void {
+  if (categorySlug) {
+    const norm = categorySlug.toLowerCase();
+    for (const key of Object.keys(categoryProductsPromises)) {
+      if (key.startsWith(norm)) {
+        delete categoryProductsPromises[key];
+      }
+    }
+  } else {
+    for (const key of Object.keys(categoryProductsPromises)) {
+      delete categoryProductsPromises[key];
+    }
+  }
 }
 
 // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
@@ -199,12 +234,8 @@ function rewriteCategoryImageUrls(categories: CategoryItem[] | null): CategoryIt
 export async function fetchWooCommerceProductBySlug(slug: string): Promise<Product | null> {
   if (!slug) return null;
   const cacheKey = `slug:${slug}`;
-  const cached = singleProductCache.get(cacheKey);
-  if (isCacheValid(cached)) {
-    writeLog(`[CACHE HIT] Product slug '${slug}' returned from memory cache`);
-    return cached.data;
-  }
 
+  // 🧠 DEDUP IN-FLIGHT: Si otra petición simultánea ya está consultando este slug en esta instancia, unirse a ella
   const inFlight = singleProductPromises.get(cacheKey);
   if (inFlight) {
     writeLog(`[CACHE DEDUP] In-flight fetch for product slug '${slug}'`);
@@ -236,7 +267,10 @@ export async function fetchWooCommerceProductBySlug(slug: string): Promise<Produ
             "Content-Type": "application/json",
             "User-Agent": "ComercialPatagonia-B2B-Agent/1.0"
           },
-          next: { revalidate: REVALIDATE_SECONDS }
+          next: {
+            revalidate: REVALIDATE_SECONDS,
+            tags: ["products", `product-slug:${slug}`]
+          }
         },
         timeoutMs,
         maxRetries
@@ -251,14 +285,7 @@ export async function fetchWooCommerceProductBySlug(slug: string): Promise<Produ
       const json = await response.json();
       if (Array.isArray(json) && json.length > 0) {
         const raw = json[0] as Product;
-        const product = rewriteSingleProductImageUrls(raw);
-        if (product) {
-          singleProductCache.set(cacheKey, { data: product, timestamp: Date.now() });
-          if (product.id) {
-            singleProductCache.set(`id:${product.id}`, { data: product, timestamp: Date.now() });
-          }
-        }
-        return product;
+        return rewriteSingleProductImageUrls(raw);
       }
 
       // If empty in API, check offline backup as safety fallback
@@ -286,12 +313,8 @@ export async function fetchWooCommerceProductById(id: number | string): Promise<
   const idStr = String(id);
   if (!idStr) return null;
   const cacheKey = `id:${idStr}`;
-  const cached = singleProductCache.get(cacheKey);
-  if (isCacheValid(cached)) {
-    writeLog(`[CACHE HIT] Product ID '${idStr}' returned from memory cache`);
-    return cached.data;
-  }
 
+  // 🧠 DEDUP IN-FLIGHT: Si otra petición simultánea ya está consultando este id en esta instancia, unirse a ella
   const inFlight = singleProductPromises.get(cacheKey);
   if (inFlight) {
     writeLog(`[CACHE DEDUP] In-flight fetch for product ID '${idStr}'`);
@@ -323,7 +346,10 @@ export async function fetchWooCommerceProductById(id: number | string): Promise<
             "Content-Type": "application/json",
             "User-Agent": "ComercialPatagonia-B2B-Agent/1.0"
           },
-          next: { revalidate: REVALIDATE_SECONDS }
+          next: {
+            revalidate: REVALIDATE_SECONDS,
+            tags: ["products", `product:${idStr}`]
+          }
         },
         timeoutMs,
         maxRetries
@@ -338,14 +364,7 @@ export async function fetchWooCommerceProductById(id: number | string): Promise<
       const json = await response.json();
       if (json && typeof json === 'object' && 'id' in json) {
         const raw = json as Product;
-        const product = rewriteSingleProductImageUrls(raw);
-        if (product) {
-          singleProductCache.set(cacheKey, { data: product, timestamp: Date.now() });
-          if (product.slug) {
-            singleProductCache.set(`slug:${product.slug}`, { data: product, timestamp: Date.now() });
-          }
-        }
-        return product;
+        return rewriteSingleProductImageUrls(raw);
       }
 
       const fallback = await loadBackupProduct(idStr);
@@ -372,44 +391,22 @@ export async function fetchWooCommerceProductById(id: number | string): Promise<
  * Fetches products from your WooCommerce server (with deduplication cache and backup fallback)
  */
 export async function fetchWooCommerceProducts(): Promise<Product[] | null> {
-  // 🧠 CACHE HIT — Return immediately without touching the network
-  if (isCacheValid(productsCache)) {
-    writeLog(`[CACHE HIT] Products returned from memory cache (${productsCache.data?.length ?? 0} products, age: ${Math.round((Date.now() - productsCache.timestamp) / 1000)}s)`);
-    return productsCache.data;
-  }
-
-  // 🧠 DEDUP — If another render is already fetching, piggyback on it
+  // 🧠 DEDUP IN-FLIGHT: Si otra petición simultánea ya está consultando el catálogo en esta instancia, esperar su promesa
   if (productsCachePromise) {
     writeLog(`[CACHE DEDUP] Another fetch is in-flight, waiting for it...`);
     return productsCachePromise;
   }
 
-  // 🚀 FRESH FETCH — Only happens once per TTL window
-  productsCachePromise = _fetchProductsFromAPI();
-
-  try {
-    const result = await productsCachePromise;
-    const finalResult = rewriteProductImageUrls(result);
-    productsCache = { data: finalResult, timestamp: Date.now() };
-
-    // Prime the singleProductCache with the products for fast individual lookups
-    if (finalResult && Array.isArray(finalResult)) {
-      for (const prod of finalResult) {
-        if (prod && typeof prod === 'object') {
-          if (prod.slug) {
-            singleProductCache.set(`slug:${prod.slug}`, { data: prod, timestamp: Date.now() });
-          }
-          if (prod.id) {
-            singleProductCache.set(`id:${prod.id}`, { data: prod, timestamp: Date.now() });
-          }
-        }
-      }
+  productsCachePromise = (async () => {
+    try {
+      const result = await _fetchProductsFromAPI();
+      return rewriteProductImageUrls(result);
+    } finally {
+      productsCachePromise = null;
     }
+  })();
 
-    return finalResult;
-  } finally {
-    productsCachePromise = null;
-  }
+  return productsCachePromise;
 }
 
 /**
@@ -444,7 +441,10 @@ async function _fetchProductsFromAPI(): Promise<Product[] | null> {
             "Content-Type": "application/json",
             "User-Agent": "ComercialPatagonia-B2B-Agent/1.0"
           },
-          next: { revalidate: REVALIDATE_SECONDS }
+          next: {
+            revalidate: REVALIDATE_SECONDS,
+            tags: ["products"]
+          }
         }, timeoutMs, maxRetries);
         
         writeLog(`[RESPONSE] Page ${page} received. Status: ${response.status} ok: ${response.ok}`);
@@ -506,28 +506,22 @@ async function _fetchProductsFromAPI(): Promise<Product[] | null> {
  * Fetches categories from WooCommerce (with deduplication cache and backup fallback)
  */
 export async function fetchWooCommerceCategories(): Promise<CategoryItem[] | null> {
-  // 🧠 CACHE HIT
-  if (isCacheValid(categoriesCache)) {
-    writeLog(`[CACHE HIT] Categories returned from memory cache (age: ${Math.round((Date.now() - categoriesCache.timestamp) / 1000)}s)`);
-    return categoriesCache.data;
-  }
-
-  // 🧠 DEDUP
+  // 🧠 DEDUP IN-FLIGHT: Si otra petición simultánea ya está consultando categorías en esta instancia, unirse a ella
   if (categoriesCachePromise) {
     writeLog(`[CACHE DEDUP] Categories fetch in-flight, waiting...`);
     return categoriesCachePromise;
   }
 
-  categoriesCachePromise = _fetchCategoriesFromAPI();
+  categoriesCachePromise = (async () => {
+    try {
+      const result = await _fetchCategoriesFromAPI();
+      return rewriteCategoryImageUrls(result);
+    } finally {
+      categoriesCachePromise = null;
+    }
+  })();
 
-  try {
-    const result = await categoriesCachePromise;
-    const finalResult = rewriteCategoryImageUrls(result);
-    categoriesCache = { data: finalResult, timestamp: Date.now() };
-    return finalResult;
-  } finally {
-    categoriesCachePromise = null;
-  }
+  return categoriesCachePromise;
 }
 
 /**
@@ -557,7 +551,10 @@ async function _fetchCategoriesFromAPI(): Promise<CategoryItem[] | null> {
         "Content-Type": "application/json",
         "User-Agent": "ComercialPatagonia-B2B-Agent/1.0"
       },
-      next: { revalidate: REVALIDATE_SECONDS }
+      next: {
+        revalidate: REVALIDATE_SECONDS,
+        tags: ["categories"]
+      }
     }, timeoutMs, maxRetries);
 
     writeLog(`[RESPONSE] Categories received. Status: ${response.status} ok: ${response.ok}`);
@@ -589,35 +586,28 @@ async function _fetchCategoriesFromAPI(): Promise<CategoryItem[] | null> {
 // 🏷️ CATEGORY PRODUCTS FETCH (CYBER & ESPECIALES)
 // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
-const categoryProductsCache: Record<string, { data: Product[]; timestamp: number }> = {};
-const categoryProductsPromises: Record<string, Promise<Product[]> | null> = {};
 
 /**
  * Fetches products by category slug (dedicated query, e.g. limit = 8 for Cyber)
  */
 export async function fetchWooCommerceProductsByCategorySlug(slug: string, limit = 8): Promise<Product[]> {
   const cacheKey = `${slug.toLowerCase()}_${limit}`;
-  const cached = categoryProductsCache[cacheKey];
 
-  if (cached && (Date.now() - cached.timestamp < CACHE_TTL_MS)) {
-    writeLog(`[CACHE HIT] Products for category "${slug}" returned from memory cache`);
-    return cached.data;
-  }
-
+  // 🧠 DEDUP IN-FLIGHT: Si otra petición simultánea ya está consultando esta categoría, unirse a ella
   if (categoryProductsPromises[cacheKey]) {
     writeLog(`[DEDUP] Joining existing category products fetch for "${slug}"`);
     return categoryProductsPromises[cacheKey]!;
   }
 
-  categoryProductsPromises[cacheKey] = _fetchProductsByCategorySlugFromAPI(slug, limit);
+  categoryProductsPromises[cacheKey] = (async () => {
+    try {
+      return await _fetchProductsByCategorySlugFromAPI(slug, limit);
+    } finally {
+      categoryProductsPromises[cacheKey] = null;
+    }
+  })();
 
-  try {
-    const products = await categoryProductsPromises[cacheKey]!;
-    categoryProductsCache[cacheKey] = { data: products, timestamp: Date.now() };
-    return products;
-  } finally {
-    categoryProductsPromises[cacheKey] = null;
-  }
+  return categoryProductsPromises[cacheKey]!;
 }
 
 /**
@@ -657,6 +647,11 @@ async function _fetchProductsByCategorySlugFromAPI(slug: string, limit: number):
     const timeoutMs = 9000;
     const maxRetries = isVercel ? 2 : 3;
 
+    const categoryTags = ["products", `category:${normalizedSlug}`];
+    if (normalizedSlug === "cyberday" || normalizedSlug === "cybermonday" || normalizedSlug === "cyber") {
+      categoryTags.push("cyber-products");
+    }
+
     writeLog(`[FETCH] Category products requesting: ${endpoint}`);
     const response = await fetchWithRetry(endpoint, {
       method: "GET",
@@ -666,7 +661,10 @@ async function _fetchProductsByCategorySlugFromAPI(slug: string, limit: number):
         "Content-Type": "application/json",
         "User-Agent": "ComercialPatagonia-B2B-Agent/1.0"
       },
-      next: { revalidate: REVALIDATE_SECONDS }
+      next: {
+        revalidate: REVALIDATE_SECONDS,
+        tags: categoryTags
+      }
     }, timeoutMs, maxRetries);
 
     if (!response.ok) {

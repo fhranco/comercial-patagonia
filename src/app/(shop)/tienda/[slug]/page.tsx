@@ -11,8 +11,9 @@ import {
 import { Metadata } from "next";
 import { notFound, redirect } from "next/navigation";
 
-// 5 minutos de ISR (300 segundos), alineado con la política de caché de WooCommerce
-export const revalidate = 300;
+// Fallback de seguridad de 1 hora (3600 segundos), revalidado bajo demanda por webhook de WooCommerce
+export const revalidate = 3600;
+export const dynamicParams = true;
 
 // Resolves a product by slug or id (retrocompatibility support)
 // Wrapped with React cache() to deduplicate execution between generateMetadata() and Page()

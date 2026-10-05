@@ -5,8 +5,8 @@ import { fetchWooCommerceProducts } from "@/lib/woocommerce";
 import { writeLog } from "@/lib/logger";
 import { Product } from "@/types/woocommerce";
 
-// 5 minutos de ISR (300 segundos), alineado con /tienda/[slug]
-export const revalidate = 300;
+// Fallback de seguridad de 1 hora (3600 segundos), revalidado bajo demanda por webhook de WooCommerce
+export const revalidate = 3600;
 
 export const metadata: Metadata = {
   title: "Catálogo de Materiales y Muebles | Comercial de la Patagonia",
