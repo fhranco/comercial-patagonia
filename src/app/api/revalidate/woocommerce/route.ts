@@ -8,34 +8,76 @@ import {
 } from "@/lib/woocommerce";
 
 /**
- * Valida la firma HMAC-SHA256 enviada por WooCommerce en el header x-wc-webhook-signature
+ * Comparación de firmas en tiempo constante para mitigar ataques de temporización (timing attacks)
  */
-function verifyWooCommerceSignature(
-  rawBody: string,
-  signatureHeader: string | null,
-  secret: string
-): boolean {
-  if (!signatureHeader || !secret) {
-    return false;
-  }
-
+function safeTimingCompare(a: string, b: string): boolean {
   try {
-    const computedSignature = crypto
-      .createHmac("sha256", secret)
-      .update(rawBody, "utf8")
-      .digest("base64");
-
-    const headerBuf = Buffer.from(signatureHeader.trim());
-    const computedBuf = Buffer.from(computedSignature.trim());
-
-    if (headerBuf.length !== computedBuf.length) {
+    const bufA = Buffer.from(a);
+    const bufB = Buffer.from(b);
+    if (bufA.length !== bufB.length) {
       return false;
     }
-
-    return crypto.timingSafeEqual(headerBuf, computedBuf);
-  } catch (err) {
-    console.error("[WC WEBHOOK ERROR] Error verifying HMAC signature:", err);
+    return crypto.timingSafeEqual(bufA, bufB);
+  } catch {
     return false;
+  }
+}
+
+/**
+ * Valida la firma HMAC-SHA256 enviada por WooCommerce en el header X-WC-Webhook-Signature
+ */
+function verifyWooCommerceSignature(
+  rawBuffer: Buffer,
+  signatureHeader: string | null,
+  secret: string
+): { isValid: boolean; headerLength: number; computedLength: number } {
+  if (!signatureHeader || !secret) {
+    return { isValid: false, headerLength: signatureHeader ? signatureHeader.length : 0, computedLength: 0 };
+  }
+
+  // Normalizar cabecera recibida (eliminar posibles espacios y prefijos como 'sha256=')
+  const cleanHeader = signatureHeader.trim().replace(/^sha256=/i, "");
+  
+  // Normalizar secreto (limpiar espacios y comillas accidentales de configuración)
+  const trimmedSecret = secret.trim().replace(/^["\x27]|["\x27]$/g, "");
+
+  try {
+    // 1. Digest estándar de WooCommerce: Base64
+    const computedBase64 = crypto
+      .createHmac("sha256", secret)
+      .update(rawBuffer)
+      .digest("base64");
+
+    const computedBase64Trimmed = crypto
+      .createHmac("sha256", trimmedSecret)
+      .update(rawBuffer)
+      .digest("base64");
+
+    // 2. Digest fallback alternativo: Hexadecimal (por si alguna versión envía hex)
+    const computedHex = crypto
+      .createHmac("sha256", secret)
+      .update(rawBuffer)
+      .digest("hex");
+
+    const computedHexTrimmed = crypto
+      .createHmac("sha256", trimmedSecret)
+      .update(rawBuffer)
+      .digest("hex");
+
+    const isValid =
+      safeTimingCompare(cleanHeader, computedBase64) ||
+      safeTimingCompare(cleanHeader, computedBase64Trimmed) ||
+      safeTimingCompare(cleanHeader, computedHex) ||
+      safeTimingCompare(cleanHeader, computedHexTrimmed);
+
+    return {
+      isValid,
+      headerLength: cleanHeader.length,
+      computedLength: computedBase64.length
+    };
+  } catch (err) {
+    console.error("[WC WEBHOOK ERROR] Exception during HMAC verification:", err);
+    return { isValid: false, headerLength: cleanHeader.length, computedLength: 0 };
   }
 }
 
@@ -43,38 +85,85 @@ export async function POST(req: NextRequest) {
   const secret = process.env.WOOCOMMERCE_WEBHOOK_SECRET;
 
   if (!secret) {
-    console.error("[WC WEBHOOK ERROR] WOOCOMMERCE_WEBHOOK_SECRET environment variable is missing.");
+    console.error("[WC WEBHOOK ERROR] WOOCOMMERCE_WEBHOOK_SECRET environment variable is missing on server.");
     return NextResponse.json(
       { error: "Webhook secret not configured on server" },
       { status: 500 }
     );
   }
 
-  let rawBody = "";
+  // 1. Obtener cabeceras relevantes
+  const signatureHeader =
+    req.headers.get("x-wc-webhook-signature") ||
+    req.headers.get("X-WC-Webhook-Signature");
+
+  const topicHeader =
+    req.headers.get("x-wc-webhook-topic") ||
+    req.headers.get("X-WC-Webhook-Topic") ||
+    "";
+
+  const eventHeader =
+    req.headers.get("x-wc-webhook-event") ||
+    req.headers.get("X-WC-Webhook-Event") ||
+    "";
+
+  const resourceHeader =
+    req.headers.get("x-wc-webhook-resource") ||
+    req.headers.get("X-WC-Webhook-Resource") ||
+    "";
+
+  // 2. Leer BODY RAW como Buffer binario exacto ANTES de cualquier JSON.parse()
+  let rawBuffer: Buffer;
+  let rawBodyText: string;
   try {
-    rawBody = await req.text();
-  } catch {
+    const arrayBuffer = await req.arrayBuffer();
+    rawBuffer = Buffer.from(arrayBuffer);
+    rawBodyText = rawBuffer.toString("utf8");
+  } catch (readErr) {
+    console.error("[WC WEBHOOK ERROR] Failed reading raw body:", readErr);
     return NextResponse.json({ error: "Could not read request body" }, { status: 400 });
   }
 
-  const signature = req.headers.get("x-wc-webhook-signature");
+  // 3. Validar criptográficamente la firma
+  const { isValid, headerLength, computedLength } = verifyWooCommerceSignature(
+    rawBuffer,
+    signatureHeader,
+    secret
+  );
 
-  // Validación criptográfica obligatoria
-  const isValidSignature = verifyWooCommerceSignature(rawBody, signature, secret);
-  if (!isValidSignature) {
-    console.warn("[WC WEBHOOK WARN] Rejected request: Invalid or missing webhook signature.");
+  // 4. Logs seguros de auditoría solicitados (sin exponer secreto ni body)
+  console.log(`[WC WEBHOOK AUTH] Signature check:`, {
+    hasSignatureHeader: Boolean(signatureHeader),
+    signatureHeaderLength: headerLength,
+    computedSignatureLength: computedLength,
+    signaturesMatch: isValid,
+    topic: topicHeader || eventHeader || "none",
+    rawBytesLength: rawBuffer.length
+  });
+
+  if (!isValid) {
+    console.warn(`[WC WEBHOOK WARN] Rejected request: Invalid webhook signature. (Header len: ${headerLength}, Computed len: ${computedLength}, Topic: ${topicHeader || "none"})`);
     return NextResponse.json(
-      { error: "Invalid webhook signature" },
+      {
+        error: "Invalid webhook signature",
+        diagnostics: {
+          hasSignatureHeader: Boolean(signatureHeader),
+          signatureHeaderLength: headerLength,
+          computedSignatureLength: computedLength,
+          signaturesMatch: false,
+          topic: topicHeader || "none"
+        }
+      },
       { status: 401 }
     );
   }
 
-  // Parseo del payload JSON
+  // 5. Solo después de validar la firma se realiza el parseo de JSON
   let payload: Record<string, unknown> | null = null;
   try {
-    payload = JSON.parse(rawBody);
+    payload = JSON.parse(rawBodyText);
   } catch {
-    console.error("[WC WEBHOOK ERROR] Rejected request: Malformed JSON payload.");
+    console.error("[WC WEBHOOK ERROR] Payload is not valid JSON.");
     return NextResponse.json(
       { error: "Malformed JSON payload" },
       { status: 400 }
@@ -88,11 +177,7 @@ export async function POST(req: NextRequest) {
     );
   }
 
-  const topicHeader = req.headers.get("x-wc-webhook-topic") || "";
-  const eventHeader = req.headers.get("x-wc-webhook-event") || "";
-  const resourceHeader = req.headers.get("x-wc-webhook-resource") || "";
-
-  // 1. Manejo de verificación/ping de WooCommerce
+  // 6. Manejo de verificación/ping de WooCommerce
   if (
     topicHeader === "action.woocommerce_webhook_ping" ||
     eventHeader === "ping" ||
@@ -103,7 +188,7 @@ export async function POST(req: NextRequest) {
     return NextResponse.json({ received: true, event: "ping" }, { status: 200 });
   }
 
-  // 2. Determinar si el evento corresponde a productos
+  // 7. Determinar si el evento corresponde a productos
   const isProductResource =
     resourceHeader === "product" ||
     topicHeader.startsWith("product.") ||
@@ -145,7 +230,7 @@ export async function POST(req: NextRequest) {
   const revalidatedPaths: string[] = [];
 
   try {
-    // 1. Invalidar tags de Data Cache
+    // 1. Invalidar tags de Data Cache en Next.js
     if (productId) {
       revalidateTag(`product:${productId}`, { expire: 0 });
       revalidatedTags.push(`product:${productId}`);
@@ -176,7 +261,7 @@ export async function POST(req: NextRequest) {
       revalidatedTags.push("cyber-products");
     }
 
-    // 2. Limpiar memoria local de la instancia activa
+    // 2. Limpiar promesas in-flight en la memoria de la instancia activa
     invalidateProductMemoryCache(productId, productSlug);
     invalidateCatalogMemoryCache();
     if (isCyber) {
